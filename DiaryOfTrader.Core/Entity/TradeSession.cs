@@ -1,11 +1,11 @@
 ﻿
 namespace DiaryOfTrader.Core.Entity
 {
-  public class TradeSession
+  public class TradeSession : Entity
   {
-    public long ID { get; set; }
-    public string Name { get; set; }
     public DateTime Time { get; set; }
+    public int Order{ get; set; }
+
   }
 
 }

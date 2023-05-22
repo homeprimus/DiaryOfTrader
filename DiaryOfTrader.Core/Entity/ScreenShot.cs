@@ -1,9 +1,8 @@
 ﻿
 namespace DiaryOfTrader.Core.Entity
 {
-  public class ScreenShot
+  public class ScreenShot : Entity
   {
-    public long ID { get; set; }
     public string Path { get; set; }
   }
 

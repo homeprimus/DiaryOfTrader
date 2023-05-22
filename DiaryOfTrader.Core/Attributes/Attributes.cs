@@ -24,14 +24,13 @@ namespace DiaryOfTrader.Core.Attributes
     [DefaultValue(int.MaxValue)]
     public int Order
     {
-      get; protected set;
+      get;
     }
     #region IComparable
-    public virtual int CompareTo(object obj)
+    public virtual int CompareTo(object? obj)
     {
       var result = 1;
-      var fa = obj as IOrder;
-      if (fa != null)
+      if (obj is IOrder fa)
       {
         result = Order.CompareTo(fa.Order);
       }
@@ -39,7 +38,7 @@ namespace DiaryOfTrader.Core.Attributes
     }
     #endregion
     #region override
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
       return CompareTo(obj) == 0;
     }
@@ -184,7 +183,7 @@ namespace DiaryOfTrader.Core.Attributes
       get { return order; }
     }
 
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
       var result = 1;
       var or = obj as OrderXmlAttributeAttribute;
@@ -196,7 +195,7 @@ namespace DiaryOfTrader.Core.Attributes
       }
       return result;
     }
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
       return CompareTo(obj) == 0;
     }

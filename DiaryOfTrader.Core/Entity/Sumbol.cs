@@ -1,12 +1,10 @@
 ﻿
+using DiaryOfTrader.Core.Core;
+
 namespace DiaryOfTrader.Core.Entity
 {
-  /*
-   Таймфрейм
-   */
-  public class TimeFrame : Entity
+  public class Sumbol : Entity
   {
     public int Order { get; set; }
   }
-
 }
