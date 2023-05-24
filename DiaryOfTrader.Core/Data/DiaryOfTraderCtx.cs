@@ -14,6 +14,7 @@ namespace DiaryOfTrader.Core.Data
     public DbSet<Result> TimeResult { get; set; }
     public DbSet<Sumbol> Sumbol { get; set; }
     public DbSet<Entity.Exchange> Exchange { get; set; }
+    public DbSet<Trend> Trend { get; set; }
 
 
     public DiaryOfTraderCtx()

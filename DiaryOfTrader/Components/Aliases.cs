@@ -20,7 +20,7 @@ namespace DiaryOfTrader.Components
     }
   }
 
-  public class CoreControl : UserControl
+  public class CoreControl : DevExpress.XtraEditors.XtraUserControl
   {
     public static readonly AutoScaleMode ControlAutoScaleMode = AutoScaleMode.Font;
 

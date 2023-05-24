@@ -28,15 +28,16 @@
     /// </summary>
     private void InitializeComponent()
     {
+      var resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
       SuspendLayout();
       // 
       // Main
       // 
-      AutoScaleDimensions = new SizeF(7F, 15F);
-      AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(800, 450);
+      Appearance.Options.UseFont = true;
+      AutoScaleDimensions = new SizeF(6F, 13F);
+      ClientSize = new Size(507, 292);
+      IconOptions.Icon = (Icon)resources.GetObject("Main.IconOptions.Icon");
       Name = "Main";
-      Text = "Form1";
       ResumeLayout(false);
     }
 

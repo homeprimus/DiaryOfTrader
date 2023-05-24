@@ -22,7 +22,7 @@ namespace DiaryOfTrader.Core.Entity
     /*
      * Месячного ТФ
      */
-    public string? Trend { get; set; }
+    public Trend? Trend { get; set; }
     /*
      * Дневной ТФ
      */
