@@ -34,16 +34,18 @@ namespace DiaryOfTrader
     {
       var resources = new System.ComponentModel.ComponentResourceManager(typeof(RibbonMain));
       ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
-      rbpGenaral = new DevExpress.XtraBars.Ribbon.RibbonPage();
-      rbpgMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-      ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-      rbpgDictionary = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       bbtExchamge = new DevExpress.XtraBars.BarButtonItem();
       barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
       bbtSymbol = new DevExpress.XtraBars.BarButtonItem();
       bbtSession = new DevExpress.XtraBars.BarButtonItem();
       bbtTimeFrame = new DevExpress.XtraBars.BarButtonItem();
       bbtResult = new DevExpress.XtraBars.BarButtonItem();
+      rbpGenaral = new DevExpress.XtraBars.Ribbon.RibbonPage();
+      rbpgMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+      rbpgDictionary = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+      ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+      rbpАnalytics = new DevExpress.XtraBars.Ribbon.RibbonPage();
+      rbpgReports = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
       SuspendLayout();
       // 
@@ -54,44 +56,16 @@ namespace DiaryOfTrader
       ribbon.Location = new Point(0, 0);
       ribbon.MaxItemId = 7;
       ribbon.Name = "ribbon";
-      ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { rbpGenaral });
+      ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { rbpGenaral, rbpАnalytics });
       ribbon.Size = new Size(964, 158);
       ribbon.StatusBar = ribbonStatusBar;
-      // 
-      // rbpGenaral
-      // 
-      rbpGenaral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgMain, rbpgDictionary });
-      rbpGenaral.Name = "rbpGenaral";
-      rbpGenaral.Text = "Главная";
-      // 
-      // rbpgMain
-      // 
-      rbpgMain.Name = "rbpgMain";
-      rbpgMain.Text = "Основные";
-      // 
-      // ribbonStatusBar
-      // 
-      ribbonStatusBar.Location = new Point(0, 537);
-      ribbonStatusBar.Name = "ribbonStatusBar";
-      ribbonStatusBar.Ribbon = ribbon;
-      ribbonStatusBar.Size = new Size(964, 24);
-      // 
-      // rbpgDictionary
-      // 
-      rbpgDictionary.ItemLinks.Add(bbtExchamge);
-      rbpgDictionary.ItemLinks.Add(bbtSymbol);
-      rbpgDictionary.ItemLinks.Add(bbtSession);
-      rbpgDictionary.ItemLinks.Add(bbtTimeFrame);
-      rbpgDictionary.ItemLinks.Add(bbtResult);
-      rbpgDictionary.Name = "rbpgDictionary";
-      rbpgDictionary.Text = "Справочники";
       // 
       // bbtExchamge
       // 
       bbtExchamge.Caption = "Биржи";
       bbtExchamge.Id = 1;
-      bbtExchamge.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image");
-      bbtExchamge.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItem1.ImageOptions.LargeImage");
+      bbtExchamge.ImageOptions.Image = (Image)resources.GetObject("bbtExchamge.ImageOptions.Image");
+      bbtExchamge.ImageOptions.LargeImage = (Image)resources.GetObject("bbtExchamge.ImageOptions.LargeImage");
       bbtExchamge.Name = "bbtExchamge";
       // 
       // barButtonItem2
@@ -111,10 +85,10 @@ namespace DiaryOfTrader
       // 
       // bbtSession
       // 
-      bbtSession.Caption = "Сессия";
+      bbtSession.Caption = "Торговая сессия";
       bbtSession.Id = 4;
-      bbtSession.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image1");
-      bbtSession.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItem1.ImageOptions.LargeImage1");
+      bbtSession.ImageOptions.Image = (Image)resources.GetObject("bbtSession.ImageOptions.Image");
+      bbtSession.ImageOptions.LargeImage = (Image)resources.GetObject("bbtSession.ImageOptions.LargeImage");
       bbtSession.Name = "bbtSession";
       // 
       // bbtTimeFrame
@@ -129,9 +103,48 @@ namespace DiaryOfTrader
       // 
       bbtResult.Caption = "Результат сделки";
       bbtResult.Id = 6;
-      bbtResult.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image2");
-      bbtResult.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItem1.ImageOptions.LargeImage2");
+      bbtResult.ImageOptions.Image = (Image)resources.GetObject("bbtResult.ImageOptions.Image");
+      bbtResult.ImageOptions.LargeImage = (Image)resources.GetObject("bbtResult.ImageOptions.LargeImage");
       bbtResult.Name = "bbtResult";
+      // 
+      // rbpGenaral
+      // 
+      rbpGenaral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgMain, rbpgDictionary });
+      rbpGenaral.Name = "rbpGenaral";
+      rbpGenaral.Text = "Главная";
+      // 
+      // rbpgMain
+      // 
+      rbpgMain.Name = "rbpgMain";
+      rbpgMain.Text = "Основные";
+      // 
+      // rbpgDictionary
+      // 
+      rbpgDictionary.ItemLinks.Add(bbtExchamge);
+      rbpgDictionary.ItemLinks.Add(bbtSymbol);
+      rbpgDictionary.ItemLinks.Add(bbtSession);
+      rbpgDictionary.ItemLinks.Add(bbtTimeFrame);
+      rbpgDictionary.ItemLinks.Add(bbtResult);
+      rbpgDictionary.Name = "rbpgDictionary";
+      rbpgDictionary.Text = "Справочники";
+      // 
+      // ribbonStatusBar
+      // 
+      ribbonStatusBar.Location = new Point(0, 537);
+      ribbonStatusBar.Name = "ribbonStatusBar";
+      ribbonStatusBar.Ribbon = ribbon;
+      ribbonStatusBar.Size = new Size(964, 24);
+      // 
+      // rbpАnalytics
+      // 
+      rbpАnalytics.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgReports });
+      rbpАnalytics.Name = "rbpАnalytics";
+      rbpАnalytics.Text = "Аналитика";
+      // 
+      // rbpgReports
+      // 
+      rbpgReports.Name = "rbpgReports";
+      rbpgReports.Text = "Отчеты";
       // 
       // RibbonMain
       // 
@@ -162,5 +175,7 @@ namespace DiaryOfTrader
     private DevExpress.XtraBars.BarButtonItem bbtSession;
     private DevExpress.XtraBars.BarButtonItem bbtTimeFrame;
     private DevExpress.XtraBars.BarButtonItem bbtResult;
+    private DevExpress.XtraBars.Ribbon.RibbonPage rbpАnalytics;
+    private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbpgReports;
   }
 }

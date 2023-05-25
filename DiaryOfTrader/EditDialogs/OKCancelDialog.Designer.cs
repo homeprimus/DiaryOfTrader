@@ -32,21 +32,27 @@ namespace DiaryOfTrader.EditDialogs
     private void InitializeComponent()
     {
       var resources = new System.ComponentModel.ComponentResourceManager(typeof(OKCancelDialog));
-      pnlDown = new DiaryOfTrader.Components.Panel();
-      pnlOK = new DiaryOfTrader.Components.Panel();
-      btOK = new DiaryOfTrader.Components.Button();
-      pnlCancel = new DiaryOfTrader.Components.Panel();
-      lblDown = new LabeledLine();
-      pnlClient = new DiaryOfTrader.Components.Panel();
+      pnlDown = new Components.Panel();
+      pnlOK = new Components.Panel();
+      btOK = new Button();
+      pnlCancel = new Components.Panel();
       btCancel = new Button();
+      lblDown = new LabeledLine();
+      pnlClient = new Components.Panel();
+      ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       pnlDown.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)pnlOK).BeginInit();
       pnlOK.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)pnlCancel).BeginInit();
       pnlCancel.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
       SuspendLayout();
       // 
       // pnlDown
       // 
-      pnlDown.BackColor = Color.Transparent;
+      pnlDown.Appearance.BackColor = (Color)resources.GetObject("pnlDown.Appearance.BackColor");
+      pnlDown.Appearance.Options.UseBackColor = true;
+      pnlDown.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
       pnlDown.Controls.Add(pnlOK);
       pnlDown.Controls.Add(pnlCancel);
       pnlDown.Controls.Add(lblDown);
@@ -55,13 +61,15 @@ namespace DiaryOfTrader.EditDialogs
       // 
       // pnlOK
       // 
+      pnlOK.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
       pnlOK.Controls.Add(btOK);
       resources.ApplyResources(pnlOK, "pnlOK");
       pnlOK.Name = "pnlOK";
       // 
       // btOK
       // 
-      btOK.BackColor = Color.Transparent;
+      btOK.Appearance.Font = (Font)resources.GetObject("btOK.Appearance.Font");
+      btOK.Appearance.Options.UseFont = true;
       resources.ApplyResources(btOK, "btOK");
       btOK.Name = "btOK";
       btOK.UseVisualStyleBackColor = true;
@@ -69,9 +77,19 @@ namespace DiaryOfTrader.EditDialogs
       // 
       // pnlCancel
       // 
+      pnlCancel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
       pnlCancel.Controls.Add(btCancel);
       resources.ApplyResources(pnlCancel, "pnlCancel");
       pnlCancel.Name = "pnlCancel";
+      // 
+      // btCancel
+      // 
+      btCancel.Appearance.Font = (Font)resources.GetObject("btCancel.Appearance.Font");
+      btCancel.Appearance.Options.UseFont = true;
+      btCancel.DialogResult = DialogResult.Cancel;
+      resources.ApplyResources(btCancel, "btCancel");
+      btCancel.Name = "btCancel";
+      btCancel.UseVisualStyleBackColor = true;
       // 
       // lblDown
       // 
@@ -80,27 +98,26 @@ namespace DiaryOfTrader.EditDialogs
       // 
       // pnlClient
       // 
-      pnlClient.BackColor = Color.Transparent;
+      pnlClient.Appearance.BackColor = (Color)resources.GetObject("pnlClient.Appearance.BackColor");
+      pnlClient.Appearance.Options.UseBackColor = true;
+      pnlClient.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
       resources.ApplyResources(pnlClient, "pnlClient");
       pnlClient.Name = "pnlClient";
       // 
-      // btCancel
-      // 
-      btCancel.BackColor = Color.Transparent;
-      btCancel.DialogResult = DialogResult.Cancel;
-      resources.ApplyResources(btCancel, "btCancel");
-      btCancel.Name = "btCancel";
-      btCancel.UseVisualStyleBackColor = true;
-      // 
       // OKCancelDialog
       // 
+      Appearance.Options.UseFont = true;
       resources.ApplyResources(this, "$this");
       Controls.Add(pnlClient);
       Controls.Add(pnlDown);
       Name = "OKCancelDialog";
+      ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       pnlDown.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)pnlOK).EndInit();
       pnlOK.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)pnlCancel).EndInit();
       pnlCancel.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
       ResumeLayout(false);
     }
 
