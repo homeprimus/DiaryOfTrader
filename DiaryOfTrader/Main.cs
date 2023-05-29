@@ -13,10 +13,5 @@ namespace DiaryOfTrader
     {
       new RibbonMain().ShowDialog();
     }
-
-    private void btTool_Click(object sender, EventArgs e)
-    {
-      new ToolbarForm1().ShowDialog();
-    }
   }
 }

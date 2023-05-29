@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using DiaryOfTrader.Core.Interfaces;
 
@@ -13,6 +14,7 @@ namespace DiaryOfTrader.Core.Core
   }
 
   [Serializable]
+  [NotMapped]
   public abstract class Element :
     Persistent, 
     IEditableUI, 
@@ -192,21 +194,22 @@ namespace DiaryOfTrader.Core.Core
       get { return isInitialize != 0; }
     }
 
-    [Browsable(false)]
+    [NotMapped, Browsable(false)]
     public bool IsNew
     {
       get { return isNew; }
       internal set { isNew = value; }
     }
 
-    [Browsable(false)]
+
+    [NotMapped, Browsable(false)]
     public bool IsDeleted
     {
       get { return isDeleted; }
       internal set { isDeleted = value; }
     }
 
-    [Browsable(false)]
+    [NotMapped, Browsable(false)]
     public virtual bool IsChanged
     {
       get { return isChanged; }
@@ -220,7 +223,7 @@ namespace DiaryOfTrader.Core.Core
       }
     }
 
-    [Browsable(false)]
+    [NotMapped, Browsable(false)]
     public bool Validate
     {
       get { return GetValidate(); }

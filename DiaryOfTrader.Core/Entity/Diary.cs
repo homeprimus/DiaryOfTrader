@@ -14,7 +14,7 @@ namespace DiaryOfTrader.Core.Entity
     /*
      * Чем торговали
      */
-    public Sumbol Sumbol { get; set; }
+    public Symbol Symbol { get; set; }
     /*
      * На каом таймфрейме был выполнен вход
      */
@@ -32,7 +32,7 @@ namespace DiaryOfTrader.Core.Entity
     /*
      * Торговая сесия
      */
-    public TradeSession? Session { get; }
+    public TraderSession? Session { get; }
     /*
      * Сделка, ход и сопровождение
      */
@@ -48,7 +48,7 @@ namespace DiaryOfTrader.Core.Entity
     /*
      * Результат сделки
      */
-    public Result Result { get; set; }
+    public TraderResult TraderResult { get; set; }
     /*
      * Сумма профита или убытка
      */

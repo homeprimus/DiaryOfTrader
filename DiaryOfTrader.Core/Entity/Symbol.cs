@@ -3,8 +3,7 @@ using DiaryOfTrader.Core.Core;
 
 namespace DiaryOfTrader.Core.Entity
 {
-  public class Sumbol : Entity
+  public class Symbol : Entity
   {
-    public int Order { get; set; }
   }
 }

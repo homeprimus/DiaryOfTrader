@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-namespace DiaryOfTrader.EditDialogs
+namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  partial class GridEditDialog
+  partial class ResultDlg
   {
     /// <summary>
     /// Required designer variable.
@@ -32,25 +32,31 @@ namespace DiaryOfTrader.EditDialogs
     /// </summary>
     private void InitializeComponent()
     {
-      grid = new EditControls.GridCntrl();
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
       pnlClient.SuspendLayout();
       SuspendLayout();
       // 
+      // grid
+      // 
+      grid.Appearance.BackColor = Color.Transparent;
+      grid.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      grid.Appearance.Options.UseBackColor = true;
+      grid.Appearance.Options.UseFont = true;
+      grid.Size = new Size(436, 174);
+      // 
       // pnlDown
       // 
       pnlDown.Appearance.BackColor = Color.Transparent;
       pnlDown.Appearance.Options.UseBackColor = true;
-      pnlDown.Location = new Point(0, 217);
-      pnlDown.Size = new Size(534, 40);
+      pnlDown.Location = new Point(0, 174);
+      pnlDown.Size = new Size(436, 40);
       // 
       // pnlClient
       // 
       pnlClient.Appearance.BackColor = Color.Transparent;
       pnlClient.Appearance.Options.UseBackColor = true;
-      pnlClient.Controls.Add(grid);
-      pnlClient.Size = new Size(534, 217);
+      pnlClient.Size = new Size(436, 174);
       // 
       // btOK
       // 
@@ -62,25 +68,13 @@ namespace DiaryOfTrader.EditDialogs
       btCancel.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
       btCancel.Appearance.Options.UseFont = true;
       // 
-      // grid
-      // 
-      grid.Appearance.BackColor = Color.Transparent;
-      grid.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
-      grid.Appearance.Options.UseBackColor = true;
-      grid.Appearance.Options.UseFont = true;
-      grid.Dock = DockStyle.Fill;
-      grid.Location = new Point(0, 0);
-      grid.Name = "grid";
-      grid.Size = new Size(534, 217);
-      grid.TabIndex = 0;
-      // 
-      // GridEditDialog
+      // ResultDlg
       // 
       Appearance.Options.UseFont = true;
       AutoScaleDimensions = new SizeF(6F, 13F);
-      ClientSize = new Size(534, 257);
-      Name = "GridEditDialog";
-      Text = "GridEditDialog";
+      ClientSize = new Size(436, 214);
+      Name = "ResultDlg";
+      Text = "ResultDlg";
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
       pnlClient.ResumeLayout(false);
@@ -88,7 +82,5 @@ namespace DiaryOfTrader.EditDialogs
     }
 
     #endregion
-
-    protected EditControls.GridCntrl grid;
   }
 }

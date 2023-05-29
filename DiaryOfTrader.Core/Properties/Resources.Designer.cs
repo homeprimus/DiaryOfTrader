@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DiaryOfTrader.Properties {
+namespace DiaryOfTrader.Core.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DiaryOfTrader.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DiaryOfTrader.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DiaryOfTrader.Core.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace DiaryOfTrader.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Удаление.
+        ///   Looks up a localized string similar to Потеря.
         /// </summary>
-        internal static string DeleteQuestion {
+        internal static string TraderResultLoss {
             get {
-                return ResourceManager.GetString("DeleteQuestion", resourceCulture);
+                return ResourceManager.GetString("TraderResultLoss", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Удалить запись &quot;{0}&quot;?.
+        ///   Looks up a localized string similar to Без результата.
         /// </summary>
-        internal static string DeleteRecord {
+        internal static string TraderResultNone {
             get {
-                return ResourceManager.GetString("DeleteRecord", resourceCulture);
+                return ResourceManager.GetString("TraderResultNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успех.
+        /// </summary>
+        internal static string TraderResultSuccess {
+            get {
+                return ResourceManager.GetString("TraderResultSuccess", resourceCulture);
             }
         }
     }

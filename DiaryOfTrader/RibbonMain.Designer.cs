@@ -43,18 +43,19 @@ namespace DiaryOfTrader
       rbpGenaral = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       rbpgDictionary = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-      ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
       rbpАnalytics = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgReports = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+      ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+      bbtTrend = new DevExpress.XtraBars.BarButtonItem();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
       SuspendLayout();
       // 
       // ribbon
       // 
       ribbon.ExpandCollapseItem.Id = 0;
-      ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, ribbon.SearchEditItem, bbtExchamge, barButtonItem2, bbtSymbol, bbtSession, bbtTimeFrame, bbtResult });
+      ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, ribbon.SearchEditItem, bbtExchamge, barButtonItem2, bbtSymbol, bbtSession, bbtTimeFrame, bbtResult, bbtTrend });
       ribbon.Location = new Point(0, 0);
-      ribbon.MaxItemId = 7;
+      ribbon.MaxItemId = 8;
       ribbon.Name = "ribbon";
       ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { rbpGenaral, rbpАnalytics });
       ribbon.Size = new Size(964, 158);
@@ -67,6 +68,7 @@ namespace DiaryOfTrader
       bbtExchamge.ImageOptions.Image = (Image)resources.GetObject("bbtExchamge.ImageOptions.Image");
       bbtExchamge.ImageOptions.LargeImage = (Image)resources.GetObject("bbtExchamge.ImageOptions.LargeImage");
       bbtExchamge.Name = "bbtExchamge";
+      bbtExchamge.ItemClick += bbtExchamge_ItemClick;
       // 
       // barButtonItem2
       // 
@@ -77,11 +79,12 @@ namespace DiaryOfTrader
       // bbtSymbol
       // 
       bbtSymbol.AllowAllUp = true;
-      bbtSymbol.Caption = "Торговая пара";
+      bbtSymbol.Caption = "Инструмент";
       bbtSymbol.Id = 3;
       bbtSymbol.ImageOptions.Image = (Image)resources.GetObject("bbtSymbol.ImageOptions.Image");
       bbtSymbol.ImageOptions.LargeImage = (Image)resources.GetObject("bbtSymbol.ImageOptions.LargeImage");
       bbtSymbol.Name = "bbtSymbol";
+      bbtSymbol.ItemClick += bbtSymbol_ItemClick;
       // 
       // bbtSession
       // 
@@ -90,6 +93,7 @@ namespace DiaryOfTrader
       bbtSession.ImageOptions.Image = (Image)resources.GetObject("bbtSession.ImageOptions.Image");
       bbtSession.ImageOptions.LargeImage = (Image)resources.GetObject("bbtSession.ImageOptions.LargeImage");
       bbtSession.Name = "bbtSession";
+      bbtSession.ItemClick += bbtSession_ItemClick;
       // 
       // bbtTimeFrame
       // 
@@ -98,6 +102,7 @@ namespace DiaryOfTrader
       bbtTimeFrame.ImageOptions.Image = (Image)resources.GetObject("bbtTimeFrame.ImageOptions.Image");
       bbtTimeFrame.ImageOptions.LargeImage = (Image)resources.GetObject("bbtTimeFrame.ImageOptions.LargeImage");
       bbtTimeFrame.Name = "bbtTimeFrame";
+      bbtTimeFrame.ItemClick += bbtTimeFrame_ItemClick;
       // 
       // bbtResult
       // 
@@ -106,6 +111,7 @@ namespace DiaryOfTrader
       bbtResult.ImageOptions.Image = (Image)resources.GetObject("bbtResult.ImageOptions.Image");
       bbtResult.ImageOptions.LargeImage = (Image)resources.GetObject("bbtResult.ImageOptions.LargeImage");
       bbtResult.Name = "bbtResult";
+      bbtResult.ItemClick += bbtResult_ItemClick;
       // 
       // rbpGenaral
       // 
@@ -124,16 +130,10 @@ namespace DiaryOfTrader
       rbpgDictionary.ItemLinks.Add(bbtSymbol);
       rbpgDictionary.ItemLinks.Add(bbtSession);
       rbpgDictionary.ItemLinks.Add(bbtTimeFrame);
+      rbpgDictionary.ItemLinks.Add(bbtTrend);
       rbpgDictionary.ItemLinks.Add(bbtResult);
       rbpgDictionary.Name = "rbpgDictionary";
       rbpgDictionary.Text = "Справочники";
-      // 
-      // ribbonStatusBar
-      // 
-      ribbonStatusBar.Location = new Point(0, 537);
-      ribbonStatusBar.Name = "ribbonStatusBar";
-      ribbonStatusBar.Ribbon = ribbon;
-      ribbonStatusBar.Size = new Size(964, 24);
       // 
       // rbpАnalytics
       // 
@@ -145,6 +145,22 @@ namespace DiaryOfTrader
       // 
       rbpgReports.Name = "rbpgReports";
       rbpgReports.Text = "Отчеты";
+      // 
+      // ribbonStatusBar
+      // 
+      ribbonStatusBar.Location = new Point(0, 537);
+      ribbonStatusBar.Name = "ribbonStatusBar";
+      ribbonStatusBar.Ribbon = ribbon;
+      ribbonStatusBar.Size = new Size(964, 24);
+      // 
+      // bbtTrend
+      // 
+      bbtTrend.Caption = "Тренд";
+      bbtTrend.Id = 7;
+      bbtTrend.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image");
+      bbtTrend.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItem1.ImageOptions.LargeImage");
+      bbtTrend.Name = "bbtTrend";
+      bbtTrend.ItemClick += bbtTrend_ItemClick;
       // 
       // RibbonMain
       // 
@@ -177,5 +193,6 @@ namespace DiaryOfTrader
     private DevExpress.XtraBars.BarButtonItem bbtResult;
     private DevExpress.XtraBars.Ribbon.RibbonPage rbpАnalytics;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbpgReports;
+    private DevExpress.XtraBars.BarButtonItem bbtTrend;
   }
 }

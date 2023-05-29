@@ -55,6 +55,7 @@ namespace DiaryOfTrader.Components
       get { return base.AutoScaleMode; }
       set { base.AutoScaleMode = value; }
     }
+
   }
 
   public class TabPage : DevExpress.XtraTab.XtraTabPage

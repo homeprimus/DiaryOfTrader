@@ -32,128 +32,81 @@ namespace DiaryOfTrader.EditControls
     /// </summary>
     private void InitializeComponent()
     {
-      components = new System.ComponentModel.Container();
-      var resources = new System.ComponentModel.ComponentResourceManager(typeof(GridCntrl));
-      pmGrid = new DevExpress.XtraBars.PopupMenu(components);
-      bmGrid = new DevExpress.XtraBars.BarManager(components);
-      barDockControlTop = new DevExpress.XtraBars.BarDockControl();
-      barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
-      barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
-      barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-      bar2 = new DevExpress.XtraBars.Bar();
-      bbtDelete = new DevExpress.XtraBars.BarButtonItem();
-      bbtAdd = new DevExpress.XtraBars.BarButtonItem();
-      gcDictionary = new DevExpress.XtraGrid.GridControl();
-      gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-      bbEdit = new DevExpress.XtraBars.BarButtonItem();
-      ((System.ComponentModel.ISupportInitialize)pmGrid).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)bmGrid).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)gcDictionary).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+      gridNavigator = new GridNavigator();
+      grid = new DevExpress.XtraGrid.GridControl();
+      gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+      gcName = new DevExpress.XtraGrid.Columns.GridColumn();
+      gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+      gcOrder = new DevExpress.XtraGrid.Columns.GridColumn();
+      ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)gridView).BeginInit();
       SuspendLayout();
       // 
-      // pmGrid
+      // gridNavigator
       // 
-      pmGrid.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(bbtAdd), new DevExpress.XtraBars.LinkPersistInfo(bbtDelete), new DevExpress.XtraBars.LinkPersistInfo(bbEdit) });
-      pmGrid.Manager = bmGrid;
-      pmGrid.Name = "pmGrid";
+      gridNavigator.Appearance.BackColor = Color.Transparent;
+      gridNavigator.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      gridNavigator.Appearance.Options.UseBackColor = true;
+      gridNavigator.Appearance.Options.UseFont = true;
+      gridNavigator.Dock = DockStyle.Top;
+      gridNavigator.Location = new Point(0, 0);
+      gridNavigator.Name = "gridNavigator";
+      gridNavigator.Size = new Size(352, 27);
+      gridNavigator.TabIndex = 5;
+      gridNavigator.View = null;
       // 
-      // bmGrid
+      // grid
       // 
-      bmGrid.AllowCustomization = false;
-      bmGrid.AllowHtmlText = true;
-      bmGrid.Bars.AddRange(new DevExpress.XtraBars.Bar[] { bar2 });
-      bmGrid.DockControls.Add(barDockControlTop);
-      bmGrid.DockControls.Add(barDockControlBottom);
-      bmGrid.DockControls.Add(barDockControlLeft);
-      bmGrid.DockControls.Add(barDockControlRight);
-      bmGrid.Form = this;
-      bmGrid.Items.AddRange(new DevExpress.XtraBars.BarItem[] { bbtDelete, bbtAdd, bbEdit });
-      bmGrid.MainMenu = bar2;
-      bmGrid.MaxItemId = 3;
+      grid.Dock = DockStyle.Fill;
+      grid.Location = new Point(0, 27);
+      grid.MainView = gridView;
+      grid.Name = "grid";
+      grid.Size = new Size(352, 136);
+      grid.TabIndex = 6;
+      grid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
       // 
-      // barDockControlTop
+      // gridView
       // 
-      barDockControlTop.CausesValidation = false;
-      barDockControlTop.Dock = DockStyle.Top;
-      barDockControlTop.Location = new Point(0, 0);
-      barDockControlTop.Manager = bmGrid;
-      barDockControlTop.Size = new Size(441, 24);
+      gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcName, gcDescription, gcOrder });
+      gridView.GridControl = grid;
+      gridView.Name = "gridView";
+      gridView.OptionsBehavior.AllowIncrementalSearch = true;
+      gridView.OptionsCustomization.AllowColumnMoving = false;
+      gridView.OptionsCustomization.AllowGroup = false;
+      gridView.OptionsCustomization.AllowQuickHideColumns = false;
+      gridView.OptionsView.ShowDetailButtons = false;
+      gridView.OptionsView.ShowGroupPanel = false;
       // 
-      // barDockControlBottom
+      // gcName
       // 
-      barDockControlBottom.CausesValidation = false;
-      barDockControlBottom.Dock = DockStyle.Bottom;
-      barDockControlBottom.Location = new Point(0, 191);
-      barDockControlBottom.Manager = bmGrid;
-      barDockControlBottom.Size = new Size(441, 0);
+      gcName.Caption = "Наименование";
+      gcName.FieldName = "Name";
+      gcName.Name = "gcName";
+      gcName.UnboundDataType = typeof(string);
+      gcName.Visible = true;
+      gcName.VisibleIndex = 0;
+      gcName.Width = 150;
       // 
-      // barDockControlLeft
+      // gcDescription
       // 
-      barDockControlLeft.CausesValidation = false;
-      barDockControlLeft.Dock = DockStyle.Left;
-      barDockControlLeft.Location = new Point(0, 24);
-      barDockControlLeft.Manager = bmGrid;
-      barDockControlLeft.Size = new Size(0, 167);
+      gcDescription.Caption = "Описание";
+      gcDescription.FieldName = "Description";
+      gcDescription.Name = "gcDescription";
+      gcDescription.UnboundDataType = typeof(string);
+      gcDescription.Visible = true;
+      gcDescription.VisibleIndex = 1;
+      gcDescription.Width = 200;
       // 
-      // barDockControlRight
+      // gcOrder
       // 
-      barDockControlRight.CausesValidation = false;
-      barDockControlRight.Dock = DockStyle.Right;
-      barDockControlRight.Location = new Point(441, 24);
-      barDockControlRight.Manager = bmGrid;
-      barDockControlRight.Size = new Size(0, 167);
-      // 
-      // bar2
-      // 
-      bar2.BarName = "Main menu";
-      bar2.DockCol = 0;
-      bar2.DockRow = 0;
-      bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-      bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(bbtAdd), new DevExpress.XtraBars.LinkPersistInfo(bbEdit), new DevExpress.XtraBars.LinkPersistInfo(bbtDelete) });
-      bar2.OptionsBar.MultiLine = true;
-      bar2.OptionsBar.UseWholeRow = true;
-      bar2.Text = "Main menu";
-      // 
-      // bbtDelete
-      // 
-      bbtDelete.Caption = "Удалить";
-      bbtDelete.Id = 0;
-      bbtDelete.ImageOptions.Image = (Image)resources.GetObject("bbtDelete.ImageOptions.Image");
-      bbtDelete.ImageOptions.LargeImage = (Image)resources.GetObject("bbtDelete.ImageOptions.LargeImage");
-      bbtDelete.Name = "bbtDelete";
-      // 
-      // bbtAdd
-      // 
-      bbtAdd.Caption = "Новая запись";
-      bbtAdd.Id = 1;
-      bbtAdd.ImageOptions.Image = (Image)resources.GetObject("bbtAdd.ImageOptions.Image");
-      bbtAdd.ImageOptions.LargeImage = (Image)resources.GetObject("bbtAdd.ImageOptions.LargeImage");
-      bbtAdd.Name = "bbtAdd";
-      // 
-      // gcDictionary
-      // 
-      gcDictionary.Dock = DockStyle.Fill;
-      gcDictionary.Location = new Point(0, 24);
-      gcDictionary.MainView = gridView1;
-      gcDictionary.MenuManager = bmGrid;
-      gcDictionary.Name = "gcDictionary";
-      gcDictionary.Size = new Size(441, 167);
-      gcDictionary.TabIndex = 4;
-      gcDictionary.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
-      // 
-      // gridView1
-      // 
-      gridView1.GridControl = gcDictionary;
-      gridView1.Name = "gridView1";
-      // 
-      // bbEdit
-      // 
-      bbEdit.Caption = "Изменить";
-      bbEdit.Id = 2;
-      bbEdit.ImageOptions.Image = (Image)resources.GetObject("bbEdit.ImageOptions.Image");
-      bbEdit.ImageOptions.LargeImage = (Image)resources.GetObject("bbEdit.ImageOptions.LargeImage");
-      bbEdit.Name = "bbEdit";
+      gcOrder.Caption = "Сортировка";
+      gcOrder.FieldName = "Order";
+      gcOrder.MinWidth = 50;
+      gcOrder.Name = "gcOrder";
+      gcOrder.UnboundDataType = typeof(int);
+      gcOrder.Visible = true;
+      gcOrder.VisibleIndex = 2;
+      gcOrder.Width = 66;
       // 
       // GridCntrl
       // 
@@ -163,34 +116,21 @@ namespace DiaryOfTrader.EditControls
       Appearance.Options.UseFont = true;
       AutoScaleDimensions = new SizeF(6F, 13F);
       AutoScaleMode = AutoScaleMode.Font;
-      Controls.Add(gcDictionary);
-      Controls.Add(barDockControlLeft);
-      Controls.Add(barDockControlRight);
-      Controls.Add(barDockControlBottom);
-      Controls.Add(barDockControlTop);
+      Controls.Add(grid);
+      Controls.Add(gridNavigator);
       Name = "GridCntrl";
-      Size = new Size(441, 191);
-      ((System.ComponentModel.ISupportInitialize)pmGrid).EndInit();
-      ((System.ComponentModel.ISupportInitialize)bmGrid).EndInit();
-      ((System.ComponentModel.ISupportInitialize)gcDictionary).EndInit();
-      ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+      Size = new Size(352, 163);
+      ((System.ComponentModel.ISupportInitialize)grid).EndInit();
+      ((System.ComponentModel.ISupportInitialize)gridView).EndInit();
       ResumeLayout(false);
-      PerformLayout();
     }
 
     #endregion
-
-    private DevExpress.XtraBars.PopupMenu pmGrid;
-    private DevExpress.XtraBars.BarButtonItem bbtAdd;
-    private DevExpress.XtraBars.BarButtonItem bbtDelete;
-    private DevExpress.XtraBars.BarManager bmGrid;
-    private DevExpress.XtraBars.Bar bar2;
-    private DevExpress.XtraBars.BarDockControl barDockControlTop;
-    private DevExpress.XtraBars.BarDockControl barDockControlBottom;
-    private DevExpress.XtraBars.BarDockControl barDockControlLeft;
-    private DevExpress.XtraBars.BarDockControl barDockControlRight;
-    private DevExpress.XtraBars.BarButtonItem bbEdit;
-    private DevExpress.XtraGrid.GridControl gcDictionary;
-    private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+    private GridNavigator gridNavigator;
+    public DevExpress.XtraGrid.GridControl grid;
+    public DevExpress.XtraGrid.Views.Grid.GridView gridView;
+    public DevExpress.XtraGrid.Columns.GridColumn gcName;
+    public DevExpress.XtraGrid.Columns.GridColumn gcDescription;
+    public DevExpress.XtraGrid.Columns.GridColumn gcOrder;
   }
 }

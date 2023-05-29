@@ -1,5 +1,4 @@
-﻿
-using DiaryOfTrader.Components;
+﻿using DiaryOfTrader.Components;
 
 namespace DiaryOfTrader.EditControls
 {
@@ -8,6 +7,13 @@ namespace DiaryOfTrader.EditControls
     public GridCntrl()
     {
       InitializeComponent();
+      gridNavigator.View = gridView;
+    }
+
+    public object DataSource
+    {
+      get { return grid.DataSource; }
+      set { grid.DataSource= value; }
     }
   }
 }
