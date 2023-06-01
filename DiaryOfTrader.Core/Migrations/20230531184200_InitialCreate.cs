@@ -102,16 +102,31 @@ namespace DiaryOfTrader.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Wallet",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wallet", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Session",
                 columns: table => new
                 {
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RegionID = table.Column<long>(type: "INTEGER", nullable: false),
-                    SummerStarting = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    SummerFinished = table.Column<DateTime>(type: "TEXT", nullable: false),
                     WinterStarting = table.Column<DateTime>(type: "TEXT", nullable: false),
                     WinterFinished = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    SummerStarting = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    SummerFinished = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Order = table.Column<int>(type: "INTEGER", nullable: false)
@@ -275,6 +290,9 @@ namespace DiaryOfTrader.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Session");
+
+            migrationBuilder.DropTable(
+                name: "Wallet");
 
             migrationBuilder.DropTable(
                 name: "Diary");

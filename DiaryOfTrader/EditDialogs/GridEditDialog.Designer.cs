@@ -32,6 +32,7 @@ namespace DiaryOfTrader.EditDialogs
     /// </summary>
     private void InitializeComponent()
     {
+      var resources = new System.ComponentModel.ComponentResourceManager(typeof(GridEditDialog));
       grid = new EditControls.GridCntrl();
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
@@ -40,47 +41,42 @@ namespace DiaryOfTrader.EditDialogs
       // 
       // pnlDown
       // 
-      pnlDown.Appearance.BackColor = Color.Transparent;
+      pnlDown.Appearance.BackColor = (Color)resources.GetObject("pnlDown.Appearance.BackColor");
       pnlDown.Appearance.Options.UseBackColor = true;
-      pnlDown.Location = new Point(0, 217);
-      pnlDown.Size = new Size(534, 40);
+      resources.ApplyResources(pnlDown, "pnlDown");
       // 
       // pnlClient
       // 
-      pnlClient.Appearance.BackColor = Color.Transparent;
+      pnlClient.Appearance.BackColor = (Color)resources.GetObject("pnlClient.Appearance.BackColor");
       pnlClient.Appearance.Options.UseBackColor = true;
       pnlClient.Controls.Add(grid);
-      pnlClient.Size = new Size(534, 217);
+      resources.ApplyResources(pnlClient, "pnlClient");
       // 
       // btOK
       // 
-      btOK.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      btOK.Appearance.Font = (Font)resources.GetObject("btOK.Appearance.Font");
       btOK.Appearance.Options.UseFont = true;
       // 
       // btCancel
       // 
-      btCancel.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      btCancel.Appearance.Font = (Font)resources.GetObject("btCancel.Appearance.Font");
       btCancel.Appearance.Options.UseFont = true;
       // 
       // grid
       // 
-      grid.Appearance.BackColor = Color.Transparent;
-      grid.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      grid.Appearance.BackColor = (Color)resources.GetObject("grid.Appearance.BackColor");
+      grid.Appearance.Font = (Font)resources.GetObject("grid.Appearance.Font");
       grid.Appearance.Options.UseBackColor = true;
       grid.Appearance.Options.UseFont = true;
-      grid.Dock = DockStyle.Fill;
-      grid.Location = new Point(0, 0);
+      grid.DataSource = null;
+      resources.ApplyResources(grid, "grid");
       grid.Name = "grid";
-      grid.Size = new Size(534, 217);
-      grid.TabIndex = 0;
       // 
       // GridEditDialog
       // 
       Appearance.Options.UseFont = true;
-      AutoScaleDimensions = new SizeF(6F, 13F);
-      ClientSize = new Size(534, 257);
+      resources.ApplyResources(this, "$this");
       Name = "GridEditDialog";
-      Text = "GridEditDialog";
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
       pnlClient.ResumeLayout(false);

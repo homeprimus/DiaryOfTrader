@@ -57,4 +57,136 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pnlDown.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
+    <value>Transparent</value>
+  </data>
+  <data name="pnlDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 217</value>
+  </data>
+  <data name="pnlDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 40</value>
+  </data>
+  <data name="&gt;&gt;pnlDown.Name" xml:space="preserve">
+    <value>pnlDown</value>
+  </data>
+  <data name="&gt;&gt;pnlDown.Type" xml:space="preserve">
+    <value>DiaryOfTrader.Components.Panel, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pnlDown.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlDown.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pnlClient.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
+    <value>Transparent</value>
+  </data>
+  <data name="&gt;&gt;grid.Name" xml:space="preserve">
+    <value>grid</value>
+  </data>
+  <data name="&gt;&gt;grid.Type" xml:space="preserve">
+    <value>DiaryOfTrader.EditControls.GridCntrl, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grid.Parent" xml:space="preserve">
+    <value>pnlClient</value>
+  </data>
+  <data name="&gt;&gt;grid.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlClient.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 217</value>
+  </data>
+  <data name="&gt;&gt;pnlClient.Name" xml:space="preserve">
+    <value>pnlClient</value>
+  </data>
+  <data name="&gt;&gt;pnlClient.Type" xml:space="preserve">
+    <value>DiaryOfTrader.Components.Panel, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pnlClient.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlClient.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btOK.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="&gt;&gt;btOK.Name" xml:space="preserve">
+    <value>btOK</value>
+  </data>
+  <data name="&gt;&gt;btOK.Type" xml:space="preserve">
+    <value>DiaryOfTrader.Components.Button, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btOK.Parent" xml:space="preserve">
+    <value>pnlOK</value>
+  </data>
+  <data name="&gt;&gt;btOK.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btCancel.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="&gt;&gt;btCancel.Name" xml:space="preserve">
+    <value>btCancel</value>
+  </data>
+  <data name="&gt;&gt;btCancel.Type" xml:space="preserve">
+    <value>DiaryOfTrader.Components.Button, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btCancel.Parent" xml:space="preserve">
+    <value>pnlCancel</value>
+  </data>
+  <data name="&gt;&gt;btCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grid.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
+    <value>Transparent</value>
+  </data>
+  <data name="grid.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="grid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="grid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 217</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grid.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;grid.Name" xml:space="preserve">
+    <value>grid</value>
+  </data>
+  <data name="&gt;&gt;grid.Type" xml:space="preserve">
+    <value>DiaryOfTrader.EditControls.GridCntrl, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grid.Parent" xml:space="preserve">
+    <value>pnlClient</value>
+  </data>
+  <data name="&gt;&gt;grid.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>534, 257</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>GridEditDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>GridEditDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>DiaryOfTrader.EditDialogs.OKCancelDialog, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
 </root>

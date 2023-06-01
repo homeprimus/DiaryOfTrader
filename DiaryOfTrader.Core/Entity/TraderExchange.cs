@@ -1,7 +1,7 @@
 ﻿
 namespace DiaryOfTrader.Core.Entity
 {
-  public class Exchange: Entity
+  public class TraderExchange: Entity
   {
   }
 }

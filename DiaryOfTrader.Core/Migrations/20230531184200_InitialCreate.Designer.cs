@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiaryOfTrader.Core.Migrations
 {
     [DbContext(typeof(DiaryOfTraderCtx))]
-    [Migration("20230528143104_InitialCreate")]
+    [Migration("20230531184200_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -78,29 +78,6 @@ namespace DiaryOfTrader.Core.Migrations
                     b.HasIndex("TrendID");
 
                     b.ToTable("Diary");
-
-                    b.UseTpcMappingStrategy();
-                });
-
-            modelBuilder.Entity("DiaryOfTrader.Core.Entity.Exchange", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Exchange");
 
                     b.UseTpcMappingStrategy();
                 });
@@ -207,6 +184,29 @@ namespace DiaryOfTrader.Core.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Frame");
+
+                    b.UseTpcMappingStrategy();
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderExchange", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Exchange");
 
                     b.UseTpcMappingStrategy();
                 });
@@ -320,6 +320,29 @@ namespace DiaryOfTrader.Core.Migrations
                     b.UseTpcMappingStrategy();
                 });
 
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.Wallet", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Wallet");
+
+                    b.UseTpcMappingStrategy();
+                });
+
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.Diary", b =>
                 {
                     b.HasOne("DiaryOfTrader.Core.Entity.TimeFrame", "Entered")
@@ -328,7 +351,7 @@ namespace DiaryOfTrader.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DiaryOfTrader.Core.Entity.Exchange", "Exchange")
+                    b.HasOne("DiaryOfTrader.Core.Entity.TraderExchange", "Exchange")
                         .WithMany()
                         .HasForeignKey("ExchangeID");
 

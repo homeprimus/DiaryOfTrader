@@ -10,7 +10,7 @@ namespace DiaryOfTrader.Core.Entity
     /*
      * На какой бирже торговали
      */
-    public Exchange? Exchange { get; set; }
+    public TraderExchange? Exchange { get; set; }
     /*
      * Чем торговали
      */

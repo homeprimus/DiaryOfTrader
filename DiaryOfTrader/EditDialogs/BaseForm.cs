@@ -1,4 +1,5 @@
 ﻿using DiaryOfTrader.Components;
+using DiaryOfTrader.Properties;
 
 namespace DiaryOfTrader.EditDialogs
 {
@@ -12,14 +13,21 @@ namespace DiaryOfTrader.EditDialogs
 
     private void InitializeComponent()
     {
-      this.SuspendLayout();
+      var resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
+      SuspendLayout();
       // 
       // BaseForm
       // 
-      this.ClientSize = new System.Drawing.Size(292, 266);
-      this.Name = "BaseForm";
-      this.ResumeLayout(false);
+      Appearance.Options.UseFont = true;
+      resources.ApplyResources(this, "$this");
+      Name = "BaseForm";
+      ResumeLayout(false);
+    }
 
+    protected override void OnLoad(EventArgs e)
+    {
+      base.OnLoad(e);
+      Icon = Resources.Main;
     }
 
   }

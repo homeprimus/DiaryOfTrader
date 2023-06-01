@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Reflection.Emit;
-using System.Xml.Linq;
-using DiaryOfTrader.Core.Core;
+﻿using DiaryOfTrader.Core.Core;
 using DiaryOfTrader.Core.Entity;
-using DiaryOfTrader.Core.Properties;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DiaryOfTrader.Core.Data
 {
@@ -33,7 +28,7 @@ namespace DiaryOfTrader.Core.Data
        * Add-Migration InitialCreate
        * Название миграции произвольное. В данном случае это InitialCreate. Нажмем на Enter для создания миграции.
        */
-      Database.Migrate();
+    //  Database.Migrate();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -43,58 +38,94 @@ namespace DiaryOfTrader.Core.Data
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
+
+      //modelBuilder.Entity<HistoryRow>().ToTable("MigrationHistory");
+
       modelBuilder.Ignore<Element>();
       modelBuilder.Ignore<Entity.Entity>();
-
 
       modelBuilder.Entity<ScreenShot>().UseTpcMappingStrategy();
       modelBuilder.Entity<ScreenShot>().Property(b => b.ID).ValueGeneratedOnAdd();
 
-      modelBuilder.Entity<TraderRegion>().UseTpcMappingStrategy();
-      modelBuilder.Entity<TraderRegion>().Property(b => b.ID).ValueGeneratedOnAdd();
-
-      modelBuilder.Entity<TraderSession>().UseTpcMappingStrategy();
-      modelBuilder.Entity<TraderSession>().Property(b => b.ID).ValueGeneratedOnAdd();
-
-      modelBuilder.Entity<TimeFrame>().UseTpcMappingStrategy();
-      modelBuilder.Entity<TimeFrame>().Property(b => b.ID).ValueGeneratedOnAdd();
-
-      modelBuilder.Entity<Symbol>().UseTpcMappingStrategy();
-      modelBuilder.Entity<Symbol>().Property(b => b.ID).ValueGeneratedOnAdd();
-
-      modelBuilder.Entity<Entity.Exchange>().UseTpcMappingStrategy();
-      modelBuilder.Entity<Entity.Exchange>().Property(b => b.ID).ValueGeneratedOnAdd();
-
-      modelBuilder.Entity<Trend>().UseTpcMappingStrategy();
-      modelBuilder.Entity<Trend>().Property(b => b.ID).ValueGeneratedOnAdd();
-
+      modelBuilder.Entity<Wallet>(WalletConfigure);
+      modelBuilder.Entity<Symbol>(SymbolConfigure);
+      modelBuilder.Entity<TraderExchange>(ExchangeConfigure);
+      modelBuilder.Entity<TraderRegion>(TraderRegionConfigure);
+      modelBuilder.Entity<TraderSession>(TraderSessionConfigure);
+      modelBuilder.Entity<TimeFrame>(TimeFrameConfigure);
+      modelBuilder.Entity<Trend>(TrendConfigure);
       modelBuilder.Entity<TraderResult>(TraderResultConfigure);
       modelBuilder.Entity<Diary>(DiaryConfigure);
       modelBuilder.Entity<MarketReview>(MarketReviewConfigure);
-
     }
 
+    #region Configure
+
+    #region Symbol
+    private void SymbolConfigure(EntityTypeBuilder<Symbol> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
+    #endregion
+    #region Wallet
+    private void WalletConfigure(EntityTypeBuilder<Wallet> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
+    #endregion
+    #region Exchange
+    private void ExchangeConfigure(EntityTypeBuilder<TraderExchange> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
+    #endregion
+    #region TraderSession
+    private void TraderSessionConfigure(EntityTypeBuilder<TraderSession> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
+    #endregion
+    #region TraderRegion
+    private void TraderRegionConfigure(EntityTypeBuilder<TraderRegion> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
+    #endregion
+    #region Trend
+    private void TrendConfigure(EntityTypeBuilder<Trend> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
+    #endregion
+    #region TimeFrame
+    private void TimeFrameConfigure(EntityTypeBuilder<TimeFrame> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
+    #endregion
+    #region TraderResult
     private void TraderResultConfigure(EntityTypeBuilder<TraderResult> builder)
     {
       builder.UseTpcMappingStrategy();
       builder.Property(b => b.ID).ValueGeneratedOnAdd();
-      //builder.HasData(
-      //  new TraderResult[]
-      //  {
-      //    new TraderResult { ID=1, Name=Resources.TraderResultSuccess, Description= ""},
-      //    new TraderResult { ID=2, Name=Resources.TraderResultNone, Description = ""},
-      //    new TraderResult { ID=3, Name=Resources.TraderResultLoss, Description = ""}
-      //  });
-
     }
-
+    #endregion
+    #region MarketReview
     private void MarketReviewConfigure(EntityTypeBuilder<MarketReview> builder)
     {
       builder.UseTpcMappingStrategy();
       builder.Ignore(b => b.Order);
       builder.Property(b => b.ID).ValueGeneratedOnAdd();
     }
-
+    #endregion
+    #region Diary
     private void DiaryConfigure(EntityTypeBuilder<Diary> builder)
     {
       builder.UseTpcMappingStrategy();
@@ -117,19 +148,22 @@ namespace DiaryOfTrader.Core.Data
       //  .HasIndex(u => u.Symbol)
       //  .HasFilter("[Symbol] IS NOT NULL"); ;
     }
+    #endregion
 
-    public DbSet<Diary> Diary { get; set; }
+    #endregion
+
     public DbSet<ScreenShot> ScreenShot { get; set; }
     public DbSet<TraderSession> Session { get; set; }
     public DbSet<TimeFrame> Frame { get; set; }
     public DbSet<TraderResult> Result { get; set; }
     public DbSet<Symbol> Symbol { get; set; }
-    public DbSet<Entity.Exchange> Exchange { get; set; }
+    public DbSet<TraderExchange> Exchange { get; set; }
     public DbSet<Trend> Trend { get; set; }
     public DbSet<TraderRegion> Region { get; set; }
-    public DbSet<MarketReview> MarketReview { get; set; }
-    
+    public DbSet<Wallet> Wallet { get; set; }
 
+    public DbSet<Diary> Diary { get; set; }
+    public DbSet<MarketReview> MarketReview { get; set; }
   }
 }
 

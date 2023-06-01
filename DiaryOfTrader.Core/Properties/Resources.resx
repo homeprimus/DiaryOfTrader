@@ -117,6 +117,162 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Chicago" xml:space="preserve">
+    <value>Чикаго</value>
+  </data>
+  <data name="ExchangeBinance" xml:space="preserve">
+    <value>Binance</value>
+  </data>
+  <data name="ExchangeBinanceDesc" xml:space="preserve">
+    <value>Криптовалютная биржа Binance</value>
+  </data>
+  <data name="ExchangeForex" xml:space="preserve">
+    <value>Forex</value>
+  </data>
+  <data name="ExchangeForexDesc" xml:space="preserve">
+    <value>Форекс – международный финансовый рынок, на котором происходит обмен валют</value>
+  </data>
+  <data name="Frankfurt" xml:space="preserve">
+    <value>Франкфурт</value>
+  </data>
+  <data name="HongKong" xml:space="preserve">
+    <value>Гонконг</value>
+  </data>
+  <data name="London" xml:space="preserve">
+    <value>Лондон</value>
+  </data>
+  <data name="NewYork" xml:space="preserve">
+    <value>Нью-Йорк</value>
+  </data>
+  <data name="Sydney" xml:space="preserve">
+    <value>Сидней</value>
+  </data>
+  <data name="SymbolBNBUSD" xml:space="preserve">
+    <value>BNBUSD</value>
+  </data>
+  <data name="SymbolBNBUSDDesc" xml:space="preserve">
+    <value>Курс BNB (Binance Coin) к Доллару США</value>
+  </data>
+  <data name="SymbolBTCUSD" xml:space="preserve">
+    <value>BTCUSD</value>
+  </data>
+  <data name="SymbolBTCUSDDesc" xml:space="preserve">
+    <value>BTC/USD – это инновационная валютная пара нового поколения, в которой отражается соотношение котировки одного биткоина к доллару США.</value>
+  </data>
+  <data name="SymbolDXY" xml:space="preserve">
+    <value>DXY</value>
+  </data>
+  <data name="SymbolDXYDesc" xml:space="preserve">
+    <value>Обозначение Индекса доллара — DXY. Индекс доллара передает ценность валюты Америки. Данный показатель представлен в виде соотношения шести крупных валют с USD. В корзину включены — евро (EUR), йена (JPY), фунт стерлингов (GBP), канадский доллар (CAD), шведская крона (SEK), швейцарский франк (CHF).</value>
+  </data>
+  <data name="SymbolETHUSD" xml:space="preserve">
+    <value>ETHUSD</value>
+  </data>
+  <data name="SymbolETHUSDDesc" xml:space="preserve">
+    <value>Курс Эфира (эфириума) к Доллару США</value>
+  </data>
+  <data name="SymbolEURUSD" xml:space="preserve">
+    <value>EURUSD</value>
+  </data>
+  <data name="SymbolEURUSDDesc" xml:space="preserve">
+    <value>EURUSD - валютная пара, которая имеет достаточно низкий спред и показывает соотношение евро и доллара США. В паре евро выступает как базовая валюта, а доллар США - как котируемая</value>
+  </data>
+  <data name="SymbolGRBUSD" xml:space="preserve">
+    <value>GRBUSD</value>
+  </data>
+  <data name="SymbolGRBUSDDesc" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SymbolSPX" xml:space="preserve">
+    <value>SPX</value>
+  </data>
+  <data name="SymbolSPXDesc" xml:space="preserve">
+    <value>SPX – это индекс S&amp;P500, который был впервые составлен Standard&amp;Poor`s еще в 1923 году. Это взвешенный по рыночной капитализации индекс, в который входят акции 500 самых крупных компаний США</value>
+  </data>
+  <data name="SymbolUSDJPY" xml:space="preserve">
+    <value>USDJPY</value>
+  </data>
+  <data name="SymbolUSDJPYDesc" xml:space="preserve">
+    <value>USDJPY — это валютная пара, в которую входит доллар США и японская иена. Эту пару называют «иена» или «гофер». Она является второй по объёму торговой парой на рынке Форекс.</value>
+  </data>
+  <data name="TimeFrameD1" xml:space="preserve">
+    <value>D1</value>
+  </data>
+  <data name="TimeFrameD1Desc" xml:space="preserve">
+    <value>Дневной</value>
+  </data>
+  <data name="TimeFrameH1" xml:space="preserve">
+    <value>H1</value>
+  </data>
+  <data name="TimeFrameH1Desc" xml:space="preserve">
+    <value>Часовой</value>
+  </data>
+  <data name="TimeFrameH4" xml:space="preserve">
+    <value>H4</value>
+  </data>
+  <data name="TimeFrameH4Desc" xml:space="preserve">
+    <value>Четырех часовой</value>
+  </data>
+  <data name="TimeFrameM1" xml:space="preserve">
+    <value>M1</value>
+  </data>
+  <data name="TimeFrameM15" xml:space="preserve">
+    <value>M15</value>
+  </data>
+  <data name="TimeFrameM15Desc" xml:space="preserve">
+    <value>Пятнадцати минутный</value>
+  </data>
+  <data name="TimeFrameM1Desc" xml:space="preserve">
+    <value>Минутный тренд</value>
+  </data>
+  <data name="TimeFrameM30" xml:space="preserve">
+    <value>M30</value>
+  </data>
+  <data name="TimeFrameM30Desc" xml:space="preserve">
+    <value>Тридцати минутный</value>
+  </data>
+  <data name="TimeFrameM5" xml:space="preserve">
+    <value>M5</value>
+  </data>
+  <data name="TimeFrameM5Desc" xml:space="preserve">
+    <value>Пятиминутный</value>
+  </data>
+  <data name="TimeFrameMN" xml:space="preserve">
+    <value>MN</value>
+  </data>
+  <data name="TimeFrameMNDesc" xml:space="preserve">
+    <value>Месячный</value>
+  </data>
+  <data name="TimeFrameW1" xml:space="preserve">
+    <value>W1</value>
+  </data>
+  <data name="TimeFrameW1Desc" xml:space="preserve">
+    <value>Недельный</value>
+  </data>
+  <data name="Tokyo" xml:space="preserve">
+    <value>Токио</value>
+  </data>
+  <data name="TraderRegionAmerica" xml:space="preserve">
+    <value>Американский</value>
+  </data>
+  <data name="TraderRegionAsia" xml:space="preserve">
+    <value>Азиатский</value>
+  </data>
+  <data name="TraderRegionEurope" xml:space="preserve">
+    <value>Европейский</value>
+  </data>
+  <data name="TraderRegionPacific" xml:space="preserve">
+    <value>Тихоокенский</value>
+  </data>
+  <data name="TraderResultDescriptionLoss" xml:space="preserve">
+    <value>Трейдинг закончился потерей ликвидности</value>
+  </data>
+  <data name="TraderResultDescriptionNone" xml:space="preserve">
+    <value>Трейдинг не состоялся</value>
+  </data>
+  <data name="TraderResultDescriptionSuccess" xml:space="preserve">
+    <value>Трейдинг закончился с прибылью</value>
+  </data>
   <data name="TraderResultLoss" xml:space="preserve">
     <value>Потеря</value>
   </data>
@@ -125,5 +281,44 @@
   </data>
   <data name="TraderResultSuccess" xml:space="preserve">
     <value>Успех</value>
+  </data>
+  <data name="TrendDownward" xml:space="preserve">
+    <value>Нисходящий(медвежий)</value>
+  </data>
+  <data name="TrendDownwardDesc" xml:space="preserve">
+    <value>Тренд в котором каждый последующий хай ниже предыдущего.</value>
+  </data>
+  <data name="TrendSide" xml:space="preserve">
+    <value>Боковой</value>
+  </data>
+  <data name="TrendSideDesc" xml:space="preserve">
+    <value>Тренд, при котором последующие хаи или лои находятся на одном уровне</value>
+  </data>
+  <data name="TrendUpward" xml:space="preserve">
+    <value>Восходящий(бычий)</value>
+  </data>
+  <data name="TrendUpwardDesc" xml:space="preserve">
+    <value>Тренд в котором каждый последующий лой выше предыдущего</value>
+  </data>
+  <data name="WalletDemo" xml:space="preserve">
+    <value>Демо</value>
+  </data>
+  <data name="WalletDemoDesc" xml:space="preserve">
+    <value>Демо кошелек</value>
+  </data>
+  <data name="WalletMarketSimulator" xml:space="preserve">
+    <value>Симулятор</value>
+  </data>
+  <data name="WalletMarketSimulatorDesc" xml:space="preserve">
+    <value>Используется на симуляторах рынка</value>
+  </data>
+  <data name="WalletReal" xml:space="preserve">
+    <value>Торговый</value>
+  </data>
+  <data name="WalletRealDesc" xml:space="preserve">
+    <value>Реальный кошелек с ликвидностью</value>
+  </data>
+  <data name="Wellington" xml:space="preserve">
+    <value>Веллингтон</value>
   </data>
 </root>

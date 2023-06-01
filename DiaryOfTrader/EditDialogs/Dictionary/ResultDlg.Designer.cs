@@ -32,6 +32,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
     /// </summary>
     private void InitializeComponent()
     {
+      var resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultDlg));
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
       pnlClient.SuspendLayout();
@@ -39,42 +40,39 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       // 
       // grid
       // 
-      grid.Appearance.BackColor = Color.Transparent;
-      grid.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      grid.Appearance.BackColor = (Color)resources.GetObject("grid.Appearance.BackColor");
+      grid.Appearance.Font = (Font)resources.GetObject("grid.Appearance.Font");
       grid.Appearance.Options.UseBackColor = true;
       grid.Appearance.Options.UseFont = true;
-      grid.Size = new Size(436, 174);
+      resources.ApplyResources(grid, "grid");
       // 
       // pnlDown
       // 
-      pnlDown.Appearance.BackColor = Color.Transparent;
+      pnlDown.Appearance.BackColor = (Color)resources.GetObject("pnlDown.Appearance.BackColor");
       pnlDown.Appearance.Options.UseBackColor = true;
-      pnlDown.Location = new Point(0, 174);
-      pnlDown.Size = new Size(436, 40);
+      resources.ApplyResources(pnlDown, "pnlDown");
       // 
       // pnlClient
       // 
-      pnlClient.Appearance.BackColor = Color.Transparent;
+      pnlClient.Appearance.BackColor = (Color)resources.GetObject("pnlClient.Appearance.BackColor");
       pnlClient.Appearance.Options.UseBackColor = true;
-      pnlClient.Size = new Size(436, 174);
+      resources.ApplyResources(pnlClient, "pnlClient");
       // 
       // btOK
       // 
-      btOK.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      btOK.Appearance.Font = (Font)resources.GetObject("btOK.Appearance.Font");
       btOK.Appearance.Options.UseFont = true;
       // 
       // btCancel
       // 
-      btCancel.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      btCancel.Appearance.Font = (Font)resources.GetObject("btCancel.Appearance.Font");
       btCancel.Appearance.Options.UseFont = true;
       // 
       // ResultDlg
       // 
       Appearance.Options.UseFont = true;
-      AutoScaleDimensions = new SizeF(6F, 13F);
-      ClientSize = new Size(436, 214);
+      resources.ApplyResources(this, "$this");
       Name = "ResultDlg";
-      Text = "ResultDlg";
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
       pnlClient.ResumeLayout(false);

@@ -32,10 +32,52 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(800, 450);
-      this.Text = "TimeFrameDlg";
+      var resources = new System.ComponentModel.ComponentResourceManager(typeof(TimeFrameDlg));
+      ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
+      pnlClient.SuspendLayout();
+      SuspendLayout();
+      // 
+      // grid
+      // 
+      grid.Appearance.BackColor = (Color)resources.GetObject("grid.Appearance.BackColor");
+      grid.Appearance.Font = (Font)resources.GetObject("grid.Appearance.Font");
+      grid.Appearance.Options.UseBackColor = true;
+      grid.Appearance.Options.UseFont = true;
+      resources.ApplyResources(grid, "grid");
+      // 
+      // pnlDown
+      // 
+      pnlDown.Appearance.BackColor = (Color)resources.GetObject("pnlDown.Appearance.BackColor");
+      pnlDown.Appearance.Options.UseBackColor = true;
+      resources.ApplyResources(pnlDown, "pnlDown");
+      // 
+      // pnlClient
+      // 
+      pnlClient.Appearance.BackColor = (Color)resources.GetObject("pnlClient.Appearance.BackColor");
+      pnlClient.Appearance.Options.UseBackColor = true;
+      resources.ApplyResources(pnlClient, "pnlClient");
+      // 
+      // btOK
+      // 
+      btOK.Appearance.Font = (Font)resources.GetObject("btOK.Appearance.Font");
+      btOK.Appearance.Options.UseFont = true;
+      // 
+      // btCancel
+      // 
+      btCancel.Appearance.Font = (Font)resources.GetObject("btCancel.Appearance.Font");
+      btCancel.Appearance.Options.UseFont = true;
+      // 
+      // TimeFrameDlg
+      // 
+      Appearance.Options.UseFont = true;
+      resources.ApplyResources(this, "$this");
+      IconOptions.Icon = (Icon)resources.GetObject("TimeFrameDlg.IconOptions.Icon");
+      Name = "TimeFrameDlg";
+      ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
+      ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
+      pnlClient.ResumeLayout(false);
+      ResumeLayout(false);
     }
 
     #endregion
