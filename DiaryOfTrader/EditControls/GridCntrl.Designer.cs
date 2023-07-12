@@ -37,8 +37,8 @@ namespace DiaryOfTrader.EditControls
       gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
       gcName = new DevExpress.XtraGrid.Columns.GridColumn();
       gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
-      gcOrder = new DevExpress.XtraGrid.Columns.GridColumn();
       repositoryItemMemoEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+      gcOrder = new DevExpress.XtraGrid.Columns.GridColumn();
       ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gridView).BeginInit();
       ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).BeginInit();
@@ -77,43 +77,52 @@ namespace DiaryOfTrader.EditControls
       gridView.OptionsCustomization.AllowColumnMoving = false;
       gridView.OptionsCustomization.AllowGroup = false;
       gridView.OptionsCustomization.AllowQuickHideColumns = false;
+      gridView.OptionsView.RowAutoHeight = true;
       gridView.OptionsView.ShowDetailButtons = false;
       gridView.OptionsView.ShowGroupPanel = false;
       // 
       // gcName
       // 
+      gcName.AppearanceHeader.Options.UseTextOptions = true;
+      gcName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       gcName.Caption = "Наименование";
       gcName.FieldName = "Name";
       gcName.Name = "gcName";
       gcName.UnboundDataType = typeof(string);
       gcName.Visible = true;
       gcName.VisibleIndex = 0;
-      gcName.Width = 150;
+      gcName.Width = 110;
       // 
       // gcDescription
       // 
+      gcDescription.AppearanceHeader.Options.UseTextOptions = true;
+      gcDescription.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       gcDescription.Caption = "Описание";
+      gcDescription.ColumnEdit = repositoryItemMemoEdit;
       gcDescription.FieldName = "Description";
       gcDescription.Name = "gcDescription";
       gcDescription.UnboundDataType = typeof(string);
       gcDescription.Visible = true;
       gcDescription.VisibleIndex = 1;
-      gcDescription.Width = 200;
-      // 
-      // gcOrder
-      // 
-      gcOrder.Caption = "Сортировка";
-      gcOrder.FieldName = "Order";
-      gcOrder.MinWidth = 50;
-      gcOrder.Name = "gcOrder";
-      gcOrder.UnboundDataType = typeof(int);
-      gcOrder.Visible = true;
-      gcOrder.VisibleIndex = 2;
-      gcOrder.Width = 66;
+      gcDescription.Width = 152;
       // 
       // repositoryItemMemoEdit
       // 
       repositoryItemMemoEdit.Name = "repositoryItemMemoEdit";
+      // 
+      // gcOrder
+      // 
+      gcOrder.AppearanceHeader.Options.UseTextOptions = true;
+      gcOrder.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      gcOrder.Caption = "Сортировка";
+      gcOrder.FieldName = "Order";
+      gcOrder.MinWidth = 50;
+      gcOrder.Name = "gcOrder";
+      gcOrder.OptionsColumn.FixedWidth = true;
+      gcOrder.UnboundDataType = typeof(int);
+      gcOrder.Visible = true;
+      gcOrder.VisibleIndex = 2;
+      gcOrder.Width = 70;
       // 
       // GridCntrl
       // 

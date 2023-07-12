@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel;
+using System.Windows.Controls;
 using DevExpress.Xpo;
 using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.EditControls;

@@ -75,7 +75,7 @@ namespace DiaryOfTrader.Core.Data
     {
       #region asia
 
-      var asia = new TraderRegion { ID = 1, Name = Resources.TraderRegionAsia, Order = 10 };
+      var asia = new TraderRegion { ID = 1, Name = Resources.TraderRegionAsia, Description = Resources.TraderRegionAsiaDesc, Order = 10 };
       asia.Sessions.AddRange(
         new[]
         {
@@ -84,6 +84,7 @@ namespace DiaryOfTrader.Core.Data
             ID = 1,
             Region = asia,
             Name = Resources.Tokyo,
+            Description = Resources.TokyoDesc,
             WinterStarting = new DateTime(2023, 05, 01, 00, 0, 0),
             WinterFinished = new DateTime(2023, 05, 01, 08, 0, 0),
             SummerStarting = new DateTime(2023, 05, 01, 00, 0, 0),
@@ -93,7 +94,8 @@ namespace DiaryOfTrader.Core.Data
           {
             ID = 2,
             Region = asia,
-            Name = Resources.HongKong,
+            Name = Resources.HongKong, 
+            Description =  Resources.HongKongDesc,
             WinterStarting = new DateTime(2023, 05, 01, 01, 0, 0),
             WinterFinished = new DateTime(2023, 05, 01, 09, 0, 0),
             SummerStarting = new DateTime(2023, 05, 01, 01, 0, 0),
@@ -107,7 +109,7 @@ namespace DiaryOfTrader.Core.Data
 
       #region europe
 
-      var europe = new TraderRegion { ID = 2, Name = Resources.TraderRegionEurope, Order = 20 };
+      var europe = new TraderRegion { ID = 2, Name = Resources.TraderRegionEurope, Description = Resources.TraderRegionEuropeDesc, Order = 20 };
       europe.Sessions.AddRange(
         new[]
         {
@@ -116,6 +118,7 @@ namespace DiaryOfTrader.Core.Data
             ID = 3,
             Region = europe,
             Name = Resources.Frankfurt,
+            Description = Resources.FrankfurtDesc,
             WinterStarting = new DateTime(2023, 05, 01, 06, 0, 0),
             WinterFinished = new DateTime(2023, 05, 01, 14, 0, 0),
             SummerStarting = new DateTime(2023, 05, 01, 05, 0, 0),
@@ -126,6 +129,7 @@ namespace DiaryOfTrader.Core.Data
             ID = 4,
             Region = europe,
             Name = Resources.London,
+            Description = Resources.LondonDesc,
             WinterStarting = new DateTime(2023, 05, 01, 07, 0, 0),
             WinterFinished = new DateTime(2023, 05, 01, 15, 0, 0),
             SummerStarting = new DateTime(2023, 05, 01, 06, 0, 0),
@@ -138,7 +142,7 @@ namespace DiaryOfTrader.Core.Data
 
       #region america
 
-      var america = new TraderRegion { ID = 3, Name = Resources.TraderRegionAmerica, Order = 30 };
+      var america = new TraderRegion { ID = 3, Name = Resources.TraderRegionAmerica, Description = Resources.TraderRegionAmericaDesc, Order = 30 };
       america.Sessions.AddRange(new[]
       {
         new TraderSession
@@ -146,6 +150,7 @@ namespace DiaryOfTrader.Core.Data
           ID = 5,
           Region = europe,
           Name = Resources.NewYork,
+          Description = Resources.NewYorkDesc,
           WinterStarting = new DateTime(2023, 05, 01, 13, 0, 0),
           WinterFinished = new DateTime(2023, 05, 01, 21, 0, 0),
           SummerStarting = new DateTime(2023, 05, 01, 12, 0, 0),
@@ -156,6 +161,7 @@ namespace DiaryOfTrader.Core.Data
           ID = 6,
           Region = europe,
           Name = Resources.Chicago,
+          Description = Resources.ChicagoDesc,
           WinterStarting = new DateTime(2023, 05, 01, 13, 0, 0),
           WinterFinished = new DateTime(2023, 05, 01, 21, 0, 0),
           SummerStarting = new DateTime(2023, 05, 01, 14, 0, 0),
@@ -167,7 +173,7 @@ namespace DiaryOfTrader.Core.Data
 
       #region pacific
 
-      var pacific = new TraderRegion { ID = 4, Name = Resources.TraderRegionPacific, Order = 40 };
+      var pacific = new TraderRegion { ID = 4, Name = Resources.TraderRegionPacific, Description = Resources.TraderRegionPacificDesc, Order = 40 };
       pacific.Sessions.AddRange(new[]
       {
         new TraderSession
@@ -175,6 +181,7 @@ namespace DiaryOfTrader.Core.Data
           ID = 7,
           Region = europe,
           Name = Resources.Wellington,
+          Description = Resources.WellingtonDesc,
           WinterStarting = new DateTime(2023, 05, 01, 21, 0, 0),
           WinterFinished = new DateTime(2023, 05, 01, 03, 0, 0),
           SummerStarting = new DateTime(2023, 05, 01, 20, 0, 0),
@@ -185,6 +192,7 @@ namespace DiaryOfTrader.Core.Data
           ID = 8,
           Region = europe,
           Name = Resources.Sydney,
+          Description = Resources.ChicagoDesc,
           WinterStarting = new DateTime(2023, 05, 01, 23, 0, 0),
           WinterFinished = new DateTime(2023, 05, 01, 05, 0, 0),
           SummerStarting = new DateTime(2023, 05, 01, 22, 0, 0),

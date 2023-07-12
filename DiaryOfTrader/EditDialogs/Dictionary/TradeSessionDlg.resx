@@ -69,7 +69,7 @@
     <value>Top</value>
   </data>
   <data name="grid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 160</value>
+    <value>897, 243</value>
   </data>
   <data name="&gt;&gt;grid.Name" xml:space="preserve">
     <value>grid</value>
@@ -87,10 +87,10 @@
     <value>Transparent</value>
   </data>
   <data name="pnlDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 370</value>
+    <value>0, 460</value>
   </data>
   <data name="pnlDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 40</value>
+    <value>897, 40</value>
   </data>
   <data name="&gt;&gt;pnlDown.Name" xml:space="preserve">
     <value>pnlDown</value>
@@ -107,34 +107,6 @@
   <data name="pnlClient.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
     <value>Transparent</value>
   </data>
-  <data name="spRegion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="spRegion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="spRegion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 160</value>
-  </data>
-  <data name="spRegion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 3</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="spRegion.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;spRegion.Name" xml:space="preserve">
-    <value>spRegion</value>
-  </data>
-  <data name="&gt;&gt;spRegion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Splitter, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;spRegion.Parent" xml:space="preserve">
-    <value>pnlClient</value>
-  </data>
-  <data name="&gt;&gt;spRegion.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="pnlSession.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
     <value>Transparent</value>
   </data>
@@ -150,17 +122,27 @@
   <data name="clName.Caption" xml:space="preserve">
     <value>Город</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="clName.Visible" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="clName.Width" type="System.Int32, mscorlib">
-    <value>242</value>
+    <value>304</value>
+  </data>
+  <data name="clDescription.Caption" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="clDescription.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="clDescription.Width" type="System.Int32, mscorlib">
+    <value>364</value>
   </data>
   <data name="gbName.Name" xml:space="preserve">
     <value>gbName</value>
   </data>
   <data name="gbName.Width" type="System.Int32, mscorlib">
-    <value>242</value>
+    <value>668</value>
   </data>
   <data name="gbSummer.Caption" xml:space="preserve">
     <value>Лето</value>
@@ -182,7 +164,7 @@
     <value>True</value>
   </data>
   <data name="clSummerStarting.Width" type="System.Int32, mscorlib">
-    <value>100</value>
+    <value>30</value>
   </data>
   <data name="clSummerFinished.Caption" xml:space="preserve">
     <value>Закрытие</value>
@@ -191,13 +173,13 @@
     <value>True</value>
   </data>
   <data name="clSummerFinished.Width" type="System.Int32, mscorlib">
-    <value>101</value>
+    <value>35</value>
   </data>
   <data name="gbSummer.Name" xml:space="preserve">
     <value>gbSummer</value>
   </data>
   <data name="gbSummer.Width" type="System.Int32, mscorlib">
-    <value>201</value>
+    <value>65</value>
   </data>
   <data name="gbWinter.Caption" xml:space="preserve">
     <value>Зима</value>
@@ -209,7 +191,7 @@
     <value>True</value>
   </data>
   <data name="clWinterStarting.Width" type="System.Int32, mscorlib">
-    <value>102</value>
+    <value>39</value>
   </data>
   <data name="clWinterFinished.Caption" xml:space="preserve">
     <value>Закрытие</value>
@@ -218,16 +200,16 @@
     <value>True</value>
   </data>
   <data name="clWinterFinished.Width" type="System.Int32, mscorlib">
-    <value>102</value>
+    <value>20</value>
   </data>
   <data name="gbWinter.Name" xml:space="preserve">
     <value>gbWinter</value>
   </data>
   <data name="gbWinter.Width" type="System.Int32, mscorlib">
-    <value>204</value>
+    <value>59</value>
   </data>
   <data name="gridSession.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 183</value>
+    <value>897, 180</value>
   </data>
   <data name="gridSession.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -257,7 +239,7 @@
     <value>0, 0</value>
   </data>
   <data name="gnSession.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 27</value>
+    <value>897, 27</value>
   </data>
   <data name="gnSession.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -278,13 +260,13 @@
     <value>Fill</value>
   </data>
   <data name="pnlSession.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 160</value>
+    <value>0, 253</value>
   </data>
   <data name="pnlSession.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 210</value>
+    <value>897, 207</value>
   </data>
   <data name="pnlSession.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;pnlSession.Name" xml:space="preserve">
     <value>pnlSession</value>
@@ -296,10 +278,34 @@
     <value>pnlClient</value>
   </data>
   <data name="&gt;&gt;pnlSession.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitterControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="splitterControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 243</value>
+  </data>
+  <data name="splitterControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 10</value>
+  </data>
+  <data name="splitterControl.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;splitterControl.Name" xml:space="preserve">
+    <value>splitterControl</value>
+  </data>
+  <data name="&gt;&gt;splitterControl.Type" xml:space="preserve">
+    <value>DevExpress.XtraEditors.SplitterControl, DevExpress.Utils.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;splitterControl.Parent" xml:space="preserve">
+    <value>pnlClient</value>
+  </data>
+  <data name="&gt;&gt;splitterControl.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pnlClient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>687, 370</value>
+    <value>897, 460</value>
   </data>
   <data name="&gt;&gt;pnlClient.Name" xml:space="preserve">
     <value>pnlClient</value>
@@ -350,7 +356,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>687, 410</value>
+    <value>897, 500</value>
   </data>
   <data name="TradeSessionDlg.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -401,7 +407,7 @@
     <value>gvSession</value>
   </data>
   <data name="&gt;&gt;gvSession.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.Views.BandedGrid.BandedGridView, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;gbName.Name" xml:space="preserve">
     <value>gbName</value>
@@ -414,6 +420,18 @@
   </data>
   <data name="&gt;&gt;clName.Type" xml:space="preserve">
     <value>DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;clDescription.Name" xml:space="preserve">
+    <value>clDescription</value>
+  </data>
+  <data name="&gt;&gt;clDescription.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;repositoryItemMemoEdit.Name" xml:space="preserve">
+    <value>repositoryItemMemoEdit</value>
+  </data>
+  <data name="&gt;&gt;repositoryItemMemoEdit.Type" xml:space="preserve">
+    <value>DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit, DevExpress.XtraEditors.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;gbSummer.Name" xml:space="preserve">
     <value>gbSummer</value>

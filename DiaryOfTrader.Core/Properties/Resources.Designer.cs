@@ -70,6 +70,16 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Чикаго (CHX) – третья крупнейшая биржевая площадка в США и самая мощная по объему торгов за пределами Нью-Йорка.
+        ///Фьючерсы на биткойны (BTC) и Ethereum (ETH) теперь торгуются на Чикагской бирже. Обе эти криптовалюты доступны как фьючерсные позиции..
+        /// </summary>
+        internal static string ChicagoDesc {
+            get {
+                return ResourceManager.GetString("ChicagoDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сделка.
         /// </summary>
         internal static string Diary {
@@ -124,6 +134,16 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Франкфурт (FSE) 
+        ///Именно на Немецкой бирже одни из самых высоких показателей по уровню прибыли, выручки и капитализации в Европе. Все операции на бирже проходят в электронной системе торгов Xetra – в ней ведут работу более 650 клиентов биржи, включая около 5-ти тысяч трейдеров и 270 банков со всего мира..
+        /// </summary>
+        internal static string FrankfurtDesc {
+            get {
+                return ResourceManager.GetString("FrankfurtDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Гонконг.
         /// </summary>
         internal static string HongKong {
@@ -133,11 +153,32 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Гонконг (HKEX)
+        ///Гонконгская фондовая биржа работает с 4:00 до 12:00 по московскому времени. Открытие торгов может начаться в 4: 15 и в 4: 20 (МСК)..
+        /// </summary>
+        internal static string HongKongDesc {
+            get {
+                return ResourceManager.GetString("HongKongDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Лондон.
         /// </summary>
         internal static string London {
             get {
                 return ResourceManager.GetString("London", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лондон (LSE) 
+        ///Основной центр торговли – Лондонская биржа начинает свою работу  в 10:00(МСК). Европейская сессия пересекается сразу с двумя другими сессиями: с азиатской с начала и до 11:00 по МСК, и с американской с 16:30 до конца сессии. Во время пересечений данных сессий волатильность пересекающихся валютных пар данных регионов возрастает крайне значительно, что делает данные периоды крайне опасными для новичков.
+        ///По торговому обороту LSE забирает на себя около 50% международной торговли акциями. на Лонд [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LondonDesc {
+            get {
+                return ResourceManager.GetString("LondonDesc", resourceCulture);
             }
         }
         
@@ -160,11 +201,31 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Нью Йорк (NYSE)   Наиболее оживленное время торговли на бирже Форекс начинается в тот момент, когда в рынок входит Нью-Йоркская торговая площадка.
+        ///Биржа открыта в будни – с понедельника по пятницу – и работает с 9:30 до 16:00 по Нью-Йоркскому времени. Разница с Москвой — 7 часов..
+        /// </summary>
+        internal static string NewYorkDesc {
+            get {
+                return ResourceManager.GetString("NewYorkDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сидней.
         /// </summary>
         internal static string Sydney {
             get {
                 return ResourceManager.GetString("Sydney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сидней (ASX)
+        ///Расположенная в Сиднее Австралийская Фондовая Биржа (ASX) является более крупной, чем Новозеландская. Спустя час, после открытия бирж Новой Зеландии  к ним подключаются австралийские биржи. Окончание торгов происходит в 9 часов (МСК)..
+        /// </summary>
+        internal static string SydneyDesc {
+            get {
+                return ResourceManager.GetString("SydneyDesc", resourceCulture);
             }
         }
         
@@ -502,6 +563,17 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Токио (TSE)
+        ///В Азиатском же регионе TSE является самой востребованной биржей: более 80% сделок осуществляется именно здесь.
+        ///Трейдер, подав заявление на рассмотрение его для участия на бирже, может ожидать несколько месяцев, прежде чем биржевая комиссия выдаст ему соответствующий допуск. Биржа, при этом, имеет право запрашивать данные о кандидатуре в участники TSE. Такие требования связаны с обеспечением стабильности на рынке и безопасностью..
+        /// </summary>
+        internal static string TokyoDesc {
+            get {
+                return ResourceManager.GetString("TokyoDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Биржа.
         /// </summary>
         internal static string TraderExchange {
@@ -529,11 +601,33 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Наибольшие объемы торгов приходятся на первые два часа американской сессии, когда одновременно торгуют Нью-Йорк и Лондон. Начало по МСК данного периода приходится на 16:00, а окончание на 18:00, когда закрываются торги в Лондоне.
+        ///Также в пятницу вечером американские трейдеры предпочитают зафиксировать прибыль перед выходными и по основным тенденциям может наблюдаться откат.
+        /// Американская сессия считается наиболее агрессивной. Следует помнить, что перед открытием бирж в Чикаго и Нью-Йорке трейдерам стоит о [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TraderRegionAmericaDesc {
+            get {
+                return ResourceManager.GetString("TraderRegionAmericaDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Азиатский.
         /// </summary>
         internal static string TraderRegionAsia {
             get {
                 return ResourceManager.GetString("TraderRegionAsia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Азиатская торговая сессия характеризуется довольно низкой волатильностью. Открытие торгов азиатской сессии происходит в 3:00 по Москве, закрытие – в 12:00. Торги на фондовом рынке проходят во все дни, кроме выходных (субботы и воскресенья), а также праздничных дней, которые биржа объявляет заранее.
+        ///Азиатские трейдеры часто задают тренды всему торговому дню. Новое формирование трендов, может складываться из новостей, вышедших в выходные.
+        ///Своего торгового пика рынок Азии достигает в 08:00 по Москве с открыт [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TraderRegionAsiaDesc {
+            get {
+                return ResourceManager.GetString("TraderRegionAsiaDesc", resourceCulture);
             }
         }
         
@@ -547,11 +641,31 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пик активности выпадает на период с 17,30 до 18,00, перед закрытием европейской сессии. В этот момент многие игроки стараются выжать из рынка как можно больше и успеть закрыть позиции без переноса на следующий день.
+        /// </summary>
+        internal static string TraderRegionEuropeDesc {
+            get {
+                return ResourceManager.GetString("TraderRegionEuropeDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тихоокенский.
         /// </summary>
         internal static string TraderRegionPacific {
             get {
                 return ResourceManager.GetString("TraderRegionPacific", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тихоокеанская торговая сессия длится с 0:00 до 9:00 по Московскому времени.
+        ///Начало работы Тихоокеанской торговой сессии совпадает с окончанием работы американской и знаменует собой начало нового торгового дня.
+        ///Главной особенностью Тихоокеанской сессии (Pacific Session) является период затишья, когда Американская сессия уже завершилась, а Азиатская еще не начала свою работу. Подавляющая часть опытных трейдеров и крупные игроки в начале Тихоокеанской сессии берут тайм-аут и дожидаются выхода на рынок азиатс [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TraderRegionPacificDesc {
+            get {
+                return ResourceManager.GetString("TraderRegionPacificDesc", resourceCulture);
             }
         }
         
@@ -759,6 +873,15 @@ namespace DiaryOfTrader.Core.Properties {
         internal static string Wellington {
             get {
                 return ResourceManager.GetString("Wellington", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В 0:00 по Москве стартуют новозеландские биржи, в частности Новозеландская Фондовая Биржа (NZX)..
+        /// </summary>
+        internal static string WellingtonDesc {
+            get {
+                return ResourceManager.GetString("WellingtonDesc", resourceCulture);
             }
         }
     }

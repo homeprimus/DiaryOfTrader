@@ -33,11 +33,14 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
     private void InitializeComponent()
     {
       var resources = new System.ComponentModel.ComponentResourceManager(typeof(TradeSessionDlg));
+      splitterControl = new DevExpress.XtraEditors.SplitterControl();
       pnlSession = new Components.Panel();
       gridSession = new DevExpress.XtraGrid.GridControl();
-      gvSession = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+      gvSession = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
       gbName = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
       clName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+      clDescription = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+      repositoryItemMemoEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
       gbSummer = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
       clSummerStarting = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
       repositoryItemDateEdit = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
@@ -46,7 +49,6 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       clWinterStarting = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
       clWinterFinished = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
       gnSession = new EditControls.GridNavigator();
-      spRegion = new Splitter();
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
       pnlClient.SuspendLayout();
@@ -54,6 +56,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       pnlSession.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)gridSession).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gvSession).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).BeginInit();
       ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit).BeginInit();
       ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit.CalendarTimeProperties).BeginInit();
       SuspendLayout();
@@ -76,12 +79,12 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       // 
       pnlClient.Appearance.BackColor = (Color)resources.GetObject("pnlClient.Appearance.BackColor");
       pnlClient.Appearance.Options.UseBackColor = true;
-      pnlClient.Controls.Add(spRegion);
       pnlClient.Controls.Add(pnlSession);
+      pnlClient.Controls.Add(splitterControl);
       resources.ApplyResources(pnlClient, "pnlClient");
       pnlClient.Controls.SetChildIndex(grid, 0);
+      pnlClient.Controls.SetChildIndex(splitterControl, 0);
       pnlClient.Controls.SetChildIndex(pnlSession, 0);
-      pnlClient.Controls.SetChildIndex(spRegion, 0);
       // 
       // btOK
       // 
@@ -92,6 +95,12 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       // 
       btCancel.Appearance.Font = (Font)resources.GetObject("btCancel.Appearance.Font");
       btCancel.Appearance.Options.UseFont = true;
+      // 
+      // splitterControl
+      // 
+      resources.ApplyResources(splitterControl, "splitterControl");
+      splitterControl.Name = "splitterControl";
+      splitterControl.TabStop = false;
       // 
       // pnlSession
       // 
@@ -108,20 +117,20 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       resources.ApplyResources(gridSession, "gridSession");
       gridSession.MainView = gvSession;
       gridSession.Name = "gridSession";
-      gridSession.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemDateEdit });
+      gridSession.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemDateEdit, repositoryItemMemoEdit });
       gridSession.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvSession });
       // 
       // gvSession
       // 
       gvSession.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gbName, gbSummer, gbWinter });
-      gvSession.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { clName, clSummerStarting, clSummerFinished, clWinterStarting, clWinterFinished });
+      gvSession.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { clName, clSummerStarting, clSummerFinished, clWinterStarting, clWinterFinished, clDescription });
       gvSession.GridControl = gridSession;
       gvSession.Name = "gvSession";
       gvSession.OptionsBehavior.AllowIncrementalSearch = true;
       gvSession.OptionsCustomization.AllowColumnMoving = false;
       gvSession.OptionsCustomization.AllowGroup = false;
       gvSession.OptionsCustomization.AllowQuickHideColumns = false;
-      gvSession.OptionsView.ColumnAutoWidth = true;
+      gvSession.OptionsView.RowAutoHeight = true;
       gvSession.OptionsView.ShowDetailButtons = false;
       gvSession.OptionsView.ShowGroupPanel = false;
       // 
@@ -131,6 +140,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       gbName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       resources.ApplyResources(gbName, "gbName");
       gbName.Columns.Add(clName);
+      gbName.Columns.Add(clDescription);
       gbName.OptionsBand.AllowMove = false;
       gbName.OptionsBand.ShowCaption = false;
       gbName.VisibleIndex = 0;
@@ -144,6 +154,19 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       clName.Name = "clName";
       clName.OptionsColumn.AllowMove = false;
       clName.UnboundDataType = typeof(string);
+      // 
+      // clDescription
+      // 
+      clDescription.AppearanceHeader.Options.UseTextOptions = true;
+      clDescription.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      resources.ApplyResources(clDescription, "clDescription");
+      clDescription.ColumnEdit = repositoryItemMemoEdit;
+      clDescription.FieldName = "Description";
+      clDescription.Name = "clDescription";
+      // 
+      // repositoryItemMemoEdit
+      // 
+      repositoryItemMemoEdit.Name = "repositoryItemMemoEdit";
       // 
       // gbSummer
       // 
@@ -237,12 +260,6 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       gnSession.Name = "gnSession";
       gnSession.View = null;
       // 
-      // spRegion
-      // 
-      resources.ApplyResources(spRegion, "spRegion");
-      spRegion.Name = "spRegion";
-      spRegion.TabStop = false;
-      // 
       // TradeSessionDlg
       // 
       Appearance.Options.UseFont = true;
@@ -256,6 +273,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       pnlSession.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)gridSession).EndInit();
       ((System.ComponentModel.ISupportInitialize)gvSession).EndInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).EndInit();
       ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit.CalendarTimeProperties).EndInit();
       ((System.ComponentModel.ISupportInitialize)repositoryItemDateEdit).EndInit();
       ResumeLayout(false);
@@ -265,17 +283,19 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
 
     private Components.Panel pnlSession;
     public DevExpress.XtraGrid.GridControl gridSession;
-    private EditControls.GridNavigator gnSession;
-    private Splitter spRegion;
-    private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView gvSession;
+    private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView gvSession;
+    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbName;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clName;
+    private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clDescription;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
+    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbSummer;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clSummerStarting;
+    private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clSummerFinished;
+    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbWinter;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clWinterStarting;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clWinterFinished;
-    private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit;
-    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbName;
-    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbSummer;
-    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbWinter;
+    private EditControls.GridNavigator gnSession;
+    private DevExpress.XtraEditors.SplitterControl splitterControl;
   }
 }
