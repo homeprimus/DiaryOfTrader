@@ -3,17 +3,38 @@ using DiaryOfTrader.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Sqlite.Migrations.Internal;
 
 namespace DiaryOfTrader.Core.Data
 {
 
-  public class DiaryOfTraderCtx : DbContext
+  public sealed class DiaryOfTraderCtx : DbContext
   {
     private const string DIARY_OF_TRADER = "DiaryOfTrader";
 
+    internal class HistoryRepository : SqliteHistoryRepository
+    {
+      public HistoryRepository(HistoryRepositoryDependencies dependencies) :
+        base(dependencies)
+      {
+      }
+      protected override void ConfigureTable(EntityTypeBuilder<HistoryRow> history)
+      {
+        base.ConfigureTable(history);
+        //history.Property(h => h.MigrationId).HasColumnName("Id");
+        //history.Property(h => h.ProductVersion).HasColumnName("Version");
+        //history.Property<string>("Custom").HasMaxLength(300).IsRequired();
+      }
+    }
+
+    public static string RootFolder
+    {
+      get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DIARY_OF_TRADER); }
+    }
+
     private string DataSource()
     {
-      var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DIARY_OF_TRADER + "\\Data");
+      var folder = Path.Combine(RootFolder, "Data");
       if (!Directory.Exists(folder))
       {
         Directory.CreateDirectory(folder);
@@ -28,19 +49,25 @@ namespace DiaryOfTrader.Core.Data
        * Add-Migration InitialCreate
        * Название миграции произвольное. В данном случае это InitialCreate. Нажмем на Enter для создания миграции.
        */
-    //  Database.Migrate();
+      Database.Migrate();
+      if (Frame != null && !Frame.Any())
+      {
+        var upData = new DataInitializer(this);
+        upData.Update();
+      }
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseSqlite("Data Source=" + DataSource());
+      optionsBuilder.UseSqlite("Data Source=" + DataSource())
+        .ReplaceService<IHistoryRepository, HistoryRepository>()
+        ; 
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
       base.OnModelCreating(modelBuilder);
-
-      //modelBuilder.Entity<HistoryRow>().ToTable("MigrationHistory");
-
+      
       modelBuilder.Ignore<Element>();
       modelBuilder.Ignore<Entity.Entity>();
 

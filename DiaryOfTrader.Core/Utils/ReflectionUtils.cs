@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reflection;
 using DiaryOfTrader.Core.Attributes;
 using DiaryOfTrader.Core.Core;
+using DiaryOfTrader.Core.Properties;
 
 namespace DiaryOfTrader.Core.Utils
 {
@@ -108,6 +109,11 @@ namespace DiaryOfTrader.Core.Utils
       if ((assign.Length > 0) && (assign[0] is DescriptionAttribute))
         result = ((DescriptionAttribute)assign[0]).Description;
       return result;
+    }
+
+    public static string ClassDescription(Type core)
+    {
+      return Resources.ResourceManager.GetString(core.Name) ?? string.Empty;
     }
 
 

@@ -3,10 +3,10 @@ using DevExpress.Mvvm.Native;
 using DevExpress.XtraBars;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Entity;
+using DiaryOfTrader.Core.Utils;
 using DiaryOfTrader.EditDialogs;
 using DiaryOfTrader.EditDialogs.Dictionary;
 using Microsoft.EntityFrameworkCore;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace DiaryOfTrader
 {
@@ -19,17 +19,39 @@ namespace DiaryOfTrader
       InitializeComponent();
     }
 
-    private void UpdateDbSet<T>(GridEditDialog dlg, DbSet<T> data) where T : Entity
+    private void UpdateDbSet<T>(GridEditDialog dlg, DbSet<T> data, List<T>? readAlredy = null) where T : Entity
     {
-      var orig = new BindingList<T>(data.ToList());
+
+      BindingList<T> orig;
+      if (readAlredy != null)
+      {
+        orig = new(readAlredy);
+      }
+      else
+      {
+        orig = new(data.OrderBy(e => e.Order).ToList());
+      }
+
       var list = new List<T>(orig);
       dlg.DataSource = orig;
+      dlg.Text = ReflectionUtils.ClassDescription(typeof(T));
       if (dlg.ShowDialog() == DialogResult.OK)
       {
-        orig.Where(e => !list.Contains(e)).ForEach(e => data.Add(e));
+        orig.Where(e => !list.Contains(e) && e.Validate).ForEach(e => data.Add(e));
         list.Where(e => !orig.Contains(e)).ForEach(e => data.Remove(e));
-
-        ctx.SaveChanges();
+        try
+        {
+          ctx.SaveChanges();
+        }
+        catch(Exception ex) 
+        {
+          var s = ex.ToString();
+          if (ex.InnerException != null)
+          {
+            s = ex.InnerException.ToString();
+          }
+          DiaryOfTrader.Core.MessageBox.ShowError(s, "");
+        }
       }
 
     }
@@ -45,7 +67,8 @@ namespace DiaryOfTrader
 
     private void bbtSession_ItemClick(object sender, ItemClickEventArgs e)
     {
-      UpdateDbSet(new TradeSessionDlg(), ctx.Session);
+      var data = ctx.Region.Include(e => e.Sessions).ToList();
+      UpdateDbSet(new TradeSessionDlg(), ctx.Region, data);
     }
 
     private void bbtTimeFrame_ItemClick(object sender, ItemClickEventArgs e)
@@ -61,6 +84,11 @@ namespace DiaryOfTrader
     private void bbtTrend_ItemClick(object sender, ItemClickEventArgs e)
     {
       UpdateDbSet(new TrendDlg(), ctx.Trend);
+    }
+
+    private void bbtWallet_ItemClick(object sender, ItemClickEventArgs e)
+    {
+      UpdateDbSet(new WalletDlg(), ctx.Wallet);
     }
   }
 }

@@ -1,4 +1,6 @@
-﻿using DiaryOfTrader.Components;
+﻿using System.IO;
+using DiaryOfTrader.Components;
+using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Properties;
 
 namespace DiaryOfTrader.EditDialogs
@@ -11,6 +13,18 @@ namespace DiaryOfTrader.EditDialogs
       //this.Icon = Settings.DefaultFormIcon;
     }
 
+    public string SettingFolder
+    {
+      get
+      {
+        var folder = Path.Combine(DiaryOfTraderCtx.RootFolder, "Setting");
+        if (!Directory.Exists(folder))
+        {
+          Directory.CreateDirectory(folder);
+        }
+        return folder;
+      }
+    }
     private void InitializeComponent()
     {
       var resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
@@ -22,6 +36,8 @@ namespace DiaryOfTrader.EditDialogs
       resources.ApplyResources(this, "$this");
       Name = "BaseForm";
       ResumeLayout(false);
+
+      MinimumSize = new Size(Width, Height);
     }
 
     protected override void OnLoad(EventArgs e)

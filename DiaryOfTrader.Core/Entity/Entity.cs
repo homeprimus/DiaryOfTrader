@@ -1,5 +1,6 @@
 ﻿
 using DiaryOfTrader.Core.Core;
+using DiaryOfTrader.Core.Utils;
 
 namespace DiaryOfTrader.Core.Entity
 {
@@ -13,6 +14,20 @@ namespace DiaryOfTrader.Core.Entity
     public string Name { get; set; }
     public string? Description { get; set; }
     public int Order { get; set; }
+
+
+    public string ClassDescription
+    {
+      get
+      {
+        return ReflectionUtils.ClassDescription(GetType());
+      }
+    }
+
+    protected override bool GetValidate()
+    {
+      return  base.GetValidate() && !string.IsNullOrEmpty(Name);
+    }
 
     public override string ToString()
     {

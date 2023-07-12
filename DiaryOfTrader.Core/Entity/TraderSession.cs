@@ -20,7 +20,6 @@ https://alfaforex.ru/faq/internet-treyding/vremya-raboty-rynka-forex-raspisanie-
   public class TraderSession : Entity
   {
     public TraderRegion Region { get; set; }
-    //public string City { get; set; } => Name
     public DateTime WinterStarting { get; set; }
     public DateTime WinterFinished { get; set; }
     public DateTime SummerStarting { get; set; }

@@ -70,6 +70,15 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сделка.
+        /// </summary>
+        internal static string Diary {
+            get {
+                return ResourceManager.GetString("Diary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Binance.
         /// </summary>
         internal static string ExchangeBinance {
@@ -133,6 +142,15 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Обзор рынка.
+        /// </summary>
+        internal static string MarketReview {
+            get {
+                return ResourceManager.GetString("MarketReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Нью-Йорк.
         /// </summary>
         internal static string NewYork {
@@ -147,6 +165,15 @@ namespace DiaryOfTrader.Core.Properties {
         internal static string Sydney {
             get {
                 return ResourceManager.GetString("Sydney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Инструмент.
+        /// </summary>
+        internal static string Symbol {
+            get {
+                return ResourceManager.GetString("Symbol", resourceCulture);
             }
         }
         
@@ -291,6 +318,15 @@ namespace DiaryOfTrader.Core.Properties {
         internal static string SymbolUSDJPYDesc {
             get {
                 return ResourceManager.GetString("SymbolUSDJPYDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тайм Фрейм.
+        /// </summary>
+        internal static string TimeFrame {
+            get {
+                return ResourceManager.GetString("TimeFrame", resourceCulture);
             }
         }
         
@@ -466,6 +502,24 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Биржа.
+        /// </summary>
+        internal static string TraderExchange {
+            get {
+                return ResourceManager.GetString("TraderExchange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Регион.
+        /// </summary>
+        internal static string TraderRegion {
+            get {
+                return ResourceManager.GetString("TraderRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Американский.
         /// </summary>
         internal static string TraderRegionAmerica {
@@ -498,6 +552,15 @@ namespace DiaryOfTrader.Core.Properties {
         internal static string TraderRegionPacific {
             get {
                 return ResourceManager.GetString("TraderRegionPacific", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Результат сделки.
+        /// </summary>
+        internal static string TraderResult {
+            get {
+                return ResourceManager.GetString("TraderResult", resourceCulture);
             }
         }
         
@@ -556,6 +619,24 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Торговая сессия.
+        /// </summary>
+        internal static string TraderSession {
+            get {
+                return ResourceManager.GetString("TraderSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тренд.
+        /// </summary>
+        internal static string Trend {
+            get {
+                return ResourceManager.GetString("Trend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Нисходящий(медвежий).
         /// </summary>
         internal static string TrendDownward {
@@ -606,6 +687,15 @@ namespace DiaryOfTrader.Core.Properties {
         internal static string TrendUpwardDesc {
             get {
                 return ResourceManager.GetString("TrendUpwardDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип кошелька.
+        /// </summary>
+        internal static string Wallet {
+            get {
+                return ResourceManager.GetString("Wallet", resourceCulture);
             }
         }
         

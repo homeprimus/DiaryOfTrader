@@ -6,6 +6,7 @@ using System.ComponentModel;
 using DiaryOfTrader.Core;
 using DiaryOfTrader.Core.Core;
 using DiaryOfTrader.Core.Interfaces;
+using MessageBox = DiaryOfTrader.Core.MessageBox;
 
 namespace DiaryOfTrader.EditDialogs
 {
@@ -163,7 +164,7 @@ namespace DiaryOfTrader.EditDialogs
         }
         catch (Exception exception)
         {
-          MsgBox.ShowError(this, exception.Message);
+          MessageBox.ShowError(this, exception.Message);
         }
       }
       return result;

@@ -1,4 +1,6 @@
 ﻿
+using DiaryOfTrader.Core.Attributes;
+
 namespace DiaryOfTrader.Core.Entity
 {
   /*
@@ -6,7 +8,6 @@ namespace DiaryOfTrader.Core.Entity
    */
   public class TimeFrame : Entity
   {
-    public int Order { get; set; }
   }
 
 }

@@ -46,7 +46,7 @@ namespace DiaryOfTrader.Core.Utils
     }
     #endregion
 
-    private static string keyValue(Type keyAttributeType, Type objectType)
+    private static string KeyValue(Type keyAttributeType, Type objectType)
     {
       return keyAttributeType.Name + "!" + objectType.Name;
     }
@@ -54,32 +54,32 @@ namespace DiaryOfTrader.Core.Utils
     public static PropertyValue[] GetPropertyMapField(Type fieldAttributeType, Type objectType)
     {
       PropertyValue[] result;
-      Hashtable cache = HashType;
+      var cache = HashType;
       lock (cache)
       {
-        string key = keyValue(fieldAttributeType, objectType);
+        var key = KeyValue(fieldAttributeType, objectType);
         if (cache.ContainsKey(key))
         {
           result = (PropertyValue[])cache[key];
         }
         else
         {
-          List<PropertyValue> list = new List<PropertyValue>();
-          PropertyInfo[] properties = objectType.GetProperties(
+          var list = new List<PropertyValue>();
+          var properties = objectType.GetProperties(
             BindingFlags.Instance |
             BindingFlags.Public |
             BindingFlags.NonPublic);
-          foreach (PropertyInfo property in properties)
+          foreach (var property in properties)
           {
-            Object[] assign = property.GetCustomAttributes(fieldAttributeType, true);
-            foreach (Object o in assign)
+            var assign = property.GetCustomAttributes(fieldAttributeType, true);
+            foreach (var o in assign)
               if (o.GetType() == fieldAttributeType)
               {
-                PropertyValue pv = new PropertyValue(property, o);
-                MapFieldAttribute map = o as MapFieldAttribute;
+                var pv = new PropertyValue(property, o);
+                var map = o as MapFieldAttribute;
                 if (map != null)
                 {
-                  string[] classes = map.Mapped.Split('.');
+                  var classes = map.Mapped.Split('.');
                   if (property.PropertyType.IsClass)
                   {
                     //property.PropertyType.GetProperty(classes[i])
@@ -109,22 +109,22 @@ namespace DiaryOfTrader.Core.Utils
       Hashtable cache = HashType;
       lock (cache)
       {
-        string key = keyValue(keyAttributeType, objectType);
+        string key = KeyValue(keyAttributeType, objectType);
         if (cache.ContainsKey(key))
         {
           result = (PropertyValue[])cache[key];
         }
         else
         {
-          List<PropertyValue> list = new List<PropertyValue>();
-          PropertyInfo[] properties = objectType.GetProperties(
+          var list = new List<PropertyValue>();
+          var properties = objectType.GetProperties(
             BindingFlags.Instance |
             BindingFlags.Public |
             BindingFlags.NonPublic);
-          foreach (PropertyInfo property in properties)
+          foreach (var property in properties)
           {
-            Object[] assign = property.GetCustomAttributes(keyAttributeType, true);
-            foreach (Object o in assign)
+            var assign = property.GetCustomAttributes(keyAttributeType, true);
+            foreach (var o in assign)
               if (o.GetType() == keyAttributeType)
               {
                 list.Add(new PropertyValue(property, o));
@@ -141,8 +141,8 @@ namespace DiaryOfTrader.Core.Utils
     {
       if (value != null)
       {
-        Type pType = propertyInfo.PropertyType;
-        Type vType = value.GetType();
+        var pType = propertyInfo.PropertyType;
+        var vType = value.GetType();
         if (!pType.Equals(vType))
         {
           if (pType.Equals(typeof (Guid)))
@@ -155,7 +155,7 @@ namespace DiaryOfTrader.Core.Utils
           }
           else if (pType.Equals(typeof(TimeSpan)))
           {
-            string s = value.ToString();
+            var s = value.ToString();
             if (s.Length < 8)
             {
               s = s.PadLeft(6, '0').Insert(4, ":").Insert(2, ":");

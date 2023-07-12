@@ -1,9 +1,9 @@
 ﻿
 namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  public partial class TradeRegionDlg : GridEditDialog
+  public partial class WalletDlg : GridEditDialog
   {
-    public TradeRegionDlg()
+    public WalletDlg()
     {
       InitializeComponent();
     }

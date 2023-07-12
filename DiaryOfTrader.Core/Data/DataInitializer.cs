@@ -10,9 +10,23 @@ namespace DiaryOfTrader.Core.Data
   {
     private DiaryOfTraderCtx ctx;
 
-    DataInitializer(DiaryOfTraderCtx ctx)
+    public DataInitializer(DiaryOfTraderCtx ctx)
     {
       this.ctx = ctx;
+    }
+
+    public virtual void Update()
+    {
+      PostSymbolConfigure();
+      PostWalletConfigure();
+      PostExchangeConfigure();
+      PostTraderRegionConfigure();
+      PostTraderSessionConfigure();
+      PostTrendConfigure();
+      PostTraderResultConfigure();
+      PostTimeFrameConfigure();
+
+      ctx.SaveChanges();
     }
     #region Symbol
     private void PostSymbolConfigure()
@@ -20,16 +34,15 @@ namespace DiaryOfTrader.Core.Data
       ctx.Symbol.AddRange(
         new Symbol[]
         {
-          new Symbol { ID=1, Name=Resources.SymbolDXY, Description=Resources.SymbolDXYDesc},
-          new Symbol { ID=2, Name=Resources.SymbolEURUSD, Description=Resources.SymbolEURUSDDesc},
-          new Symbol { ID=3, Name=Resources.SymbolUSDJPY, Description=Resources.SymbolUSDJPYDesc},
+          new Symbol { ID=1, Name=Resources.SymbolDXY, Description=Resources.SymbolDXYDesc, Order = 10},
+          new Symbol { ID=2, Name=Resources.SymbolEURUSD, Description=Resources.SymbolEURUSDDesc, Order = 20},
+          new Symbol { ID=3, Name=Resources.SymbolUSDJPY, Description=Resources.SymbolUSDJPYDesc, Order = 30},
 
-          new Symbol { ID=4, Name=Resources.SymbolSPX, Description=Resources.SymbolSPXDesc},
+          new Symbol { ID=4, Name=Resources.SymbolSPX, Description=Resources.SymbolSPXDesc, Order = 40},
 
-          new Symbol { ID=5, Name=Resources.SymbolBTCUSD, Description=Resources.SymbolBTCUSDDesc},
-          new Symbol { ID=6, Name=Resources.SymbolETHUSD, Description=Resources.SymbolETHUSDDesc},
-          new Symbol { ID=7, Name=Resources.SymbolBNBUSD, Description=Resources.SymbolBNBUSDDesc},
-          new Symbol { ID=7, Name=Resources.SymbolBNBUSD, Description=Resources.SymbolBNBUSDDesc},
+          new Symbol { ID=5, Name=Resources.SymbolBTCUSD, Description=Resources.SymbolBTCUSDDesc, Order = 50},
+          new Symbol { ID=6, Name=Resources.SymbolETHUSD, Description=Resources.SymbolETHUSDDesc, Order = 60},
+          new Symbol { ID=7, Name=Resources.SymbolBNBUSD, Description=Resources.SymbolBNBUSDDesc, Order = 70},
         });
     }
     #endregion
@@ -51,46 +64,58 @@ namespace DiaryOfTrader.Core.Data
       ctx.Exchange.AddRange(
         new TraderExchange[]
         {
-          new TraderExchange { ID=1, Name=Resources.ExchangeForex, Description=Resources.ExchangeForexDesc},
-          new TraderExchange { ID=2, Name=Resources.ExchangeBinance, Description = Resources.ExchangeBinanceDesc},
+          new TraderExchange { ID=1, Name=Resources.ExchangeForex, Description=Resources.ExchangeForexDesc, Order = 10},
+          new TraderExchange { ID=2, Name=Resources.ExchangeBinance, Description = Resources.ExchangeBinanceDesc, Order = 20},
         });
     }
     #endregion
     #region TraderSession
+
     private void PostTraderSessionConfigure()
     {
-      var asia = ctx.Region.First(e => e.ID == 1);
-      var europe = ctx.Region.First(e => e.ID == 2);
-      var america = ctx.Region.First(e => e.ID == 3);
-      var pacific = ctx.Region.First(e => e.ID == 4);
+      #region asia
 
-      ctx.Session.AddRange(
-        new TraderSession[]
+      var asia = new TraderRegion { ID = 1, Name = Resources.TraderRegionAsia, Order = 10 };
+      asia.Sessions.AddRange(
+        new[]
         {
-          #region asia
           new TraderSession
           {
-            ID=1, Region=asia, Name=Resources.Tokyo,
+            ID = 1,
+            Region = asia,
+            Name = Resources.Tokyo,
             WinterStarting = new DateTime(2023, 05, 01, 00, 0, 0),
             WinterFinished = new DateTime(2023, 05, 01, 08, 0, 0),
             SummerStarting = new DateTime(2023, 05, 01, 00, 0, 0),
             SummerFinished = new DateTime(2023, 05, 01, 08, 0, 0),
           },
-
           new TraderSession
           {
-            ID=2, Region=asia, Name=Resources.HongKong,
+            ID = 2,
+            Region = asia,
+            Name = Resources.HongKong,
             WinterStarting = new DateTime(2023, 05, 01, 01, 0, 0),
             WinterFinished = new DateTime(2023, 05, 01, 09, 0, 0),
             SummerStarting = new DateTime(2023, 05, 01, 01, 0, 0),
             SummerFinished = new DateTime(2023, 05, 01, 00, 0, 0),
 
-          },
-          #endregion
-          #region europe
+          }
+        }
+      );
+
+      #endregion
+
+      #region europe
+
+      var europe = new TraderRegion { ID = 2, Name = Resources.TraderRegionEurope, Order = 20 };
+      europe.Sessions.AddRange(
+        new[]
+        {
           new TraderSession
           {
-            ID=3, Region=europe, Name=Resources.Frankfurt,
+            ID = 3,
+            Region = europe,
+            Name = Resources.Frankfurt,
             WinterStarting = new DateTime(2023, 05, 01, 06, 0, 0),
             WinterFinished = new DateTime(2023, 05, 01, 14, 0, 0),
             SummerStarting = new DateTime(2023, 05, 01, 05, 0, 0),
@@ -98,63 +123,86 @@ namespace DiaryOfTrader.Core.Data
           },
           new TraderSession
           {
-            ID=4, Region=europe, Name=Resources.London,
+            ID = 4,
+            Region = europe,
+            Name = Resources.London,
             WinterStarting = new DateTime(2023, 05, 01, 07, 0, 0),
             WinterFinished = new DateTime(2023, 05, 01, 15, 0, 0),
             SummerStarting = new DateTime(2023, 05, 01, 06, 0, 0),
             SummerFinished = new DateTime(2023, 05, 01, 14, 0, 0),
           },
-          #endregion
-          #region america
-          new TraderSession
-          {
-            ID=5, Region=europe, Name=Resources.NewYork,
-            WinterStarting = new DateTime(2023, 05, 01, 13, 0, 0),
-            WinterFinished = new DateTime(2023, 05, 01, 21, 0, 0),
-            SummerStarting = new DateTime(2023, 05, 01, 12, 0, 0),
-            SummerFinished = new DateTime(2023, 05, 01, 20, 0, 0),
-          },
-          new TraderSession
-          {
-            ID=6, Region=europe, Name=Resources.Chicago,
-            WinterStarting = new DateTime(2023, 05, 01, 13, 0, 0),
-            WinterFinished = new DateTime(2023, 05, 01, 21, 0, 0),
-            SummerStarting = new DateTime(2023, 05, 01, 14, 0, 0),
-            SummerFinished = new DateTime(2023, 05, 01, 22, 0, 0),
-          },
-          #endregion
-          #region pacific
-          new TraderSession
-          {
-            ID=7, Region=europe, Name=Resources.Wellington,
-            WinterStarting = new DateTime(2023, 05, 01, 21, 0, 0),
-            WinterFinished = new DateTime(2023, 05, 01, 03, 0, 0),
-            SummerStarting = new DateTime(2023, 05, 01, 20, 0, 0),
-            SummerFinished = new DateTime(2023, 05, 01, 04, 0, 0),
-          },
-          new TraderSession
-          {
-            ID=8, Region=europe, Name=Resources.Sydney,
-            WinterStarting = new DateTime(2023, 05, 01, 23, 0, 0),
-            WinterFinished = new DateTime(2023, 05, 01, 05, 0, 0),
-            SummerStarting = new DateTime(2023, 05, 01, 22, 0, 0),
-            SummerFinished = new DateTime(2023, 05, 01, 04, 0, 0),
-          },
-          #endregion
         });
+
+      #endregion
+
+
+      #region america
+
+      var america = new TraderRegion { ID = 3, Name = Resources.TraderRegionAmerica, Order = 30 };
+      america.Sessions.AddRange(new[]
+      {
+        new TraderSession
+        {
+          ID = 5,
+          Region = europe,
+          Name = Resources.NewYork,
+          WinterStarting = new DateTime(2023, 05, 01, 13, 0, 0),
+          WinterFinished = new DateTime(2023, 05, 01, 21, 0, 0),
+          SummerStarting = new DateTime(2023, 05, 01, 12, 0, 0),
+          SummerFinished = new DateTime(2023, 05, 01, 20, 0, 0),
+        },
+        new TraderSession
+        {
+          ID = 6,
+          Region = europe,
+          Name = Resources.Chicago,
+          WinterStarting = new DateTime(2023, 05, 01, 13, 0, 0),
+          WinterFinished = new DateTime(2023, 05, 01, 21, 0, 0),
+          SummerStarting = new DateTime(2023, 05, 01, 14, 0, 0),
+          SummerFinished = new DateTime(2023, 05, 01, 22, 0, 0),
+        },
+      });
+
+      #endregion
+
+      #region pacific
+
+      var pacific = new TraderRegion { ID = 4, Name = Resources.TraderRegionPacific, Order = 40 };
+      pacific.Sessions.AddRange(new[]
+      {
+        new TraderSession
+        {
+          ID = 7,
+          Region = europe,
+          Name = Resources.Wellington,
+          WinterStarting = new DateTime(2023, 05, 01, 21, 0, 0),
+          WinterFinished = new DateTime(2023, 05, 01, 03, 0, 0),
+          SummerStarting = new DateTime(2023, 05, 01, 20, 0, 0),
+          SummerFinished = new DateTime(2023, 05, 01, 04, 0, 0),
+        },
+        new TraderSession
+        {
+          ID = 8,
+          Region = europe,
+          Name = Resources.Sydney,
+          WinterStarting = new DateTime(2023, 05, 01, 23, 0, 0),
+          WinterFinished = new DateTime(2023, 05, 01, 05, 0, 0),
+          SummerStarting = new DateTime(2023, 05, 01, 22, 0, 0),
+          SummerFinished = new DateTime(2023, 05, 01, 04, 0, 0),
+        },
+      });
+
+      ctx.Region.AddRange(new[] { asia, europe, america, pacific });
+
+      ctx.Region.ToList().ForEach(e=> ctx.Session.AddRange(e.Sessions));
+
+      #endregion
     }
+
     #endregion
     #region TraderRegion
     private void PostTraderRegionConfigure()
     {
-      ctx.Region.AddRangeAsync(
-        new TraderRegion[]
-        {
-          new TraderRegion { ID=1, Name=Resources.TraderRegionAsia },
-          new TraderRegion { ID=2, Name=Resources.TraderRegionEurope },
-          new TraderRegion { ID=3, Name = Resources.TraderRegionAmerica },
-          new TraderRegion { ID=4, Name = Resources.TraderRegionPacific }
-        });
     }
     #endregion
     #region Trend
@@ -163,9 +211,9 @@ namespace DiaryOfTrader.Core.Data
       ctx.Trend.AddRange(
         new Trend[]
         {
-          new Trend { ID=1, Name=Resources.TrendUpward, Description=Resources.TrendUpwardDesc},
-          new Trend { ID=2, Name=Resources.TrendDownward, Description = Resources.TrendDownwardDesc},
-          new Trend { ID=3, Name=Resources.TrendSide, Description = Resources.TrendSideDesc}
+          new Trend { ID=1, Name=Resources.TrendUpward, Description=Resources.TrendUpwardDesc, Order = 10},
+          new Trend { ID=2, Name=Resources.TrendDownward, Description = Resources.TrendDownwardDesc, Order = 20},
+          new Trend { ID=3, Name=Resources.TrendSide, Description = Resources.TrendSideDesc, Order = 30}
         });
     }
     #endregion
@@ -175,15 +223,15 @@ namespace DiaryOfTrader.Core.Data
       ctx.Frame.AddRange(
         new TimeFrame[]
         {
-          new TimeFrame { ID=1, Name=Resources.TimeFrameMN, Description=Resources.TimeFrameMNDesc},
-          new TimeFrame { ID=2, Name=Resources.TimeFrameW1, Description = Resources.TimeFrameW1Desc},
-          new TimeFrame { ID=3, Name=Resources.TimeFrameD1, Description = Resources.TimeFrameD1Desc},
-          new TimeFrame { ID=4, Name=Resources.TimeFrameH4, Description = Resources.TimeFrameH4Desc},
-          new TimeFrame { ID=5, Name=Resources.TimeFrameH1, Description = Resources.TimeFrameH1Desc},
-          new TimeFrame { ID=6, Name=Resources.TimeFrameM30, Description = Resources.TimeFrameM30Desc},
-          new TimeFrame { ID=7, Name=Resources.TimeFrameM15, Description = Resources.TimeFrameM15Desc},
-          new TimeFrame { ID=8, Name=Resources.TimeFrameM5, Description = Resources.TimeFrameM5Desc},
-          new TimeFrame { ID=9, Name=Resources.TimeFrameM1, Description = Resources.TimeFrameM1Desc}
+          new TimeFrame { ID=1, Name=Resources.TimeFrameMN, Description=Resources.TimeFrameMNDesc, Order = 10},
+          new TimeFrame { ID=2, Name=Resources.TimeFrameW1, Description = Resources.TimeFrameW1Desc, Order = 20},
+          new TimeFrame { ID=3, Name=Resources.TimeFrameD1, Description = Resources.TimeFrameD1Desc, Order = 30},
+          new TimeFrame { ID=4, Name=Resources.TimeFrameH4, Description = Resources.TimeFrameH4Desc, Order = 40},
+          new TimeFrame { ID=5, Name=Resources.TimeFrameH1, Description = Resources.TimeFrameH1Desc, Order = 50},
+          new TimeFrame { ID=6, Name=Resources.TimeFrameM30, Description = Resources.TimeFrameM30Desc, Order = 60},
+          new TimeFrame { ID=7, Name=Resources.TimeFrameM15, Description = Resources.TimeFrameM15Desc, Order = 70},
+          new TimeFrame { ID=8, Name=Resources.TimeFrameM5, Description = Resources.TimeFrameM5Desc, Order = 80},
+          new TimeFrame { ID=9, Name=Resources.TimeFrameM1, Description = Resources.TimeFrameM1Desc, Order = 90}
         });
     }
     #endregion
@@ -193,9 +241,9 @@ namespace DiaryOfTrader.Core.Data
       ctx.Result.AddRange(
         new TraderResult[]
         {
-          new TraderResult { ID=1, Name=Resources.TraderResultSuccess, Description=Resources.TraderResultDescriptionSuccess},
-          new TraderResult { ID=2, Name=Resources.TraderResultNone, Description = Resources.TraderResultDescriptionNone},
-          new TraderResult { ID=3, Name=Resources.TraderResultLoss, Description = Resources.TraderResultDescriptionLoss}
+          new TraderResult { ID=1, Name=Resources.TraderResultSuccess, Description=Resources.TraderResultDescriptionSuccess, Order = 10},
+          new TraderResult { ID=2, Name=Resources.TraderResultNone, Description = Resources.TraderResultDescriptionNone, Order = 20},
+          new TraderResult { ID=3, Name=Resources.TraderResultLoss, Description = Resources.TraderResultDescriptionLoss, Order = 30}
         });
     }
     #endregion

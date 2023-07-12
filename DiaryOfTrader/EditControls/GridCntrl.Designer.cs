@@ -38,8 +38,10 @@ namespace DiaryOfTrader.EditControls
       gcName = new DevExpress.XtraGrid.Columns.GridColumn();
       gcDescription = new DevExpress.XtraGrid.Columns.GridColumn();
       gcOrder = new DevExpress.XtraGrid.Columns.GridColumn();
+      repositoryItemMemoEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
       ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gridView).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).BeginInit();
       SuspendLayout();
       // 
       // gridNavigator
@@ -61,6 +63,7 @@ namespace DiaryOfTrader.EditControls
       grid.Location = new Point(0, 27);
       grid.MainView = gridView;
       grid.Name = "grid";
+      grid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit });
       grid.Size = new Size(352, 136);
       grid.TabIndex = 6;
       grid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
@@ -108,6 +111,10 @@ namespace DiaryOfTrader.EditControls
       gcOrder.VisibleIndex = 2;
       gcOrder.Width = 66;
       // 
+      // repositoryItemMemoEdit
+      // 
+      repositoryItemMemoEdit.Name = "repositoryItemMemoEdit";
+      // 
       // GridCntrl
       // 
       Appearance.BackColor = Color.Transparent;
@@ -122,6 +129,7 @@ namespace DiaryOfTrader.EditControls
       Size = new Size(352, 163);
       ((System.ComponentModel.ISupportInitialize)grid).EndInit();
       ((System.ComponentModel.ISupportInitialize)gridView).EndInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).EndInit();
       ResumeLayout(false);
     }
 
@@ -132,5 +140,6 @@ namespace DiaryOfTrader.EditControls
     public DevExpress.XtraGrid.Columns.GridColumn gcName;
     public DevExpress.XtraGrid.Columns.GridColumn gcDescription;
     public DevExpress.XtraGrid.Columns.GridColumn gcOrder;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
   }
 }

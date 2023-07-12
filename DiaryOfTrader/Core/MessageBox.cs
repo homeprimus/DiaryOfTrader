@@ -1,5 +1,4 @@
 ﻿using DevExpress.XtraEditors;
-using DiaryOfTrader.Properties;
 
 namespace DiaryOfTrader.Core
 {
@@ -7,7 +6,7 @@ namespace DiaryOfTrader.Core
 	/// <summary>
 	/// Contains some static methods to uniform messaging.
 	/// </summary>
-	internal static class MsgBox
+	internal static class MessageBox
 	{
 		public static DialogResult WarningOk(string msg,string caption)
 		{

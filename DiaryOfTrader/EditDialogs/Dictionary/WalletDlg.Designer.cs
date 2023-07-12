@@ -4,7 +4,7 @@
 
 namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  partial class TradeRegionDlg
+  partial class WalletDlg
   {
     /// <summary>
     /// Required designer variable.
@@ -32,7 +32,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
     /// </summary>
     private void InitializeComponent()
     {
-      var resources = new System.ComponentModel.ComponentResourceManager(typeof(TradeRegionDlg));
+      var resources = new System.ComponentModel.ComponentResourceManager(typeof(WalletDlg));
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
       pnlClient.SuspendLayout();
@@ -40,39 +40,40 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       // 
       // grid
       // 
-      grid.Appearance.BackColor = (Color)resources.GetObject("grid.Appearance.BackColor");
-      grid.Appearance.Font = (Font)resources.GetObject("grid.Appearance.Font");
+      grid.Appearance.BackColor = Color.Transparent;
+      grid.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
       grid.Appearance.Options.UseBackColor = true;
       grid.Appearance.Options.UseFont = true;
-      resources.ApplyResources(grid, "grid");
       // 
       // pnlDown
       // 
-      pnlDown.Appearance.BackColor = (Color)resources.GetObject("pnlDown.Appearance.BackColor");
+      pnlDown.Appearance.BackColor = Color.Transparent;
       pnlDown.Appearance.Options.UseBackColor = true;
-      resources.ApplyResources(pnlDown, "pnlDown");
       // 
       // pnlClient
       // 
-      pnlClient.Appearance.BackColor = (Color)resources.GetObject("pnlClient.Appearance.BackColor");
+      pnlClient.Appearance.BackColor = Color.Transparent;
       pnlClient.Appearance.Options.UseBackColor = true;
-      resources.ApplyResources(pnlClient, "pnlClient");
       // 
       // btOK
       // 
-      btOK.Appearance.Font = (Font)resources.GetObject("btOK.Appearance.Font");
+      btOK.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
       btOK.Appearance.Options.UseFont = true;
       // 
       // btCancel
       // 
-      btCancel.Appearance.Font = (Font)resources.GetObject("btCancel.Appearance.Font");
+      btCancel.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
       btCancel.Appearance.Options.UseFont = true;
       // 
-      // TradeRegionDlg
+      // WalletDlg
       // 
       Appearance.Options.UseFont = true;
-      resources.ApplyResources(this, "$this");
-      Name = "TradeRegionDlg";
+      AutoScaleDimensions = new SizeF(6F, 13F);
+      ClientSize = new Size(534, 257);
+      IconOptions.Icon = (Icon)resources.GetObject("WalletDlg.IconOptions.Icon");
+      MinimumSize = new Size(536, 289);
+      Name = "WalletDlg";
+      Text = "WalletDlg";
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
       pnlClient.ResumeLayout(false);

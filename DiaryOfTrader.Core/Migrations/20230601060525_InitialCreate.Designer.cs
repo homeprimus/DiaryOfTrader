@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiaryOfTrader.Core.Migrations
 {
     [DbContext(typeof(DiaryOfTraderCtx))]
-    [Migration("20230531184200_InitialCreate")]
+    [Migration("20230601060525_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

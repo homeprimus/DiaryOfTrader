@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Security.Cryptography;
 using System.Xml.Serialization;
+using DiaryOfTrader.Core.Properties;
 
 namespace DiaryOfTrader.Core.Attributes
 {
@@ -13,7 +15,7 @@ namespace DiaryOfTrader.Core.Attributes
     string Field { get; }
   }
 
-  [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+  // [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
   public class OrderAttribute : Attribute, IOrder
   {
     public OrderAttribute() : this(int.MaxValue) { }
@@ -282,4 +284,24 @@ namespace DiaryOfTrader.Core.Attributes
     {
     }
   }
+
+
+  public class DescriptionResAttribute : OrderAttribute
+  {
+    private readonly string resourceKey;
+    public DescriptionResAttribute(string description) : this(int.MaxValue, description) { }
+    public DescriptionResAttribute(int order, string description) : base(order)
+    {
+      this.resourceKey = description;
+    }
+    public  string Description
+    {
+      get
+      {
+          return Resources.ResourceManager.GetString(resourceKey)!;
+      }
+    }
+  }
+
+
 }

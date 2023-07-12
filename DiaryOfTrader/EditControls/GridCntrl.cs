@@ -13,7 +13,7 @@ namespace DiaryOfTrader.EditControls
     public object DataSource
     {
       get { return grid.DataSource; }
-      set { grid.DataSource= value; }
+      set { grid.DataSource = value; }
     }
   }
 }

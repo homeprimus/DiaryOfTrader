@@ -3,6 +3,7 @@ using System.ComponentModel;
 using DiaryOfTrader.Components;
 using DiaryOfTrader.Core;
 using DiaryOfTrader.Properties;
+using MessageBox = DiaryOfTrader.Core.MessageBox;
 
 namespace DiaryOfTrader.EditControls
 {
@@ -25,7 +26,7 @@ namespace DiaryOfTrader.EditControls
 
     private void bbtDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
-      if (MsgBox.ShowQuestionYesNo(String.Format(Resources.DeleteRecord, ""), Resources.DeleteQuestion) == DialogResult.Yes)
+      if (MessageBox.ShowQuestionYesNo(String.Format(Resources.DeleteRecord, ""), Resources.DeleteQuestion) == DialogResult.Yes)
       {
         View.DeleteRow(View.FocusedRowHandle);
       }

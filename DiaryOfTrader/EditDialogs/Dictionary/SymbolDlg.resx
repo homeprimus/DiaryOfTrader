@@ -65,7 +65,7 @@
     <value>Tahoma, 8pt</value>
   </data>
   <data name="grid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>545, 158</value>
+    <value>777, 234</value>
   </data>
   <data name="&gt;&gt;grid.Name" xml:space="preserve">
     <value>grid</value>
@@ -83,10 +83,10 @@
     <value>Transparent</value>
   </data>
   <data name="pnlDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 158</value>
+    <value>0, 234</value>
   </data>
   <data name="pnlDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>545, 40</value>
+    <value>777, 40</value>
   </data>
   <data name="&gt;&gt;pnlDown.Name" xml:space="preserve">
     <value>pnlDown</value>
@@ -104,7 +104,7 @@
     <value>Transparent</value>
   </data>
   <data name="pnlClient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>545, 158</value>
+    <value>777, 234</value>
   </data>
   <data name="&gt;&gt;pnlClient.Name" xml:space="preserve">
     <value>pnlClient</value>
@@ -155,7 +155,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>545, 198</value>
+    <value>777, 274</value>
   </data>
   <data name="SymbolDlg.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

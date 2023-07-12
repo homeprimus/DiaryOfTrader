@@ -61,12 +61,6 @@
   <data name="pnlDown.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
     <value>Transparent</value>
   </data>
-  <data name="pnlDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 217</value>
-  </data>
-  <data name="pnlDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 40</value>
-  </data>
   <data name="&gt;&gt;pnlDown.Name" xml:space="preserve">
     <value>pnlDown</value>
   </data>
@@ -82,6 +76,26 @@
   <data name="pnlClient.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
     <value>Transparent</value>
   </data>
+  <data name="grid.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
+    <value>Transparent</value>
+  </data>
+  <data name="grid.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="grid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="grid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>531, 242</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grid.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;grid.Name" xml:space="preserve">
     <value>grid</value>
   </data>
@@ -93,9 +107,6 @@
   </data>
   <data name="&gt;&gt;grid.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="pnlClient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 217</value>
   </data>
   <data name="&gt;&gt;pnlClient.Name" xml:space="preserve">
     <value>pnlClient</value>
@@ -139,38 +150,6 @@
   <data name="&gt;&gt;btCancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="grid.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
-    <value>Transparent</value>
-  </data>
-  <data name="grid.Appearance.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8pt</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="grid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="grid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="grid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 217</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="grid.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;grid.Name" xml:space="preserve">
-    <value>grid</value>
-  </data>
-  <data name="&gt;&gt;grid.Type" xml:space="preserve">
-    <value>DiaryOfTrader.EditControls.GridCntrl, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grid.Parent" xml:space="preserve">
-    <value>pnlClient</value>
-  </data>
-  <data name="&gt;&gt;grid.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -178,7 +157,52 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>534, 257</value>
+    <value>531, 282</value>
+  </data>
+  <data name="GridEditDialog.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAAAAACoCAAAFgAAACgAAAAgAAAAQAAAAAEACAAAAAAAgAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA////ANOSMQAure0AVlZWALGxsQBernIAea3cANbW1gDJqHgAjo6OADQ0NAB8mrMAj7eZAGpq
+        agDt7e0AnrrIAHazhQBwuvMAR0dHAMnJyQCHt88As73CAIK63gCXl5cAgbSOADqv6QCqqqoAtL22AL6+
+        vgB2tdUAZGRkAKu8xQBZWVkAM67sAGdnZwC6vbsAMK3sADiu6QC8vr0AhbfQADU1NQBXV1cAvL28ALS9
+        wQCru8QAh7jQADmu6QB3tdUAn7rIAIe30AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAACkpKSkpKSkpKSkpKSkpKSkpKSkLAAAAAAAAAAAAAAAAACkpKSkpKSkpKSkp
+        KSkpKSkpKQAAAAAAAAAAAAAAAAAAABMTExMTExMTExMTExMTExMAAAAAAAAAAAAAAAAAAAAABCoqKioq
+        KioqKioqKioqKgAAAAAAAAAAAAAAAAAAAAAAKioqKioqKioqKioqKioAAAAAAAAAAAAAAAAAAAAAAAAq
+        KioqKioqKioqKioqKgAAAAAAAAAAAAAAHR0dHR0dHQofKioqKioqKioqKh8KHR0dHR0dHQAAAAAdAgIJ
+        HQIJHR0FGA4jAAAjDhgFHR0dHQgIHQ8dAAAAAB0dHR0dHR0dHR0dISkpKSkhHR0dHR0dHR0dHR0AAAAA
+        HQICCR0CAgICHR0bDAcHDBsdHQ8PDx0ICB0PHQAAAAAdHR0dHR0dHR0dHR0XEhIXHR0dHR0dHR0dHR0d
+        AAAAAB0CAgkdAgICAh0dECYDAyYxHR0PDw8dCAgdDx0AAAAAHR0dHR0dHR0dHRYvAwMDAxosHR0dHR0d
+        HR0dHQAAAAAdAgIJHQICAgIdKAMDAwMDAzIdDw8PHQgIHQ8dAAAAAB0dHR0dHR0dHR0eAwMDAwMDMB0d
+        HR0dHR0dHR0AAAAAAAAAAAAAAAAAAAADAwMDAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDAwMD
+        AwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJQMDAwMlAAAAAAAAAAAAAAAAAAAAHR0dHR0dHR0dHR0u
+        IgMDIhUdHR0dHR0dHR0dHQAAAAAdCAgUHQgIFB0ICB0gAAAtHR0dDw8dDw8dDw8dAAAAAB0ICBQdCAgU
+        HQgIHR0AAB0cJx0dHR0dHR0dHR0AAAAAHQgIFB0ICBQdCAgUHQAAHRkRJysNKx0dHR0dHQAAAAAdCAgU
+        HQgIFB0ICBQdAAAdJxEREQYRKysNJx0dAAAAAB0ICBQdCAgUHQgIFB0AAB0dJxERJBEREQYRJx0AAAAA
+        HQgIFB0ICBQdCAgUHQAAHR0dKysdKxERJBERJwAAAAAdCAgUHQgIFB0ICBQdAAAdHR0dHR0dKysdJxkc
+        AAAAAB0ICBQdCAgUHQgIFB0AAB0IDw8IHR0dHR0dHR0AAAAAHR0dHR0dHR0dHR0dHQAAHR0dHR0dHR0d
+        HR0dHQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAP///////////AAAP/4AAH//AAD//wAA//+AAf//gAH/wAAAA8ABgAPAAAADwAAAA8AA
+        AAPAAAADwAAAA8AAAAPAAAAD//gf///4H///+B//wAAAA8ABgAPAAYADwAGAA8ABgAPAAYADwAGAA8AB
+        gAPAAYADwAGAA///////////
+</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>533, 314</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>GridEditDialog</value>

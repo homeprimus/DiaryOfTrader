@@ -43,14 +43,12 @@ namespace DiaryOfTrader.EditDialogs
       // 
       pnlDown.Appearance.BackColor = (Color)resources.GetObject("pnlDown.Appearance.BackColor");
       pnlDown.Appearance.Options.UseBackColor = true;
-      resources.ApplyResources(pnlDown, "pnlDown");
       // 
       // pnlClient
       // 
       pnlClient.Appearance.BackColor = (Color)resources.GetObject("pnlClient.Appearance.BackColor");
       pnlClient.Appearance.Options.UseBackColor = true;
       pnlClient.Controls.Add(grid);
-      resources.ApplyResources(pnlClient, "pnlClient");
       // 
       // btOK
       // 
@@ -76,6 +74,7 @@ namespace DiaryOfTrader.EditDialogs
       // 
       Appearance.Options.UseFont = true;
       resources.ApplyResources(this, "$this");
+      IconOptions.Icon = (Icon)resources.GetObject("GridEditDialog.IconOptions.Icon");
       Name = "GridEditDialog";
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();

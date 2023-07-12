@@ -40,22 +40,23 @@ namespace DiaryOfTrader
       bbtSession = new DevExpress.XtraBars.BarButtonItem();
       bbtTimeFrame = new DevExpress.XtraBars.BarButtonItem();
       bbtResult = new DevExpress.XtraBars.BarButtonItem();
+      bbtTrend = new DevExpress.XtraBars.BarButtonItem();
       rbpGenaral = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       rbpgDictionary = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       rbpАnalytics = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgReports = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-      bbtTrend = new DevExpress.XtraBars.BarButtonItem();
+      bbtWallet = new DevExpress.XtraBars.BarButtonItem();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
       SuspendLayout();
       // 
       // ribbon
       // 
       ribbon.ExpandCollapseItem.Id = 0;
-      ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, ribbon.SearchEditItem, bbtExchamge, barButtonItem2, bbtSymbol, bbtSession, bbtTimeFrame, bbtResult, bbtTrend });
+      ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, ribbon.SearchEditItem, bbtExchamge, barButtonItem2, bbtSymbol, bbtSession, bbtTimeFrame, bbtResult, bbtTrend, bbtWallet });
       ribbon.Location = new Point(0, 0);
-      ribbon.MaxItemId = 8;
+      ribbon.MaxItemId = 9;
       ribbon.Name = "ribbon";
       ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { rbpGenaral, rbpАnalytics });
       ribbon.Size = new Size(964, 158);
@@ -113,6 +114,15 @@ namespace DiaryOfTrader
       bbtResult.Name = "bbtResult";
       bbtResult.ItemClick += bbtResult_ItemClick;
       // 
+      // bbtTrend
+      // 
+      bbtTrend.Caption = "Тренд";
+      bbtTrend.Id = 7;
+      bbtTrend.ImageOptions.Image = (Image)resources.GetObject("bbtTrend.ImageOptions.Image");
+      bbtTrend.ImageOptions.LargeImage = (Image)resources.GetObject("bbtTrend.ImageOptions.LargeImage");
+      bbtTrend.Name = "bbtTrend";
+      bbtTrend.ItemClick += bbtTrend_ItemClick;
+      // 
       // rbpGenaral
       // 
       rbpGenaral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgMain, rbpgDictionary });
@@ -132,6 +142,7 @@ namespace DiaryOfTrader
       rbpgDictionary.ItemLinks.Add(bbtTimeFrame);
       rbpgDictionary.ItemLinks.Add(bbtTrend);
       rbpgDictionary.ItemLinks.Add(bbtResult);
+      rbpgDictionary.ItemLinks.Add(bbtWallet);
       rbpgDictionary.Name = "rbpgDictionary";
       rbpgDictionary.Text = "Справочники";
       // 
@@ -153,14 +164,13 @@ namespace DiaryOfTrader
       ribbonStatusBar.Ribbon = ribbon;
       ribbonStatusBar.Size = new Size(964, 24);
       // 
-      // bbtTrend
+      // bbtWallet
       // 
-      bbtTrend.Caption = "Тренд";
-      bbtTrend.Id = 7;
-      bbtTrend.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image");
-      bbtTrend.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItem1.ImageOptions.LargeImage");
-      bbtTrend.Name = "bbtTrend";
-      bbtTrend.ItemClick += bbtTrend_ItemClick;
+      bbtWallet.Caption = "Тип кошелька";
+      bbtWallet.Id = 8;
+      bbtWallet.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem1.ImageOptions.SvgImage");
+      bbtWallet.Name = "bbtWallet";
+      bbtWallet.ItemClick += bbtWallet_ItemClick;
       // 
       // RibbonMain
       // 
@@ -194,5 +204,6 @@ namespace DiaryOfTrader
     private DevExpress.XtraBars.Ribbon.RibbonPage rbpАnalytics;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbpgReports;
     private DevExpress.XtraBars.BarButtonItem bbtTrend;
+    private DevExpress.XtraBars.BarButtonItem bbtWallet;
   }
 }

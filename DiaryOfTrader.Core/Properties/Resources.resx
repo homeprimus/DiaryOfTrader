@@ -120,6 +120,9 @@
   <data name="Chicago" xml:space="preserve">
     <value>Чикаго</value>
   </data>
+  <data name="Diary" xml:space="preserve">
+    <value>Сделка</value>
+  </data>
   <data name="ExchangeBinance" xml:space="preserve">
     <value>Binance</value>
   </data>
@@ -141,11 +144,17 @@
   <data name="London" xml:space="preserve">
     <value>Лондон</value>
   </data>
+  <data name="MarketReview" xml:space="preserve">
+    <value>Обзор рынка</value>
+  </data>
   <data name="NewYork" xml:space="preserve">
     <value>Нью-Йорк</value>
   </data>
   <data name="Sydney" xml:space="preserve">
     <value>Сидней</value>
+  </data>
+  <data name="Symbol" xml:space="preserve">
+    <value>Инструмент</value>
   </data>
   <data name="SymbolBNBUSD" xml:space="preserve">
     <value>BNBUSD</value>
@@ -194,6 +203,9 @@
   </data>
   <data name="SymbolUSDJPYDesc" xml:space="preserve">
     <value>USDJPY — это валютная пара, в которую входит доллар США и японская иена. Эту пару называют «иена» или «гофер». Она является второй по объёму торговой парой на рынке Форекс.</value>
+  </data>
+  <data name="TimeFrame" xml:space="preserve">
+    <value>Тайм Фрейм</value>
   </data>
   <data name="TimeFrameD1" xml:space="preserve">
     <value>D1</value>
@@ -252,6 +264,12 @@
   <data name="Tokyo" xml:space="preserve">
     <value>Токио</value>
   </data>
+  <data name="TraderExchange" xml:space="preserve">
+    <value>Биржа</value>
+  </data>
+  <data name="TraderRegion" xml:space="preserve">
+    <value>Регион</value>
+  </data>
   <data name="TraderRegionAmerica" xml:space="preserve">
     <value>Американский</value>
   </data>
@@ -263,6 +281,9 @@
   </data>
   <data name="TraderRegionPacific" xml:space="preserve">
     <value>Тихоокенский</value>
+  </data>
+  <data name="TraderResult" xml:space="preserve">
+    <value>Результат сделки</value>
   </data>
   <data name="TraderResultDescriptionLoss" xml:space="preserve">
     <value>Трейдинг закончился потерей ликвидности</value>
@@ -282,6 +303,12 @@
   <data name="TraderResultSuccess" xml:space="preserve">
     <value>Успех</value>
   </data>
+  <data name="TraderSession" xml:space="preserve">
+    <value>Торговая сессия</value>
+  </data>
+  <data name="Trend" xml:space="preserve">
+    <value>Тренд</value>
+  </data>
   <data name="TrendDownward" xml:space="preserve">
     <value>Нисходящий(медвежий)</value>
   </data>
@@ -299,6 +326,9 @@
   </data>
   <data name="TrendUpwardDesc" xml:space="preserve">
     <value>Тренд в котором каждый последующий лой выше предыдущего</value>
+  </data>
+  <data name="Wallet" xml:space="preserve">
+    <value>Тип кошелька</value>
   </data>
   <data name="WalletDemo" xml:space="preserve">
     <value>Демо</value>

@@ -64,8 +64,12 @@
   <data name="grid.Appearance.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8pt</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="grid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>535, 233</value>
+    <value>687, 160</value>
   </data>
   <data name="&gt;&gt;grid.Name" xml:space="preserve">
     <value>grid</value>
@@ -77,16 +81,16 @@
     <value>pnlClient</value>
   </data>
   <data name="&gt;&gt;grid.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="pnlDown.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
     <value>Transparent</value>
   </data>
   <data name="pnlDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 233</value>
+    <value>0, 370</value>
   </data>
   <data name="pnlDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>535, 40</value>
+    <value>687, 40</value>
   </data>
   <data name="&gt;&gt;pnlDown.Name" xml:space="preserve">
     <value>pnlDown</value>
@@ -103,8 +107,199 @@
   <data name="pnlClient.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
     <value>Transparent</value>
   </data>
+  <data name="spRegion.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="spRegion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="spRegion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 160</value>
+  </data>
+  <data name="spRegion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>687, 3</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="spRegion.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;spRegion.Name" xml:space="preserve">
+    <value>spRegion</value>
+  </data>
+  <data name="&gt;&gt;spRegion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Splitter, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;spRegion.Parent" xml:space="preserve">
+    <value>pnlClient</value>
+  </data>
+  <data name="&gt;&gt;spRegion.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlSession.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
+    <value>Transparent</value>
+  </data>
+  <data name="gridSession.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gridSession.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 27</value>
+  </data>
+  <data name="gbName.Caption" xml:space="preserve">
+    <value>Город</value>
+  </data>
+  <data name="clName.Caption" xml:space="preserve">
+    <value>Город</value>
+  </data>
+  <data name="clName.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="clName.Width" type="System.Int32, mscorlib">
+    <value>242</value>
+  </data>
+  <data name="gbName.Name" xml:space="preserve">
+    <value>gbName</value>
+  </data>
+  <data name="gbName.Width" type="System.Int32, mscorlib">
+    <value>242</value>
+  </data>
+  <data name="gbSummer.Caption" xml:space="preserve">
+    <value>Лето</value>
+  </data>
+  <data name="clSummerStarting.Caption" xml:space="preserve">
+    <value>Открытие</value>
+  </data>
+  <data name="repositoryItemDateEdit.AutoHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <assembly alias="DevExpress.Utils.v22.2" name="DevExpress.Utils.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="repositoryItemDateEdit.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v22.2">
+    <value>Combo</value>
+  </data>
+  <data name="repositoryItemDateEdit.CalendarTimeProperties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v22.2">
+    <value>Combo</value>
+  </data>
+  <data name="clSummerStarting.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="clSummerStarting.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="clSummerFinished.Caption" xml:space="preserve">
+    <value>Закрытие</value>
+  </data>
+  <data name="clSummerFinished.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="clSummerFinished.Width" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="gbSummer.Name" xml:space="preserve">
+    <value>gbSummer</value>
+  </data>
+  <data name="gbSummer.Width" type="System.Int32, mscorlib">
+    <value>201</value>
+  </data>
+  <data name="gbWinter.Caption" xml:space="preserve">
+    <value>Зима</value>
+  </data>
+  <data name="clWinterStarting.Caption" xml:space="preserve">
+    <value>Открытие</value>
+  </data>
+  <data name="clWinterStarting.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="clWinterStarting.Width" type="System.Int32, mscorlib">
+    <value>102</value>
+  </data>
+  <data name="clWinterFinished.Caption" xml:space="preserve">
+    <value>Закрытие</value>
+  </data>
+  <data name="clWinterFinished.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="clWinterFinished.Width" type="System.Int32, mscorlib">
+    <value>102</value>
+  </data>
+  <data name="gbWinter.Name" xml:space="preserve">
+    <value>gbWinter</value>
+  </data>
+  <data name="gbWinter.Width" type="System.Int32, mscorlib">
+    <value>204</value>
+  </data>
+  <data name="gridSession.Size" type="System.Drawing.Size, System.Drawing">
+    <value>687, 183</value>
+  </data>
+  <data name="gridSession.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;gridSession.Name" xml:space="preserve">
+    <value>gridSession</value>
+  </data>
+  <data name="&gt;&gt;gridSession.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;gridSession.Parent" xml:space="preserve">
+    <value>pnlSession</value>
+  </data>
+  <data name="&gt;&gt;gridSession.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gnSession.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
+    <value>Transparent</value>
+  </data>
+  <data name="gnSession.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8pt</value>
+  </data>
+  <data name="gnSession.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="gnSession.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="gnSession.Size" type="System.Drawing.Size, System.Drawing">
+    <value>687, 27</value>
+  </data>
+  <data name="gnSession.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;gnSession.Name" xml:space="preserve">
+    <value>gnSession</value>
+  </data>
+  <data name="&gt;&gt;gnSession.Type" xml:space="preserve">
+    <value>DiaryOfTrader.EditControls.GridNavigator, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gnSession.Parent" xml:space="preserve">
+    <value>pnlSession</value>
+  </data>
+  <data name="&gt;&gt;gnSession.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pnlSession.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pnlSession.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 160</value>
+  </data>
+  <data name="pnlSession.Size" type="System.Drawing.Size, System.Drawing">
+    <value>687, 210</value>
+  </data>
+  <data name="pnlSession.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;pnlSession.Name" xml:space="preserve">
+    <value>pnlSession</value>
+  </data>
+  <data name="&gt;&gt;pnlSession.Type" xml:space="preserve">
+    <value>DiaryOfTrader.Components.Panel, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;pnlSession.Parent" xml:space="preserve">
+    <value>pnlClient</value>
+  </data>
+  <data name="&gt;&gt;pnlSession.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="pnlClient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>535, 233</value>
+    <value>687, 370</value>
   </data>
   <data name="&gt;&gt;pnlClient.Name" xml:space="preserve">
     <value>pnlClient</value>
@@ -155,7 +350,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>535, 273</value>
+    <value>687, 410</value>
   </data>
   <data name="TradeSessionDlg.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -201,6 +396,66 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>TradeSessionDlg</value>
+  </data>
+  <data name="&gt;&gt;gvSession.Name" xml:space="preserve">
+    <value>gvSession</value>
+  </data>
+  <data name="&gt;&gt;gvSession.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;gbName.Name" xml:space="preserve">
+    <value>gbName</value>
+  </data>
+  <data name="&gt;&gt;gbName.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.GridBand, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;clName.Name" xml:space="preserve">
+    <value>clName</value>
+  </data>
+  <data name="&gt;&gt;clName.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;gbSummer.Name" xml:space="preserve">
+    <value>gbSummer</value>
+  </data>
+  <data name="&gt;&gt;gbSummer.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.GridBand, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;clSummerStarting.Name" xml:space="preserve">
+    <value>clSummerStarting</value>
+  </data>
+  <data name="&gt;&gt;clSummerStarting.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;repositoryItemDateEdit.Name" xml:space="preserve">
+    <value>repositoryItemDateEdit</value>
+  </data>
+  <data name="&gt;&gt;repositoryItemDateEdit.Type" xml:space="preserve">
+    <value>DevExpress.XtraEditors.Repository.RepositoryItemDateEdit, DevExpress.XtraEditors.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;clSummerFinished.Name" xml:space="preserve">
+    <value>clSummerFinished</value>
+  </data>
+  <data name="&gt;&gt;clSummerFinished.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;gbWinter.Name" xml:space="preserve">
+    <value>gbWinter</value>
+  </data>
+  <data name="&gt;&gt;gbWinter.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.GridBand, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;clWinterStarting.Name" xml:space="preserve">
+    <value>clWinterStarting</value>
+  </data>
+  <data name="&gt;&gt;clWinterStarting.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;clWinterFinished.Name" xml:space="preserve">
+    <value>clWinterFinished</value>
+  </data>
+  <data name="&gt;&gt;clWinterFinished.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn, DevExpress.XtraGrid.v22.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TradeSessionDlg</value>
