@@ -14,6 +14,17 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       InitializeComponent();
       grid.gridView.FocusedRowChanged += FocusedRowChanged;
       gnSession.View = gvSession;
+      gnSession.Add += delegate (object entity)
+      {
+        var region = (TraderRegion)grid.gridView.GetRow(grid.gridView.FocusedRowHandle);
+        ((TraderSession)entity).Region = region;
+        region.Sessions.Add((TraderSession)entity);
+      };
+      gnSession.Delete += delegate (object entity)
+      {
+        var region = (TraderRegion)grid.gridView.GetRow(grid.gridView.FocusedRowHandle);
+        region.Sessions.Remove((TraderSession)entity);
+      };
     }
 
     private void FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)

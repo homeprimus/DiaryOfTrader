@@ -192,7 +192,7 @@ namespace DiaryOfTrader.Core.Data
           ID = 8,
           Region = europe,
           Name = Resources.Sydney,
-          Description = Resources.ChicagoDesc,
+          Description = Resources.SydneyDesc,
           WinterStarting = new DateTime(2023, 05, 01, 23, 0, 0),
           WinterFinished = new DateTime(2023, 05, 01, 05, 0, 0),
           SummerStarting = new DateTime(2023, 05, 01, 22, 0, 0),

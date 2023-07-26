@@ -1,5 +1,6 @@
 ﻿using DiaryOfTrader.Core.Core;
 using DiaryOfTrader.Core.Entity;
+using DiaryOfTrader.Core.Entity.Economic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -84,11 +85,24 @@ namespace DiaryOfTrader.Core.Data
       modelBuilder.Entity<TraderResult>(TraderResultConfigure);
       modelBuilder.Entity<Diary>(DiaryConfigure);
       modelBuilder.Entity<MarketReview>(MarketReviewConfigure);
+      modelBuilder.Entity<EconomicSchedule>(EconomicScheduleConfigure);
+      modelBuilder.Entity<EconomicEvent>(EconomicEventConfigure);
+
     }
 
     #region Configure
 
     #region Symbol
+    private void EconomicScheduleConfigure(EntityTypeBuilder<EconomicSchedule> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
+    private void EconomicEventConfigure(EntityTypeBuilder<EconomicEvent> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
     private void SymbolConfigure(EntityTypeBuilder<Symbol> builder)
     {
       builder.UseTpcMappingStrategy();
@@ -188,9 +202,10 @@ namespace DiaryOfTrader.Core.Data
     public DbSet<Trend> Trend { get; set; }
     public DbSet<TraderRegion> Region { get; set; }
     public DbSet<Wallet> Wallet { get; set; }
-
     public DbSet<Diary> Diary { get; set; }
     public DbSet<MarketReview> MarketReview { get; set; }
+    public DbSet<EconomicSchedule> EconomicSchedule { get; set; }
+    public DbSet<EconomicEvent> EconomicEvent { get; set; }
   }
 }
 

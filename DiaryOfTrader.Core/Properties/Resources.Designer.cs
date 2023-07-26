@@ -89,6 +89,51 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Страна:.
+        /// </summary>
+        internal static string EconomicCountry {
+            get {
+                return ResourceManager.GetString("EconomicCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Валюта:.
+        /// </summary>
+        internal static string EconomicCurency {
+            get {
+                return ResourceManager.GetString("EconomicCurency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ru..
+        /// </summary>
+        internal static string EconomicEndPointPrefix {
+            get {
+                return ResourceManager.GetString("EconomicEndPointPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Источник:.
+        /// </summary>
+        internal static string EconomicSource {
+            get {
+                return ResourceManager.GetString("EconomicSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выходной.
+        /// </summary>
+        internal static string EconomicWeekEnd {
+            get {
+                return ResourceManager.GetString("EconomicWeekEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Binance.
         /// </summary>
         internal static string ExchangeBinance {

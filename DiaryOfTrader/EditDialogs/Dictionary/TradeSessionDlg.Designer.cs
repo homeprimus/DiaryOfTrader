@@ -176,6 +176,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       gbSummer.Columns.Add(clSummerStarting);
       gbSummer.Columns.Add(clSummerFinished);
       gbSummer.OptionsBand.AllowMove = false;
+      gbSummer.OptionsBand.FixedWidth = true;
       gbSummer.VisibleIndex = 1;
       // 
       // clSummerStarting
@@ -189,6 +190,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       clSummerStarting.FieldName = "SummerStarting";
       clSummerStarting.Name = "clSummerStarting";
       clSummerStarting.OptionsColumn.AllowMove = false;
+      clSummerStarting.OptionsColumn.FixedWidth = true;
       // 
       // repositoryItemDateEdit
       // 
@@ -215,6 +217,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       clSummerFinished.FieldName = "SummerFinished";
       clSummerFinished.Name = "clSummerFinished";
       clSummerFinished.OptionsColumn.AllowMove = false;
+      clSummerFinished.OptionsColumn.FixedWidth = true;
       // 
       // gbWinter
       // 
@@ -224,6 +227,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       gbWinter.Columns.Add(clWinterStarting);
       gbWinter.Columns.Add(clWinterFinished);
       gbWinter.OptionsBand.AllowMove = false;
+      gbWinter.OptionsBand.FixedWidth = true;
       gbWinter.VisibleIndex = 2;
       // 
       // clWinterStarting
@@ -237,6 +241,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       clWinterStarting.FieldName = "WinterStarting";
       clWinterStarting.Name = "clWinterStarting";
       clWinterStarting.OptionsColumn.AllowMove = false;
+      clWinterStarting.OptionsColumn.FixedWidth = true;
       // 
       // clWinterFinished
       // 
@@ -249,6 +254,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
       clWinterFinished.FieldName = "WinterFinished";
       clWinterFinished.Name = "clWinterFinished";
       clWinterFinished.OptionsColumn.AllowMove = false;
+      clWinterFinished.OptionsColumn.FixedWidth = true;
       // 
       // gnSession
       // 
@@ -284,18 +290,18 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
     private Components.Panel pnlSession;
     public DevExpress.XtraGrid.GridControl gridSession;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView gvSession;
-    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbName;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clName;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clDescription;
     private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
-    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbSummer;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clSummerStarting;
     private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clSummerFinished;
-    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbWinter;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clWinterStarting;
     private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn clWinterFinished;
     private EditControls.GridNavigator gnSession;
     private DevExpress.XtraEditors.SplitterControl splitterControl;
+    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbName;
+    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbSummer;
+    private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbWinter;
   }
 }

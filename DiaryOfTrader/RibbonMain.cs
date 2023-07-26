@@ -19,76 +19,61 @@ namespace DiaryOfTrader
       InitializeComponent();
     }
 
-    private void UpdateDbSet<T>(GridEditDialog dlg, DbSet<T> data, List<T>? readAlredy = null) where T : Entity
+    private bool EditDbSet<T>(GridEditDialog dlg, DbSet<T> data) where T : Entity
     {
-
-      BindingList<T> orig;
-      if (readAlredy != null)
+      Entity.DoBeginEdit(data, out BindingList<T> orig, out List<T> list);
+      dlg.DataSource = orig;
+      dlg.Text = ReflectionUtils.ClassDescription(typeof(T));
+      var result = dlg.ShowDialog() == DialogResult.OK;
+      if (result)
       {
-        orig = new(readAlredy);
+        Entity.DoEndEdit(ctx, data, orig, list);
       }
       else
       {
-        orig = new(data.OrderBy(e => e.Order).ToList());
+        Entity.DoCancelEdit(ctx);
       }
-
-      var list = new List<T>(orig);
-      dlg.DataSource = orig;
-      dlg.Text = ReflectionUtils.ClassDescription(typeof(T));
-      if (dlg.ShowDialog() == DialogResult.OK)
-      {
-        orig.Where(e => !list.Contains(e) && e.Validate).ForEach(e => data.Add(e));
-        list.Where(e => !orig.Contains(e)).ForEach(e => data.Remove(e));
-        try
-        {
-          ctx.SaveChanges();
-        }
-        catch(Exception ex) 
-        {
-          var s = ex.ToString();
-          if (ex.InnerException != null)
-          {
-            s = ex.InnerException.ToString();
-          }
-          DiaryOfTrader.Core.MessageBox.ShowError(s, "");
-        }
-      }
-
+      return result;
     }
+
     private void bbtExchamge_ItemClick(object sender, ItemClickEventArgs e)
     {
-      UpdateDbSet(new ExchangeDlg(), ctx.Exchange);
+      EditDbSet(new ExchangeDlg(), ctx.Exchange);
     }
 
     private void bbtSymbol_ItemClick(object sender, ItemClickEventArgs e)
     {
-      UpdateDbSet(new SymbolDlg(), ctx.Symbol);
+      EditDbSet(new SymbolDlg(), ctx.Symbol);
     }
 
     private void bbtSession_ItemClick(object sender, ItemClickEventArgs e)
     {
-      var data = ctx.Region.Include(e => e.Sessions).ToList();
-      UpdateDbSet(new TradeSessionDlg(), ctx.Region, data);
+      Entity.DoBeginEdit<TraderSession>(ctx.Session, out BindingList<TraderSession> orig, out List<TraderSession> list);
+
+      if (EditDbSet(new TradeSessionDlg(), ctx.Region))
+      {
+        Entity.DoEndEdit<TraderSession>(ctx, ctx.Session, orig, list);
+      }
     }
 
     private void bbtTimeFrame_ItemClick(object sender, ItemClickEventArgs e)
     {
-      UpdateDbSet(new TimeFrameDlg(), ctx.Frame);
+      EditDbSet(new TimeFrameDlg(), ctx.Frame);
     }
 
     private void bbtResult_ItemClick(object sender, ItemClickEventArgs e)
     {
-      UpdateDbSet(new ResultDlg(), ctx.Result);
+      EditDbSet(new ResultDlg(), ctx.Result);
     }
 
     private void bbtTrend_ItemClick(object sender, ItemClickEventArgs e)
     {
-      UpdateDbSet(new TrendDlg(), ctx.Trend);
+      EditDbSet(new TrendDlg(), ctx.Trend);
     }
 
     private void bbtWallet_ItemClick(object sender, ItemClickEventArgs e)
     {
-      UpdateDbSet(new WalletDlg(), ctx.Wallet);
+      EditDbSet(new WalletDlg(), ctx.Wallet);
     }
   }
 }

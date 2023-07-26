@@ -127,7 +127,7 @@
     <value>True</value>
   </data>
   <data name="clName.Width" type="System.Int32, mscorlib">
-    <value>304</value>
+    <value>201</value>
   </data>
   <data name="clDescription.Caption" xml:space="preserve">
     <value>Описание</value>
@@ -136,16 +136,16 @@
     <value>True</value>
   </data>
   <data name="clDescription.Width" type="System.Int32, mscorlib">
-    <value>364</value>
+    <value>411</value>
   </data>
   <data name="gbName.Name" xml:space="preserve">
     <value>gbName</value>
   </data>
   <data name="gbName.Width" type="System.Int32, mscorlib">
-    <value>668</value>
+    <value>612</value>
   </data>
   <data name="gbSummer.Caption" xml:space="preserve">
-    <value>Лето</value>
+    <value>Лето (UTC)</value>
   </data>
   <data name="clSummerStarting.Caption" xml:space="preserve">
     <value>Открытие</value>
@@ -164,7 +164,7 @@
     <value>True</value>
   </data>
   <data name="clSummerStarting.Width" type="System.Int32, mscorlib">
-    <value>30</value>
+    <value>65</value>
   </data>
   <data name="clSummerFinished.Caption" xml:space="preserve">
     <value>Закрытие</value>
@@ -173,16 +173,16 @@
     <value>True</value>
   </data>
   <data name="clSummerFinished.Width" type="System.Int32, mscorlib">
-    <value>35</value>
+    <value>65</value>
   </data>
   <data name="gbSummer.Name" xml:space="preserve">
     <value>gbSummer</value>
   </data>
   <data name="gbSummer.Width" type="System.Int32, mscorlib">
-    <value>65</value>
+    <value>130</value>
   </data>
   <data name="gbWinter.Caption" xml:space="preserve">
-    <value>Зима</value>
+    <value>Зима (UTC)</value>
   </data>
   <data name="clWinterStarting.Caption" xml:space="preserve">
     <value>Открытие</value>
@@ -191,7 +191,7 @@
     <value>True</value>
   </data>
   <data name="clWinterStarting.Width" type="System.Int32, mscorlib">
-    <value>39</value>
+    <value>65</value>
   </data>
   <data name="clWinterFinished.Caption" xml:space="preserve">
     <value>Закрытие</value>
@@ -200,13 +200,13 @@
     <value>True</value>
   </data>
   <data name="clWinterFinished.Width" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>65</value>
   </data>
   <data name="gbWinter.Name" xml:space="preserve">
     <value>gbWinter</value>
   </data>
   <data name="gbWinter.Width" type="System.Int32, mscorlib">
-    <value>59</value>
+    <value>130</value>
   </data>
   <data name="gridSession.Size" type="System.Drawing.Size, System.Drawing">
     <value>897, 180</value>

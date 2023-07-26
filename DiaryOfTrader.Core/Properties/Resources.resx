@@ -127,6 +127,21 @@
   <data name="Diary" xml:space="preserve">
     <value>Сделка</value>
   </data>
+  <data name="EconomicCountry" xml:space="preserve">
+    <value>Страна:</value>
+  </data>
+  <data name="EconomicCurency" xml:space="preserve">
+    <value>Валюта:</value>
+  </data>
+  <data name="EconomicEndPointPrefix" xml:space="preserve">
+    <value>ru.</value>
+  </data>
+  <data name="EconomicSource" xml:space="preserve">
+    <value>Источник:</value>
+  </data>
+  <data name="EconomicWeekEnd" xml:space="preserve">
+    <value>Выходной</value>
+  </data>
   <data name="ExchangeBinance" xml:space="preserve">
     <value>Binance</value>
   </data>
