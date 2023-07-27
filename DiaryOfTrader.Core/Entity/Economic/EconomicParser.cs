@@ -33,7 +33,6 @@ namespace DiaryOfTrader.Core.Entity.Economic
     }
     private async Task EventInfoAsync(EconomicSchedule schedule, bool reload = false)
     {
-
       string GetValue(string regex, string value)
       {
         var match = new Regex(regex).Match(value);
@@ -59,8 +58,9 @@ namespace DiaryOfTrader.Core.Entity.Economic
       req.Method = "GET";
       req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7";
       req.Referer = "https://" + Resources.EconomicEndPointPrefix + "investing.com/economic-calendar/";
+      req.AutomaticDecompression = DecompressionMethods.All;
 
-      req.Host = "ru.investing.com";
+      req.Host = Resources.EconomicEndPointPrefix + "investing.com";
 
       req.Headers.Add("Accept-Encoding", "gzip, deflate, br");
       req.Headers.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
@@ -73,9 +73,9 @@ namespace DiaryOfTrader.Core.Entity.Economic
 
       try
       {
-        var resp = await req.GetResponseAsync();
+        var resp =  req.GetResponse();
         var stream = resp.GetResponseStream();
-        var html = await new StreamReader(stream).ReadToEndAsync();
+        var html = new StreamReader(stream).ReadToEnd();
         if (!string.IsNullOrEmpty(html))
         {
           const string OVER_VIEW_BOX = @"<div id=""overViewBox"" class=""overViewBox event"">";
@@ -103,7 +103,6 @@ namespace DiaryOfTrader.Core.Entity.Economic
             }
 
             schedule.Event = result;
-
             await contex.EconomicEvent.AddAsync(result);
 
           }
@@ -114,6 +113,29 @@ namespace DiaryOfTrader.Core.Entity.Economic
         Debug.WriteLine(e.ToString());
       }
     }
+
+    public async Task<bool> UpdateThisWeekAsync()
+    {
+      var startDate = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+      var endDate = startDate.AddDays(6);
+      try
+      {
+        var exists = contex.EconomicSchedule
+          .Any(e => e.Time.Date >= startDate && e.Time.Date <= endDate);
+        if (!exists)
+        {
+          var calendar = await ParseAsync(true, EconomicPeriod.thisWeek, Importance.High);
+          await EventsAsync(calendar, true);
+        }
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e);
+        throw;
+      }
+
+      return true;
+    }
     public async Task EventsAsync(List<EconomicSchedule> schedule, bool reload = false)
     {
       var tasks = new Task[schedule.Count];
@@ -123,9 +145,9 @@ namespace DiaryOfTrader.Core.Entity.Economic
       }
       await Task.WhenAll(tasks);
       await contex.SaveChangesAsync();
-
     }
-    public async Task<List<EconomicSchedule>> ParseAsync(bool reload = false, EconomicPeriod period = EconomicPeriod.thisWeek, Importance importance = Importance.Low)
+
+    public async Task<List<EconomicSchedule>> ParseAsync(bool reload = false, EconomicPeriod period = EconomicPeriod.thisWeek, Importance importance = Importance.None)
     {
       var startDate = DateTime.Today.Date;
       var endDate = startDate;
@@ -184,10 +206,10 @@ namespace DiaryOfTrader.Core.Entity.Economic
 
       req.Method = "POST";
       req.Accept = "*/*";
+      req.AutomaticDecompression = DecompressionMethods.All;
 
       var bytes = Encoding.UTF8.GetBytes(data.ToString());
       var reqStream = req.GetRequestStream();
-
       reqStream.Write(bytes, 0, bytes.Length);
       req.ContentLength = bytes.Length;
       req.ContentType = "application/x-www-form-urlencoded";
@@ -202,9 +224,9 @@ namespace DiaryOfTrader.Core.Entity.Economic
 
       try
       {
-        var resp = await req.GetResponseAsync();
+        var resp = req.GetResponse();
         var stream = resp.GetResponseStream();
-        var jsonData = await new StreamReader(stream).ReadToEndAsync();
+        var jsonData = new StreamReader(stream).ReadToEnd();
         var parse = JsonObject.Parse(jsonData);
 
         var html = (string)parse["data"];
@@ -284,22 +306,24 @@ namespace DiaryOfTrader.Core.Entity.Economic
                         break;
                       case 4: // Fact
                         // class="bold act redFont event-478063-actual" title="Хуже ожидаемого" id="eventActual_478063"
-                        ev.Factual = tdValue;
+                        ev.Factual = tdValue.Replace("&nbsp;", string.Empty);
                         break;
                       case 5: // Prognosis
-                        ev.Prognosis = tdValue;
+                        ev.Prognosis = tdValue.Replace("&nbsp;", string.Empty);
                         break;
                       case 6: // Previous
                         // class="prev blackFont  event-478063-previous" id="eventPrevious_478063"
                         //<span title="">40,6</span>
                         var prevMatch = prevReg.Match(tdValue);
                         if (prevMatch.Success)
-                          ev.Previous = prevMatch.Result("${value}").Trim();
+                        {
+                          ev.Previous = prevMatch.Result("${value}").Trim().Replace("&nbsp;", string.Empty);
+                        }
                         break;
                       case 7: // Last
                         // class="alert js-injected-user-alert-container "  data-name ="Индекс деловой активности в производственном секторе (PMI) Германии" data-event-id="136" data-status-enabled="0"
                         //<span class="js-plus-icon alertBellGrayPlus genToolTip oneliner" data-tooltip="Создать уведомление" data-tooltip-alt="Уведомление активно" data-reg_ep="add alert"></span>    
-                        ev.Last = tdValue;
+                        ev.Last = string.Empty;// tdValue;
                         break;
                     }
                   }

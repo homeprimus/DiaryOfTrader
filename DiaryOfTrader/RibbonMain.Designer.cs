@@ -41,22 +41,24 @@ namespace DiaryOfTrader
       bbtTimeFrame = new DevExpress.XtraBars.BarButtonItem();
       bbtResult = new DevExpress.XtraBars.BarButtonItem();
       bbtTrend = new DevExpress.XtraBars.BarButtonItem();
+      bbtWallet = new DevExpress.XtraBars.BarButtonItem();
+      bbtCalendar = new DevExpress.XtraBars.BarButtonItem();
       rbpGenaral = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       rbpgDictionary = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+      rbpgCalendar = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       rbpАnalytics = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgReports = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-      bbtWallet = new DevExpress.XtraBars.BarButtonItem();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
       SuspendLayout();
       // 
       // ribbon
       // 
       ribbon.ExpandCollapseItem.Id = 0;
-      ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, ribbon.SearchEditItem, bbtExchamge, barButtonItem2, bbtSymbol, bbtSession, bbtTimeFrame, bbtResult, bbtTrend, bbtWallet });
+      ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, ribbon.SearchEditItem, bbtExchamge, barButtonItem2, bbtSymbol, bbtSession, bbtTimeFrame, bbtResult, bbtTrend, bbtWallet, bbtCalendar });
       ribbon.Location = new Point(0, 0);
-      ribbon.MaxItemId = 9;
+      ribbon.MaxItemId = 10;
       ribbon.Name = "ribbon";
       ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { rbpGenaral, rbpАnalytics });
       ribbon.Size = new Size(964, 158);
@@ -123,9 +125,26 @@ namespace DiaryOfTrader
       bbtTrend.Name = "bbtTrend";
       bbtTrend.ItemClick += bbtTrend_ItemClick;
       // 
+      // bbtWallet
+      // 
+      bbtWallet.Caption = "Тип кошелька";
+      bbtWallet.Id = 8;
+      bbtWallet.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("bbtWallet.ImageOptions.SvgImage");
+      bbtWallet.Name = "bbtWallet";
+      bbtWallet.ItemClick += bbtWallet_ItemClick;
+      // 
+      // bbtCalendar
+      // 
+      bbtCalendar.Caption = "Экономический календарь";
+      bbtCalendar.Id = 9;
+      bbtCalendar.ImageOptions.Image = (Image)resources.GetObject("bbtCalendar.ImageOptions.Image");
+      bbtCalendar.ImageOptions.LargeImage = (Image)resources.GetObject("bbtCalendar.ImageOptions.LargeImage");
+      bbtCalendar.Name = "bbtCalendar";
+      bbtCalendar.ItemClick += bbtCalendar_ItemClick;
+      // 
       // rbpGenaral
       // 
-      rbpGenaral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgMain, rbpgDictionary });
+      rbpGenaral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgMain, rbpgDictionary, rbpgCalendar });
       rbpGenaral.Name = "rbpGenaral";
       rbpGenaral.Text = "Главная";
       // 
@@ -146,6 +165,12 @@ namespace DiaryOfTrader
       rbpgDictionary.Name = "rbpgDictionary";
       rbpgDictionary.Text = "Справочники";
       // 
+      // rbpgCalendar
+      // 
+      rbpgCalendar.ItemLinks.Add(bbtCalendar);
+      rbpgCalendar.Name = "rbpgCalendar";
+      rbpgCalendar.Text = "Календарь";
+      // 
       // rbpАnalytics
       // 
       rbpАnalytics.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgReports });
@@ -163,14 +188,6 @@ namespace DiaryOfTrader
       ribbonStatusBar.Name = "ribbonStatusBar";
       ribbonStatusBar.Ribbon = ribbon;
       ribbonStatusBar.Size = new Size(964, 24);
-      // 
-      // bbtWallet
-      // 
-      bbtWallet.Caption = "Тип кошелька";
-      bbtWallet.Id = 8;
-      bbtWallet.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem1.ImageOptions.SvgImage");
-      bbtWallet.Name = "bbtWallet";
-      bbtWallet.ItemClick += bbtWallet_ItemClick;
       // 
       // RibbonMain
       // 
@@ -205,5 +222,7 @@ namespace DiaryOfTrader
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbpgReports;
     private DevExpress.XtraBars.BarButtonItem bbtTrend;
     private DevExpress.XtraBars.BarButtonItem bbtWallet;
+    private DevExpress.XtraBars.BarButtonItem bbtCalendar;
+    private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbpgCalendar;
   }
 }

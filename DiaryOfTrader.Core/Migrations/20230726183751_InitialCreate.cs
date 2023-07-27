@@ -12,6 +12,23 @@ namespace DiaryOfTrader.Core.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "EconomicEvent",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Country = table.Column<string>(type: "TEXT", nullable: false),
+                    Currency = table.Column<string>(type: "TEXT", nullable: false),
+                    SourceRef = table.Column<string>(type: "TEXT", nullable: false),
+                    LocalRef = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EconomicEvent", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Exchange",
                 columns: table => new
                 {
@@ -32,9 +49,9 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Order = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,6 +131,33 @@ namespace DiaryOfTrader.Core.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Wallet", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EconomicSchedule",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Time = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Currency = table.Column<string>(type: "TEXT", nullable: false),
+                    Importance = table.Column<int>(type: "INTEGER", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Factual = table.Column<string>(type: "TEXT", nullable: false),
+                    Prognosis = table.Column<string>(type: "TEXT", nullable: false),
+                    Previous = table.Column<string>(type: "TEXT", nullable: false),
+                    Last = table.Column<string>(type: "TEXT", nullable: false),
+                    HRef = table.Column<string>(type: "TEXT", nullable: false),
+                    EventID = table.Column<long>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EconomicSchedule", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_EconomicSchedule_EconomicEvent_EventID",
+                        column: x => x.EventID,
+                        principalTable: "EconomicEvent",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -264,6 +308,11 @@ namespace DiaryOfTrader.Core.Migrations
                 column: "TrendID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EconomicSchedule_EventID",
+                table: "EconomicSchedule",
+                column: "EventID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MarketReview_SymbolID",
                 table: "MarketReview",
                 column: "SymbolID");
@@ -283,6 +332,9 @@ namespace DiaryOfTrader.Core.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EconomicSchedule");
+
+            migrationBuilder.DropTable(
                 name: "MarketReview");
 
             migrationBuilder.DropTable(
@@ -293,6 +345,9 @@ namespace DiaryOfTrader.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Wallet");
+
+            migrationBuilder.DropTable(
+                name: "EconomicEvent");
 
             migrationBuilder.DropTable(
                 name: "Diary");

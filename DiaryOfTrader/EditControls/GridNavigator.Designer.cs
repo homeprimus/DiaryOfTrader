@@ -77,8 +77,8 @@ namespace DiaryOfTrader.EditControls
       // 
       bbtEdit.Caption = "Изменить";
       bbtEdit.Id = 2;
-      bbtEdit.ImageOptions.Image = (Image)resources.GetObject("bbEdit.ImageOptions.Image");
-      bbtEdit.ImageOptions.LargeImage = (Image)resources.GetObject("bbEdit.ImageOptions.LargeImage");
+      bbtEdit.ImageOptions.Image = (Image)resources.GetObject("bbtEdit.ImageOptions.Image");
+      bbtEdit.ImageOptions.LargeImage = (Image)resources.GetObject("bbtEdit.ImageOptions.LargeImage");
       bbtEdit.Name = "bbtEdit";
       bbtEdit.ItemClick += bbEdit_ItemClick;
       // 
@@ -86,8 +86,8 @@ namespace DiaryOfTrader.EditControls
       // 
       bbtRefresh.Caption = "Обновить";
       bbtRefresh.Id = 3;
-      bbtRefresh.ImageOptions.Image = (Image)resources.GetObject("bbRefresh.ImageOptions.Image");
-      bbtRefresh.ImageOptions.LargeImage = (Image)resources.GetObject("bbRefresh.ImageOptions.LargeImage");
+      bbtRefresh.ImageOptions.Image = (Image)resources.GetObject("bbtRefresh.ImageOptions.Image");
+      bbtRefresh.ImageOptions.LargeImage = (Image)resources.GetObject("bbtRefresh.ImageOptions.LargeImage");
       bbtRefresh.Name = "bbtRefresh";
       // 
       // bmGrid

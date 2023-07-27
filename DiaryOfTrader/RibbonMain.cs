@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel;
 using DevExpress.Mvvm.Native;
+using DevExpress.Pdf.Native.BouncyCastle.Utilities;
 using DevExpress.XtraBars;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Entity;
+using DiaryOfTrader.Core.Entity.Economic;
 using DiaryOfTrader.Core.Utils;
 using DiaryOfTrader.EditDialogs;
+using DiaryOfTrader.EditDialogs.Calendar;
 using DiaryOfTrader.EditDialogs.Dictionary;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +16,12 @@ namespace DiaryOfTrader
   public partial class RibbonMain : DevExpress.XtraBars.Ribbon.RibbonForm
   {
     readonly DiaryOfTraderCtx ctx = new DiaryOfTraderCtx();
-
+    private Task? updateThisWeekAsync;
     public RibbonMain()
     {
       InitializeComponent();
+      var eco = new EconomicParser(ctx);
+      updateThisWeekAsync = eco.UpdateThisWeekAsync();
     }
 
     private bool EditDbSet<T>(GridEditDialog dlg, DbSet<T> data) where T : Entity
@@ -75,5 +80,29 @@ namespace DiaryOfTrader
     {
       EditDbSet(new WalletDlg(), ctx.Wallet);
     }
+
+    private void bbtCalendar_ItemClick(object sender, ItemClickEventArgs e)
+    {
+      if (updateThisWeekAsync != null)
+      {
+        Task.WaitAll(updateThisWeekAsync);
+        updateThisWeekAsync = null;
+      }
+
+      var calendar = new CalendarDlg();
+      calendar.ShowDialog();
+    }
   }
+
+  public class BindingCalendar
+  {
+    public DateTime Time { get; set; }
+    public string Currency { get; set; }
+    public string Description { get; set; }
+    public string Factual { get; set; }
+    public string Prognosis { get; set; }
+    public string Previous { get; set; }
+    public string Node { get; set; }
+  }
+
 }

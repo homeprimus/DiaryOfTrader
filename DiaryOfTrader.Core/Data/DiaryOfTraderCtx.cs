@@ -49,13 +49,17 @@ namespace DiaryOfTrader.Core.Data
        * Вначале введем команду
        * Add-Migration InitialCreate
        * Название миграции произвольное. В данном случае это InitialCreate. Нажмем на Enter для создания миграции.
+       *
+       * Remove-migration
        */
+
       Database.Migrate();
       if (Frame != null && !Frame.Any())
       {
         var upData = new DataInitializer(this);
         upData.Update();
       }
+
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -169,7 +169,7 @@
         tDCAjrU6/AAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="bbEdit.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="bbtEdit.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAABh0RVh0VGl0
         bGUARWRpdGluZ01lcmdlQ2VsbHM7pSizawAAAkxJREFUOE+l0+1LU1EcB/ADWRRU/8dKbKx/Jed8SKLU
@@ -185,7 +185,7 @@
         nJwkp/7i9B/w8RMMwH8A+wlyQqxDtCEvoQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="bbEdit.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="bbtEdit.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAABh0RVh0VGl0
         bGUARWRpdGluZ01lcmdlQ2VsbHM7pSizawAABl5JREFUWEfFl2lTFFcUhklMjLhrkh8Rtxi1kphF4wcr
@@ -218,7 +218,7 @@
         MegGRI/kNHv+nxH9Q03oAF2Tlw15yEdeLkAvtfMqES8A+B8Bh78Bhv6n9h/mG10AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="bbRefresh.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="bbtRefresh.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACd0RVh0VGl0
         bGUAUmVmcmVzaFBpdm90VGFibGU7UmVmcmVzaDtVcGRhdGU7zi+BuQAAAt1JREFUOE+Nk3lIlEEYxj+v
@@ -237,7 +237,7 @@
         aUwte3MAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="bbRefresh.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="bbtRefresh.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACd0RVh0VGl0
         bGUAUmVmcmVzaFBpdm90VGFibGU7UmVmcmVzaDtVcGRhdGU7zi+BuQAABd1JREFUWEe9lg1UjXccxx/z

@@ -79,6 +79,91 @@ namespace DiaryOfTrader.Core.Migrations
                     b.UseTpcMappingStrategy();
                 });
 
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.Economic.EconomicEvent", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LocalRef")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SourceRef")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("EconomicEvent");
+
+                    b.UseTpcMappingStrategy();
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.Economic.EconomicSchedule", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<long?>("EventID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Factual")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HRef")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Importance")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Last")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Previous")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Prognosis")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("EventID");
+
+                    b.ToTable("EconomicSchedule");
+
+                    b.UseTpcMappingStrategy();
+                });
+
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReview", b =>
                 {
                     b.Property<long>("ID")
@@ -379,6 +464,15 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Navigation("Trend");
                 });
 
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.Economic.EconomicSchedule", b =>
+                {
+                    b.HasOne("DiaryOfTrader.Core.Entity.Economic.EconomicEvent", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventID");
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReview", b =>
                 {
                     b.HasOne("DiaryOfTrader.Core.Entity.Symbol", "Symbol")
@@ -400,7 +494,7 @@ namespace DiaryOfTrader.Core.Migrations
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderSession", b =>
                 {
                     b.HasOne("DiaryOfTrader.Core.Entity.TraderRegion", "Region")
-                        .WithMany()
+                        .WithMany("Sessions")
                         .HasForeignKey("RegionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -411,6 +505,11 @@ namespace DiaryOfTrader.Core.Migrations
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.Diary", b =>
                 {
                     b.Navigation("Screenshot");
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderRegion", b =>
+                {
+                    b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618
         }
