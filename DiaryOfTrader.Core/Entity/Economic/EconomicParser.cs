@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.Json.Nodes;
@@ -12,15 +13,46 @@ namespace DiaryOfTrader.Core.Entity.Economic
   public class EconomicParser
   {
     private DiaryOfTraderCtx contex;
-    public EconomicParser(DiaryOfTraderCtx contex)
+    private CancellationToken cancellationToken;
+    public EconomicParser(DiaryOfTraderCtx contex, CancellationToken cancellationToken)
     {
       this.contex = contex;
+      this.cancellationToken = cancellationToken;
       EndPoint = "https://" + Resources.EconomicEndPointPrefix + "investing.com";
       CalendarFilteredData = "/economic-calendar/Service/getCalendarFilteredData";
     }
 
     public string EndPoint { get; set; }
     public string CalendarFilteredData { get; set; }
+
+
+    public static void GetPeriodToDate(EconomicPeriod period, out DateTime startDate, out DateTime endDate)
+    {
+      startDate = DateTime.Today.Date;
+      endDate = startDate;
+
+      switch (period)
+      {
+        case EconomicPeriod.yesterday:
+          startDate = DateTime.Today.Date.AddDays(-1);
+          endDate = startDate;
+          break;
+        case EconomicPeriod.today:
+          break;
+        case EconomicPeriod.nextWeek:
+          startDate = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday + 7);
+          endDate = startDate.AddDays(6);
+          break;
+        case EconomicPeriod.thisWeek:
+          startDate = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+          endDate = startDate.AddDays(6);
+          break;
+        case EconomicPeriod.tomorrow:
+          startDate = startDate.AddDays(1);
+          endDate = startDate;
+          break;
+      }
+    }
 
     private void SetDefaultRequest(HttpWebRequest req)
     {
@@ -53,6 +85,23 @@ namespace DiaryOfTrader.Core.Entity.Economic
         }
       }
 
+      if (string.IsNullOrEmpty(schedule.HRef))
+      {
+        var result = new EconomicEvent
+        {
+          LocalRef = schedule.HRef,
+          Description = Resources.NotPlannedEvents,
+          Country = string.Empty,
+          Currency = string.Empty,
+          SourceRef = string.Empty
+        };
+
+        schedule.Event = result;
+        await contex.EconomicEvent.AddAsync(result, cancellationToken);
+
+        return;
+      }
+
       var req = WebRequest.Create(EndPoint + schedule.HRef) as HttpWebRequest;
       SetDefaultRequest(req);
       req.Method = "GET";
@@ -70,6 +119,9 @@ namespace DiaryOfTrader.Core.Entity.Economic
       req.Headers.Add("Sec-Fetch-Site", "same-origin");
       req.Headers.Add("Sec-Fetch-User", "?1");
       req.Headers.Add("Upgrade-Insecure-Requests", "1");
+
+      if(cancellationToken.IsCancellationRequested)
+        return;
 
       try
       {
@@ -97,13 +149,14 @@ namespace DiaryOfTrader.Core.Entity.Economic
               Currency = GetValue(@"<span>" + Resources.EconomicCurency + @"<\/span>\n?<span>(?<value>.*?)<\/span>", s),
               SourceRef = GetValue(@"<span>" + Resources.EconomicSource + @"<\/span>\n?<span><a href=""(?<value>.*?)""", s)
             };
+
             if (string.IsNullOrEmpty(result.Description))
             {
               result.Description = schedule.Description;
             }
 
             schedule.Event = result;
-            await contex.EconomicEvent.AddAsync(result);
+            await contex.EconomicEvent.AddAsync(result, cancellationToken);
 
           }
         }
@@ -116,22 +169,21 @@ namespace DiaryOfTrader.Core.Entity.Economic
 
     public async Task<bool> UpdateThisWeekAsync()
     {
-      var startDate = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
-      var endDate = startDate.AddDays(6);
+      GetPeriodToDate(EconomicPeriod.thisWeek, out DateTime startDate, out DateTime endDate);
       try
       {
         var exists = contex.EconomicSchedule
-          .Any(e => e.Time.Date >= startDate && e.Time.Date <= endDate);
+          .Any(e => e.Time.Date >= startDate && e.Time.Date <= endDate && e.Importance == (int)Importance.High);
+
         if (!exists)
         {
           var calendar = await ParseAsync(true, EconomicPeriod.thisWeek, Importance.High);
-          await EventsAsync(calendar, true);
         }
+
       }
       catch (Exception e)
       {
-        Console.WriteLine(e);
-        throw;
+        Debug.WriteLine(e);
       }
 
       return true;
@@ -139,44 +191,36 @@ namespace DiaryOfTrader.Core.Entity.Economic
     public async Task EventsAsync(List<EconomicSchedule> schedule, bool reload = false)
     {
       var tasks = new Task[schedule.Count];
-      for (var i = 0; i < schedule.Count; i++)
+      var i = 0;
+      while(i < schedule.Count && !cancellationToken.IsCancellationRequested)
       {
         tasks[i] = EventInfoAsync(schedule[i], reload);
+        i++;
       }
-      await Task.WhenAll(tasks);
-      await contex.SaveChangesAsync();
+
+      if (!cancellationToken.IsCancellationRequested)
+      {
+        await Task.WhenAll(tasks);
+      }
+
+      await contex.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<List<EconomicSchedule>> ParseAsync(bool reload = false, EconomicPeriod period = EconomicPeriod.thisWeek, Importance importance = Importance.None)
     {
-      var startDate = DateTime.Today.Date;
-      var endDate = startDate;
-
-      switch (period)
-      {
-        case EconomicPeriod.today:
-          break;
-        case EconomicPeriod.nextWeek:
-          startDate = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday + 7);
-          endDate = startDate.AddDays(6);
-          break;
-        case EconomicPeriod.thisWeek:
-          startDate = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
-          endDate = startDate.AddDays(6);
-          break;
-        case EconomicPeriod.tomorrow:
-          startDate = startDate.AddDays(1);
-          endDate = startDate;
-          break;
-      }
-
+      GetPeriodToDate(period, out DateTime startDate, out DateTime endDate);
+      var noResultFlag = false;
       var orig = contex.EconomicSchedule
-        .Where(e => e.Time.Date >= startDate && e.Time.Date <= endDate && (importance == Importance.None || e.Importance == (int)importance))
+        .Where(e => 
+          e.Time.Date >= startDate && 
+          e.Time.Date <= endDate && 
+          (importance == Importance.None || e.Importance == (int)importance)
+          )
         .Include(e => e.Event).ToList();
-      if (!reload)
-      {
 
-        if (orig.Count > 0)
+      
+      if (!reload && orig.Count > 0 && ((importance != Importance.None) || (orig.GroupBy(e => e.Importance).Count() == 3)))
+      {
           return orig;
       }
 
@@ -222,129 +266,152 @@ namespace DiaryOfTrader.Core.Entity.Economic
       req.Headers.Add("Sec-Fetch-User", "?1");
       req.Headers.Add("Sec-Fetch-Site", "same-origin");
 
+      if (cancellationToken.IsCancellationRequested)
+        return result;
+
       try
       {
         var resp = req.GetResponse();
         var stream = resp.GetResponseStream();
         var jsonData = new StreamReader(stream).ReadToEnd();
-        var parse = JsonObject.Parse(jsonData);
+        var parse = JsonNode.Parse(jsonData);
 
-        var html = (string)parse["data"];
-        if (html != null)
+        if (parse == null)
+          return result;
+
+        var html = (string)parse["data"]!;
+
+        var tr = new Regex(@"<tr(?<class>.*?)>(?<value>.*?)<\/tr>");
+        var td = new Regex(@"<td(?<class>.*?)>(?<value>.*?)<\/td>");
+        var theDay = new Regex("id=\"theDay(?<value>[0-9]*)\"");
+        var bull = new Regex("data-img_key=\"bull(?<value>[0-9])\"");
+        var evReg = new Regex("<a href=\"(?<href>[^\"]*)\".*?>(?<value>.*?)<\\/a>");
+        var prevReg = new Regex("<span title=\".*?\">(?<value>.*?)<\\/span>");
+        var noResult = new Regex(@"class=""noResults center"">(?<value>.*?)<\/td>");
+
+        var current = startDate.Date;
+
+        var trMatch = tr.Match(html);
+
+        while (trMatch.Success && !cancellationToken.IsCancellationRequested)
         {
-          var tr = new Regex(@"<tr(?<class>.*?)>(?<value>.*?)<\/tr>");
-          var td = new Regex(@"<td(?<class>.*?)>(?<value>.*?)<\/td>");
-          var theDay = new Regex("id=\"theDay(?<value>[0-9]*)\"");
-          var bull = new Regex("data-img_key=\"bull(?<value>[0-9])\"");
-          var evReg = new Regex("<a href=\"(?<href>[^\"]*)\".*?>(?<value>.*?)<\\/a>");
-          var prevReg = new Regex("<span title=\".*?\">(?<value>.*?)<\\/span>");
+          var trClass = trMatch.Result("${class}").Trim();
+          var trValue = trMatch.Result("${value}").Trim();
 
-          var current = DateTime.Now;
-          var trMatch = tr.Match(html);
-
-          while (trMatch.Success)
+          if (!trValue.Contains(Resources.EconomicWeekEnd + "</span>"))
           {
-            var trClass = trMatch.Result("${class}").Trim();
-            var trValue = trMatch.Result("${value}").Trim();
 
-            if (!trValue.Contains(Resources.EconomicWeekEnd +  "</span>"))
+            if (trValue.Contains("class=\"theDay\""))
             {
-              if (trValue.Contains("class=\"theDay\""))
+              // day of year
+              var dayMatch = theDay.Match(trValue);
+              if (dayMatch.Success)
               {
-                // day of year
-                var dayMatch = theDay.Match(trValue);
-                if (dayMatch.Success)
-                {
-                  var unixTimeSeconds = long.Parse(dayMatch.Result("${value}"));
-                  current = DateTimeOffset.FromUnixTimeSeconds(unixTimeSeconds).Date;
-                }
-              }
-              else
-              {
-                var tdMatch = td.Match(trValue);
-                var ev = new EconomicSchedule();
-                var col = 0;
-                while (tdMatch.Success)
-                {
-                  var tdClass = tdMatch.Result("${class}").Trim();
-                  var tdValue = tdMatch.Result("${value}").Trim();
-                  try
-                  {
-                    switch (col)
-                    {
-                      case 0: // Time
-                        if (!DateTime.TryParse(tdValue, out DateTime time))
-                        {
-                          time = current;
-                        }
-
-                        ev.Time = new DateTime(current.Year, current.Month, current.Day, time.Hour, time.Minute, 0);
-                        break;
-                      case 1: // Currency
-                        //<span title="Великобритания" class="ceFlags United_Kingdom" data-img_key="United_Kingdom">&nbsp;</span> GBP
-                        ev.Currency = tdValue.Substring(tdValue.LastIndexOf(">") + 1).Trim();
-                        ;
-                        break;
-                      case 2: // Importance
-                        // class="left textNum sentiment noWrap" title="Ожид. высокая волатильность" data-img_key="bull3"
-                        var bullMatch = bull.Match(tdClass);
-                        if (bullMatch.Success)
-                        {
-                          ev.Importance = int.Parse(bullMatch.Result("${value}").Trim());
-                        }
-
-                        break;
-                      case 3: // Event
-                        //<a href="/economic-calendar/german-manufacturing-pmi-136" target="_blank">  Индекс деловой активности в производственном секторе (PMI) Германии  (июль)</a>      &nbsp;<span class="smallGrayP" title="Предварительные данные" data-img_key="perliminary"></span>
-                        var evMatch = evReg.Match(tdValue);
-                        if (evMatch.Success)
-                        {
-                          ev.HRef = evMatch.Result("${href}").Trim();
-                          ev.Description = evMatch.Result("${value}").Trim();
-                        }
-
-                        break;
-                      case 4: // Fact
-                        // class="bold act redFont event-478063-actual" title="Хуже ожидаемого" id="eventActual_478063"
-                        ev.Factual = tdValue.Replace("&nbsp;", string.Empty);
-                        break;
-                      case 5: // Prognosis
-                        ev.Prognosis = tdValue.Replace("&nbsp;", string.Empty);
-                        break;
-                      case 6: // Previous
-                        // class="prev blackFont  event-478063-previous" id="eventPrevious_478063"
-                        //<span title="">40,6</span>
-                        var prevMatch = prevReg.Match(tdValue);
-                        if (prevMatch.Success)
-                        {
-                          ev.Previous = prevMatch.Result("${value}").Trim().Replace("&nbsp;", string.Empty);
-                        }
-                        break;
-                      case 7: // Last
-                        // class="alert js-injected-user-alert-container "  data-name ="Индекс деловой активности в производственном секторе (PMI) Германии" data-event-id="136" data-status-enabled="0"
-                        //<span class="js-plus-icon alertBellGrayPlus genToolTip oneliner" data-tooltip="Создать уведомление" data-tooltip-alt="Уведомление активно" data-reg_ep="add alert"></span>    
-                        ev.Last = string.Empty;// tdValue;
-                        break;
-                    }
-                  }
-                  catch (Exception e)
-                  {
-                    Debug.WriteLine($"tdValue = \"{tdValue}\"; tdClass = \"{tdClass}\"; " + e.ToString());
-                  }
-
-                  col++;
-                  tdMatch = tdMatch.NextMatch();
-                }
-
-                if (!string.IsNullOrEmpty(ev.Description))
-                {
-                  result.Add(ev);
-                }
+                var unixTimeSeconds = long.Parse(dayMatch.Result("${value}"));
+                current = DateTimeOffset.FromUnixTimeSeconds(unixTimeSeconds).Date;
               }
             }
+            else if (trValue.Contains("class=\"noResults center\""))
+            {
+              noResultFlag = true;
+              var noResultMath = noResult.Match(trValue);
 
-            trMatch = trMatch.NextMatch();
+              if (noResultMath.Success)
+              {
+                var ev = new EconomicSchedule
+                {
+                  Time = startDate, 
+                  Description = noResultMath.Result("${value}") 
+                };
+                result.Add(ev);
+              }
+            }
+            else
+            {
+              var tdMatch = td.Match(trValue);
+              var ev = new EconomicSchedule();
+              var col = 0;
+              while (tdMatch.Success)
+              {
+                var tdClass = tdMatch.Result("${class}").Trim();
+                var tdValue = tdMatch.Result("${value}").Trim();
+                try
+                {
+                  switch (col)
+                  {
+                    case 0: // Time
+                      if (!DateTime.TryParse(tdValue, out DateTime time))
+                      {
+                        time = current;
+                      }
+
+                      ev.Time = new DateTime(current.Year, current.Month, current.Day, time.Hour, time.Minute, 0);
+                      break;
+                    case 1: // Currency
+                      //<span title="Великобритания" class="ceFlags United_Kingdom" data-img_key="United_Kingdom">&nbsp;</span> GBP
+                      ev.Currency = tdValue.Substring(tdValue.LastIndexOf(">") + 1).Trim();
+                      ;
+                      break;
+                    case 2: // Importance
+                      // class="left textNum sentiment noWrap" title="Ожид. высокая волатильность" data-img_key="bull3"
+                      var bullMatch = bull.Match(tdClass);
+                      if (bullMatch.Success)
+                      {
+                        ev.Importance = int.Parse(bullMatch.Result("${value}").Trim());
+                      }
+
+                      break;
+                    case 3: // Event
+                      //<a href="/economic-calendar/german-manufacturing-pmi-136" target="_blank">  Индекс деловой активности в производственном секторе (PMI) Германии  (июль)</a>      &nbsp;<span class="smallGrayP" title="Предварительные данные" data-img_key="perliminary"></span>
+                      var evMatch = evReg.Match(tdValue);
+                      if (evMatch.Success)
+                      {
+                        ev.HRef = evMatch.Result("${href}").Trim();
+                        ev.Description = evMatch.Result("${value}").Trim();
+                      }
+
+                      break;
+                    case 4: // Fact
+                      // class="bold act redFont event-478063-actual" title="Хуже ожидаемого" id="eventActual_478063"
+                      ev.Factual = tdValue.Replace("&nbsp;", string.Empty);
+                      break;
+                    case 5: // Prognosis
+                      ev.Prognosis = tdValue.Replace("&nbsp;", string.Empty);
+                      break;
+                    case 6: // Previous
+                      // class="prev blackFont  event-478063-previous" id="eventPrevious_478063"
+                      //<span title="">40,6</span>
+                      var prevMatch = prevReg.Match(tdValue);
+                      if (prevMatch.Success)
+                      {
+                        ev.Previous = prevMatch.Result("${value}").Trim().Replace("&nbsp;", string.Empty);
+                      }
+
+                      break;
+                    case 7: // Last
+                      // class="alert js-injected-user-alert-container "  data-name ="Индекс деловой активности в производственном секторе (PMI) Германии" data-event-id="136" data-status-enabled="0"
+                      //<span class="js-plus-icon alertBellGrayPlus genToolTip oneliner" data-tooltip="Создать уведомление" data-tooltip-alt="Уведомление активно" data-reg_ep="add alert"></span>    
+                      ev.Last = string.Empty; // tdValue;
+                      break;
+                  }
+                }
+                catch (Exception e)
+                {
+                  Debug.WriteLine($"tdValue = \"{tdValue}\"; tdClass = \"{tdClass}\"; " + e.ToString());
+                }
+
+                col++;
+                tdMatch = tdMatch.NextMatch();
+              }
+
+              if (!string.IsNullOrEmpty(ev.Description))
+              {
+                result.Add(ev);
+              }
+            }
           }
+
+          trMatch = trMatch.NextMatch();
         }
       }
       catch (Exception e)
@@ -352,9 +419,17 @@ namespace DiaryOfTrader.Core.Entity.Economic
         Debug.WriteLine(e.ToString());
       }
 
-      orig.Where(e => !result.Contains(e)).ToList().ForEach(e => contex.EconomicSchedule.Remove(e));
-      result.Where(e => !orig.Contains(e)).ToList().ForEach(e => contex.EconomicSchedule.Add(e));
-      await contex.SaveChangesAsync();
+      if (!noResultFlag)
+      {
+        if (!cancellationToken.IsCancellationRequested)
+        {
+          orig.Where(e => !result.Contains(e)).ToList().ForEach(e => contex.EconomicSchedule.Remove(e));
+          result.Where(e => !orig.Contains(e)).ToList().ForEach(e => contex.EconomicSchedule.Add(e));
+        }
+
+        await contex.SaveChangesAsync(cancellationToken);
+        await EventsAsync(result, reload);
+      }
 
       return result;
     }

@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel;
-using DevExpress.Mvvm.Native;
-using DevExpress.Pdf.Native.BouncyCastle.Utilities;
 using DevExpress.XtraBars;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Entity;
@@ -15,12 +13,14 @@ namespace DiaryOfTrader
 {
   public partial class RibbonMain : DevExpress.XtraBars.Ribbon.RibbonForm
   {
-    readonly DiaryOfTraderCtx ctx = new DiaryOfTraderCtx();
+    private readonly CancellationTokenSource cancelTokenSource = new ();
+    private readonly DiaryOfTraderCtx contexDb = new ();
+
     private Task? updateThisWeekAsync;
     public RibbonMain()
     {
       InitializeComponent();
-      var eco = new EconomicParser(ctx);
+      var eco = new EconomicParser(contexDb, cancelTokenSource.Token);
       updateThisWeekAsync = eco.UpdateThisWeekAsync();
     }
 
@@ -32,53 +32,53 @@ namespace DiaryOfTrader
       var result = dlg.ShowDialog() == DialogResult.OK;
       if (result)
       {
-        Entity.DoEndEdit(ctx, data, orig, list);
+        Entity.DoEndEdit(contexDb, data, orig, list);
       }
       else
       {
-        Entity.DoCancelEdit(ctx);
+        Entity.DoCancelEdit(contexDb);
       }
       return result;
     }
 
     private void bbtExchamge_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new ExchangeDlg(), ctx.Exchange);
+      EditDbSet(new ExchangeDlg(), contexDb.Exchange);
     }
 
     private void bbtSymbol_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new SymbolDlg(), ctx.Symbol);
+      EditDbSet(new SymbolDlg(), contexDb.Symbol);
     }
 
     private void bbtSession_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Entity.DoBeginEdit<TraderSession>(ctx.Session, out BindingList<TraderSession> orig, out List<TraderSession> list);
+      Entity.DoBeginEdit<TraderSession>(contexDb.Session, out BindingList<TraderSession> orig, out List<TraderSession> list);
 
-      if (EditDbSet(new TradeSessionDlg(), ctx.Region))
+      if (EditDbSet(new TradeSessionDlg(), contexDb.Region))
       {
-        Entity.DoEndEdit<TraderSession>(ctx, ctx.Session, orig, list);
+        Entity.DoEndEdit<TraderSession>(contexDb, contexDb.Session, orig, list);
       }
     }
 
     private void bbtTimeFrame_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new TimeFrameDlg(), ctx.Frame);
+      EditDbSet(new TimeFrameDlg(), contexDb.Frame);
     }
 
     private void bbtResult_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new ResultDlg(), ctx.Result);
+      EditDbSet(new ResultDlg(), contexDb.Result);
     }
 
     private void bbtTrend_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new TrendDlg(), ctx.Trend);
+      EditDbSet(new TrendDlg(), contexDb.Trend);
     }
 
     private void bbtWallet_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new WalletDlg(), ctx.Wallet);
+      EditDbSet(new WalletDlg(), contexDb.Wallet);
     }
 
     private void bbtCalendar_ItemClick(object sender, ItemClickEventArgs e)
@@ -90,19 +90,10 @@ namespace DiaryOfTrader
       }
 
       var calendar = new CalendarDlg();
+      calendar.Text = e.Item.Caption;
+      calendar.Contex = contexDb;
       calendar.ShowDialog();
     }
-  }
-
-  public class BindingCalendar
-  {
-    public DateTime Time { get; set; }
-    public string Currency { get; set; }
-    public string Description { get; set; }
-    public string Factual { get; set; }
-    public string Prognosis { get; set; }
-    public string Previous { get; set; }
-    public string Node { get; set; }
   }
 
 }

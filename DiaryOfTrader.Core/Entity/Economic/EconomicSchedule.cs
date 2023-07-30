@@ -1,4 +1,6 @@
-﻿namespace DiaryOfTrader.Core.Entity.Economic
+﻿using System.Collections.Generic;
+
+namespace DiaryOfTrader.Core.Entity.Economic
 {
   public enum Importance
   {
@@ -10,32 +12,45 @@
 
   public enum EconomicPeriod
   {
-    today,
-    tomorrow,
-    thisWeek,
-    nextWeek,
+    yesterday = 0,
+    today = 1,
+    tomorrow = 2,
+    thisWeek = 3,
+    nextWeek = 4,
   }
 
   public class EconomicSchedule: IComparable
   {
-    private string[] importance = new[] { "", "Низкая", "Умеренная", "Выссокая" };
+    private static List<KeyValuePair<Importance, string>> importances =
+      new List<KeyValuePair<Importance, string>>(
+      new []{
+        new KeyValuePair<Importance, string>(Economic.Importance.None, "Все уровни"),
+        new KeyValuePair<Importance, string>(Economic.Importance.Low, "Низкая"),
+        new KeyValuePair<Importance, string>(Economic.Importance.Moderate, "Умеренная"),
+        new KeyValuePair<Importance, string>(Economic.Importance.High, "Выссокая")
+      });
 
     public long ID { get; set; }
     public DateTime Time { get; set; }
-    public string Currency { get; set; }
+    public string Currency { get; set; } = string.Empty;
     public int Importance { get; set; }
-    public string Description { get; set; }
-    public string Factual { get; set; }
-    public string Prognosis { get; set; }
-    public string Previous { get; set; }
-    public string Last { get; set; }
-    public string HRef { get; set; }
+    public string Description { get; set; } = string.Empty;
+    public string Factual { get; set; } = string.Empty;
+    public string Prognosis { get; set; } = string.Empty;
+    public string Previous { get; set; } = string.Empty;
+    public string Last { get; set; } = string.Empty;
+    public string HRef { get; set; } = string.Empty;
     public EconomicEvent? Event { get; set; }
 
+    public static List<KeyValuePair<Importance, string>> Importances
+    {
+      get { return importances; }
+    }
     public override string ToString()
     {
+      
       return
-        Time.ToString("yyyy.MM.dd HH:mm") + " [" + importance[Importance] + "] " + Currency + " \"" + Description +
+        Time.ToString("yyyy.MM.dd HH:mm") + " [" + importances[Importance].Value + "] " + Currency + " \"" + Description +
         "\"";
     }
 

@@ -36,20 +36,37 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       var resources = new System.ComponentModel.ComponentResourceManager(typeof(CalendarDlg));
       bmCalendar = new DevExpress.XtraBars.BarManager(components);
       bar2 = new DevExpress.XtraBars.Bar();
+      beiEconomicPeriod = new DevExpress.XtraBars.BarEditItem();
+      rgEconomicPeriod = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
+      beiEconomicImportance = new DevExpress.XtraBars.BarEditItem();
+      cbEconomicImportance = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+      bbiRefresh = new DevExpress.XtraBars.BarButtonItem();
       barDockControlTop = new DevExpress.XtraBars.BarDockControl();
       barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
       barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
       barDockControlRight = new DevExpress.XtraBars.BarDockControl();
       bar1 = new DevExpress.XtraBars.Bar();
-      beiEconomicPeriod = new DevExpress.XtraBars.BarEditItem();
-      rgEconomicPeriod = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
-      beiEconomicImportance = new DevExpress.XtraBars.BarEditItem();
-      cbEconomicImportance = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+      grid = new DevExpress.XtraGrid.GridControl();
+      gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+      clDate = new DevExpress.XtraGrid.Columns.GridColumn();
+      clTime = new DevExpress.XtraGrid.Columns.GridColumn();
+      clCurrency = new DevExpress.XtraGrid.Columns.GridColumn();
+      clImportance = new DevExpress.XtraGrid.Columns.GridColumn();
+      clDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+      repositoryItemMemoEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+      clFactual = new DevExpress.XtraGrid.Columns.GridColumn();
+      clPrognosis = new DevExpress.XtraGrid.Columns.GridColumn();
+      repositoryItemMemoExEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
+      pnlClient.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)bmCalendar).BeginInit();
       ((System.ComponentModel.ISupportInitialize)rgEconomicPeriod).BeginInit();
       ((System.ComponentModel.ISupportInitialize)cbEconomicImportance).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)gridView).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoExEdit).BeginInit();
       SuspendLayout();
       // 
       // pnlDown
@@ -63,6 +80,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       // 
       pnlClient.Appearance.BackColor = Color.Transparent;
       pnlClient.Appearance.Options.UseBackColor = true;
+      pnlClient.Controls.Add(grid);
       pnlClient.Location = new Point(0, 28);
       pnlClient.Size = new Size(809, 337);
       // 
@@ -85,9 +103,9 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       bmCalendar.DockControls.Add(barDockControlLeft);
       bmCalendar.DockControls.Add(barDockControlRight);
       bmCalendar.Form = this;
-      bmCalendar.Items.AddRange(new DevExpress.XtraBars.BarItem[] { beiEconomicPeriod, beiEconomicImportance });
+      bmCalendar.Items.AddRange(new DevExpress.XtraBars.BarItem[] { beiEconomicPeriod, beiEconomicImportance, bbiRefresh });
       bmCalendar.MainMenu = bar2;
-      bmCalendar.MaxItemId = 5;
+      bmCalendar.MaxItemId = 6;
       bmCalendar.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { rgEconomicPeriod, cbEconomicImportance });
       // 
       // bar2
@@ -96,10 +114,49 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       bar2.DockCol = 0;
       bar2.DockRow = 0;
       bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-      bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, beiEconomicPeriod, "", false, true, true, 418), new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, beiEconomicImportance, "", false, true, true, 213) });
+      bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, beiEconomicPeriod, "", false, true, true, 418), new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, beiEconomicImportance, "", false, true, true, 157), new DevExpress.XtraBars.LinkPersistInfo(bbiRefresh) });
       bar2.OptionsBar.MultiLine = true;
       bar2.OptionsBar.UseWholeRow = true;
       bar2.Text = "Main menu";
+      // 
+      // beiEconomicPeriod
+      // 
+      beiEconomicPeriod.Edit = rgEconomicPeriod;
+      beiEconomicPeriod.Id = 3;
+      beiEconomicPeriod.Name = "beiEconomicPeriod";
+      // 
+      // rgEconomicPeriod
+      // 
+      rgEconomicPeriod.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Вчера", true, (short)0), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Сегодня", true, (short)1), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Завтра", true, (short)2), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "На неделю", true, (short)3), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Следующая неделя", true, (short)4) });
+      rgEconomicPeriod.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
+      rgEconomicPeriod.Name = "rgEconomicPeriod";
+      // 
+      // beiEconomicImportance
+      // 
+      beiEconomicImportance.Caption = "Волатильность";
+      beiEconomicImportance.CaptionToEditorIndent = 3;
+      beiEconomicImportance.Description = "Волатильность";
+      beiEconomicImportance.Edit = cbEconomicImportance;
+      beiEconomicImportance.Id = 4;
+      beiEconomicImportance.Name = "beiEconomicImportance";
+      beiEconomicImportance.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.Caption;
+      // 
+      // cbEconomicImportance
+      // 
+      cbEconomicImportance.AutoHeight = false;
+      cbEconomicImportance.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+      cbEconomicImportance.Items.AddRange(new object[] { "Все уровни", "Низкая", "Умеренная", "Высокая" });
+      cbEconomicImportance.Name = "cbEconomicImportance";
+      cbEconomicImportance.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+      // 
+      // bbiRefresh
+      // 
+      bbiRefresh.Caption = "Обновить";
+      bbiRefresh.Id = 5;
+      bbiRefresh.ImageOptions.Image = (Image)resources.GetObject("bbiRefresh.ImageOptions.Image");
+      bbiRefresh.ImageOptions.LargeImage = (Image)resources.GetObject("bbiRefresh.ImageOptions.LargeImage");
+      bbiRefresh.Name = "bbiRefresh";
+      bbiRefresh.ItemClick += bbiRefresh_ItemClick;
       // 
       // barDockControlTop
       // 
@@ -141,34 +198,135 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
       bar1.Text = "Custom 3";
       // 
-      // beiEconomicPeriod
+      // grid
       // 
-      beiEconomicPeriod.Edit = rgEconomicPeriod;
-      beiEconomicPeriod.Id = 3;
-      beiEconomicPeriod.Name = "beiEconomicPeriod";
+      grid.Dock = DockStyle.Fill;
+      grid.Location = new Point(0, 0);
+      grid.MainView = gridView;
+      grid.Name = "grid";
+      grid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit, repositoryItemMemoExEdit });
+      grid.Size = new Size(809, 337);
+      grid.TabIndex = 7;
+      grid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
       // 
-      // rgEconomicPeriod
+      // gridView
       // 
-      rgEconomicPeriod.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Вчера"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Сегодня"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Завтра"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "На неделю"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Следующая неделя") });
-      rgEconomicPeriod.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
-      rgEconomicPeriod.Name = "rgEconomicPeriod";
+      gridView.Appearance.GroupPanel.Options.UseTextOptions = true;
+      gridView.Appearance.GroupPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { clDate, clTime, clCurrency, clImportance, clDescription, clFactual, clPrognosis });
+      gridView.GridControl = grid;
+      gridView.GroupFormat = "[#image]{1} {2}";
+      gridView.Name = "gridView";
+      gridView.OptionsBehavior.AllowIncrementalSearch = true;
+      gridView.OptionsBehavior.AutoExpandAllGroups = true;
+      gridView.OptionsBehavior.KeepGroupExpandedOnSorting = false;
+      gridView.OptionsCustomization.AllowColumnMoving = false;
+      gridView.OptionsCustomization.AllowQuickHideColumns = false;
+      gridView.OptionsView.RowAutoHeight = true;
+      gridView.OptionsView.ShowDetailButtons = false;
+      gridView.OptionsView.ShowGroupPanel = false;
       // 
-      // beiEconomicImportance
+      // clDate
       // 
-      beiEconomicImportance.Caption = "Волатильность";
-      beiEconomicImportance.CaptionToEditorIndent = 3;
-      beiEconomicImportance.Description = "Волатильность";
-      beiEconomicImportance.Edit = cbEconomicImportance;
-      beiEconomicImportance.Id = 4;
-      beiEconomicImportance.Name = "beiEconomicImportance";
-      beiEconomicImportance.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.Caption;
+      clDate.AppearanceHeader.Options.UseTextOptions = true;
+      clDate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clDate.Caption = "Дата";
+      clDate.DisplayFormat.FormatString = "dddd, dd MMMM yyyy";
+      clDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+      clDate.FieldName = "Date";
+      clDate.GroupFormat.FormatString = "dddd, dd MMMM yyyy";
+      clDate.GroupFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+      clDate.Name = "clDate";
+      clDate.OptionsColumn.AllowEdit = false;
+      clDate.Visible = true;
+      clDate.VisibleIndex = 0;
+      clDate.Width = 163;
       // 
-      // cbEconomicImportance
+      // clTime
       // 
-      cbEconomicImportance.AutoHeight = false;
-      cbEconomicImportance.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-      cbEconomicImportance.Items.AddRange(new object[] { "Все уровни", "Низкая", "Умеренная", "Высокая" });
-      cbEconomicImportance.Name = "cbEconomicImportance";
+      clTime.AppearanceHeader.Options.UseTextOptions = true;
+      clTime.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clTime.Caption = "Время";
+      clTime.FieldName = "Time";
+      clTime.Name = "clTime";
+      clTime.OptionsColumn.AllowEdit = false;
+      clTime.OptionsColumn.FixedWidth = true;
+      clTime.Visible = true;
+      clTime.VisibleIndex = 1;
+      clTime.Width = 50;
+      // 
+      // clCurrency
+      // 
+      clCurrency.AppearanceHeader.Options.UseTextOptions = true;
+      clCurrency.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clCurrency.Caption = "Валюта";
+      clCurrency.FieldName = "Currency";
+      clCurrency.Name = "clCurrency";
+      clCurrency.OptionsColumn.AllowEdit = false;
+      clCurrency.OptionsColumn.FixedWidth = true;
+      clCurrency.Visible = true;
+      clCurrency.VisibleIndex = 2;
+      clCurrency.Width = 50;
+      // 
+      // clImportance
+      // 
+      clImportance.AppearanceHeader.Options.UseTextOptions = true;
+      clImportance.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clImportance.Caption = "Важность";
+      clImportance.FieldName = "Importance";
+      clImportance.Name = "clImportance";
+      clImportance.OptionsColumn.AllowEdit = false;
+      clImportance.Visible = true;
+      clImportance.VisibleIndex = 3;
+      clImportance.Width = 100;
+      // 
+      // clDescription
+      // 
+      clDescription.AppearanceHeader.Options.UseTextOptions = true;
+      clDescription.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clDescription.Caption = "Событие";
+      clDescription.ColumnEdit = repositoryItemMemoEdit;
+      clDescription.FieldName = "Description";
+      clDescription.Name = "clDescription";
+      clDescription.OptionsColumn.AllowEdit = false;
+      clDescription.Visible = true;
+      clDescription.VisibleIndex = 4;
+      clDescription.Width = 281;
+      // 
+      // repositoryItemMemoEdit
+      // 
+      repositoryItemMemoEdit.Name = "repositoryItemMemoEdit";
+      // 
+      // clFactual
+      // 
+      clFactual.AppearanceHeader.Options.UseTextOptions = true;
+      clFactual.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clFactual.Caption = "Факт.";
+      clFactual.FieldName = "Factual";
+      clFactual.Name = "clFactual";
+      clFactual.OptionsColumn.AllowEdit = false;
+      clFactual.OptionsColumn.FixedWidth = true;
+      clFactual.Visible = true;
+      clFactual.VisibleIndex = 5;
+      clFactual.Width = 70;
+      // 
+      // clPrognosis
+      // 
+      clPrognosis.AppearanceHeader.Options.UseTextOptions = true;
+      clPrognosis.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clPrognosis.Caption = "Прогноз";
+      clPrognosis.FieldName = "Prognosis";
+      clPrognosis.Name = "clPrognosis";
+      clPrognosis.OptionsColumn.AllowEdit = false;
+      clPrognosis.OptionsColumn.FixedWidth = true;
+      clPrognosis.Visible = true;
+      clPrognosis.VisibleIndex = 6;
+      clPrognosis.Width = 70;
+      // 
+      // repositoryItemMemoExEdit
+      // 
+      repositoryItemMemoExEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+      repositoryItemMemoExEdit.Name = "repositoryItemMemoExEdit";
       // 
       // CalendarDlg
       // 
@@ -182,6 +340,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       IconOptions.Icon = (Icon)resources.GetObject("CalendarDlg.IconOptions.Icon");
       Name = "CalendarDlg";
       Text = "CalendarDlg";
+      Load += CalendarDlg_Load;
       Controls.SetChildIndex(barDockControlTop, 0);
       Controls.SetChildIndex(barDockControlBottom, 0);
       Controls.SetChildIndex(barDockControlRight, 0);
@@ -190,9 +349,14 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       Controls.SetChildIndex(pnlClient, 0);
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
+      pnlClient.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)bmCalendar).EndInit();
       ((System.ComponentModel.ISupportInitialize)rgEconomicPeriod).EndInit();
       ((System.ComponentModel.ISupportInitialize)cbEconomicImportance).EndInit();
+      ((System.ComponentModel.ISupportInitialize)grid).EndInit();
+      ((System.ComponentModel.ISupportInitialize)gridView).EndInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).EndInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoExEdit).EndInit();
       ResumeLayout(false);
       PerformLayout();
     }
@@ -211,5 +375,17 @@ namespace DiaryOfTrader.EditDialogs.Calendar
     private DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup rgEconomicPeriod;
     private DevExpress.XtraBars.BarEditItem beiEconomicImportance;
     private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbEconomicImportance;
+    public DevExpress.XtraGrid.Views.Grid.GridView gridView;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit repositoryItemMemoExEdit;
+    private DevExpress.XtraGrid.Columns.GridColumn clDate;
+    private DevExpress.XtraGrid.Columns.GridColumn clTime;
+    private DevExpress.XtraGrid.Columns.GridColumn clCurrency;
+    private DevExpress.XtraGrid.Columns.GridColumn clImportance;
+    private DevExpress.XtraGrid.Columns.GridColumn clDescription;
+    private DevExpress.XtraGrid.Columns.GridColumn clFactual;
+    private DevExpress.XtraGrid.Columns.GridColumn clPrognosis;
+    private DevExpress.XtraGrid.GridControl grid;
+    private DevExpress.XtraBars.BarButtonItem bbiRefresh;
   }
 }

@@ -256,6 +256,15 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Событий не запланировано.
+        /// </summary>
+        internal static string NotPlannedEvents {
+            get {
+                return ResourceManager.GetString("NotPlannedEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Сидней.
         /// </summary>
         internal static string Sydney {
