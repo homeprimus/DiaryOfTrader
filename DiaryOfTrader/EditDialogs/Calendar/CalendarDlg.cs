@@ -70,7 +70,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
 
     private void CalendarDlg_Load(object sender, EventArgs e)
     {
-      beiEconomicPeriod.EditValue = rgEconomicPeriod.Items[1];
+      beiEconomicPeriod.EditValue = (int)EconomicPeriod.today;
       beiEconomicImportance.EditValue = cbEconomicImportance.Items[^1];
 
       rgEconomicPeriod.SelectedIndexChanged += RgEconomicPeriod_SelectedIndexChanged;

@@ -114,7 +114,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       bar2.DockCol = 0;
       bar2.DockRow = 0;
       bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-      bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, beiEconomicPeriod, "", false, true, true, 418), new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, beiEconomicImportance, "", false, true, true, 157), new DevExpress.XtraBars.LinkPersistInfo(bbiRefresh) });
+      bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, beiEconomicPeriod, "", true, true, true, 418), new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, beiEconomicImportance, "", true, true, true, 157), new DevExpress.XtraBars.LinkPersistInfo(bbiRefresh, true) });
       bar2.OptionsBar.MultiLine = true;
       bar2.OptionsBar.UseWholeRow = true;
       bar2.Text = "Main menu";
@@ -127,7 +127,14 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       // 
       // rgEconomicPeriod
       // 
-      rgEconomicPeriod.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Вчера", true, (short)0), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Сегодня", true, (short)1), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Завтра", true, (short)2), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "На неделю", true, (short)3), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Следующая неделя", true, (short)4) });
+      rgEconomicPeriod.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[]
+      {
+        new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "Вчера", true, (short)0), 
+        new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "Сегодня", true, (short)1), 
+        new DevExpress.XtraEditors.Controls.RadioGroupItem(2, "Завтра", true, (short)2), 
+        new DevExpress.XtraEditors.Controls.RadioGroupItem(3, "На неделю", true, (short)3),
+        new DevExpress.XtraEditors.Controls.RadioGroupItem(4, "Следующая неделя", true, (short)4)
+      });
       rgEconomicPeriod.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
       rgEconomicPeriod.Name = "rgEconomicPeriod";
       // 
