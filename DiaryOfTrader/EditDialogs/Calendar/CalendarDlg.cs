@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel;
 using DevExpress.XtraEditors;
+using DiaryOfTrader.Core;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Entity.Economic;
 
@@ -10,7 +11,9 @@ namespace DiaryOfTrader.EditDialogs.Calendar
   {
     private EconomicPeriod period = EconomicPeriod.today;
     private Importance importance = Importance.High;
-    private readonly CancellationTokenSource cancelTokenSource = new();
+    private CancellationTokenSource cancelTokenSource = new();
+
+    private Task updateTask;
     //private readonly DiaryOfTraderCtx contexDb = new();
 
     private Task? updateThisWeekAsync;
@@ -36,11 +39,17 @@ namespace DiaryOfTrader.EditDialogs.Calendar
     [DefaultValue(null)]
     public DiaryOfTraderCtx? Contex { get; set; }
 
-
-    private async Task Update(bool refresh = false)
+    private void Update(bool refresh = false)
     {
-      var parser = new EconomicParser(Contex, cancelTokenSource.Token);
-      var result = await parser.ParseAsync(refresh, period, importance);
+      ScreenCursor.WaitCursor();
+      splashScreenManager.ShowWaitForm();
+      Task.Run(() => DoUpdate(refresh));
+    }
+
+    private void DoUpdate(bool refresh = false)
+    {
+      var parser = new EconomicParser(Contex!, cancelTokenSource.Token);
+      var result = parser.ParseAsync(refresh, period, importance).Result;
 
       var data = result
         .Join(
@@ -62,10 +71,24 @@ namespace DiaryOfTrader.EditDialogs.Calendar
             }
         ).ToList();
 
-      clImportance.VisibleIndex = 2;
-      clImportance.Visible = importance == Importance.None;
+      if (InvokeRequired)
+      {
+        Invoke(
+          new MethodInvoker
+          (
+            delegate
+            {
+              clImportance.VisibleIndex = 2;
+              clImportance.Visible = importance == Importance.None;
 
-      grid.DataSource = new BindingList<BindingCalendar>(data);
+              grid.DataSource = new BindingList<BindingCalendar>(data);
+
+              splashScreenManager.CloseWaitForm();
+              ScreenCursor.Unset();
+            }
+          )
+        );
+      }
     }
 
     private void CalendarDlg_Load(object sender, EventArgs e)
@@ -79,7 +102,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       Update(false);
     }
 
-    private void bbiRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+    private async void bbiRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
       Update(true);
     }

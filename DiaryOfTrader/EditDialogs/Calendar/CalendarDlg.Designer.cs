@@ -57,6 +57,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       clFactual = new DevExpress.XtraGrid.Columns.GridColumn();
       clPrognosis = new DevExpress.XtraGrid.Columns.GridColumn();
       repositoryItemMemoExEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
+      splashScreenManager = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(ProgressIndicator), true, true);
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
       pnlClient.SuspendLayout();
@@ -127,14 +128,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       // 
       // rgEconomicPeriod
       // 
-      rgEconomicPeriod.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[]
-      {
-        new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "Вчера", true, (short)0), 
-        new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "Сегодня", true, (short)1), 
-        new DevExpress.XtraEditors.Controls.RadioGroupItem(2, "Завтра", true, (short)2), 
-        new DevExpress.XtraEditors.Controls.RadioGroupItem(3, "На неделю", true, (short)3),
-        new DevExpress.XtraEditors.Controls.RadioGroupItem(4, "Следующая неделя", true, (short)4)
-      });
+      rgEconomicPeriod.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "Вчера", true, (short)0), new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "Сегодня", true, (short)1), new DevExpress.XtraEditors.Controls.RadioGroupItem(2, "Завтра", true, (short)2), new DevExpress.XtraEditors.Controls.RadioGroupItem(3, "На неделю", true, (short)3), new DevExpress.XtraEditors.Controls.RadioGroupItem(4, "Следующая неделя", true, (short)4) });
       rgEconomicPeriod.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
       rgEconomicPeriod.Name = "rgEconomicPeriod";
       // 
@@ -335,6 +329,10 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       repositoryItemMemoExEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
       repositoryItemMemoExEdit.Name = "repositoryItemMemoExEdit";
       // 
+      // splashScreenManager
+      // 
+      splashScreenManager.ClosingDelay = 500;
+      // 
       // CalendarDlg
       // 
       Appearance.Options.UseFont = true;
@@ -394,5 +392,6 @@ namespace DiaryOfTrader.EditDialogs.Calendar
     private DevExpress.XtraGrid.Columns.GridColumn clPrognosis;
     private DevExpress.XtraGrid.GridControl grid;
     private DevExpress.XtraBars.BarButtonItem bbiRefresh;
+    private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager;
   }
 }
