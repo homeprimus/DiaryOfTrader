@@ -32,60 +32,62 @@ namespace DiaryOfTrader
     /// </summary>
     private void InitializeComponent()
     {
-      this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
-      this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-      this.tableLayoutPanel1.SuspendLayout();
-      this.SuspendLayout();
+      progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
+      tableLayoutPanel1 = new TableLayoutPanel();
+      tableLayoutPanel1.SuspendLayout();
+      SuspendLayout();
       // 
       // progressPanel1
       // 
-      this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
-      this.progressPanel1.Appearance.Options.UseBackColor = true;
-      this.progressPanel1.AppearanceCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-      this.progressPanel1.AppearanceCaption.Options.UseFont = true;
-      this.progressPanel1.AppearanceDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-      this.progressPanel1.AppearanceDescription.Options.UseFont = true;
-      this.progressPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.progressPanel1.ImageHorzOffset = 20;
-      this.progressPanel1.Location = new System.Drawing.Point(0, 17);
-      this.progressPanel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-      this.progressPanel1.Name = "progressPanel1";
-      this.progressPanel1.Size = new System.Drawing.Size(246, 39);
-      this.progressPanel1.TabIndex = 0;
-      this.progressPanel1.Text = "progressPanel1";
+      progressPanel1.Appearance.BackColor = Color.Transparent;
+      progressPanel1.Appearance.Options.UseBackColor = true;
+      progressPanel1.AppearanceCaption.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
+      progressPanel1.AppearanceCaption.Options.UseFont = true;
+      progressPanel1.AppearanceDescription.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+      progressPanel1.AppearanceDescription.Options.UseFont = true;
+      progressPanel1.Caption = "Ожидайте";
+      progressPanel1.Description = "Загрузка данных";
+      progressPanel1.Dock = DockStyle.Fill;
+      progressPanel1.ImageHorzOffset = 20;
+      progressPanel1.Location = new Point(0, 17);
+      progressPanel1.Margin = new Padding(0, 3, 0, 3);
+      progressPanel1.Name = "progressPanel1";
+      progressPanel1.Size = new Size(183, 41);
+      progressPanel1.TabIndex = 0;
+      progressPanel1.Text = "progressPanel1";
       // 
       // tableLayoutPanel1
       // 
-      this.tableLayoutPanel1.AutoSize = true;
-      this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-      this.tableLayoutPanel1.ColumnCount = 1;
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel1.Controls.Add(this.progressPanel1, 0, 0);
-      this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-      this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-      this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 14, 0, 14);
-      this.tableLayoutPanel1.RowCount = 1;
-      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel1.Size = new System.Drawing.Size(246, 73);
-      this.tableLayoutPanel1.TabIndex = 1;
+      tableLayoutPanel1.AutoSize = true;
+      tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+      tableLayoutPanel1.BackColor = Color.Transparent;
+      tableLayoutPanel1.ColumnCount = 1;
+      tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel1.Controls.Add(progressPanel1, 0, 0);
+      tableLayoutPanel1.Dock = DockStyle.Fill;
+      tableLayoutPanel1.Location = new Point(0, 0);
+      tableLayoutPanel1.Name = "tableLayoutPanel1";
+      tableLayoutPanel1.Padding = new Padding(0, 14, 0, 14);
+      tableLayoutPanel1.RowCount = 1;
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel1.Size = new Size(183, 75);
+      tableLayoutPanel1.TabIndex = 1;
       // 
-      // Form1
+      // ProgressIndicator
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.AutoSize = true;
-      this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ClientSize = new System.Drawing.Size(246, 73);
-      this.Controls.Add(this.tableLayoutPanel1);
-      this.DoubleBuffered = true;
-      this.Name = "Form1";
-      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-      this.Text = "Form1";
-      this.tableLayoutPanel1.ResumeLayout(false);
-      this.ResumeLayout(false);
-      this.PerformLayout();
+      AutoScaleDimensions = new SizeF(6F, 13F);
+      AutoScaleMode = AutoScaleMode.Font;
+      AutoSize = true;
+      AutoSizeMode = AutoSizeMode.GrowAndShrink;
+      ClientSize = new Size(183, 75);
+      Controls.Add(tableLayoutPanel1);
+      DoubleBuffered = true;
+      Name = "ProgressIndicator";
+      StartPosition = FormStartPosition.Manual;
+      Text = "Form1";
+      tableLayoutPanel1.ResumeLayout(false);
+      ResumeLayout(false);
+      PerformLayout();
     }
 
     #endregion

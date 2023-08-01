@@ -46,6 +46,10 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
       barDockControlRight = new DevExpress.XtraBars.BarDockControl();
       bar1 = new DevExpress.XtraBars.Bar();
+      splashScreenManager = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(ProgressIndicator), true, true);
+      pnlNode = new Panel();
+      html = new DevExpress.XtraEditors.HtmlContentControl();
+      splitterControl = new DevExpress.XtraEditors.SplitterControl();
       grid = new DevExpress.XtraGrid.GridControl();
       gridView = new DevExpress.XtraGrid.Views.Grid.GridView();
       clDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -57,13 +61,14 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       clFactual = new DevExpress.XtraGrid.Columns.GridColumn();
       clPrognosis = new DevExpress.XtraGrid.Columns.GridColumn();
       repositoryItemMemoExEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
-      splashScreenManager = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(ProgressIndicator), true, true);
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
       pnlClient.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)bmCalendar).BeginInit();
       ((System.ComponentModel.ISupportInitialize)rgEconomicPeriod).BeginInit();
       ((System.ComponentModel.ISupportInitialize)cbEconomicImportance).BeginInit();
+      pnlNode.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)html).BeginInit();
       ((System.ComponentModel.ISupportInitialize)grid).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gridView).BeginInit();
       ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).BeginInit();
@@ -82,6 +87,8 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       pnlClient.Appearance.BackColor = Color.Transparent;
       pnlClient.Appearance.Options.UseBackColor = true;
       pnlClient.Controls.Add(grid);
+      pnlClient.Controls.Add(splitterControl);
+      pnlClient.Controls.Add(pnlNode);
       pnlClient.Location = new Point(0, 28);
       pnlClient.Size = new Size(809, 337);
       // 
@@ -199,6 +206,38 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
       bar1.Text = "Custom 3";
       // 
+      // splashScreenManager
+      // 
+      splashScreenManager.ClosingDelay = 500;
+      // 
+      // pnlNode
+      // 
+      pnlNode.Controls.Add(html);
+      pnlNode.Dock = DockStyle.Bottom;
+      pnlNode.Location = new Point(0, 250);
+      pnlNode.Margin = new Padding(5, 3, 5, 3);
+      pnlNode.Name = "pnlNode";
+      pnlNode.Size = new Size(809, 87);
+      pnlNode.TabIndex = 8;
+      // 
+      // html
+      // 
+      html.Dock = DockStyle.Fill;
+      html.Location = new Point(0, 0);
+      html.Name = "html";
+      html.Padding = new Padding(20, 3, 10, 3);
+      html.Size = new Size(809, 87);
+      html.TabIndex = 0;
+      // 
+      // splitterControl
+      // 
+      splitterControl.Dock = DockStyle.Bottom;
+      splitterControl.Location = new Point(0, 240);
+      splitterControl.Name = "splitterControl";
+      splitterControl.Size = new Size(809, 10);
+      splitterControl.TabIndex = 9;
+      splitterControl.TabStop = false;
+      // 
       // grid
       // 
       grid.Dock = DockStyle.Fill;
@@ -206,8 +245,8 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       grid.MainView = gridView;
       grid.Name = "grid";
       grid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit, repositoryItemMemoExEdit });
-      grid.Size = new Size(809, 337);
-      grid.TabIndex = 7;
+      grid.Size = new Size(809, 240);
+      grid.TabIndex = 10;
       grid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
       // 
       // gridView
@@ -226,6 +265,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       gridView.OptionsView.RowAutoHeight = true;
       gridView.OptionsView.ShowDetailButtons = false;
       gridView.OptionsView.ShowGroupPanel = false;
+      gridView.FocusedRowChanged += FocusedRowChanged;
       // 
       // clDate
       // 
@@ -329,10 +369,6 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       repositoryItemMemoExEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
       repositoryItemMemoExEdit.Name = "repositoryItemMemoExEdit";
       // 
-      // splashScreenManager
-      // 
-      splashScreenManager.ClosingDelay = 500;
-      // 
       // CalendarDlg
       // 
       Appearance.Options.UseFont = true;
@@ -358,6 +394,8 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       ((System.ComponentModel.ISupportInitialize)bmCalendar).EndInit();
       ((System.ComponentModel.ISupportInitialize)rgEconomicPeriod).EndInit();
       ((System.ComponentModel.ISupportInitialize)cbEconomicImportance).EndInit();
+      pnlNode.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)html).EndInit();
       ((System.ComponentModel.ISupportInitialize)grid).EndInit();
       ((System.ComponentModel.ISupportInitialize)gridView).EndInit();
       ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).EndInit();
@@ -380,18 +418,21 @@ namespace DiaryOfTrader.EditDialogs.Calendar
     private DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup rgEconomicPeriod;
     private DevExpress.XtraBars.BarEditItem beiEconomicImportance;
     private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbEconomicImportance;
+    private DevExpress.XtraBars.BarButtonItem bbiRefresh;
+    private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager;
+    private DevExpress.XtraEditors.SplitterControl splitterControl;
+    private Panel pnlNode;
+    private DevExpress.XtraEditors.HtmlContentControl html;
+    private DevExpress.XtraGrid.GridControl grid;
     public DevExpress.XtraGrid.Views.Grid.GridView gridView;
-    private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
-    private DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit repositoryItemMemoExEdit;
     private DevExpress.XtraGrid.Columns.GridColumn clDate;
     private DevExpress.XtraGrid.Columns.GridColumn clTime;
     private DevExpress.XtraGrid.Columns.GridColumn clCurrency;
     private DevExpress.XtraGrid.Columns.GridColumn clImportance;
     private DevExpress.XtraGrid.Columns.GridColumn clDescription;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
     private DevExpress.XtraGrid.Columns.GridColumn clFactual;
     private DevExpress.XtraGrid.Columns.GridColumn clPrognosis;
-    private DevExpress.XtraGrid.GridControl grid;
-    private DevExpress.XtraBars.BarButtonItem bbiRefresh;
-    private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit repositoryItemMemoExEdit;
   }
 }

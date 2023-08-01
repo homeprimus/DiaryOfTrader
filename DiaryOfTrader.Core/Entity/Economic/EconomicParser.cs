@@ -144,7 +144,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
             var result = new EconomicEvent
             {
               LocalRef = schedule.HRef,
-              Description = GetValue(@"<div class=""left"">(?<value>.*?)\n?<\/div>", s).Replace("<BR />", Environment.NewLine),
+              Description = GetValue(@"<div class=""left"">(?<value>.*?)\n?<\/div>", s),
               Country = GetValue(@"<span>" + Resources.EconomicCountry + @"<\/span>\n?<span><i title=""(?<value>.*?)""", s),
               Currency = GetValue(@"<span>" + Resources.EconomicCurency + @"<\/span>\n?<span>(?<value>.*?)<\/span>", s),
               SourceRef = GetValue(@"<span>" + Resources.EconomicSource + @"<\/span>\n?<span><a href=""(?<value>.*?)""", s)
@@ -167,26 +167,30 @@ namespace DiaryOfTrader.Core.Entity.Economic
       }
     }
 
-    public async Task<bool> UpdateThisWeekAsync()
+    public  Task UpdateThisWeekAsync()
     {
-      GetPeriodToDate(EconomicPeriod.thisWeek, out DateTime startDate, out DateTime endDate);
-      try
+      
+      return Task.Run(() =>
       {
-        var exists = contex.EconomicSchedule
-          .Any(e => e.Time.Date >= startDate && e.Time.Date <= endDate && e.Importance == (int)Importance.High);
 
-        if (!exists)
+        GetPeriodToDate(EconomicPeriod.thisWeek, out DateTime startDate, out DateTime endDate);
+        try
         {
-          var calendar = await ParseAsync(true, EconomicPeriod.thisWeek, Importance.High);
+          var exists = contex.EconomicSchedule
+            .Any(e => e.Time.Date >= startDate && e.Time.Date <= endDate && e.Importance == (int)Importance.High);
+
+          if (!exists)
+          {
+            var economicSchedules = ParseAsync(true, EconomicPeriod.thisWeek, Importance.High).Result;
+          }
+
         }
+        catch (Exception e)
+        {
+          Debug.WriteLine(e);
+        }
+      });
 
-      }
-      catch (Exception e)
-      {
-        Debug.WriteLine(e);
-      }
-
-      return true;
     }
     public async Task EventsAsync(List<EconomicSchedule> schedule, bool reload = false)
     {

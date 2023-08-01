@@ -1,8 +1,10 @@
 ﻿
 using System.ComponentModel;
+using System.IO;
 using DevExpress.XtraEditors;
 using DiaryOfTrader.Core;
 using DiaryOfTrader.Core.Data;
+using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.Core.Entity.Economic;
 
 namespace DiaryOfTrader.EditDialogs.Calendar
@@ -43,6 +45,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
     {
       ScreenCursor.WaitCursor();
       splashScreenManager.ShowWaitForm();
+
       Task.Run(() => DoUpdate(refresh));
     }
 
@@ -89,6 +92,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
           )
         );
       }
+
     }
 
     private void CalendarDlg_Load(object sender, EventArgs e)
@@ -102,9 +106,42 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       Update(false);
     }
 
+    protected string GridLayoutStore
+    {
+      get { return Path.Combine(SettingFolder, GetType().Name + ".GridLayout.xml"); }
+    }
+
+    protected override void OnLoad(EventArgs e)
+    {
+      base.OnLoad(e);
+      if (File.Exists(GridLayoutStore))
+      {
+        gridView.RestoreLayoutFromXml(GridLayoutStore);
+      }
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+      base.OnClosed(e);
+      gridView.SaveLayoutToXml(GridLayoutStore);
+    }
+
     private async void bbiRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
       Update(true);
+    }
+
+    private void FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+    {
+      if (e.FocusedRowHandle > -1)
+      {
+        var bindingCalendar = (BindingCalendar)gridView.GetRow(e.FocusedRowHandle);
+        html.HtmlTemplate.Template = bindingCalendar.Node;
+      }
+      else
+      {
+        html.HtmlTemplate.Template = string.Empty;
+      }
     }
   }
 
