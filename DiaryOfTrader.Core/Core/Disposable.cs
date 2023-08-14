@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace DiaryOfTrader.Core.Core
 {
@@ -17,7 +18,7 @@ namespace DiaryOfTrader.Core.Core
       return syncRoot;
     }
 
-    [Browsable(false)]
+    [JsonIgnore, Browsable(false)]
     public object SyncRoot
     {
       get { return GetSyncRoot(); }

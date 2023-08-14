@@ -1,11 +1,13 @@
 ﻿
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using DevExpress.XtraEditors;
 using DiaryOfTrader.Core;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.Core.Entity.Economic;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace DiaryOfTrader.EditDialogs.Calendar
 {
@@ -15,7 +17,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
     private Importance importance = Importance.High;
     private CancellationTokenSource cancelTokenSource = new();
 
-    private Task updateTask;
+    private Task? updateTask;
     //private readonly DiaryOfTraderCtx contexDb = new();
 
     private Task? updateThisWeekAsync;
@@ -32,10 +34,11 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       Update(false);
     }
 
-    private void RgEconomicPeriod_SelectedIndexChanged(object? sender, EventArgs e)
+    private void rgEconomicPeriod_EditValueChanged(object sender, EventArgs e)
     {
-      period = (EconomicPeriod)((RadioGroup)sender!).SelectedIndex;
-      Update(false);
+       period = (EconomicPeriod)((RadioGroup)sender!).SelectedIndex;
+       Update(false);
+
     }
 
     [DefaultValue(null)]
@@ -43,18 +46,34 @@ namespace DiaryOfTrader.EditDialogs.Calendar
 
     private void Update(bool refresh = false)
     {
-      ScreenCursor.WaitCursor();
-      splashScreenManager.ShowWaitForm();
+      bbiRefresh.Enabled = false;
+      cancelTokenSource.Cancel();
+      if (updateTask != null)
+      {
+        try
+        {
+          Task.WaitAll(updateTask);
+        }
+        catch (Exception e)
+        {
+          Debug.WriteLine(e);
+        }
+      }
+      cancelTokenSource.Dispose();
+      cancelTokenSource = new();
 
-      Task.Run(() => DoUpdate(refresh));
+      ScreenCursor.WaitCursor();
+      if (!splashScreenManager.IsSplashFormVisible)
+      {
+        splashScreenManager.ShowWaitForm();
+      }
+
+      updateTask = Task.Run(() => DoUpdate(refresh));
     }
 
-    private void DoUpdate(bool refresh = false)
+    private void DoRehresh(List<EconomicSchedule> economic)
     {
-      var parser = new EconomicParser(Contex!, cancelTokenSource.Token);
-      var result = parser.ParseAsync(refresh, period, importance).Result;
-
-      var data = result
+      var data = economic
         .Join(
           EconomicSchedule.Importances,
           e => e.Importance,
@@ -85,14 +104,24 @@ namespace DiaryOfTrader.EditDialogs.Calendar
               clImportance.Visible = importance == Importance.None;
 
               grid.DataSource = new BindingList<BindingCalendar>(data);
-
-              splashScreenManager.CloseWaitForm();
+              if (splashScreenManager.IsSplashFormVisible)
+              {
+                splashScreenManager.CloseWaitForm();
+              }
               ScreenCursor.Unset();
+              bbiRefresh.Enabled = true;
             }
           )
         );
       }
+    }
 
+    private void DoUpdate(bool refresh = false)
+    {
+      var parser = new EconomicParser(Contex!, cancelTokenSource.Token);
+      var result = parser.ParseAsync(refresh, period, importance).Result;
+      DoRehresh(result);
+      Task.Run(() => parser.EventsAsync(result, () => DoRehresh(result), false));
     }
 
     private void CalendarDlg_Load(object sender, EventArgs e)
@@ -100,7 +129,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       beiEconomicPeriod.EditValue = (int)EconomicPeriod.today;
       beiEconomicImportance.EditValue = cbEconomicImportance.Items[^1];
 
-      rgEconomicPeriod.SelectedIndexChanged += RgEconomicPeriod_SelectedIndexChanged;
+      rgEconomicPeriod.EditValueChanged += rgEconomicPeriod_EditValueChanged;
       cbEconomicImportance.SelectedIndexChanged += CbEconomicImportance_SelectedIndexChanged;
 
       Update(false);
@@ -143,6 +172,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
         html.HtmlTemplate.Template = string.Empty;
       }
     }
+
   }
 
   public class BindingCalendar

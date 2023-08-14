@@ -167,7 +167,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
       }
     }
 
-    public  Task UpdateThisWeekAsync()
+    public Task UpdateThisWeekAsync()
     {
       
       return Task.Run(() =>
@@ -192,7 +192,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
       });
 
     }
-    public async Task EventsAsync(List<EconomicSchedule> schedule, bool reload = false)
+    public void EventsAsync(List<EconomicSchedule> schedule, Action action, bool reload = false)
     {
       var tasks = new Task[schedule.Count];
       var i = 0;
@@ -201,13 +201,21 @@ namespace DiaryOfTrader.Core.Entity.Economic
         tasks[i] = EventInfoAsync(schedule[i], reload);
         i++;
       }
-
       if (!cancellationToken.IsCancellationRequested)
       {
-        await Task.WhenAll(tasks);
+        Task.WaitAll(tasks);
       }
 
-      await contex.SaveChangesAsync(cancellationToken);
+      try
+      {
+        contex.SaveChanges();
+      }
+      catch (Exception e)
+      {
+        Debug.WriteLine(e);
+      }
+
+      action();
     }
 
     public async Task<List<EconomicSchedule>> ParseAsync(bool reload = false, EconomicPeriod period = EconomicPeriod.thisWeek, Importance importance = Importance.None)
@@ -432,7 +440,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
         }
 
         await contex.SaveChangesAsync(cancellationToken);
-        await EventsAsync(result, reload);
+
       }
 
       return result;

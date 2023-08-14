@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 using DiaryOfTrader.Core.Interfaces;
 
 namespace DiaryOfTrader.Core.Core
@@ -75,7 +76,7 @@ namespace DiaryOfTrader.Core.Core
       OnAfterConstruction();
     }
 
-
+    [JsonIgnore]
     public Element Parent
     {
       get { return parent; }
@@ -194,7 +195,7 @@ namespace DiaryOfTrader.Core.Core
       get { return isInitialize != 0; }
     }
 
-    [NotMapped, Browsable(false)]
+    [JsonIgnore, NotMapped, Browsable(false)]
     public bool IsNew
     {
       get { return isNew; }
@@ -202,14 +203,14 @@ namespace DiaryOfTrader.Core.Core
     }
 
 
-    [NotMapped, Browsable(false)]
+    [JsonIgnore, NotMapped, Browsable(false)]
     public bool IsDeleted
     {
       get { return isDeleted; }
       internal set { isDeleted = value; }
     }
 
-    [NotMapped, Browsable(false)]
+    [JsonIgnore, NotMapped, Browsable(false)]
     public virtual bool IsChanged
     {
       get { return isChanged; }
@@ -223,7 +224,7 @@ namespace DiaryOfTrader.Core.Core
       }
     }
 
-    [NotMapped, Browsable(false)]
+    [JsonIgnore, NotMapped, Browsable(false)]
     public bool Validate
     {
       get { return GetValidate(); }

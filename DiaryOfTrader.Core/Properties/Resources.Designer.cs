@@ -116,6 +116,42 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выссокая.
+        /// </summary>
+        internal static string EconomicImportanceHigh {
+            get {
+                return ResourceManager.GetString("EconomicImportanceHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Низкая.
+        /// </summary>
+        internal static string EconomicImportanceLow {
+            get {
+                return ResourceManager.GetString("EconomicImportanceLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Умеренная.
+        /// </summary>
+        internal static string EconomicImportanceModerate {
+            get {
+                return ResourceManager.GetString("EconomicImportanceModerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Все уровни.
+        /// </summary>
+        internal static string EconomicImportanceNone {
+            get {
+                return ResourceManager.GetString("EconomicImportanceNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Источник:.
         /// </summary>
         internal static string EconomicSource {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DiaryOfTrader.Core.Properties;
 
 namespace DiaryOfTrader.Core.Entity.Economic
 {
@@ -24,10 +25,10 @@ namespace DiaryOfTrader.Core.Entity.Economic
     private static List<KeyValuePair<Importance, string>> importances =
       new List<KeyValuePair<Importance, string>>(
       new []{
-        new KeyValuePair<Importance, string>(Economic.Importance.None, "Все уровни"),
-        new KeyValuePair<Importance, string>(Economic.Importance.Low, "Низкая"),
-        new KeyValuePair<Importance, string>(Economic.Importance.Moderate, "Умеренная"),
-        new KeyValuePair<Importance, string>(Economic.Importance.High, "Выссокая")
+        new KeyValuePair<Importance, string>(Economic.Importance.None, Resources.EconomicImportanceNone),
+        new KeyValuePair<Importance, string>(Economic.Importance.Low, Resources.EconomicImportanceLow),
+        new KeyValuePair<Importance, string>(Economic.Importance.Moderate, Resources.EconomicImportanceModerate),
+        new KeyValuePair<Importance, string>(Economic.Importance.High, Resources.EconomicImportanceHigh)
       });
 
     public long ID { get; set; }

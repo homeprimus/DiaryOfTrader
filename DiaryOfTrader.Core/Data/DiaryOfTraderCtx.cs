@@ -64,7 +64,7 @@ namespace DiaryOfTrader.Core.Data
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseSqlite("Data Source=" + DataSource())
+      optionsBuilder.UseSqlite("Pooling=True;Data Source=" + DataSource())
         .ReplaceService<IHistoryRepository, HistoryRepository>()
         ; 
     }

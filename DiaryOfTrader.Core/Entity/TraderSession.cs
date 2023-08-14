@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace DiaryOfTrader.Core.Entity
 {
   /*
@@ -19,6 +21,7 @@ https://alfaforex.ru/faq/internet-treyding/vremya-raboty-rynka-forex-raspisanie-
    */
   public class TraderSession : Entity
   {
+    [JsonIgnore]
     public TraderRegion Region { get; set; }
     public DateTime WinterStarting { get; set; }
     public DateTime WinterFinished { get; set; }

@@ -138,6 +138,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       rgEconomicPeriod.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "Вчера", true, (short)0), new DevExpress.XtraEditors.Controls.RadioGroupItem(1, "Сегодня", true, (short)1), new DevExpress.XtraEditors.Controls.RadioGroupItem(2, "Завтра", true, (short)2), new DevExpress.XtraEditors.Controls.RadioGroupItem(3, "На неделю", true, (short)3), new DevExpress.XtraEditors.Controls.RadioGroupItem(4, "Следующая неделя", true, (short)4) });
       rgEconomicPeriod.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
       rgEconomicPeriod.Name = "rgEconomicPeriod";
+      rgEconomicPeriod.EditValueChanged += rgEconomicPeriod_EditValueChanged;
       // 
       // beiEconomicImportance
       // 

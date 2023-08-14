@@ -136,6 +136,18 @@
   <data name="EconomicEndPointPrefix" xml:space="preserve">
     <value>ru.</value>
   </data>
+  <data name="EconomicImportanceHigh" xml:space="preserve">
+    <value>Выссокая</value>
+  </data>
+  <data name="EconomicImportanceLow" xml:space="preserve">
+    <value>Низкая</value>
+  </data>
+  <data name="EconomicImportanceModerate" xml:space="preserve">
+    <value>Умеренная</value>
+  </data>
+  <data name="EconomicImportanceNone" xml:space="preserve">
+    <value>Все уровни</value>
+  </data>
   <data name="EconomicSource" xml:space="preserve">
     <value>Источник:</value>
   </data>
