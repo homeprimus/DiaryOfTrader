@@ -63,15 +63,15 @@ namespace DiaryOfTrader.WebApi.Core.Api
       Results.Ok(await repository.GetAllAsync());
 
     //[Authorize]
-    private async Task<IResult> GetById(string pattern, [FromServices] TRepository repository) =>
+    private async Task<IResult> Search(string pattern, [FromServices] TRepository repository) =>
       await repository.GetAllAsync(new object[] { pattern }) is IEnumerable<TEntity> entities
         ? Results.Ok(entities)
         : Results.NotFound(Array.Empty<TEntity>());
 
     //[Authorize]
-    private async Task<IResult> Search(int id, [FromServices] TRepository repository) =>
-      await repository.GetByIdAsync(id) is IEnumerable<TEntity> entities
-        ? Results.Ok(entities)
+    private async Task<IResult> GetById(int id, [FromServices] TRepository repository) =>
+      await repository.GetByIdAsync(id) is TEntity entity
+        ? Results.Ok(entity)
         : Results.NotFound(Array.Empty<TEntity>());
 
     //[Authorize]

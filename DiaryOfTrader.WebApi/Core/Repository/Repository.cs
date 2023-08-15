@@ -1,4 +1,5 @@
-﻿using DiaryOfTrader.Core.Core;
+﻿using System.Linq;
+using DiaryOfTrader.Core.Core;
 
 namespace DiaryOfTrader.WebApi.Core.Repository
 {
@@ -18,14 +19,20 @@ namespace DiaryOfTrader.WebApi.Core.Repository
     protected DbContext Data { get { return _data; } }
     protected DbSet<TEntity> Entity { get { return _entity; } }
 
-    public virtual async Task<List<TEntity?>> GetAllAsync() => await _entity.ToListAsync();
-
-    public async Task<List<TEntity>> GetAllAsync(object[] pattern)
+    public virtual async Task<List<TEntity?>> GetAllAsync()
     {
       return await _entity.ToListAsync();
     }
 
-    public async Task<TEntity?> GetByIdAsync(int entryId) => await _entity.FindAsync(new object[] { entryId });
+    public async Task<List<TEntity>> GetAllAsync(object[] pattern)
+    {
+      return await _entity.Where(e => e.Name.Contains(pattern[0].ToString()!)).ToListAsync();
+    }
+
+    public async Task<TEntity?> GetByIdAsync(int entryId) 
+    {
+      return await _entity.Where(e => e.ID == (long)entryId).FirstOrDefaultAsync();
+    }
 
     public async Task InsertAsync(TEntity entity)
     {

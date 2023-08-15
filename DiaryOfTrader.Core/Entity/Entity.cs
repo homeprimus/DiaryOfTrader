@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 using DiaryOfTrader.Core.Core;
 using DiaryOfTrader.Core.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,7 @@ namespace DiaryOfTrader.Core.Entity
     public string? Description { get; set; }
     public int Order { get; set; }
 
-
+    [JsonIgnore]
     public string ClassDescription
     {
       get
