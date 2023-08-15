@@ -41,10 +41,11 @@ void ResgistryServices(IServiceCollection serveices)
   serveices.AddScoped<IWalletRepository, WalletRepository>();
   serveices.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepository>();
 
+  serveices.AddScoped<ITraderRepository, TraderRepository>();
 
   // добавили авторизыцию
   serveices.AddSingleton<ITokenService>(new TokenService());
-  serveices.AddSingleton<IAuthRepository>(new AuthRepository());
+  //serveices.AddSingleton<ITraderRepository>(new TraderRepository());
 
   serveices.AddAuthorization();
   serveices.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -73,7 +74,7 @@ void ResgistryServices(IServiceCollection serveices)
 
   serveices.AddTransient<IApi, EconomicCalendarApi>();
 
-  serveices.AddTransient<IApi, AuthorizationApi>();
+  serveices.AddTransient<IApi, TraderApi>();
 }
 
 void Configure(WebApplication application)

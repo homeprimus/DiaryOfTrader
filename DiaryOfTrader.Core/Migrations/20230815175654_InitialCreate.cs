@@ -104,6 +104,23 @@ namespace DiaryOfTrader.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Trader",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trader", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Trend",
                 columns: table => new
                 {
@@ -342,6 +359,9 @@ namespace DiaryOfTrader.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Session");
+
+            migrationBuilder.DropTable(
+                name: "Trader");
 
             migrationBuilder.DropTable(
                 name: "Wallet");

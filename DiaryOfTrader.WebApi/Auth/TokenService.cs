@@ -9,11 +9,11 @@ namespace DiaryOfTrader.WebApi.Auth
   {
     private TimeSpan expiryDuradion = new(0, 30, 0);
 
-    public string GetToken(string key, string issue, UserDto user)
+    public string GetToken(string key, string issue, Trader trader)
     {
       var claims = new[]
       {
-        new Claim(ClaimTypes.Name, user.UserName),
+        new Claim(ClaimTypes.Name, trader.Name),
         new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
       };
       var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiaryOfTrader.Core.Migrations
 {
     [DbContext(typeof(DiaryOfTraderCtx))]
-    [Migration("20230726183751_InitialCreate")]
+    [Migration("20230815175654_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -269,6 +269,37 @@ namespace DiaryOfTrader.Core.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Frame");
+
+                    b.UseTpcMappingStrategy();
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.Trader", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Trader");
 
                     b.UseTpcMappingStrategy();
                 });

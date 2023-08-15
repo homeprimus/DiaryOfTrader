@@ -270,6 +270,37 @@ namespace DiaryOfTrader.Core.Migrations
                     b.UseTpcMappingStrategy();
                 });
 
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.Trader", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Trader");
+
+                    b.UseTpcMappingStrategy();
+                });
+
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderExchange", b =>
                 {
                     b.Property<long>("ID")

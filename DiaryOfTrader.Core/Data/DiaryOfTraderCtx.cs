@@ -59,7 +59,6 @@ namespace DiaryOfTrader.Core.Data
         var upData = new DataInitializer(this);
         upData.Update();
       }
-
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -91,12 +90,16 @@ namespace DiaryOfTrader.Core.Data
       modelBuilder.Entity<MarketReview>(MarketReviewConfigure);
       modelBuilder.Entity<EconomicSchedule>(EconomicScheduleConfigure);
       modelBuilder.Entity<EconomicEvent>(EconomicEventConfigure);
+      modelBuilder.Entity<Trader>(TraderConfigure);
 
     }
 
     #region Configure
-
-    #region Symbol
+    private void TraderConfigure(EntityTypeBuilder<Trader> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
     private void EconomicScheduleConfigure(EntityTypeBuilder<EconomicSchedule> builder)
     {
       builder.UseTpcMappingStrategy();
@@ -107,6 +110,7 @@ namespace DiaryOfTrader.Core.Data
       builder.UseTpcMappingStrategy();
       builder.Property(b => b.ID).ValueGeneratedOnAdd();
     }
+    #region Symbol
     private void SymbolConfigure(EntityTypeBuilder<Symbol> builder)
     {
       builder.UseTpcMappingStrategy();
@@ -210,6 +214,7 @@ namespace DiaryOfTrader.Core.Data
     public DbSet<MarketReview> MarketReview { get; set; }
     public DbSet<EconomicSchedule> EconomicSchedule { get; set; }
     public DbSet<EconomicEvent> EconomicEvent { get; set; }
+    public DbSet<Trader> Trader { get; set; }
   }
 }
 

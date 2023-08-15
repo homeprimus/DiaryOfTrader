@@ -19,7 +19,7 @@ namespace DiaryOfTrader.WebApi.Core.Api
       _endPoint = $"/{s}s";
       _swagger = s.Substring(0,1).ToUpperInvariant() + s.Substring(1);
     }
-    public void Register(WebApplication application)
+    public virtual void Register(WebApplication application)
     {
       application.MapGet($"{_endPoint}", GetAll)
         .Produces<List<TEntity>>(StatusCodes.Status200OK)
