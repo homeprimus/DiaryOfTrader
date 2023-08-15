@@ -79,7 +79,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
           e => e.Importance,
           i => (int)i.Key,
           (e, i)
-            => new BindingCalendar()
+            => new EventCalendar()
             {
               Date = e.Time,
               Time = e.Time.ToString("HH:mm"),
@@ -103,7 +103,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
               clImportance.VisibleIndex = 2;
               clImportance.Visible = importance == Importance.None;
 
-              grid.DataSource = new BindingList<BindingCalendar>(data);
+              grid.DataSource = new BindingList<EventCalendar>(data);
               if (splashScreenManager.IsSplashFormVisible)
               {
                 splashScreenManager.CloseWaitForm();
@@ -164,7 +164,7 @@ namespace DiaryOfTrader.EditDialogs.Calendar
     {
       if (e.FocusedRowHandle > -1)
       {
-        var bindingCalendar = (BindingCalendar)gridView.GetRow(e.FocusedRowHandle);
+        var bindingCalendar = (EventCalendar)gridView.GetRow(e.FocusedRowHandle);
         html.HtmlTemplate.Template = bindingCalendar.Node;
       }
       else
@@ -173,19 +173,6 @@ namespace DiaryOfTrader.EditDialogs.Calendar
       }
     }
 
-  }
-
-  public class BindingCalendar
-  {
-    public DateTime Date { get; set; }
-    public string Time { get; set; }
-    public string Currency { get; set; }
-    public string Importance { get; set; }
-    public string Description { get; set; }
-    public string Factual { get; set; }
-    public string Prognosis { get; set; }
-    public string Previous { get; set; }
-    public string Node { get; set; }
   }
 
 }

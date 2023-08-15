@@ -54,10 +54,16 @@ namespace DiaryOfTrader.WebApi.Core.Repository
         await SaveAsync();
       }
     }
-
     public async Task SaveAsync()
     {
       await _data.SaveChangesAsync();
     }
+
+    protected override void Free()
+    {
+      base.Free();
+      _data.Dispose();
+    }
+
   }
 }

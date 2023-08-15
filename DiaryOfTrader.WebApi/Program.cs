@@ -39,6 +39,8 @@ void ResgistryServices(IServiceCollection serveices)
   serveices.AddScoped<ITraderRegionRepository, TraderRegionRepository>();
   serveices.AddScoped<ITrendRepository, TrendRepository>();
   serveices.AddScoped<IWalletRepository, WalletRepository>();
+  serveices.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepository>();
+
 
   // добавили авторизыцию
   serveices.AddSingleton<ITokenService>(new TokenService());
@@ -68,6 +70,8 @@ void ResgistryServices(IServiceCollection serveices)
   serveices.AddTransient<IApi, TraderRegionApi>();
   serveices.AddTransient<IApi, TrendApi>();
   serveices.AddTransient<IApi, WalletApi>();
+
+  serveices.AddTransient<IApi, EconomicCalendarApi>();
 
   serveices.AddTransient<IApi, AuthorizationApi>();
 }

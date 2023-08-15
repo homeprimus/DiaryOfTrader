@@ -13,6 +13,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
 
   public enum EconomicPeriod
   {
+    custom = -1,
     yesterday = 0,
     today = 1,
     tomorrow = 2,

@@ -221,6 +221,10 @@ namespace DiaryOfTrader.Core.Entity.Economic
     public async Task<List<EconomicSchedule>> ParseAsync(bool reload = false, EconomicPeriod period = EconomicPeriod.thisWeek, Importance importance = Importance.None)
     {
       GetPeriodToDate(period, out DateTime startDate, out DateTime endDate);
+      return await ParseAsync(startDate, endDate, period, importance, reload);
+    }
+    public async Task<List<EconomicSchedule>> ParseAsync(DateTime startDate, DateTime endDate, EconomicPeriod period = EconomicPeriod.thisWeek, Importance importance = Importance.None, bool reload = false)
+    {
       var noResultFlag = false;
       var orig = contex.EconomicSchedule
         .Where(e => 
@@ -247,10 +251,23 @@ namespace DiaryOfTrader.Core.Entity.Economic
         }
         data.Append("importance%5B%5D=").Append(((int)importance).ToString());
       }
+
+      if (period == EconomicPeriod.custom)
+      {
+        if (data.Length != 0)
+        {
+          data.Append("&");
+        }
+        data
+          .Append("dateFrom=").Append(startDate.ToString("yyyy-MM-dd"))
+          .Append("&dateTo").Append(startDate.ToString("yyyy-MM-dd"));
+      }
+
       if (data.Length != 0)
       {
         data.Append("&");
       }
+
       data.Append("timeZone=55")
       .Append("&timeFilter=timeRemain")
       .Append("&currentTab=").Append(Enum.GetName(typeof(EconomicPeriod), period))
