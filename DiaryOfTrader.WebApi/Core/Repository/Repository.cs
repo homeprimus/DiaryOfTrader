@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using DiaryOfTrader.Core.Core;
+﻿using DiaryOfTrader.Core.Core;
 
 namespace DiaryOfTrader.WebApi.Core.Repository
 {
@@ -24,23 +23,23 @@ namespace DiaryOfTrader.WebApi.Core.Repository
       return await _entity.ToListAsync();
     }
 
-    public async Task<List<TEntity>> GetAllAsync(object[] pattern)
+    public virtual async Task<List<TEntity>> GetAllAsync(object[] pattern)
     {
       return await _entity.Where(e => e.Name.Contains(pattern[0].ToString()!)).ToListAsync();
     }
 
-    public async Task<TEntity?> GetByIdAsync(int entryId) 
+    public virtual async Task<TEntity?> GetByIdAsync(int entryId) 
     {
       return await _entity.Where(e => e.ID == (long)entryId).FirstOrDefaultAsync();
     }
 
-    public async Task InsertAsync(TEntity entity)
+    public virtual async Task InsertAsync(TEntity entity)
     {
       _entity.Add(entity);
       await SaveAsync();
     }
 
-    public async Task UpdateAsync(TEntity entity)
+    public virtual async Task UpdateAsync(TEntity entity)
     {
       _entity.Update(entity);
       await SaveAsync();

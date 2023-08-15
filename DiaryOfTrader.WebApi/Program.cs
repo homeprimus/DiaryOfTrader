@@ -4,6 +4,7 @@ using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.WebApi.Api;
 using DiaryOfTrader.WebApi.Auth;
 using DiaryOfTrader.WebApi.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,21 +44,21 @@ void ResgistryServices(IServiceCollection serveices)
   serveices.AddSingleton<ITokenService>(new TokenService());
   serveices.AddSingleton<IAuthRepository>(new AuthRepository());
 
-  //serveices.AddAuthorization();
-  //serveices.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-  //  .AddJwtBearer(options =>
-  //  {
-  //    options.TokenValidationParameters = new()
-  //    {
-  //      ValidateIssuer = true,
-  //      ValidateAudience = true,
-  //      ValidateLifetime = true,
-  //      ValidateIssuerSigningKey = true,
-  //      ValidIssuer = builder.Configuration["Jwt:Issuer"],
-  //      ValidAudience = builder.Configuration["Jwt:Audience"],
-  //      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-  //    };
-  //  });
+  serveices.AddAuthorization();
+  serveices.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+      options.TokenValidationParameters = new()
+      {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+      };
+    });
 
   serveices.AddTransient<IApi, SymbolApi>();
   serveices.AddTransient<IApi, TimeFrameApi>();
@@ -67,13 +68,14 @@ void ResgistryServices(IServiceCollection serveices)
   serveices.AddTransient<IApi, TraderRegionApi>();
   serveices.AddTransient<IApi, TrendApi>();
   serveices.AddTransient<IApi, WalletApi>();
-  //serveices.AddTransient<IApi, AuthorizationApi>();
+
+  serveices.AddTransient<IApi, AuthorizationApi>();
 }
 
 void Configure(WebApplication application)
 {
-  //application.UseAuthentication();
-  //application.UseAuthorization();
+  application.UseAuthentication();
+  application.UseAuthorization();
 
   if (application.Environment.IsDevelopment())
   {
