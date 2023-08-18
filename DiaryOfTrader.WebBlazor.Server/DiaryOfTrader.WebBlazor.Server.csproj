@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>DiaryOfTrader.Web1</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Components\ExchangesTable.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DiaryOfTrader.Core\DiaryOfTrader.Core.csproj" />
+    </ItemGroup>
+
+</Project>
