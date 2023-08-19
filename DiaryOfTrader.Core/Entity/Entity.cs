@@ -16,9 +16,9 @@ namespace DiaryOfTrader.Core.Entity
     }
 
     public long ID { get; set; }
-    public string Name { get; set; }
+    public virtual string Name { get; set; }
     public string? Description { get; set; }
-    public int Order { get; set; }
+    public virtual int Order { get; set; }
 
     [JsonIgnore]
     public string ClassDescription

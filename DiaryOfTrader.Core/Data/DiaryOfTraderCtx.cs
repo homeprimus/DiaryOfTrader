@@ -1,8 +1,4 @@
-﻿using DiaryOfTrader.Core.Core;
-using DiaryOfTrader.Core.Entity;
-using DiaryOfTrader.Core.Entity.Economic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Sqlite.Migrations.Internal;
 
@@ -74,6 +70,7 @@ namespace DiaryOfTrader.Core.Data
       
       modelBuilder.Ignore<Element>();
       modelBuilder.Ignore<Entity.Entity>();
+      
 
       modelBuilder.Entity<ScreenShot>().UseTpcMappingStrategy();
       modelBuilder.Entity<ScreenShot>().Property(b => b.ID).ValueGeneratedOnAdd();
@@ -87,14 +84,25 @@ namespace DiaryOfTrader.Core.Data
       modelBuilder.Entity<Trend>(TrendConfigure);
       modelBuilder.Entity<TraderResult>(TraderResultConfigure);
       modelBuilder.Entity<Diary>(DiaryConfigure);
-      modelBuilder.Entity<MarketReview>(MarketReviewConfigure);
       modelBuilder.Entity<EconomicSchedule>(EconomicScheduleConfigure);
       modelBuilder.Entity<EconomicEvent>(EconomicEventConfigure);
       modelBuilder.Entity<Trader>(TraderConfigure);
 
+      modelBuilder.Entity<MarketReview>(MarketReviewConfigure);
+      modelBuilder.Entity<MarketReviewTimeFrame>(MarketReviewTimeFrameConfigure);
+
+      modelBuilder.Entity<TraderExchange>()
+        .HasMany(c => c.Symbol)
+        .WithMany(s => s.Exchange)
+        .UsingEntity(j => j.ToTable("ExchangeSymbol"));
     }
 
     #region Configure
+    private void MarketReviewTimeFrameConfigure(EntityTypeBuilder<MarketReviewTimeFrame> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
     private void TraderConfigure(EntityTypeBuilder<Trader> builder)
     {
       builder.UseTpcMappingStrategy();

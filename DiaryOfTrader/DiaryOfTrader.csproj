@@ -13,10 +13,6 @@
     <Content Include="Resource\Icon\Main.ico" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EditControls\Entity\" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="DevExpress.Win.Design" Version="22.2.5" />

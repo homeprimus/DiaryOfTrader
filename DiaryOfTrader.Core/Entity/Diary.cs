@@ -1,4 +1,5 @@
 ﻿
+
 namespace DiaryOfTrader.Core.Entity
 {
   public class Diary: Entity
@@ -10,41 +11,45 @@ namespace DiaryOfTrader.Core.Entity
     /*
      * На какой бирже торговали
      */
+
     public TraderExchange? Exchange { get; set; }
     /*
      * Чем торговали
      */
     public Symbol Symbol { get; set; }
     /*
-     * На каом таймфрейме был выполнен вход
+     * Обхор рынка
      */
-    public TimeFrame Entered { get; set; }
+    public MarketReview Review { get; set; }
     /*
-     * Месячного ТФ
+     * Экономические новости
      */
-    public Trend? Trend { get; set; }
-    /*
-     * Дневной ТФ
-     */
-    public string Monthly { get; set; }
-
-    public string Daily { get; set; }
+    public List<EconomicSchedule> Events { get; set; }
     /*
      * Торговая сесия
      */
     public TraderSession? Session { get; }
     /*
+    * На каом таймфрейме был выполнен вход
+    */
+    public TimeFrame Entered { get; set; }
+    /*
      * Сделка, ход и сопровождение
      */
     public string? Deal { get; }
+
     /*
-     * Эмиции
+     * Чек лист эмиций для начала сделки
      */
     public string? Emotions { get; set; }
     /*
      * Скриншоьы сделки
      */
     public List<ScreenShot>? Screenshot { get; }
+    /*
+     * Кошелек
+     */
+    public Wallet Wallet { get; set; }
     /*
      * Результат сделки
      */
