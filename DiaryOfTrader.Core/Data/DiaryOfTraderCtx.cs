@@ -92,8 +92,8 @@ namespace DiaryOfTrader.Core.Data
       modelBuilder.Entity<MarketReviewTimeFrame>(MarketReviewTimeFrameConfigure);
 
       modelBuilder.Entity<TraderExchange>()
-        .HasMany(c => c.Symbol)
-        .WithMany(s => s.Exchange)
+        .HasMany(c => c.Symbols)
+        .WithMany(s => s.Exchanges)
         .UsingEntity(j => j.ToTable("ExchangeSymbol"));
     }
 

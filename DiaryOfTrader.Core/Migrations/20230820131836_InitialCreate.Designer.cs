@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiaryOfTrader.Core.Migrations
 {
     [DbContext(typeof(DiaryOfTraderCtx))]
-    [Migration("20230819171243_InitialCreate")]
+    [Migration("20230820131836_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -286,12 +286,18 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("BLOB");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
@@ -363,12 +369,18 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("BLOB");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
@@ -511,15 +523,15 @@ namespace DiaryOfTrader.Core.Migrations
 
             modelBuilder.Entity("SymbolTraderExchange", b =>
                 {
-                    b.Property<long>("ExchangeID")
+                    b.Property<long>("ExchangesID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("SymbolID")
+                    b.Property<long>("SymbolsID")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("ExchangeID", "SymbolID");
+                    b.HasKey("ExchangesID", "SymbolsID");
 
-                    b.HasIndex("SymbolID");
+                    b.HasIndex("SymbolsID");
 
                     b.ToTable("ExchangeSymbol", (string)null);
                 });
@@ -658,13 +670,13 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.HasOne("DiaryOfTrader.Core.Entity.TraderExchange", null)
                         .WithMany()
-                        .HasForeignKey("ExchangeID")
+                        .HasForeignKey("ExchangesID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DiaryOfTrader.Core.Entity.Symbol", null)
                         .WithMany()
-                        .HasForeignKey("SymbolID")
+                        .HasForeignKey("SymbolsID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -34,6 +34,8 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Order = table.Column<int>(type: "INTEGER", nullable: false)
@@ -94,6 +96,8 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Order = table.Column<int>(type: "INTEGER", nullable: false)
@@ -180,21 +184,21 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "ExchangeSymbol",
                 columns: table => new
                 {
-                    ExchangeID = table.Column<long>(type: "INTEGER", nullable: false),
-                    SymbolID = table.Column<long>(type: "INTEGER", nullable: false)
+                    ExchangesID = table.Column<long>(type: "INTEGER", nullable: false),
+                    SymbolsID = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExchangeSymbol", x => new { x.ExchangeID, x.SymbolID });
+                    table.PrimaryKey("PK_ExchangeSymbol", x => new { x.ExchangesID, x.SymbolsID });
                     table.ForeignKey(
-                        name: "FK_ExchangeSymbol_Exchange_ExchangeID",
-                        column: x => x.ExchangeID,
+                        name: "FK_ExchangeSymbol_Exchange_ExchangesID",
+                        column: x => x.ExchangesID,
                         principalTable: "Exchange",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ExchangeSymbol_Symbol_SymbolID",
-                        column: x => x.SymbolID,
+                        name: "FK_ExchangeSymbol_Symbol_SymbolsID",
+                        column: x => x.SymbolsID,
                         principalTable: "Symbol",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -424,9 +428,9 @@ namespace DiaryOfTrader.Core.Migrations
                 column: "EventID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExchangeSymbol_SymbolID",
+                name: "IX_ExchangeSymbol_SymbolsID",
                 table: "ExchangeSymbol",
-                column: "SymbolID");
+                column: "SymbolsID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MarketReview_ExchangeID",

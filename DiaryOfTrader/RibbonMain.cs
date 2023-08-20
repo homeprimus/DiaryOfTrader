@@ -13,8 +13,8 @@ namespace DiaryOfTrader
 {
   public partial class RibbonMain : DevExpress.XtraBars.Ribbon.RibbonForm
   {
-    private readonly CancellationTokenSource cancelTokenSource = new ();
-    private readonly DiaryOfTraderCtx contexDb = new ();
+    private readonly CancellationTokenSource cancelTokenSource = new();
+    private readonly DiaryOfTraderCtx contexDb = new();
 
     private Task? updateThisWeekAsync;
     public RibbonMain()
