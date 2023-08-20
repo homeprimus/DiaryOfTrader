@@ -50,7 +50,12 @@ namespace DiaryOfTrader
       rbpАnalytics = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgReports = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+      nbMain = new DevExpress.XtraNavBar.NavBarControl();
+      navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
+      navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
+      navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)nbMain).BeginInit();
       SuspendLayout();
       // 
       // ribbon
@@ -189,11 +194,42 @@ namespace DiaryOfTrader
       ribbonStatusBar.Ribbon = ribbon;
       ribbonStatusBar.Size = new Size(964, 24);
       // 
+      // nbMain
+      // 
+      nbMain.ActiveGroup = navBarGroup1;
+      nbMain.Dock = DockStyle.Left;
+      nbMain.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] { navBarGroup1, navBarGroup2 });
+      nbMain.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] { navBarItem1 });
+      nbMain.Location = new Point(0, 158);
+      nbMain.Name = "nbMain";
+      nbMain.Size = new Size(178, 379);
+      nbMain.TabIndex = 2;
+      nbMain.Text = "navBarControl1";
+      // 
+      // navBarGroup1
+      // 
+      navBarGroup1.Caption = "navBarGroup1";
+      navBarGroup1.Expanded = true;
+      navBarGroup1.Name = "navBarGroup1";
+      // 
+      // navBarGroup2
+      // 
+      navBarGroup2.Caption = "navBarGroup2";
+      navBarGroup2.Expanded = true;
+      navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] { new DevExpress.XtraNavBar.NavBarItemLink(navBarItem1) });
+      navBarGroup2.Name = "navBarGroup2";
+      // 
+      // navBarItem1
+      // 
+      navBarItem1.Caption = "navBarItem1";
+      navBarItem1.Name = "navBarItem1";
+      // 
       // RibbonMain
       // 
       AutoScaleDimensions = new SizeF(6F, 13F);
       AutoScaleMode = AutoScaleMode.Font;
       ClientSize = new Size(964, 561);
+      Controls.Add(nbMain);
       Controls.Add(ribbonStatusBar);
       Controls.Add(ribbon);
       Name = "RibbonMain";
@@ -201,6 +237,7 @@ namespace DiaryOfTrader
       StatusBar = ribbonStatusBar;
       Text = "Дневник трейдера";
       ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
+      ((System.ComponentModel.ISupportInitialize)nbMain).EndInit();
       ResumeLayout(false);
       PerformLayout();
     }
@@ -224,5 +261,9 @@ namespace DiaryOfTrader
     private DevExpress.XtraBars.BarButtonItem bbtWallet;
     private DevExpress.XtraBars.BarButtonItem bbtCalendar;
     private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbpgCalendar;
+    private DevExpress.XtraNavBar.NavBarControl nbMain;
+    private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
+    private DevExpress.XtraNavBar.NavBarGroup navBarGroup2;
+    private DevExpress.XtraNavBar.NavBarItem navBarItem1;
   }
 }

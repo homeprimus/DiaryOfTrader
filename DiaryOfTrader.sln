@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryOfTrader", "DiaryOfTra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryOfTrader.Core", "DiaryOfTrader.Core\DiaryOfTrader.Core.csproj", "{83900A1F-0522-46CA-AE79-BEA22BDF55E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryOfTrader.WebApi", "DiaryOfTrader.WebApi\DiaryOfTrader.WebApi.csproj", "{8A6F33C5-9420-4EAE-987F-709181D1E66E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryOfTrader.WebApi", "DiaryOfTrader.WebApi\DiaryOfTrader.WebApi.csproj", "{8A6F33C5-9420-4EAE-987F-709181D1E66E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryOfTrader.WebBlazor.Wasm", "DiaryOfTrader.WebBlazor.Wasm\DiaryOfTrader.WebBlazor.Wasm.csproj", "{EED9D557-C736-4FF3-9D35-6A6AEC7479DB}"
 EndProject

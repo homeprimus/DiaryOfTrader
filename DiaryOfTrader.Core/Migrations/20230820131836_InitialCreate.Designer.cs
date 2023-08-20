@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiaryOfTrader.Core.Migrations
 {
     [DbContext(typeof(DiaryOfTraderCtx))]
-    [Migration("20230815175654_InitialCreate")]
+    [Migration("20230820131836_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,10 +29,6 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Daily")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
@@ -48,13 +44,12 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<long?>("ExchangeID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Monthly")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<long>("ReviewID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<long>("SymbolID")
                         .HasColumnType("INTEGER");
@@ -62,7 +57,7 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<long>("TraderResultID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("TrendID")
+                    b.Property<long>("WalletID")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ID");
@@ -71,11 +66,13 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.HasIndex("ExchangeID");
 
+                    b.HasIndex("ReviewID");
+
                     b.HasIndex("SymbolID");
 
                     b.HasIndex("TraderResultID");
 
-                    b.HasIndex("TrendID");
+                    b.HasIndex("WalletID");
 
                     b.ToTable("Diary");
 
@@ -129,6 +126,9 @@ namespace DiaryOfTrader.Core.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<long?>("DiaryID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<long?>("EventID")
                         .HasColumnType("INTEGER");
 
@@ -160,6 +160,8 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("DiaryID");
+
                     b.HasIndex("EventID");
 
                     b.ToTable("EconomicSchedule");
@@ -179,6 +181,9 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<long>("ExchangeID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -188,9 +193,54 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ExchangeID");
+
                     b.HasIndex("SymbolID");
 
                     b.ToTable("MarketReview");
+
+                    b.UseTpcMappingStrategy();
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReviewTimeFrame", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("FrameID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long?>("ImageID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("MarketID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long?>("TrendID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FrameID");
+
+                    b.HasIndex("ImageID");
+
+                    b.HasIndex("MarketID");
+
+                    b.HasIndex("TrendID");
+
+                    b.ToTable("MarketReviewTimeFrame");
 
                     b.UseTpcMappingStrategy();
                 });
@@ -236,12 +286,18 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("BLOB");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
@@ -313,12 +369,18 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("BLOB");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 
@@ -459,6 +521,21 @@ namespace DiaryOfTrader.Core.Migrations
                     b.UseTpcMappingStrategy();
                 });
 
+            modelBuilder.Entity("SymbolTraderExchange", b =>
+                {
+                    b.Property<long>("ExchangesID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("SymbolsID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ExchangesID", "SymbolsID");
+
+                    b.HasIndex("SymbolsID");
+
+                    b.ToTable("ExchangeSymbol", (string)null);
+                });
+
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.Diary", b =>
                 {
                     b.HasOne("DiaryOfTrader.Core.Entity.TimeFrame", "Entered")
@@ -470,6 +547,12 @@ namespace DiaryOfTrader.Core.Migrations
                     b.HasOne("DiaryOfTrader.Core.Entity.TraderExchange", "Exchange")
                         .WithMany()
                         .HasForeignKey("ExchangeID");
+
+                    b.HasOne("DiaryOfTrader.Core.Entity.MarketReview", "Review")
+                        .WithMany()
+                        .HasForeignKey("ReviewID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DiaryOfTrader.Core.Entity.Symbol", "Symbol")
                         .WithMany()
@@ -483,23 +566,31 @@ namespace DiaryOfTrader.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DiaryOfTrader.Core.Entity.Trend", "Trend")
+                    b.HasOne("DiaryOfTrader.Core.Entity.Wallet", "Wallet")
                         .WithMany()
-                        .HasForeignKey("TrendID");
+                        .HasForeignKey("WalletID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Entered");
 
                     b.Navigation("Exchange");
 
+                    b.Navigation("Review");
+
                     b.Navigation("Symbol");
 
                     b.Navigation("TraderResult");
 
-                    b.Navigation("Trend");
+                    b.Navigation("Wallet");
                 });
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.Economic.EconomicSchedule", b =>
                 {
+                    b.HasOne("DiaryOfTrader.Core.Entity.Diary", null)
+                        .WithMany("Events")
+                        .HasForeignKey("DiaryID");
+
                     b.HasOne("DiaryOfTrader.Core.Entity.Economic.EconomicEvent", "Event")
                         .WithMany()
                         .HasForeignKey("EventID");
@@ -509,13 +600,52 @@ namespace DiaryOfTrader.Core.Migrations
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReview", b =>
                 {
+                    b.HasOne("DiaryOfTrader.Core.Entity.TraderExchange", "Exchange")
+                        .WithMany()
+                        .HasForeignKey("ExchangeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DiaryOfTrader.Core.Entity.Symbol", "Symbol")
                         .WithMany()
                         .HasForeignKey("SymbolID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Exchange");
+
                     b.Navigation("Symbol");
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReviewTimeFrame", b =>
+                {
+                    b.HasOne("DiaryOfTrader.Core.Entity.TimeFrame", "Frame")
+                        .WithMany()
+                        .HasForeignKey("FrameID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DiaryOfTrader.Core.Entity.ScreenShot", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageID");
+
+                    b.HasOne("DiaryOfTrader.Core.Entity.MarketReview", "Market")
+                        .WithMany("Frames")
+                        .HasForeignKey("MarketID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DiaryOfTrader.Core.Entity.Trend", "Trend")
+                        .WithMany()
+                        .HasForeignKey("TrendID");
+
+                    b.Navigation("Frame");
+
+                    b.Navigation("Image");
+
+                    b.Navigation("Market");
+
+                    b.Navigation("Trend");
                 });
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.ScreenShot", b =>
@@ -536,9 +666,31 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Navigation("Region");
                 });
 
+            modelBuilder.Entity("SymbolTraderExchange", b =>
+                {
+                    b.HasOne("DiaryOfTrader.Core.Entity.TraderExchange", null)
+                        .WithMany()
+                        .HasForeignKey("ExchangesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DiaryOfTrader.Core.Entity.Symbol", null)
+                        .WithMany()
+                        .HasForeignKey("SymbolsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.Diary", b =>
                 {
+                    b.Navigation("Events");
+
                     b.Navigation("Screenshot");
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReview", b =>
+                {
+                    b.Navigation("Frames");
                 });
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderRegion", b =>

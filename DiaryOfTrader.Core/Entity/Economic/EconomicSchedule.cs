@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using DiaryOfTrader.Core.Properties;
-
+﻿
 namespace DiaryOfTrader.Core.Entity.Economic
 {
   public enum Importance

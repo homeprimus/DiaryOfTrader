@@ -30,15 +30,22 @@ namespace DiaryOfTrader.EditDialogs.Calendar
 
     private void CbEconomicImportance_SelectedIndexChanged(object? sender, EventArgs e)
     {
-      importance = (Importance)((ComboBoxEdit)sender!).SelectedIndex;
-      Update(false);
+      var value= (Importance)((ComboBoxEdit)sender!).SelectedIndex;
+      if (importance != value)
+      {
+        importance = value;
+        Update(false);
+      }
     }
 
     private void rgEconomicPeriod_EditValueChanged(object sender, EventArgs e)
     {
-       period = (EconomicPeriod)((RadioGroup)sender!).SelectedIndex;
-       Update(false);
-
+       var value  = (EconomicPeriod)((RadioGroup)sender!).SelectedIndex;
+       if (period != value)
+       {
+         period = value;
+         Update(false);
+       }
     }
 
     [DefaultValue(null)]
