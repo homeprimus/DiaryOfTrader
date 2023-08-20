@@ -14,11 +14,17 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DiaryOfTrader.Core\DiaryOfTrader.Core.csproj" />
+      <ProjectReference Include="..\DiaryOfTrader.WebBlazor.Core\DiaryOfTrader.WebBlazor.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Components\" />
       <Folder Include="HttpRepository\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
     </ItemGroup>
 
 </Project>

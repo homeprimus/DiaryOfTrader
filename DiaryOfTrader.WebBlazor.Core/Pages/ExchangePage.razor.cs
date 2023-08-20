@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 using DiaryOfTrader.Core.Entity;
 using Microsoft.AspNetCore.Components;
 
-namespace DiaryOfTrader.Web.Pages;
+namespace DiaryOfTrader.WebBlazor.Core.Pages;
 
 public partial class ExchangePage
 {
