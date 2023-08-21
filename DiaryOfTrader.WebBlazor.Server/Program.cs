@@ -28,6 +28,7 @@ builder.Services.AddHttpClient("DiaryOfTraderAPI", (sp, cl) =>
 builder.Services.AddScoped<IExchangeHttpRepository, ExchangeHttpRepository>();
 builder.Services.AddScoped<ITimeFrameHttpRepository, TimeFrameHttpRepository>();
 builder.Services.AddScoped<IWalletHttpRepository, WalletHttpRepository>();
+builder.Services.AddScoped<ITraderResultHttpRepository, TraderResultHttpRepository>();
 
 
 #endregion
