@@ -1,9 +1,40 @@
+using Blazored.Toast;
+using DiaryOfTrader.WebBlazor.Core.HttpInterceptor;
+using DiaryOfTrader.WebBlazor.Core.HttpRepository;
+using DiaryOfTrader.WebBlazor.Server;
+using Microsoft.Extensions.Options;
+using Toolbelt.Blazor.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped(sp => new HttpClient (){BaseAddress = new Uri("https://localhost:7184")});
+
+builder.Services.Configure<ApiConfiguration>
+  (builder.Configuration.GetSection("ApiConfiguration"));
+
+#region Register HttpRepository
+
+builder.Services.AddHttpClient("DiaryOfTraderAPI", (sp, cl) =>
+{
+  var apiConfiguration = sp.GetRequiredService<IOptions<ApiConfiguration>>();
+  cl.BaseAddress = new Uri(apiConfiguration.Value.BaseAddress);
+  cl.EnableIntercept(sp);
+});
+
+builder.Services.AddScoped<IExchangeHttpRepository, ExchangeHttpRepository>();
+
+
+#endregion
+
+builder.Services.AddBlazoredToast();
+
+builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>()?.CreateClient("DiaryOfTraderAPI"));
+
+builder.Services.AddHttpClientInterceptor();
+builder.Services.AddScoped<HttpInterceptorService>();
 
 var app = builder.Build();
 

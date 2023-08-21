@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
+using SkiaSharp;
 
 namespace DiaryOfTrader.Core.Entity
 {
@@ -8,7 +9,8 @@ namespace DiaryOfTrader.Core.Entity
   {
     public string? Url { get; set; }
     [NotMapped]
-    public Image? Image { get; set; }
+    [JsonIgnore]
+    public SKImage? Image { get; set; }
     [JsonIgnore]
     public List<TraderExchange> Exchanges { get; set; } = new List<TraderExchange>();
 
@@ -16,9 +18,7 @@ namespace DiaryOfTrader.Core.Entity
     {
       get
       {
-        using var ms = new MemoryStream();
-        Image?.Save(ms, Image.RawFormat);
-        return ms.ToArray();
+        return Image?.EncodedData.ToArray();;
       }
       set
       {
@@ -29,7 +29,7 @@ namespace DiaryOfTrader.Core.Entity
         else
         {
           using var ms = new MemoryStream(value);
-          Image = Image.FromStream(ms);
+          Image = SKImage.FromEncodedData(ms);
         }
       }
     }

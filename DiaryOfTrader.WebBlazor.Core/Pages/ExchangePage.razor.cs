@@ -1,5 +1,5 @@
-using System.Net.Http.Json;
 using DiaryOfTrader.Core.Entity;
+using DiaryOfTrader.WebBlazor.Core.HttpRepository;
 using Microsoft.AspNetCore.Components;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;
@@ -8,13 +8,14 @@ public partial class ExchangePage
 {
   public List<TraderExchange> Exchanges { get; set; }
   
+    
   [Inject]
-  public HttpClient Http { get; set; }
+  public IExchangeHttpRepository HttpRepo { get; set; }
   
   
   protected override async Task OnInitializedAsync()
   {
-    Exchanges = await Http.GetFromJsonAsync<List<TraderExchange>>("sample-data/exchanges.json");
+    Exchanges = await HttpRepo.GetTraderExchanges();
   }
 
 }

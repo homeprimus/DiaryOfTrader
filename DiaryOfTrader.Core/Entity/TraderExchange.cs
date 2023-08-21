@@ -5,6 +5,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net.Mime;
+using SkiaSharp;
 
 namespace DiaryOfTrader.Core.Entity
 {
@@ -12,14 +14,13 @@ namespace DiaryOfTrader.Core.Entity
   {
     public string? Url { get; set; }
     [NotMapped]
-    public Image? Image { get; set; }
+    [JsonIgnore]
+    public SKImage? Image { get; set; }
     public byte[]? ImageData
     {
       get
       {
-        using var ms = new MemoryStream();
-        Image?.Save(ms, Image.RawFormat);
-        return ms.ToArray();
+        return Image?.EncodedData.ToArray();;
       }
       set
       {
@@ -30,7 +31,7 @@ namespace DiaryOfTrader.Core.Entity
         else
         {
           using var ms = new MemoryStream(value);
-          Image = Image.FromStream(ms);
+          Image = SKImage.FromEncodedData(ms);
         }
       }
     }
@@ -43,9 +44,9 @@ namespace DiaryOfTrader.Core.Entity
     [JsonIgnore]
     public List<Symbol> Symbols { get; set; } = new List<Symbol>();
 
-    private async Task<Image?> GetFavicon(string url, bool reload)
+    private async Task<SKImage?> GetFavicon(string url, bool reload)
     {
-      Image? image = null;
+      SKImage? image = null;
       if (!string.IsNullOrEmpty(url) && (Image != null || reload))
       {
 
@@ -95,7 +96,7 @@ namespace DiaryOfTrader.Core.Entity
 
             resp = await req.GetResponseAsync();
             using var s = resp.GetResponseStream();
-            image = System.Drawing.Image.FromStream(s);
+            image = SKImage.FromEncodedData(s);
           }
           catch (Exception e)
           {
