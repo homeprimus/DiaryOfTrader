@@ -1,6 +1,7 @@
 using Blazored.Toast;
 using DiaryOfTrader.WebBlazor.Core.HttpInterceptor;
 using DiaryOfTrader.WebBlazor.Core.HttpRepository;
+using DiaryOfTrader.WebBlazor.Core.HttpRepository.Interfaces;
 using DiaryOfTrader.WebBlazor.Server;
 using Microsoft.Extensions.Options;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
@@ -25,6 +26,8 @@ builder.Services.AddHttpClient("DiaryOfTraderAPI", (sp, cl) =>
 });
 
 builder.Services.AddScoped<IExchangeHttpRepository, ExchangeHttpRepository>();
+builder.Services.AddScoped<ITimeFrameHttpRepository, TimeFrameHttpRepository>();
+builder.Services.AddScoped<IWalletHttpRepository, WalletHttpRepository>();
 
 
 #endregion

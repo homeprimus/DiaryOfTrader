@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using DiaryOfTrader.Core.Entity;
+using DiaryOfTrader.WebBlazor.Core.HttpRepository.Interfaces;
 
 namespace DiaryOfTrader.WebBlazor.Core.HttpRepository;
 

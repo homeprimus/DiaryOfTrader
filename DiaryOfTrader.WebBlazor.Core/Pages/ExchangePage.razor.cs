@@ -1,5 +1,6 @@
 using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.WebBlazor.Core.HttpRepository;
+using DiaryOfTrader.WebBlazor.Core.HttpRepository.Interfaces;
 using Microsoft.AspNetCore.Components;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;
