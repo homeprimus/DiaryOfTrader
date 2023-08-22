@@ -2,14 +2,14 @@
 
 namespace DiaryOfTrader.WebApi.Core.Repository
 {
-  public class Repository<TEntity> : Disposable, IRepository<TEntity> where TEntity : Entity
+  public class RepositoryDb<TEntity> : Disposable, IRepository<TEntity> where TEntity : Entity
   {
     #region fields
     private readonly DbContext _data;
     private readonly DbSet<TEntity> _entity;
     #endregion
 
-    public Repository(DbContext data)
+    public RepositoryDb(DbContext data)
     {
       _data = data;
       _entity = _data.Set<TEntity>();

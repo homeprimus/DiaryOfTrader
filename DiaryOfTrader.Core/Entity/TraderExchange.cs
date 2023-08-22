@@ -11,7 +11,7 @@ namespace DiaryOfTrader.Core.Entity
   public class TraderExchange: Entity
   {
     public string? Url { get; set; }
-    [NotMapped]
+    [JsonIgnore, NotMapped]
     public Image? Image { get; set; }
     public byte[]? ImageData
     {
@@ -23,14 +23,21 @@ namespace DiaryOfTrader.Core.Entity
       }
       set
       {
-        if (value == null)
+        if (value == null || value.Length == 0)
         {
           Image = null;
         }
         else
         {
-          using var ms = new MemoryStream(value);
-          Image = Image.FromStream(ms);
+          try
+          {
+            using var ms = new MemoryStream(value);
+            Image = Image.FromStream(ms);
+          }
+          catch (Exception e)
+          {
+            Debug.WriteLine(e);
+          }
         }
       }
     }

@@ -1,8 +1,8 @@
-﻿namespace DiaryOfTrader.WebApi.Repository
+﻿namespace DiaryOfTrader.WebApi.RepositoryDb
 {
-  public class TraderRepository : Repository<Trader>, ITraderRepository
+  public class TraderRepositoryDb : RepositoryDb<Trader>, ITraderRepository
   {
-    public TraderRepository(DbContext data) : base(data)
+    public TraderRepositoryDb(DbContext data) : base(data)
     {
     }
     public async Task<Trader> Search(string user, string password)
