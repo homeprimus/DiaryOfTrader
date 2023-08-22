@@ -1,8 +1,6 @@
 ﻿
-using System.Collections;
-using System.Diagnostics;
-using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.Core.Entity.Economic;
+using DiaryOfTrader.Core.Interfaces.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

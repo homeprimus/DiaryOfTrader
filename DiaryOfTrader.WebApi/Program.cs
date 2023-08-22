@@ -1,9 +1,10 @@
 ﻿
 using System.Text;
 using DiaryOfTrader.Core.Data;
+using DiaryOfTrader.Core.Interfaces.Repository;
+using DiaryOfTrader.Core.Repository.RepositoryDb;
 using DiaryOfTrader.WebApi.Api;
 using DiaryOfTrader.WebApi.Auth;
-using DiaryOfTrader.WebApi.RepositoryDb;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
