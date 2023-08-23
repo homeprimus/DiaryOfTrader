@@ -1,4 +1,4 @@
-﻿namespace DiaryOfTrader.WebApi.Interface
+﻿namespace DiaryOfTrader.Core.Interfaces.Repository
 {
   public interface ITraderResultRepository: IRepository<TraderResult>
   {

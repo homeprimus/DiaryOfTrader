@@ -1,16 +1,15 @@
-﻿using DiaryOfTrader.Core.Core;
-using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Entity.Economic;
+﻿using DiaryOfTrader.Core.Data;
+using DiaryOfTrader.Core.Interfaces.Repository;
 
-namespace DiaryOfTrader.WebApi.Repository
+namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
-  public class EconomicCalendarRepository: Disposable, IEconomicCalendarRepository
+  public class EconomicCalendarRepositoryApi: Disposable, IEconomicCalendarRepository
   {
     #region fields
     private readonly DiaryOfTraderCtx _data;
     #endregion
 
-    public EconomicCalendarRepository(DbContext data)
+    public EconomicCalendarRepositoryApi(DbContext data)
     {
       _data = data as DiaryOfTraderCtx;
     }

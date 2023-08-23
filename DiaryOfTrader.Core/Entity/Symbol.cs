@@ -8,12 +8,12 @@ namespace DiaryOfTrader.Core.Entity
   public class Symbol : Entity
   {
     public string? Url { get; set; }
-    [NotMapped]
-    [JsonIgnore]
+    [JsonIgnore, NotMapped]
     public SKImage? Image { get; set; }
     [JsonIgnore]
     public List<TraderExchange> Exchanges { get; set; } = new List<TraderExchange>();
 
+    [JsonIgnore]
     public byte[]? ImageData
     {
       get
@@ -22,7 +22,7 @@ namespace DiaryOfTrader.Core.Entity
       }
       set
       {
-        if (value == null)
+        if (value == null || value.Length == 0)
         {
           Image = null;
         }

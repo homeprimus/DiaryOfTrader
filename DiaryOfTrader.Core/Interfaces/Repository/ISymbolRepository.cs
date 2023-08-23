@@ -1,5 +1,5 @@
 ﻿
-namespace DiaryOfTrader.WebApi.Interface
+namespace DiaryOfTrader.Core.Interfaces.Repository
 {
   public interface ISymbolRepository: IRepository<Symbol>
   {

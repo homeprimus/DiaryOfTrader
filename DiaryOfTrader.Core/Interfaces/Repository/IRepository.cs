@@ -1,4 +1,4 @@
-﻿namespace DiaryOfTrader.WebApi.Core.Repository
+﻿namespace DiaryOfTrader.Core.Interfaces.Repository
 {
   public interface IRepository<TEntity> : IDisposable
 

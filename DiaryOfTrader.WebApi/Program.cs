@@ -1,9 +1,10 @@
 ﻿
 using System.Text;
 using DiaryOfTrader.Core.Data;
+using DiaryOfTrader.Core.Interfaces.Repository;
+using DiaryOfTrader.Core.Repository.RepositoryDb;
 using DiaryOfTrader.WebApi.Api;
 using DiaryOfTrader.WebApi.Auth;
-using DiaryOfTrader.WebApi.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -31,17 +32,17 @@ void ResgistryServices(IServiceCollection serveices)
 
   serveices.AddScoped<DbContext, DiaryOfTraderCtx>();
   //// инткрфейс добавили
-  serveices.AddScoped<ISymbolRepository, SymbolRepository>();
-  serveices.AddScoped<ITimeFrameRepository, TimeFrameRepository>();
-  serveices.AddScoped<ITraderExchangeRepository, TraderExchangeRepository>();
-  serveices.AddScoped<ITraderResultRepository, TraderResultRepository>();
-  serveices.AddScoped<ITraderSessionRepository, TraderSessionRepository>();
-  serveices.AddScoped<ITraderRegionRepository, TraderRegionRepository>();
-  serveices.AddScoped<ITrendRepository, TrendRepository>();
-  serveices.AddScoped<IWalletRepository, WalletRepository>();
-  serveices.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepository>();
+  serveices.AddScoped<ISymbolRepository, SymbolRepositoryDb>();
+  serveices.AddScoped<ITimeFrameRepository, TimeFrameRepositoryDb>();
+  serveices.AddScoped<ITraderExchangeRepository, TraderExchangeRepositoryDb>();
+  serveices.AddScoped<ITraderResultRepository, TraderResultRepositoryDb>();
+  serveices.AddScoped<ITraderSessionRepository, TraderSessionRepositoryDb>();
+  serveices.AddScoped<ITraderRegionRepository, TraderRegionRepositoryDb>();
+  serveices.AddScoped<ITrendRepository, TrendRepositoryDb>();
+  serveices.AddScoped<IWalletRepository, WalletRepositoryDb>();
+  serveices.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
 
-  serveices.AddScoped<ITraderRepository, TraderRepository>();
+  serveices.AddScoped<ITraderRepository, TraderRepositoryDb>();
 
   // добавили авторизыцию
   serveices.AddSingleton<ITokenService>(new TokenService());
@@ -82,7 +83,7 @@ void Configure(WebApplication application)
   application.UseAuthentication();
   application.UseAuthorization();
 
-  if (application.Environment.IsDevelopment())
+  if (true) //(application.Environment.IsDevelopment())
   {
     // сваггер добавили
     application.UseSwagger();

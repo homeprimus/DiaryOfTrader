@@ -13,14 +13,13 @@ namespace DiaryOfTrader.Core.Entity
   public class TraderExchange: Entity
   {
     public string? Url { get; set; }
-    [NotMapped]
-    [JsonIgnore]
+    [JsonIgnore, NotMapped]
     public SKImage? Image { get; set; }
     public byte[]? ImageData
     {
       get
       {
-        return Image?.EncodedData.ToArray();;
+        return Image?.EncodedData.ToArray();
       }
       set
       {

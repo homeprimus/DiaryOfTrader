@@ -1,6 +1,4 @@
-﻿using DiaryOfTrader.Core.Entity.Economic;
-
-namespace DiaryOfTrader.WebApi.Interface
+﻿namespace DiaryOfTrader.Core.Interfaces.Repository
 {
   public interface IEconomicCalendarRepository : IDisposable
   {
