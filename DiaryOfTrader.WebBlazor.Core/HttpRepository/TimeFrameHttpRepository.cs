@@ -14,7 +14,7 @@ public class TimeFrameHttpRepository:ITimeFrameHttpRepository
     _client = client;
   }
   
-  public async Task<List<TimeFrame>> GetTimeFrame()
+  public async Task<List<TimeFrame>?> GetTimeFrame()
   {
     return await _client.GetFromJsonAsync<List<TimeFrame>>(_url);
   }

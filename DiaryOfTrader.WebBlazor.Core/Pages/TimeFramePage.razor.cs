@@ -6,7 +6,7 @@ namespace DiaryOfTrader.WebBlazor.Core.Pages;
 
 public partial class TimeFramePage
 {
-  public List<TimeFrame> TimeFrames { get; set; }
+  public List<TimeFrame>? TimeFrames { get; set; }
   
     
   [Inject]

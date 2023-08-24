@@ -29,6 +29,7 @@ builder.Services.AddScoped<IExchangeHttpRepository, ExchangeHttpRepository>();
 builder.Services.AddScoped<ITimeFrameHttpRepository, TimeFrameHttpRepository>();
 builder.Services.AddScoped<IWalletHttpRepository, WalletHttpRepository>();
 builder.Services.AddScoped<ITraderResultHttpRepository, TraderResultHttpRepository>();
+builder.Services.AddScoped<ITrendHttpRepository, TrendHttpRepository>();
 
 
 #endregion

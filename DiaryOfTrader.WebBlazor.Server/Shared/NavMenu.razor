@@ -1,120 +1,61 @@
-﻿@* <div class="top-row ps-3 navbar navbar-dark"> *@
-@*     <div class="container-fluid"> *@
-@*         <a class="navbar-brand" href="">DiaryOfTrader.WebBlazor.Server</a> *@
-@*         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu"> *@
-@*             <span class="navbar-toggler-icon"></span> *@
-@*         </button> *@
-@*     </div> *@
-@* </div> *@
-
-<div>
-    @* <nav class="flex-column"> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="" Match="NavLinkMatch.All"> *@
-    @*             <span class="oi oi-home" aria-hidden="true"></span> Home *@
-    @*         </NavLink> *@
-    @*     </div> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="exchanges"> *@
-    @*             <span class="oi oi-list-rich" aria-hidden="true"></span> Биржи *@
-    @*         </NavLink> *@
-    @*     </div> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="tool"> *@
-    @*             <span class="oi oi-list-rich" aria-hidden="true"></span> Инструмент *@
-    @*         </NavLink> *@
-    @*     </div> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="tradingsession"> *@
-    @*             <span class="oi oi-list-rich" aria-hidden="true"></span> Торговая сессия *@
-    @*         </NavLink> *@
-    @* *@
-    @*     </div> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="timeframe"> *@
-    @*             <span class="oi oi-list-rich" aria-hidden="true"></span> Тайм фрейм *@
-    @*         </NavLink> *@
-    @*     </div> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="trend"> *@
-    @*             <span class="oi oi-list-rich" aria-hidden="true"></span> Тренд *@
-    @*         </NavLink> *@
-    @*     </div> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="traderresult"> *@
-    @*             <span class="oi oi-list-rich" aria-hidden="true"></span> Результат сделки *@
-    @*         </NavLink> *@
-    @*     </div> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="wallettype"> *@
-    @*             <span class="oi oi-list-rich" aria-hidden="true"></span> Тип кошелька *@
-    @*         </NavLink> *@
-    @*     </div> *@
-    @*     <div class="nav-item px-3"> *@
-    @*         <NavLink class="nav-link" href="economiccalendar"> *@
-    @*             <span class="oi oi-list-rich" aria-hidden="true"></span> *@
-    @*             <div>Эконом. календарь</div> *@
-    @*         </NavLink> *@
-    @*     </div> *@
-    @* </nav> *@
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
-        <div class="container-fluid">
-            @* <a class="navbar-brand" href="#">Expand at md</a> *@
-            @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation"> *@
-            @*   <span class="navbar-toggler-icon"></span> *@
-            @* </button> *@
-
-            <div class="collapse navbar-collapse" id="navbarsExample04">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    @* <li class="nav-item"> *@
-                    @*     <a class="nav-link active" aria-current="page" href="/">Home</a> *@
-                    @* </li> *@
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                            <span class="oi oi-home" aria-hidden="true"></span> Дневник трейдера
-                        </NavLink>
-                    </div>
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-item dropdown" href="#">
-                            <span class="nav-link dropdown-toggle" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Справочники</span>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown04">
-                                <li>
-                                    <a class="dropdown-item" href="exchanges">Биржи</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="tool">Инструмент</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="tradingsession">Торговая сессия</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="timeframe">Тайм фрейм</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="trend">Тренд</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="traderresult">Результат сделки</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="wallettype">Тип кошелька</a>
-                                </li>
-                            </ul>
-                        </NavLink>
-                    </div>
-                </ul>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="">
-                        <span class="oi" aria-hidden="true"></span> Вход
-                    </NavLink>
-                </div>
-                @* <form> *@
-                @*     <input class="form-control" type="text" placeholder="Search" aria-label="Search"> *@
-                @* </form> *@
-            </div>
+﻿<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Дневник инвестора</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Справочники
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="exchanges">Биржи</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="tool">Инструмент</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="tradingsession">Торговая сессия</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="timeframe">Тайм фрейм</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="trend">Тренд</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="traderresult">Результат сделки</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="wallettype">Тип кошелька</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Экономический календарь</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-current="page" href="">
+                        <i class="fa-solid fa-user"></i>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="">Регистрация</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="">Авторизация</a>
+                            </li>
+                        </ul>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
-</div>
+    </div>
+</nav>
 
 @code {
     private bool collapseNavMenu = true;
