@@ -1,7 +1,7 @@
 using Blazored.Toast;
+using DiaryOfTrader.Core.Interfaces.Repository;
+using DiaryOfTrader.Core.Repository.RepositoryApi;
 using DiaryOfTrader.WebBlazor.Core.HttpInterceptor;
-using DiaryOfTrader.WebBlazor.Core.HttpRepository;
-using DiaryOfTrader.WebBlazor.Core.HttpRepository.Interfaces;
 using DiaryOfTrader.WebBlazor.Server;
 using Microsoft.Extensions.Options;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
@@ -25,12 +25,13 @@ builder.Services.AddHttpClient("DiaryOfTraderAPI", (sp, cl) =>
   cl.EnableIntercept(sp);
 });
 
-builder.Services.AddScoped<IExchangeHttpRepository, ExchangeHttpRepository>();
-builder.Services.AddScoped<ITimeFrameHttpRepository, TimeFrameHttpRepository>();
-builder.Services.AddScoped<IWalletHttpRepository, WalletHttpRepository>();
-builder.Services.AddScoped<ITraderResultHttpRepository, TraderResultHttpRepository>();
-builder.Services.AddScoped<ITrendHttpRepository, TrendHttpRepository>();
-builder.Services.AddScoped<ITraderSessionHttpRepository, TraderSessionHttpRepository>();
+var rootApi = "https://localhost:7236";
+builder.Services.AddScoped<ITraderExchangeRepository, TraderExchangeRepositoryApi>(_ => new TraderExchangeRepositoryApi(rootApi));
+builder.Services.AddScoped<ITimeFrameRepository, TimeFrameRepositoryApi>(_ => new TimeFrameRepositoryApi(rootApi));
+builder.Services.AddScoped<IWalletRepository, WalletRepositoryApi>(_ => new WalletRepositoryApi(rootApi));
+builder.Services.AddScoped<ITraderResultRepository, TraderResultRepositoryApi>(_ => new TraderResultRepositoryApi(rootApi));
+builder.Services.AddScoped<ITrendRepository, TrendRepositoryApi>(_ => new TrendRepositoryApi(rootApi));
+builder.Services.AddScoped<ITraderSessionRepository, TraderSessionRepositoryApi>(_ => new TraderSessionRepositoryApi(rootApi));
 
 
 #endregion

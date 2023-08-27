@@ -1,0 +1,19 @@
+@page "/economiccalendar"
+@using DiaryOfTrader.Core.Entity.Economic
+
+@foreach (var choice in Enum.GetValues(typeof(EconomicPeriod)).OfType<EconomicPeriod>().ToArray())
+{
+    <label>
+        <input name="yourColor" type="radio"
+               value="@choice"
+               checked="@(currentChoice == choice)"
+               @onchange="@(() => { currentChoice = choice; })">
+        @choice.ToString()
+    </label>
+}
+
+<p>You chose: @currentChoice</p>
+
+@code {
+    EconomicPeriod currentChoice = EconomicPeriod.today;
+}

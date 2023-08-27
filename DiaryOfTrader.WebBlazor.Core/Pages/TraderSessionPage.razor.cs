@@ -1,18 +1,18 @@
 ﻿using DiaryOfTrader.Core.Entity;
-using DiaryOfTrader.WebBlazor.Core.HttpRepository.Interfaces;
+using DiaryOfTrader.Core.Interfaces.Repository;
 using Microsoft.AspNetCore.Components;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;
 
 public partial class TraderSessionPage
 {
-  public List<TraderSession>? TraderSessions { get; set; }
+  public List<TraderSession?> TraderSessions { get; set; }
 
-  [Inject] public ITraderSessionHttpRepository HttpRepo { get; set; }
+  [Inject] public ITraderSessionRepository HttpRepo { get; set; }
 
 
   protected override async Task OnInitializedAsync()
   {
-    TraderSessions = await HttpRepo.GetTraderSessions();
+    TraderSessions = await HttpRepo.GetAllAsync();
   }
 }

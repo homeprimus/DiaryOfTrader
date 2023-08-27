@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace DiaryOfTrader.Core.Entity.Economic
 {
   public enum Importance
@@ -12,10 +14,15 @@ namespace DiaryOfTrader.Core.Entity.Economic
   public enum EconomicPeriod
   {
     custom = -1,
+    [Display(Name="Вчера")]
     yesterday = 0,
+    [Display(Name="Сегодня")]
     today = 1,
+    [Display(Name="Завтра")]
     tomorrow = 2,
+    [Display(Name="На неделю")]
     thisWeek = 3,
+    [Display(Name="Следующая неделя")]
     nextWeek = 4,
   }
 

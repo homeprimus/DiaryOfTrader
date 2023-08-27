@@ -1,20 +1,20 @@
 using DiaryOfTrader.Core.Entity;
-using DiaryOfTrader.WebBlazor.Core.HttpRepository.Interfaces;
+using DiaryOfTrader.Core.Interfaces.Repository;
 using Microsoft.AspNetCore.Components;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;
 
 public partial class TimeFramePage
 {
-  public List<TimeFrame>? TimeFrames { get; set; }
+  public List<TimeFrame?> TimeFrames { get; set; }
   
     
   [Inject]
-  public ITimeFrameHttpRepository HttpRepo { get; set; }
+  public ITimeFrameRepository HttpRepo { get; set; }
   
   
   protected override async Task OnInitializedAsync()
   {
-    TimeFrames = await HttpRepo.GetTimeFrame();
+    TimeFrames = await HttpRepo.GetAllAsync();
   }
 }
