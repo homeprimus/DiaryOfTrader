@@ -32,6 +32,8 @@ builder.Services.AddScoped<IWalletRepository, WalletRepositoryApi>(_ => new Wall
 builder.Services.AddScoped<ITraderResultRepository, TraderResultRepositoryApi>(_ => new TraderResultRepositoryApi(rootApi));
 builder.Services.AddScoped<ITrendRepository, TrendRepositoryApi>(_ => new TrendRepositoryApi(rootApi));
 builder.Services.AddScoped<ITraderSessionRepository, TraderSessionRepositoryApi>(_ => new TraderSessionRepositoryApi(rootApi));
+builder.Services.AddScoped<ITraderRegionRepository, TraderRegionRepositoryApi>(_ => new TraderRegionRepositoryApi(rootApi));
+builder.Services.AddScoped<ISymbolRepository, SymbolRepositoryApi>(_ => new SymbolRepositoryApi(rootApi));
 
 
 #endregion

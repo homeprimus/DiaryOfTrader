@@ -6,14 +6,23 @@
     <label>
         <input name="yourColor" type="radio"
                value="@choice"
-               checked="@(currentChoice == choice)"
-               @onchange="@(() => { currentChoice = choice; })">
+               checked="@(CurrentChoice == choice)"
+               @onchange="@(() => { CurrentChoice = choice; })">
         @choice.ToString()
     </label>
 }
 
-<p>You chose: @currentChoice</p>
-
-@code {
-    EconomicPeriod currentChoice = EconomicPeriod.today;
-}
+<p/>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Время</th>
+        <th scope="col">Валюта</th>
+        <th scope="col">Событие</th>
+        <th scope="col">Факт</th>
+        <th scope="col">Прогноз</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

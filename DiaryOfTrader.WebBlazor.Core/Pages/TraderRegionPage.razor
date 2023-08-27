@@ -1,0 +1,15 @@
+@page "/tradertegion"
+@using DiaryOfTrader.Core.Entity
+
+<PageTitle>Regions</PageTitle>
+
+<div class="row">
+    <div class="col-md-2">
+        <a class="btn btn-success mb-1" href="">+</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <CatalogTable TItem="TraderRegion" Entities="TraderRegions"/>
+    </div>
+</div>
