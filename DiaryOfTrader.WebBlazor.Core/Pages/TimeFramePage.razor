@@ -1,5 +1,5 @@
 @page "/timeframe"
-@using DiaryOfTrader.WebBlazor.Core.Components
+@using DiaryOfTrader.Core.Entity
 
 <PageTitle>Time frame</PageTitle>
 
@@ -10,6 +10,6 @@
 </div>
 <div class="row">
     <div class="col">
-        <TimeFrameTable TimeFrames="TimeFrames"/>
+        <CatalogTable TItem="TimeFrame" Entities="TimeFrames"/>
     </div>
 </div>

@@ -1,5 +1,5 @@
 @page "/exchanges"
-@using DiaryOfTrader.WebBlazor.Core.Components
+@using DiaryOfTrader.Core.Entity
 
 <PageTitle>Exchanges</PageTitle>
 
@@ -10,6 +10,6 @@
 </div>
 <div class="row">
     <div class="col">
-        <ExchangesTable Exchanges="Exchanges"/>
+        <CatalogTable TItem="TraderExchange" Entities="Exchanges"/>
     </div>
 </div>

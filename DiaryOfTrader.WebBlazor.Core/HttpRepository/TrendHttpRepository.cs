@@ -7,7 +7,7 @@ namespace DiaryOfTrader.WebBlazor.Core.HttpRepository;
 public class TrendHttpRepository: ITrendHttpRepository
 {
   private readonly HttpClient _client;
-  private string _url = "trend";
+  private string _url = "trends";
 
   public TrendHttpRepository(HttpClient client)
   {
