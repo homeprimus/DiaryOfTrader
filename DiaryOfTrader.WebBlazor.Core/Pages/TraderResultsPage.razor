@@ -1,4 +1,5 @@
 @page "/traderresult"
+@using DiaryOfTrader.Core.Entity
 
 <PageTitle>Trade result</PageTitle>
 
@@ -9,6 +10,6 @@
 </div>
 <div class="row">
     <div class="col">
-        <TraderResultTable TraderResults="TraderResults"/>
+        <CatalogTable TItem="TraderResult" Entities="TraderResults"/>
     </div>
 </div>
