@@ -39,9 +39,11 @@ namespace DiaryOfTrader.Core.Entity.Economic
     public string Prognosis { get; set; } = string.Empty;
     public string Previous { get; set; } = string.Empty;
     public string Last { get; set; } = string.Empty;
+    [JsonIgnore]
     public string HRef { get; set; } = string.Empty;
     public EconomicEvent? Event { get; set; }
 
+    [JsonIgnore]
     public static List<KeyValuePair<Importance, string>> Importances
     {
       get { return importances; }

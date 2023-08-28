@@ -1,20 +1,17 @@
 ﻿using System.Diagnostics;
-using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Properties;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiaryOfTrader.Core.Entity.Economic
 {
   public class EconomicParser
   {
-    private DiaryOfTraderCtx contex;
+    private DiaryOfTraderCtx? contex;
     private CancellationToken cancellationToken;
-    public EconomicParser(DiaryOfTraderCtx contex, CancellationToken cancellationToken)
+    public EconomicParser(DiaryOfTraderCtx? contex, CancellationToken cancellationToken)
     {
       this.contex = contex;
       this.cancellationToken = cancellationToken;
@@ -65,15 +62,6 @@ namespace DiaryOfTrader.Core.Entity.Economic
     }
     private async Task EventInfoAsync(EconomicSchedule schedule, bool reload = false)
     {
-      string GetValue(string regex, string value)
-      {
-        var match = new Regex(regex).Match(value);
-        if (match.Success)
-        {
-          return match.Result("${value}");
-        }
-        return string.Empty;
-      }
 
       if (!reload)
       {
@@ -85,86 +73,8 @@ namespace DiaryOfTrader.Core.Entity.Economic
         }
       }
 
-      if (string.IsNullOrEmpty(schedule.HRef))
-      {
-        var result = new EconomicEvent
-        {
-          LocalRef = schedule.HRef,
-          Description = Resources.NotPlannedEvents,
-          Country = string.Empty,
-          Currency = string.Empty,
-          SourceRef = string.Empty
-        };
-
-        schedule.Event = result;
-        await contex.EconomicEvent.AddAsync(result, cancellationToken);
-
-        return;
-      }
-
-      var req = WebRequest.Create(EndPoint + schedule.HRef) as HttpWebRequest;
-      SetDefaultRequest(req);
-      req.Method = "GET";
-      req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7";
-      req.Referer = "https://" + Resources.EconomicEndPointPrefix + "investing.com/economic-calendar/";
-      req.AutomaticDecompression = DecompressionMethods.All;
-
-      req.Host = Resources.EconomicEndPointPrefix + "investing.com";
-
-      req.Headers.Add("Accept-Encoding", "gzip, deflate, br");
-      req.Headers.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
-
-      req.Headers.Add("Sec-Fetch-Dest", "document");
-      req.Headers.Add("Sec-Fetch-Mode", "navigate");
-      req.Headers.Add("Sec-Fetch-Site", "same-origin");
-      req.Headers.Add("Sec-Fetch-User", "?1");
-      req.Headers.Add("Upgrade-Insecure-Requests", "1");
-
-      if(cancellationToken.IsCancellationRequested)
-        return;
-
-      try
-      {
-        var resp =  req.GetResponse();
-        var stream = resp.GetResponseStream();
-        var html = new StreamReader(stream).ReadToEnd();
-        if (!string.IsNullOrEmpty(html))
-        {
-          const string OVER_VIEW_BOX = @"<div id=""overViewBox"" class=""overViewBox event"">";
-          var sourceInfo = @"<span>" + Resources.EconomicSource + "</span>";
-
-          var i = html.IndexOf(OVER_VIEW_BOX, StringComparison.Ordinal);
-          if (i > -1)
-          {
-            i += OVER_VIEW_BOX.Length;
-            var y = html.IndexOf(sourceInfo, i, StringComparison.Ordinal) + sourceInfo.Length;
-            y = html.IndexOf("</div>", y, StringComparison.Ordinal);
-            var s = html.Substring(i, y - i);
-
-            var result = new EconomicEvent
-            {
-              LocalRef = schedule.HRef,
-              Description = GetValue(@"<div class=""left"">(?<value>.*?)\n?<\/div>", s),
-              Country = GetValue(@"<span>" + Resources.EconomicCountry + @"<\/span>\n?<span><i title=""(?<value>.*?)""", s),
-              Currency = GetValue(@"<span>" + Resources.EconomicCurency + @"<\/span>\n?<span>(?<value>.*?)<\/span>", s),
-              SourceRef = GetValue(@"<span>" + Resources.EconomicSource + @"<\/span>\n?<span><a href=""(?<value>.*?)""", s)
-            };
-
-            if (string.IsNullOrEmpty(result.Description))
-            {
-              result.Description = schedule.Description;
-            }
-
-            schedule.Event = result;
-            await contex.EconomicEvent.AddAsync(result, cancellationToken);
-
-          }
-        }
-      }
-      catch (Exception e)
-      {
-        Debug.WriteLine(e.ToString());
-      }
+      await DoEventInfoAsync(schedule);
+      await contex.EconomicEvent.AddAsync(schedule.Event, cancellationToken);
     }
 
     public Task UpdateThisWeekAsync()
@@ -240,6 +150,41 @@ namespace DiaryOfTrader.Core.Entity.Economic
           return orig;
       }
 
+      var result = await DoParseAsync(startDate, endDate, period, importance);
+      if (!noResultFlag)
+      {
+        if (!cancellationToken.IsCancellationRequested)
+        {
+          orig.Where(e => !result.Contains(e)).ToList().ForEach(e => contex.EconomicSchedule.Remove(e));
+          result.Where(e => !orig.Contains(e)).ToList().ForEach(e => contex.EconomicSchedule.Add(e));
+        }
+
+        await contex.SaveChangesAsync(cancellationToken);
+
+      }
+
+      return result;
+    }
+
+    public async Task<List<EconomicSchedule>> GetEconomicScheduleAsync(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
+    {
+      var result = await DoParseAsync(startDate, endDate, period, importance);
+      var tasks = new Task[result.Count];
+      var i = 0;
+      while (i < result.Count && !cancellationToken.IsCancellationRequested)
+      {
+        tasks[i] = DoEventInfoAsync(result[i]);
+        i++;
+      }
+      if (!cancellationToken.IsCancellationRequested)
+      {
+        Task.WaitAll(tasks);
+      }
+
+      return result;
+    }
+    private async Task<List<EconomicSchedule>> DoParseAsync(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
+    {
       var result = new List<EconomicSchedule>();
       var data = new StringBuilder();
 
@@ -342,15 +287,14 @@ namespace DiaryOfTrader.Core.Entity.Economic
             }
             else if (trValue.Contains("class=\"noResults center\""))
             {
-              noResultFlag = true;
               var noResultMath = noResult.Match(trValue);
 
               if (noResultMath.Success)
               {
                 var ev = new EconomicSchedule
                 {
-                  Time = startDate, 
-                  Description = noResultMath.Result("${value}") 
+                  Time = startDate,
+                  Description = noResultMath.Result("${value}")
                 };
                 result.Add(ev);
               }
@@ -448,19 +392,99 @@ namespace DiaryOfTrader.Core.Entity.Economic
         Debug.WriteLine(e.ToString());
       }
 
-      if (!noResultFlag)
-      {
-        if (!cancellationToken.IsCancellationRequested)
-        {
-          orig.Where(e => !result.Contains(e)).ToList().ForEach(e => contex.EconomicSchedule.Remove(e));
-          result.Where(e => !orig.Contains(e)).ToList().ForEach(e => contex.EconomicSchedule.Add(e));
-        }
-
-        await contex.SaveChangesAsync(cancellationToken);
-
-      }
-
       return result;
     }
+
+    private async Task DoEventInfoAsync(EconomicSchedule schedule)
+    {
+      string GetValue(string regex, string value)
+      {
+        var match = new Regex(regex).Match(value);
+        if (match.Success)
+        {
+          return match.Result("${value}");
+        }
+        return string.Empty;
+      }
+
+      if (string.IsNullOrEmpty(schedule.HRef))
+      {
+        var result = new EconomicEvent
+        {
+          LocalRef = schedule.HRef,
+          Description = Resources.NotPlannedEvents,
+          Country = string.Empty,
+          Currency = string.Empty,
+          SourceRef = string.Empty
+        };
+
+        schedule.Event = result;
+        return;
+      }
+
+      var req = WebRequest.Create(EndPoint + schedule.HRef) as HttpWebRequest;
+      SetDefaultRequest(req);
+      req.Method = "GET";
+      req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7";
+      req.Referer = "https://" + Resources.EconomicEndPointPrefix + "investing.com/economic-calendar/";
+      req.AutomaticDecompression = DecompressionMethods.All;
+
+      req.Host = Resources.EconomicEndPointPrefix + "investing.com";
+
+      req.Headers.Add("Accept-Encoding", "gzip, deflate, br");
+      req.Headers.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
+
+      req.Headers.Add("Sec-Fetch-Dest", "document");
+      req.Headers.Add("Sec-Fetch-Mode", "navigate");
+      req.Headers.Add("Sec-Fetch-Site", "same-origin");
+      req.Headers.Add("Sec-Fetch-User", "?1");
+      req.Headers.Add("Upgrade-Insecure-Requests", "1");
+
+      if (cancellationToken.IsCancellationRequested)
+        return;
+
+      try
+      {
+        var resp = req.GetResponse();
+        var stream = resp.GetResponseStream();
+        var html = new StreamReader(stream).ReadToEnd();
+        if (!string.IsNullOrEmpty(html))
+        {
+          const string OVER_VIEW_BOX = @"<div id=""overViewBox"" class=""overViewBox event"">";
+          var sourceInfo = @"<span>" + Resources.EconomicSource + "</span>";
+
+          var i = html.IndexOf(OVER_VIEW_BOX, StringComparison.Ordinal);
+          if (i > -1)
+          {
+            i += OVER_VIEW_BOX.Length;
+            var y = html.IndexOf(sourceInfo, i, StringComparison.Ordinal) + sourceInfo.Length;
+            y = html.IndexOf("</div>", y, StringComparison.Ordinal);
+            var s = html.Substring(i, y - i);
+
+            var result = new EconomicEvent
+            {
+              LocalRef = schedule.HRef,
+              Description = GetValue(@"<div class=""left"">(?<value>.*?)\n?<\/div>", s),
+              Country = GetValue(@"<span>" + Resources.EconomicCountry + @"<\/span>\n?<span><i title=""(?<value>.*?)""", s),
+              Currency = GetValue(@"<span>" + Resources.EconomicCurency + @"<\/span>\n?<span>(?<value>.*?)<\/span>", s),
+              SourceRef = GetValue(@"<span>" + Resources.EconomicSource + @"<\/span>\n?<span><a href=""(?<value>.*?)""", s)
+            };
+
+            if (string.IsNullOrEmpty(result.Description))
+            {
+              result.Description = schedule.Description;
+            }
+
+            schedule.Event = result;
+
+          }
+        }
+      }
+      catch (Exception e)
+      {
+        Debug.WriteLine(e.ToString());
+      }
+    }
+    )
   }
 }
