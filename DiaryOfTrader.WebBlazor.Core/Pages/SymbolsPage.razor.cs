@@ -4,15 +4,16 @@ using Microsoft.AspNetCore.Components;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;
 
-public partial class TraderSessionPage
+public partial class SymbolsPage
 {
-  public List<TraderSession?> TraderSessions { get; set; }
-
-  [Inject] public ITraderSessionRepository HttpRepo { get; set; }
-
-
+  public List<Symbol?> Symbols { get; set; }
+  
+  [Inject]
+  public ISymbolRepository HttpRepo { get; set; }
+  
+  
   protected override async Task OnInitializedAsync()
   {
-    TraderSessions = await HttpRepo.GetAllAsync();
+    Symbols = await HttpRepo.GetAllAsync();
   }
 }

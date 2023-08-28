@@ -4,15 +4,16 @@ using Microsoft.AspNetCore.Components;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;
 
-public partial class TraderSessionPage
+public partial class TraderRegionPage
 {
-  public List<TraderSession?> TraderSessions { get; set; }
-
-  [Inject] public ITraderSessionRepository HttpRepo { get; set; }
-
-
+  public List<TraderRegion?> TraderRegions { get; set; }
+  
+  [Inject]
+  public ITraderRegionRepository HttpRepo { get; set; }
+  
+  
   protected override async Task OnInitializedAsync()
   {
-    TraderSessions = await HttpRepo.GetAllAsync();
+    TraderRegions = await HttpRepo.GetAllAsync();
   }
 }
