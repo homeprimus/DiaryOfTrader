@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Json;
 using System.Web;
-using DiaryOfTrader.Core.Interfaces.Repository;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
@@ -31,10 +30,12 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
       query[PERIOD] = period.ToString();
       query[IMPORTANCE] = importance.ToString();
       uriBuilder.Query = query.ToString();
-      return await _client.GetFromJsonAsync<List<EventCalendar>>(uriBuilder.ToString());
+      var events =  await _client.GetFromJsonAsync<List<EconomicSchedule>>(uriBuilder.ToString());
+      return EconomicParser.MakeEventCalendar(events);
     }
 
-    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
+    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period,
+      Importance importance)
     {
       var uriBuilder = new UriBuilder(_endPoint);
       var query = HttpUtility.ParseQueryString(uriBuilder.Query);
@@ -43,8 +44,10 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
       query[PERIOD] = period.ToString();
       query[IMPORTANCE] = importance.ToString();
       uriBuilder.Query = query.ToString();
-      return await _client.GetFromJsonAsync<List<EventCalendar>>(uriBuilder.ToString());
+      var events = await _client.GetFromJsonAsync<List<EconomicSchedule>>(uriBuilder.ToString());
+      return EconomicParser.MakeEventCalendar(events);
     }
+
     protected override void Free()
     {
       base.Free();

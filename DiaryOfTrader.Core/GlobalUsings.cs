@@ -9,5 +9,6 @@ global using DiaryOfTrader.Core.Attributes;
 global using DiaryOfTrader.Core.Entity.Economic;
 
 global using DiaryOfTrader.Core.Properties;
+global using DiaryOfTrader.Core.Interfaces.Repository;
 
 
