@@ -1,13 +1,14 @@
 @page "/economiccalendar"
 @using DiaryOfTrader.Core.Entity.Economic
 
+
 @foreach (var choice in Enum.GetValues(typeof(EconomicPeriod)).OfType<EconomicPeriod>().ToArray())
 {
     <label>
         <input name="yourColor" type="radio"
                value="@choice"
                checked="@(Period == choice)"
-               @onchange="@(() => { Period = choice; })">
+               @onchange="@(() => { OnPeriodChanged(choice); })">
         @choice.ToString()
     </label>
 }
@@ -25,5 +26,28 @@
     </tr>
     </thead>
     <tbody>
+    @if (EconomicCalendars != null)
+    {
+        @foreach (var calendar in EconomicCalendars)
+        {
+            <tr>
+                <td class="align-middle">
+                    @calendar.Time
+                </td>
+                <td class="align-middle">
+                    @calendar.Currency
+                </td>
+                <td class="align-middle">
+                    @calendar.Description
+                </td>
+                <td class="align-middle">
+                    @calendar.Factual
+                </td>
+                <td class="align-middle">
+                    @calendar.Prognosis
+                </td>
+            </tr>
+        }
+    }
     </tbody>
 </table>
