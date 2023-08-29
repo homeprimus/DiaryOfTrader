@@ -1,60 +1,57 @@
-﻿using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Interfaces.Repository;
+﻿using System.Net.Http.Json;
+using System.Web;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
   public class EconomicCalendarRepositoryApi: Disposable, IEconomicCalendarRepository
   {
+    #region const
+    private const string CALENDAR = "/calendar";
+    private const string PERIOD = "period";
+    private const string IMPORTANCE = "importance";
+    private const string END_DATE = "enddate";
+    private const string START_DATE = "startdate";
+    private const string DATE_FORMAT = "YYYY-MM-dd";
+    #endregion
     #region fields
-    private readonly DiaryOfTraderCtx _data;
+    private readonly HttpClient _client = new ();
+    private readonly string _endPoint;
     #endregion
 
-    public EconomicCalendarRepositoryApi(DbContext data)
+    public EconomicCalendarRepositoryApi(string root)
     {
-      _data = data as DiaryOfTraderCtx;
+      _endPoint = root + CALENDAR;
     }
 
-    private List<EventCalendar> MakeEventCalendar(List<EconomicSchedule> events)
-    {
-      return events
-        .Join(
-          EconomicSchedule.Importances,
-          e => e.Importance,
-          i => (int)i.Key,
-          (e, i)
-            => new EventCalendar()
-            {
-              Date = e.Time,
-              Time = e.Time.ToString("HH:mm"),
-              Currency = e.Currency,
-              Importance = i.Value,
-              Description = e.Description,
-              Factual = e.Factual,
-              Prognosis = e.Prognosis,
-              Previous = e.Previous,
-              Node = e.Event?.Description!
-            }
-        ).ToList();
-    }
     public async Task<List<EventCalendar>> GetAsync(EconomicPeriod period, Importance importance)
     {
-      using var source = new CancellationTokenSource();
-      var parser = new EconomicParser(_data, source.Token);
-      var economic = await parser.ParseAsync(false, period, importance);
-      return MakeEventCalendar(economic);
+      var uriBuilder = new UriBuilder(_endPoint);
+      var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+      query[PERIOD] = period.ToString();
+      query[IMPORTANCE] = importance.ToString();
+      uriBuilder.Query = query.ToString();
+      var events =  await _client.GetFromJsonAsync<List<EconomicSchedule>>(uriBuilder.ToString());
+      return EconomicParser.MakeEventCalendar(events);
     }
 
-    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
+    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period,
+      Importance importance)
     {
-      using var source = new CancellationTokenSource();
-      var parser = new EconomicParser(_data, source.Token);
-      var economic = await parser.ParseAsync(startDate, endDate, period, importance, false);
-      return MakeEventCalendar(economic);
+      var uriBuilder = new UriBuilder(_endPoint);
+      var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+      query[START_DATE] = startDate.ToString(DATE_FORMAT);
+      query[END_DATE] = startDate.ToString(DATE_FORMAT);
+      query[PERIOD] = period.ToString();
+      query[IMPORTANCE] = importance.ToString();
+      uriBuilder.Query = query.ToString();
+      var events = await _client.GetFromJsonAsync<List<EconomicSchedule>>(uriBuilder.ToString());
+      return EconomicParser.MakeEventCalendar(events);
     }
+
     protected override void Free()
     {
       base.Free();
-      _data.Dispose();
+      _client.Dispose();
     }
 
   }
