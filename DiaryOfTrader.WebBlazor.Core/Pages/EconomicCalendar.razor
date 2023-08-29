@@ -6,13 +6,14 @@
     <label>
         <input name="yourColor" type="radio"
                value="@choice"
-               checked="@(CurrentChoice == choice)"
-               @onchange="@(() => { CurrentChoice = choice; })">
+               checked="@(Period == choice)"
+               @onchange="@(() => { Period = choice; })">
         @choice.ToString()
     </label>
 }
 
 <p/>
+
 <table class="table table-hover">
     <thead>
     <tr>

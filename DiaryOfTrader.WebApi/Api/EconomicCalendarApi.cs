@@ -20,7 +20,7 @@ namespace DiaryOfTrader.WebApi.Api
 
     [AllowAnonymous]
     private async Task<IResult> Getcalendar(
-      IEconomicCalendarRepository repocitory,
+      IEconomicCalendarRepository repository,
       [FromQuery] DateTime? startDate,
       [FromQuery] DateTime? endDate,
       [FromQuery] EconomicPeriod period,
@@ -30,12 +30,12 @@ namespace DiaryOfTrader.WebApi.Api
       IEnumerable<EventCalendar> eventCalendar = null;
       if (startDate != null && endDate != null)
       {
-        eventCalendar = await repocitory.GetAsync(startDate ?? DateTime.MinValue, endDate ?? DateTime.MinValue, period,
+        eventCalendar = await repository.GetAsync(startDate ?? DateTime.MinValue, endDate ?? DateTime.MinValue, period,
           importance);
       }
       else
       {
-        eventCalendar = await repocitory.GetAsync(period, importance);
+        eventCalendar = await repository.GetAsync(period, importance);
       }
 
       return Results.Ok(eventCalendar);
