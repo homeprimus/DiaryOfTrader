@@ -39,8 +39,7 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
       });
     }
 
-    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period,
-      Importance importance)
+    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
     {
       return await Task.Run(() =>
       {

@@ -9,9 +9,9 @@ namespace DiaryOfTrader.Core.Entity.Economic
 {
   public class EconomicParser
   {
-    private DiaryOfTraderCtx? contex;
+    private DiaryOfTraderCtx contex;
     private CancellationToken cancellationToken;
-    public EconomicParser(DiaryOfTraderCtx? contex, CancellationToken cancellationToken)
+    public EconomicParser(DiaryOfTraderCtx contex, CancellationToken cancellationToken)
     {
       this.contex = contex;
       this.cancellationToken = cancellationToken;
@@ -95,7 +95,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
         }
       }
 
-      await DoEventInfoAsync(schedule);
+      /*await*/ DoEventInfoAsync(schedule);
       await contex.EconomicEvent.AddAsync(schedule.Event, cancellationToken);
     }
 
@@ -190,12 +190,12 @@ namespace DiaryOfTrader.Core.Entity.Economic
 
     public async Task<List<EconomicSchedule>> GetEconomicScheduleAsync(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
     {
-      var result = await DoParseAsync(startDate, endDate, period, importance);
+      var result = await ParseAsync(startDate, endDate, period, importance, true);
       var tasks = new Task[result.Count];
       var i = 0;
       while (i < result.Count && !cancellationToken.IsCancellationRequested)
       {
-        tasks[i] = DoEventInfoAsync(result[i]);
+        tasks[i] = EventInfoAsync(result[i], false);
         i++;
       }
       if (!cancellationToken.IsCancellationRequested)
@@ -420,7 +420,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
       }, cancellationToken);
     }
 
-    private async Task DoEventInfoAsync(EconomicSchedule schedule)
+    private void/*async Task*/ DoEventInfoAsync(EconomicSchedule schedule)
     {
 
       string GetValue(string regex, string value)
@@ -434,7 +434,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
         return string.Empty;
       }
 
-      await Task.Run(() =>
+      //await Task.Run(() =>
         {
 
           if (string.IsNullOrEmpty(schedule.HRef))
@@ -518,7 +518,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
           {
             Debug.WriteLine(e.ToString());
           }
-        }, cancellationToken);
+        }//, cancellationToken);
     }
   }
 }
