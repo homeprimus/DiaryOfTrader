@@ -11,5 +11,35 @@
 <div class="row">
     <div class="col">
         <CatalogTable TItem="TraderRegion" Entities="TraderRegions"/>
+
+        @if (CatalogItemState.SelectedEntity != null)
+        {
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Город</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Откртыие (Лето) UTC</th>
+                    <th scope="col">Закрытие (Лето) UTC</th>
+                    <th scope="col">Откртыие (Зима) UTC</th>
+                    <th scope="col">Закрытие (Зима) UTC</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var session in ((TraderRegion) CatalogItemState.SelectedEntity).Sessions)
+                {
+                    <tr>
+                        <td>@session.Name</td>
+                        <td>@session.Description</td>
+                        <td>@session.SummerStarting</td>
+                        <td>@session.SummerFinished</td>
+                        <td>@session.WinterStarting</td>
+                        <td>@session.WinterFinished</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+
     </div>
 </div>

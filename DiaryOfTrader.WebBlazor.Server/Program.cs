@@ -1,6 +1,7 @@
 using Blazored.Toast;
 using DiaryOfTrader.Core.Interfaces.Repository;
 using DiaryOfTrader.Core.Repository.RepositoryApi;
+using DiaryOfTrader.WebBlazor.Core;
 using DiaryOfTrader.WebBlazor.Core.HttpInterceptor;
 using DiaryOfTrader.WebBlazor.Core.HttpRepository;
 using DiaryOfTrader.WebBlazor.Server;
@@ -37,8 +38,9 @@ builder.Services.AddScoped<ITraderRegionRepository, TraderRegionRepositoryApi>(_
 builder.Services.AddScoped<ISymbolRepository, SymbolRepositoryApi>(_ => new SymbolRepositoryApi(rootApi));
 builder.Services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryApi>(_ => new EconomicCalendarRepositoryApi(rootApi));
 
-
 #endregion
+
+builder.Services.AddScoped<CatalogItemState>();
 
 builder.Services.AddBlazoredToast();
 
