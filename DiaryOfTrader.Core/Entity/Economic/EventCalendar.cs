@@ -12,5 +12,10 @@ namespace DiaryOfTrader.Core.Entity.Economic
     public string Prognosis { get; set; }
     public string Previous { get; set; }
     public string Node { get; set; }
+
+    public override string ToString()
+    {
+      return Date.ToString("YYYY.MM.dd HH:mm") + $" [{Currency}] [{Importance}] {Description}";
+    }
   }
 }

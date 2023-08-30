@@ -17,7 +17,7 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
     private IConnection _connection;
     #endregion
 
-    public EconomicCalendarConsumerMq(string queue, string host)
+    public EconomicCalendarConsumerMq(string host, string queue)
     {
       _queue = queue;
       _host = host;
