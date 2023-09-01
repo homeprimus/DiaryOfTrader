@@ -13,12 +13,15 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
     private readonly object _lock = new ();
     private readonly string _queue;
     private readonly string _host;
+    private IModel _chanel;
+    private IConnection _connection;
     #endregion
 
-    public EconomicCalendarConsumerMq(string queue, string host)
+    public EconomicCalendarConsumerMq(string host, string queue)
     {
       _queue = queue;
       _host = host;
+      RegisterConsumer();
     }
     public async Task<List<EventCalendar>> GetAsync(EconomicPeriod period, Importance importance)
     {
@@ -39,8 +42,7 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
       });
     }
 
-    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period,
-      Importance importance)
+    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
     {
       return await Task.Run(() =>
       {
@@ -58,19 +60,19 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
       });
     }
 
-    public async Task GetMessagesAsync()
+    public void RegisterConsumer()
     {
       var factory = new ConnectionFactory { HostName = _host };
-      using var connection = factory.CreateConnection();
-      using var chanel = connection.CreateModel();
-      chanel.QueueDeclare(
+      _connection = factory.CreateConnection();
+      _chanel = _connection.CreateModel();
+      _chanel.QueueDeclare(
         queue: _queue,
         exclusive: false,
         durable: true,
         autoDelete: false,
         arguments: null);
 
-      var consumer = new EventingBasicConsumer(chanel);
+      var consumer = new EventingBasicConsumer(_chanel);
       consumer.Received += async (object? sender, BasicDeliverEventArgs e) =>
       {
         var body = e.Body.ToArray();
@@ -87,10 +89,16 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
         }
       };
 
-      chanel.BasicConsume(
+      _chanel.BasicConsume(
         queue: _queue,
         consumer: consumer);
     }
 
+    protected override void Free()
+    {
+      base.Free();
+      _chanel.Dispose();
+      _connection.Dispose();
+    }
   }
 }
