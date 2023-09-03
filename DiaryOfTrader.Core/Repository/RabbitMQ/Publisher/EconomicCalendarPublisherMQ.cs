@@ -6,7 +6,7 @@ using DiaryOfTrader.Core.Data;
 
 namespace DiaryOfTrader.Core.Repository.RabbitMQ.Publisher
 {
-  public class EconomicCalendarPublisherMq: Disposable
+  public class EconomicCalendarPublisherMq: Disposable, EconomicCalendarPublisher
   {
     #region fields
 
@@ -15,13 +15,21 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Publisher
     private readonly string _queue;
     #endregion
 
-    public EconomicCalendarPublisherMq(DbContext data, string host, string queue)
+    public EconomicCalendarPublisherMq(DbContext data, string user = "", string password = "", string queue = "", string host = "", int port = -1)
     {
       _queue = queue;
       _host = host;
       _data = data as DiaryOfTraderCtx;
     }
-    public async Task Create(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
+
+    public async Task Publish(EconomicPeriod period, Importance importance)
+    {
+      EconomicParser.GetPeriodToDate(period, out var startDate, out var endDate);
+      await Publish(startDate, endDate, period, importance);
+    }
+
+
+    public async Task Publish(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
     {
       var factory = new ConnectionFactory{HostName = _host };
       using var connection = factory.CreateConnection();
@@ -58,5 +66,6 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Publisher
       base.Free();
       _data.Dispose();
     }
+
   }
 }
