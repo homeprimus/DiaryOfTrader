@@ -1,6 +1,7 @@
 using Blazored.Toast;
 using DiaryOfTrader.Core.Interfaces.Repository;
 using DiaryOfTrader.Core.Repository.RepositoryApi;
+using DiaryOfTrader.WebBlazor.Core;
 using DiaryOfTrader.WebBlazor.Core.HttpInterceptor;
 using DiaryOfTrader.WebBlazor.Core.HttpRepository;
 using DiaryOfTrader.WebBlazor.Server;
@@ -35,10 +36,11 @@ builder.Services.AddScoped<ITrendRepository, TrendRepositoryApi>(_ => new TrendR
 builder.Services.AddScoped<ITraderSessionRepository, TraderSessionRepositoryApi>(_ => new TraderSessionRepositoryApi(rootApi));
 builder.Services.AddScoped<ITraderRegionRepository, TraderRegionRepositoryApi>(_ => new TraderRegionRepositoryApi(rootApi));
 builder.Services.AddScoped<ISymbolRepository, SymbolRepositoryApi>(_ => new SymbolRepositoryApi(rootApi));
-builder.Services.AddScoped<IEconomicCalendarRepository, EconomicCalendarHttpRepository>();
-
+builder.Services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryApi>(_ => new EconomicCalendarRepositoryApi(rootApi));
 
 #endregion
+
+builder.Services.AddScoped<CatalogItemState>();
 
 builder.Services.AddBlazoredToast();
 
