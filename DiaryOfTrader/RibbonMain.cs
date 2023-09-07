@@ -94,6 +94,15 @@ namespace DiaryOfTrader
       calendar.Contex = contexDb;
       calendar.ShowDialog();
     }
+
+    private void bbiMarketReview_ItemClick(object sender, ItemClickEventArgs e)
+    {
+      var marketReview = new MarketReviewDlg();
+      marketReview.Element = new MarketReview();
+      marketReview.Text = marketReview.Element.ClassDescription;
+      marketReview.Edit();
+
+    }
   }
 
 }

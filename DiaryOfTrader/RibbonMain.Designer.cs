@@ -43,6 +43,7 @@ namespace DiaryOfTrader
       bbtTrend = new DevExpress.XtraBars.BarButtonItem();
       bbtWallet = new DevExpress.XtraBars.BarButtonItem();
       bbtCalendar = new DevExpress.XtraBars.BarButtonItem();
+      bbiMarketReview = new DevExpress.XtraBars.BarButtonItem();
       rbpGenaral = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       rbpgDictionary = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -54,6 +55,7 @@ namespace DiaryOfTrader
       navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
       navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
       navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
+      barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
       ((System.ComponentModel.ISupportInitialize)nbMain).BeginInit();
       SuspendLayout();
@@ -61,9 +63,9 @@ namespace DiaryOfTrader
       // ribbon
       // 
       ribbon.ExpandCollapseItem.Id = 0;
-      ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, ribbon.SearchEditItem, bbtExchamge, barButtonItem2, bbtSymbol, bbtSession, bbtTimeFrame, bbtResult, bbtTrend, bbtWallet, bbtCalendar });
+      ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, ribbon.SearchEditItem, bbtExchamge, barButtonItem2, bbtSymbol, bbtSession, bbtTimeFrame, bbtResult, bbtTrend, bbtWallet, bbtCalendar, bbiMarketReview, barButtonItem1 });
       ribbon.Location = new Point(0, 0);
-      ribbon.MaxItemId = 10;
+      ribbon.MaxItemId = 12;
       ribbon.Name = "ribbon";
       ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { rbpGenaral, rbpАnalytics });
       ribbon.Size = new Size(964, 158);
@@ -147,14 +149,25 @@ namespace DiaryOfTrader
       bbtCalendar.Name = "bbtCalendar";
       bbtCalendar.ItemClick += bbtCalendar_ItemClick;
       // 
+      // bbiMarketReview
+      // 
+      bbiMarketReview.Caption = "Анализ рынка";
+      bbiMarketReview.Id = 10;
+      bbiMarketReview.ImageOptions.Image = (Image)resources.GetObject("bbiMarketReview.ImageOptions.Image");
+      bbiMarketReview.ImageOptions.LargeImage = (Image)resources.GetObject("bbiMarketReview.ImageOptions.LargeImage");
+      bbiMarketReview.Name = "bbiMarketReview";
+      bbiMarketReview.ItemClick += bbiMarketReview_ItemClick;
+      // 
       // rbpGenaral
       // 
-      rbpGenaral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgMain, rbpgDictionary, rbpgCalendar });
+      rbpGenaral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgMain, rbpgCalendar, rbpgDictionary });
       rbpGenaral.Name = "rbpGenaral";
       rbpGenaral.Text = "Главная";
       // 
       // rbpgMain
       // 
+      rbpgMain.ItemLinks.Add(barButtonItem1);
+      rbpgMain.ItemLinks.Add(bbiMarketReview);
       rbpgMain.Name = "rbpgMain";
       rbpgMain.Text = "Основные";
       // 
@@ -202,6 +215,7 @@ namespace DiaryOfTrader
       nbMain.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] { navBarItem1 });
       nbMain.Location = new Point(0, 158);
       nbMain.Name = "nbMain";
+      nbMain.OptionsNavPane.ExpandedWidth = 178;
       nbMain.Size = new Size(178, 379);
       nbMain.TabIndex = 2;
       nbMain.Text = "navBarControl1";
@@ -223,6 +237,14 @@ namespace DiaryOfTrader
       // 
       navBarItem1.Caption = "navBarItem1";
       navBarItem1.Name = "navBarItem1";
+      // 
+      // barButtonItem1
+      // 
+      barButtonItem1.Caption = "Журнал сделок";
+      barButtonItem1.Id = 11;
+      barButtonItem1.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image");
+      barButtonItem1.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItem1.ImageOptions.LargeImage");
+      barButtonItem1.Name = "barButtonItem1";
       // 
       // RibbonMain
       // 
@@ -265,5 +287,7 @@ namespace DiaryOfTrader
     private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
     private DevExpress.XtraNavBar.NavBarGroup navBarGroup2;
     private DevExpress.XtraNavBar.NavBarItem navBarItem1;
+    private DevExpress.XtraBars.BarButtonItem bbiMarketReview;
+    private DevExpress.XtraBars.BarButtonItem barButtonItem1;
   }
 }

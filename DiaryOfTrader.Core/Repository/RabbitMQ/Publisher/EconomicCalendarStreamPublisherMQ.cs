@@ -6,6 +6,7 @@ using System.Text.Json;
 using DiaryOfTrader.Core.Data;
 using RabbitMQ.Stream.Client;
 using RabbitMQ.Stream.Client.Reliable;
+// https://github.com/rabbitmq/rabbitmq-stream-dotnet-client/blob/main/docs/Documentation/ProducerUsage.cs
 
 namespace DiaryOfTrader.Core.Repository.RabbitMQ.Publisher
 {

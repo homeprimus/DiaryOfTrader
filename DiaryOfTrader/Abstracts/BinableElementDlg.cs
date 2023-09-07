@@ -14,7 +14,7 @@ namespace DiaryOfTrader.Abstracts
     public T Element
     {
       get { return (T)Instance; }
-      protected set { Instance = value; }
+      set { Instance = value; }
     }
 
   }

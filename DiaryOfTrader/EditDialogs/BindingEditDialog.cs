@@ -98,7 +98,7 @@ namespace DiaryOfTrader.EditDialogs
     {
     }
 
-    public bool Edit(EditModeUI mode)
+    public bool Edit(EditModeUI mode = EditModeUI.AllowEdit)
     {
       return Edit(instance, mode);
     }

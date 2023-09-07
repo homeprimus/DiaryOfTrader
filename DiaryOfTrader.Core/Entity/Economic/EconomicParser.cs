@@ -207,7 +207,7 @@ namespace DiaryOfTrader.Core.Entity.Economic
     }
 
     private async Task<List<EconomicSchedule>> DoParseAsync(DateTime startDate, DateTime endDate, EconomicPeriod period,
-      Importance importance)
+      Importance importance)  
     {
       return await Task.Run(() =>
       {

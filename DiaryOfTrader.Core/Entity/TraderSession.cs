@@ -19,6 +19,7 @@ namespace DiaryOfTrader.Core.Entity
 
 https://alfaforex.ru/faq/internet-treyding/vremya-raboty-rynka-forex-raspisanie-torgovykh-sessiy/
    */
+  [Serializable]
   public class TraderSession : Entity
   {
     [JsonIgnore]

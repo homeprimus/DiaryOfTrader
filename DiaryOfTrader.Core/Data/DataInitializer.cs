@@ -1,8 +1,4 @@
 ﻿
-using DiaryOfTrader.Core.Entity;
-using DiaryOfTrader.Core.Properties;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DiaryOfTrader.Core.Data
 {

@@ -1,15 +1,14 @@
 ﻿
 using System.Diagnostics;
-using System.Drawing;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Net.Mime;
 using SkiaSharp;
 
 namespace DiaryOfTrader.Core.Entity
 {
+  [Serializable]
   public class TraderExchange: Entity
   {
     public string? Url { get; set; }

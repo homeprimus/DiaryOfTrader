@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using RabbitMQ.Stream.Client;
 using RabbitMQ.Stream.Client.Reliable;
+//https://github.com/rabbitmq/rabbitmq-stream-dotnet-client/blob/main/docs/Documentation/ConsumerUsage.cs
 
 namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
 {
