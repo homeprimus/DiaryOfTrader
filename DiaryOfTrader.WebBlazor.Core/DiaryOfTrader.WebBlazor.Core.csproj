@@ -47,6 +47,15 @@
       <Content Update="wwwroot\sample-data\wallettype.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Remove="wwwroot\scripts\tradeview-init.js" />
+
+
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\scripts\" />
+
+
     </ItemGroup>
 
 
