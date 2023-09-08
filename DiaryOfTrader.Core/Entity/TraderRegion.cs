@@ -8,6 +8,7 @@ namespace DiaryOfTrader.Core.Entity
    *    Американский (America)
    *    Тихоокенский (Pacific) 
    */
+  [Serializable]
   public class TraderRegion: Entity
   {
     public TraderRegion()

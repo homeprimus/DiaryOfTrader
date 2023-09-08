@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace DiaryOfTrader.Core.Core
 {
   [Serializable]
-  public abstract class Disposable : MarshalByRefObject, IDisposable
+  public abstract class Disposable : /*MarshalByRefObject,*/ IDisposable
   {
     #region public const
     public const string Empty = "";

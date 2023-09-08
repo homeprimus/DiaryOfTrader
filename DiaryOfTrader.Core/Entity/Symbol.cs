@@ -4,6 +4,7 @@ using SkiaSharp;
 
 namespace DiaryOfTrader.Core.Entity
 {
+  [Serializable]
   [DescriptionRes("Symbol")]
   public class Symbol : Entity
   {

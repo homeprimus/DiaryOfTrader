@@ -5,7 +5,7 @@ using Exchange.Core.DynamicCode;
 
 namespace DiaryOfTrader.Core.Core
 {
-  [AttributeUsage(AttributeTargets.Field)]
+ [AttributeUsage(AttributeTargets.Field)]
   public sealed class NotPersistentAttribute : Attribute
   {
   }

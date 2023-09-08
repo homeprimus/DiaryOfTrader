@@ -1,12 +1,10 @@
 ﻿
 using System.ComponentModel;
-using System.Text.Json.Serialization;
-using DiaryOfTrader.Core.Core;
 using DiaryOfTrader.Core.Utils;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiaryOfTrader.Core.Entity
 {
+  [Serializable]
   public class Entity: Element, IComparable
   {
 

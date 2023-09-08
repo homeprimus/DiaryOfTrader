@@ -7,6 +7,7 @@ namespace DiaryOfTrader.Core.Entity
   2. Loss
   3. Безубыток
    */
+  [Serializable]
   public class TraderResult: Entity
   {
   }

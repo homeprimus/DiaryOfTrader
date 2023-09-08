@@ -1,6 +1,7 @@
 ﻿
-namespace DiaryOfTrader.Core.Entity
+namespace DiaryOfTrader.Core.Entity 
 {
+  [Serializable]
   public class Trader: Entity
   {
     public string Password { get; set; } = string.Empty;

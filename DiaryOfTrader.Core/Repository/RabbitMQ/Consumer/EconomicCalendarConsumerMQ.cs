@@ -6,67 +6,25 @@ using RabbitMQ.Client.Events;
 
 namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
 {
-  public class EconomicCalendarConsumerMq: Disposable, IEconomicCalendarRepository
+  public class EconomicCalendarConsumerMq: EconomicCalendarConsumer
   {
     #region
-    private List<EconomicSchedule>? _events;
-    private readonly object _lock = new ();
-    private readonly string _queue;
-    private readonly string _host;
     private IModel _chanel;
     private IConnection _connection;
     #endregion
-
-    public EconomicCalendarConsumerMq(string host, string queue)
+    public EconomicCalendarConsumerMq(string user = "", string password = "", string queue = "", string host = "", int port = -1) 
+      : base(user, password, queue, host, port)
     {
-      _queue = queue;
-      _host = host;
-      RegisterConsumer();
-    }
-    public async Task<List<EventCalendar>> GetAsync(EconomicPeriod period, Importance importance)
-    {
-      return await Task.Run(() =>
-      {
-        EconomicParser.GetPeriodToDate(period, out var startDate, out var endDate);
-        Monitor.Enter(_lock);
-        try
-        {
-          var events = _events?.Where(e => e.Time >= startDate && e.Time <= endDate && e.Importance == (int)importance)
-            .ToList();
-          return Task.FromResult(EconomicParser.MakeEventCalendar(events));
-        }
-        finally
-        {
-          Monitor.Exit(_lock);
-        }
-      });
+      RegisterConsumer(user, password, queue, host, port);
     }
 
-    public async Task<List<EventCalendar>> GetAsync(DateTime startDate, DateTime endDate, EconomicPeriod period, Importance importance)
+    public void RegisterConsumer(string user, string password, string queue, string host, int port)
     {
-      return await Task.Run(() =>
-      {
-        Monitor.Enter(_lock);
-        try
-        {
-          var events = _events?.Where(e => e.Time >= startDate && e.Time <= endDate && e.Importance == (int)importance)
-            .ToList();
-          return EconomicParser.MakeEventCalendar(events);
-        }
-        finally
-        {
-          Monitor.Exit(_lock);
-        }
-      });
-    }
-
-    public void RegisterConsumer()
-    {
-      var factory = new ConnectionFactory { HostName = _host };
+      var factory = new ConnectionFactory { HostName = host };
       _connection = factory.CreateConnection();
       _chanel = _connection.CreateModel();
       _chanel.QueueDeclare(
-        queue: _queue,
+        queue: queue,
         exclusive: false,
         durable: true,
         autoDelete: false,
@@ -78,19 +36,19 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
         var body = e.Body.ToArray();
         var json = Encoding.UTF8.GetString(body);
 
-        Monitor.Enter(_lock);
+        Monitor.Enter(Locker);
         try
         {
           _events = JsonSerializer.Deserialize<List<EconomicSchedule>>(json);
         }
         finally
         {
-          Monitor.Exit(_lock);
+          Monitor.Exit(Locker);
         }
       };
 
       _chanel.BasicConsume(
-        queue: _queue,
+        queue: queue,
         consumer: consumer);
     }
 
@@ -100,5 +58,6 @@ namespace DiaryOfTrader.Core.Repository.RabbitMQ.Consumer
       _chanel.Dispose();
       _connection.Dispose();
     }
+
   }
 }
