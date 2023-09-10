@@ -1,5 +1,6 @@
-﻿
-namespace DiaryOfTrader.WebApi.Auth
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DiaryOfTrader.Core.Auth
 {
   public record UserDto(string UserName, string Password);
 

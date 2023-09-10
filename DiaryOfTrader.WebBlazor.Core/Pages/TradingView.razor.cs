@@ -4,35 +4,24 @@ using Microsoft.JSInterop;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;
 
-public partial class TradingView: IAsyncDisposable
+public partial class TradingView
 {
-  private TraderViewJsInterop _interop;
+  private IJSObjectReference? _jsModule;
   
-  [Inject]public IJSRuntime jsRuntime { get; set; }
+  [Inject]public IJSRuntime? JSRuntime { get; set; }
   
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     if (firstRender)
     {
-      _interop = new TraderViewJsInterop(jsRuntime);
-      await _interop.InitWidget();
-    }
-    
+      _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/tradeview.js");
+
+      await InitWidget();
+    }			
   }
-  //
-  // protected override void OnAfterRender(bool firstRender)
-  // {
-  //   if (firstRender)
-  //   {
-  //     
-  //     _interop = new TraderViewJsInterop(jsRuntime);
-  //      _interop.InitWidget().Wait();
-  //   }
-  // }
 
-
-  public async ValueTask DisposeAsync()
+  private async Task InitWidget()
   {
-    await _interop.DisposeAsync();
+    await _jsModule.InvokeVoidAsync("InitWidget");
   }
 }
