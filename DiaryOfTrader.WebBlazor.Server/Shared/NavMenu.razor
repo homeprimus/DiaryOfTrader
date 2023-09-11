@@ -40,21 +40,34 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="economiccalendar">Экономический календарь</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="tradingview">Trading View</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-current="page" href="">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="">Регистрация</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="">Авторизация</a>
-                        </li>
-                    </ul>
-                </li>
+                <CascadingAuthenticationState>
+                    <AuthorizeView>
+                        <Authorized>
+                            Hello, @context.User.Identity.Name!
+                            <a href="Logout">Log out</a>
+                        </Authorized>
+                        <NotAuthorized>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-current="page" href="">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="register">Регистрация</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="Login">Вход</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </CascadingAuthenticationState>
             </ul>
         </div>
     </div>
