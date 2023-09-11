@@ -1,11 +1,13 @@
 ﻿
+using System.Collections;
 using System.ComponentModel;
+using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Utils;
 
 namespace DiaryOfTrader.Core.Entity
 {
   [Serializable]
-  public class Entity: Element, IComparable
+  public class Entity: Element, IComparable, IComparer
   {
 
     public Entity()
@@ -19,14 +21,23 @@ namespace DiaryOfTrader.Core.Entity
     public virtual int Order { get; set; }
 
     [JsonIgnore]
-    public string ClassDescription
+    public string ClassDescription => ReflectionUtils.ClassDescription(GetType());
+
+    public static IList Get<T>() where T : Entity
     {
-      get
-      {
-        return ReflectionUtils.ClassDescription(GetType());
-      }
+      var result = new List<KeyValuePair<string, T>>();
+      using var db = new DiaryOfTraderCtx();
+      db.Set<T>().ToList().ForEach(e => result.Add(new KeyValuePair<string, T>(e.Name, e))); ;
+      return result.ToArray();
     }
 
+    public static List<T> GetList<T>() where T : Entity
+    {
+      using var db = new DiaryOfTraderCtx();
+      return db.Set<T>().ToList();
+    }
+
+    #region На вылет
     public static void DoBeginEdit<T>(DbSet<T> data, out BindingList<T> orig, out List<T> modify) where T : Entity
     {
       orig = new BindingList<T>(data.OrderBy(e => e.Order).ToList());
@@ -61,7 +72,7 @@ namespace DiaryOfTrader.Core.Entity
         }
       }
     }
-
+    #endregion
     protected override bool GetValidate()
     {
       return  base.GetValidate() && !string.IsNullOrEmpty(Name);
@@ -70,6 +81,16 @@ namespace DiaryOfTrader.Core.Entity
     public override string ToString()
     {
       return Name;
+    }
+
+    public int Compare(object? x, object? y)
+    {
+      if (x != null && y != null)
+      {
+        return string.Compare(((Entity)x).Name, ((Entity)y).Name, StringComparison.InvariantCultureIgnoreCase);
+      }
+
+      return 0;
     }
 
     public override bool Equals(object? obj)

@@ -1,6 +1,7 @@
 ﻿
 using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using DiaryOfTrader.Core.Data;
 
 namespace DiaryOfTrader.Core.Entity
@@ -15,40 +16,36 @@ namespace DiaryOfTrader.Core.Entity
     public  DateTime DateTime { get; set; } = DateTime.Now;
     public TraderExchange Exchange { get; set; }
     public Symbol Symbol { get; set; }
-
     //public TraderSession? Session { get; }
     //public EconomicCalendar? Events { get; }
     public List<MarketReviewTimeFrame> Frames { get; set; } = new List<MarketReviewTimeFrame>();
 
+    public MarketReviewTimeFrame AddFrame()
+    {
+      var result = new MarketReviewTimeFrame();
+      using var db = new DiaryOfTraderCtx();
+      result.Trend = db.Trend.FirstOrDefault();
+      if (Frames.Count > 0)
+      {
+        result.Frame = db.Frame.FirstOrDefault(e => Frames.Any(f => f.Frame != e));
+      }
+      else
+      {
+        result.Frame = db.Frame.OrderBy(e=>e.Order).FirstOrDefault();
+      }
+
+      return result;
+    }
 
     [NotMapped, JsonIgnore]
-    public static IList Symbols
-    {
-      get
-      {
-        var result = new List<KeyValuePair<string, Symbol>>();
-        using var db = new DiaryOfTraderCtx();
-        foreach (var symbol in db.Symbol.ToList())
-        {
-          result.Add(new KeyValuePair<string, Symbol>(symbol.Name, symbol));
-        }
-        return result.ToArray();
-      }
-    }
+    public static IList FrameList => Get<TimeFrame>();
     [NotMapped, JsonIgnore]
-    public static IList Exchanges
-    {
-      get
-      {
-        var result = new List<KeyValuePair<string, TraderExchange>>();
-        using var db = new DiaryOfTraderCtx();
-        foreach (var exchange in db.Exchange.ToList())
-        {
-          result.Add(new KeyValuePair<string, TraderExchange>(exchange.Name, exchange));
-        }
-        return result.ToArray();
-      }
-    }
+    public static IList TrendList => Get<Trend>();
+
+    [NotMapped, JsonIgnore]
+    public static IList SymbolList => Get<Symbol>();
+    [NotMapped, JsonIgnore]
+    public static IList ExchangeList => Get<TraderExchange>();
   }
   [Serializable]
   public class MarketReviewTimeFrame : Entity
@@ -58,6 +55,7 @@ namespace DiaryOfTrader.Core.Entity
     public TimeFrame Frame { get; set; }
     public Trend? Trend { get; set; }
     public ScreenShot? Image { get; set; }
+
   }
 }
 

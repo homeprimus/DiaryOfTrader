@@ -48,7 +48,9 @@ namespace DiaryOfTrader.EditControls.Entity
       gcTimeFrame = new DevExpress.XtraGrid.GridControl();
       gvTimeFrame = new DevExpress.XtraGrid.Views.Grid.GridView();
       clTimeFrame = new DevExpress.XtraGrid.Columns.GridColumn();
+      luFrame = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
       clTrend = new DevExpress.XtraGrid.Columns.GridColumn();
+      luTrend = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
       clImage = new DevExpress.XtraGrid.Columns.GridColumn();
       clDescription = new DevExpress.XtraGrid.Columns.GridColumn();
       gnReview = new GridNavigator();
@@ -62,6 +64,8 @@ namespace DiaryOfTrader.EditControls.Entity
       pnlClient.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)gcTimeFrame).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gvTimeFrame).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)luFrame).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)luTrend).BeginInit();
       SuspendLayout();
       // 
       // pnlHeader
@@ -212,6 +216,7 @@ namespace DiaryOfTrader.EditControls.Entity
       gcTimeFrame.Location = new Point(3, 27);
       gcTimeFrame.MainView = gvTimeFrame;
       gcTimeFrame.Name = "gcTimeFrame";
+      gcTimeFrame.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { luTrend, luFrame });
       gcTimeFrame.Size = new Size(867, 394);
       gcTimeFrame.TabIndex = 1;
       gcTimeFrame.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvTimeFrame });
@@ -226,22 +231,44 @@ namespace DiaryOfTrader.EditControls.Entity
       // clTimeFrame
       // 
       clTimeFrame.Caption = "ТаймФрейм";
-      clTimeFrame.FieldName = "FrameFrame";
+      clTimeFrame.ColumnEdit = luFrame;
+      clTimeFrame.FieldName = "Frame";
       clTimeFrame.Name = "clTimeFrame";
       clTimeFrame.OptionsColumn.FixedWidth = true;
       clTimeFrame.Visible = true;
       clTimeFrame.VisibleIndex = 0;
       clTimeFrame.Width = 65;
       // 
+      // luFrame
+      // 
+      luFrame.AutoHeight = false;
+      luFrame.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+      luFrame.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Key", "Наименование") });
+      luFrame.DisplayMember = "Key";
+      luFrame.KeyMember = "Value";
+      luFrame.Name = "luFrame";
+      luFrame.ValueMember = "Value";
+      // 
       // clTrend
       // 
       clTrend.Caption = "Тренд";
+      clTrend.ColumnEdit = luTrend;
       clTrend.FieldName = "Trend";
       clTrend.Name = "clTrend";
       clTrend.OptionsColumn.FixedWidth = true;
       clTrend.Visible = true;
       clTrend.VisibleIndex = 1;
       clTrend.Width = 150;
+      // 
+      // luTrend
+      // 
+      luTrend.AutoHeight = false;
+      luTrend.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+      luTrend.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Key", "Наименование") });
+      luTrend.DisplayMember = "Key";
+      luTrend.KeyMember = "Value";
+      luTrend.Name = "luTrend";
+      luTrend.ValueMember = "Value";
       // 
       // clImage
       // 
@@ -298,6 +325,8 @@ namespace DiaryOfTrader.EditControls.Entity
       pnlClient.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)gcTimeFrame).EndInit();
       ((System.ComponentModel.ISupportInitialize)gvTimeFrame).EndInit();
+      ((System.ComponentModel.ISupportInitialize)luFrame).EndInit();
+      ((System.ComponentModel.ISupportInitialize)luTrend).EndInit();
       ResumeLayout(false);
     }
 
@@ -322,5 +351,7 @@ namespace DiaryOfTrader.EditControls.Entity
     private Components.LookComboBox lcbSymbol;
     private Components.MemoEdit mmDescription;
     private Label lblDescription;
+    private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit luTrend;
+    private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit luFrame;
   }
 }

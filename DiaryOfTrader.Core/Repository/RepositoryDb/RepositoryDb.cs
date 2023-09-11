@@ -1,5 +1,4 @@
-﻿using DiaryOfTrader.Core.Interfaces.Repository;
-
+﻿
 namespace DiaryOfTrader.Core.Repository.RepositoryDb
 {
   public class RepositoryDb<TEntity> : Disposable, IRepository<TEntity> where TEntity : Entity.Entity
