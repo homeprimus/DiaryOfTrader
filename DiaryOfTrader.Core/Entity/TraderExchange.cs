@@ -11,9 +11,11 @@ namespace DiaryOfTrader.Core.Entity
   [Serializable]
   public class TraderExchange: Entity
   {
-    public string? Url { get; set; }
+    [NonSerialized, NotPersistent]
+    private SKImage? _image;
     [JsonIgnore, NotMapped]
-    public SKImage? Image { get; set; }
+    public SKImage? Image { get { return _image; } set { _image = value; } }
+    public string? Url { get; set; }
     public byte[]? ImageData
     {
       get

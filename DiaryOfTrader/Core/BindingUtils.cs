@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using DevExpress.XtraEditors.Repository;
 using Exchange.Core;
 
 namespace DiaryOfTrader.Core
@@ -32,6 +33,13 @@ namespace DiaryOfTrader.Core
       ctrl.DisplayMember = Key;
       ctrl.ValueMember = Value;
       Bind(ctrl, SelectedValue, self, property);
+      ctrl.DataSource = list;
+    }
+    public static void BindRepositoryItemLookUp(RepositoryItemLookUpEdit ctrl, object? self, string property, IList list)
+    {
+      ctrl.DisplayMember = Key;
+      ctrl.ValueMember = Value;
+      //Bind(ctrl, SelectedValue, self, property);
       ctrl.DataSource = list;
     }
     public static void BindCheckBox(IBindableComponent ctrl, object? self, string bEnabled, string bChecked)

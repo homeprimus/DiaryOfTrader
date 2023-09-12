@@ -1,9 +1,9 @@
 ﻿
 namespace DiaryOfTrader.EditDialogs
 {
-  public partial class MarketReviewDlg : MarketReviewDlgAbstract
+  public partial class MarketReviewTimeFrameDlg : MarketReviewTimeFrameDlgAbstract
   {
-    public MarketReviewDlg()
+    public MarketReviewTimeFrameDlg()
     {
       InitializeComponent();
     }
@@ -11,7 +11,7 @@ namespace DiaryOfTrader.EditDialogs
     protected override void OnInitializeInstance()
     {
       base.OnInitializeInstance();
-      marketReviewCtrl.Element = Element;
+      marketReviewTimeFrameCtrl.Element = Element;
     }
 
     protected override void InstancePropertyChanged(string name)
@@ -19,4 +19,6 @@ namespace DiaryOfTrader.EditDialogs
       base.InstancePropertyChanged(name);
     }
   }
+
 }
+
