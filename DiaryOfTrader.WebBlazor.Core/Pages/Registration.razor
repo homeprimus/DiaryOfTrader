@@ -70,9 +70,9 @@
     <div class="d-flex flex-row align-items-center mb-4 align-content-center" style="width: 25%; margin: auto">
         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
         <div class="form-outline flex-fill mb-0">
-            <InputText type="email" id="email" class="form-control"
+            <InputText type="email" id="email" class="form-control" placeholder="Your Email"
                        @bind-Value="_userForRegistration.Email"/>
-                      <label class="form-label" for="email">Your Email</label>
+                      @* <label class="form-label" for="email">Your Email</label> *@
             <ValidationMessage For="@(() => _userForRegistration.Email)"/>
         </div>
     </div>
