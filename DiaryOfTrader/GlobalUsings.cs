@@ -10,4 +10,6 @@ global using DiaryOfTrader.Core.Entity.Economic;
 
 global using DiaryOfTrader.Core.Properties;
 
+global using DiaryOfTrader.Abstracts;
+
 

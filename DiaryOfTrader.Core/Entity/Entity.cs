@@ -12,13 +12,12 @@ namespace DiaryOfTrader.Core.Entity
 
     public Entity()
     {
-      Order = 0;
     }
 
     public long ID { get; set; }
-    public virtual string Name { get; set; }
-    public string? Description { get; set; }
-    public virtual int Order { get; set; }
+    public virtual string Name { get; set; } = string.Empty;
+    public string? Description { get; set; } = string.Empty;
+    public virtual int Order { get; set; } = 0;
 
     [JsonIgnore]
     public string ClassDescription => ReflectionUtils.ClassDescription(GetType());
@@ -81,6 +80,11 @@ namespace DiaryOfTrader.Core.Entity
     public override string ToString()
     {
       return Name;
+    }
+
+    public override int GetHashCode()
+    {
+      return Name.GetHashCode() ^ Order;
     }
 
     public int Compare(object? x, object? y)

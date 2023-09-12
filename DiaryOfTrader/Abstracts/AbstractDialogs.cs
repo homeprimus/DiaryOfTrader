@@ -1,7 +1,7 @@
 ﻿
-using DiaryOfTrader.Abstracts;
-
-namespace Exchange.Abstracts
+namespace DiaryOfTrader.Abstracts
 {
   public class MarketReviewDlgAbstract : BinableElementDlg<MarketReview> { }
+  public class MarketReviewTimeFrameDlgAbstract : BinableElementDlg<MarketReviewTimeFrame> { }
+
 }

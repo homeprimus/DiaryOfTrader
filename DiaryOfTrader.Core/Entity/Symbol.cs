@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
 using SkiaSharp;
 
 namespace DiaryOfTrader.Core.Entity
@@ -8,9 +7,12 @@ namespace DiaryOfTrader.Core.Entity
   [DescriptionRes("Symbol")]
   public class Symbol : Entity
   {
-    public string? Url { get; set; }
+    [NonSerialized, NotPersistent]
+    private SKImage? _image;
     [JsonIgnore, NotMapped]
-    public SKImage? Image { get; set; }
+    public SKImage? Image { get { return _image; } set { _image = value; } }
+
+    public string? Url { get; set; }
     [JsonIgnore]
     public List<TraderExchange> Exchanges { get; set; } = new List<TraderExchange>();
 

@@ -1,6 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel;
+using DiaryOfTrader.Abstracts;
 using DiaryOfTrader.Core;
-using Exchange.Abstracts;
+using DiaryOfTrader.Core.Interfaces;
+using DiaryOfTrader.EditDialogs;
 
 namespace DiaryOfTrader.EditControls.Entity
 {
@@ -12,24 +14,16 @@ namespace DiaryOfTrader.EditControls.Entity
       gnReview.View = gvTimeFrame;
       gnReview.Add += delegate (object entity)
       {
-        var frame = entity == null ? Element.AddFrame() : (MarketReviewTimeFrame)entity;
-        frame.Market = Element;
-        Element.Frames.Add(frame);
-
-        //gcTimeFrame.DataSource = Element.Frames;
+        var frame = (MarketReviewTimeFrame)entity;
+        Element.SetFrame(frame);
+        var edit = new MarketReviewTimeFrameDlg();
+        edit.Edit(frame, EditModeUI.AllowEdit);
         gvTimeFrame.RefreshData();
       };
 
       gnReview.Delete += delegate (object entity)
       {
-        if (entity != null)
-        {
-          var frame = (MarketReviewTimeFrame)entity;
-          Element.Frames.Remove(frame);
-
-          //gcTimeFrame.DataSource = Element.Frames;
-          gvTimeFrame.RefreshData();
-        }
+        gvTimeFrame.RefreshData();
       };
 
     }
@@ -44,10 +38,11 @@ namespace DiaryOfTrader.EditControls.Entity
       BindingUtils.Bind(txtName, BindingUtils.Text, Element, "Name");
       BindingUtils.Bind(mmDescription, BindingUtils.Text, Element, "Description");
 
-      gcTimeFrame.DataSource = Element.Frames;
+      gcTimeFrame.DataSource = new BindingList<MarketReviewTimeFrame>(Element.Frames); ;
 
       luFrame.DataSource = MarketReview.FrameList;
       luTrend.DataSource = MarketReview.TrendList;
     }
+
   }
 }

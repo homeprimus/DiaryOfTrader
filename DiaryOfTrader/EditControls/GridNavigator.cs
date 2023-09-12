@@ -63,7 +63,7 @@ namespace DiaryOfTrader.EditControls
 
     private void bbtDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
-      if (MessageBox.ShowQuestionYesNo(String.Format(Resources.DeleteRecord, View.GetRow(View.FocusedRowHandle).ToString()), Resources.DeleteQuestion) == DialogResult.Yes)
+      if (MessageBox.ShowQuestionYesNo(String.Format(Resources.DeleteRecord, GetEntity()), Resources.DeleteQuestion) == DialogResult.Yes)
       {
         Delete?.Invoke(GetEntity());
         View.DeleteRow(View.FocusedRowHandle);

@@ -16,25 +16,22 @@ namespace DiaryOfTrader.Core.Entity
     public  DateTime DateTime { get; set; } = DateTime.Now;
     public TraderExchange Exchange { get; set; }
     public Symbol Symbol { get; set; }
-    //public TraderSession? Session { get; }
-    //public EconomicCalendar? Events { get; }
     public List<MarketReviewTimeFrame> Frames { get; set; } = new List<MarketReviewTimeFrame>();
 
-    public MarketReviewTimeFrame AddFrame()
+    public void SetFrame(MarketReviewTimeFrame entry)
     {
-      var result = new MarketReviewTimeFrame();
+      entry.Market = this;
       using var db = new DiaryOfTraderCtx();
-      result.Trend = db.Trend.FirstOrDefault();
-      if (Frames.Count > 0)
+      entry.Trend = db.Trend.FirstOrDefault();
+      if (Frames.Count > 1)
       {
-        result.Frame = db.Frame.FirstOrDefault(e => Frames.Any(f => f.Frame != e));
+        var exists = Frames.Where(e=> e.Frame != null).Select(e=> e.Frame).Distinct().ToList();
+        entry.Frame = db.Frame.OrderBy(e => e.Order).FirstOrDefault(e => !exists.Contains(e));
       }
       else
       {
-        result.Frame = db.Frame.OrderBy(e=>e.Order).FirstOrDefault();
+        entry.Frame = db.Frame.OrderBy(e=>e.Order).FirstOrDefault();
       }
-
-      return result;
     }
 
     [NotMapped, JsonIgnore]

@@ -52,7 +52,9 @@ namespace DiaryOfTrader.EditControls.Entity
       clTrend = new DevExpress.XtraGrid.Columns.GridColumn();
       luTrend = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
       clImage = new DevExpress.XtraGrid.Columns.GridColumn();
+      ieImage = new DevExpress.XtraEditors.Repository.RepositoryItemImageEdit();
       clDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+      meDescription = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
       gnReview = new GridNavigator();
       pnlHeader.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)mmDescription.Properties).BeginInit();
@@ -66,6 +68,8 @@ namespace DiaryOfTrader.EditControls.Entity
       ((System.ComponentModel.ISupportInitialize)gvTimeFrame).BeginInit();
       ((System.ComponentModel.ISupportInitialize)luFrame).BeginInit();
       ((System.ComponentModel.ISupportInitialize)luTrend).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)ieImage).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)meDescription).BeginInit();
       SuspendLayout();
       // 
       // pnlHeader
@@ -216,7 +220,7 @@ namespace DiaryOfTrader.EditControls.Entity
       gcTimeFrame.Location = new Point(3, 27);
       gcTimeFrame.MainView = gvTimeFrame;
       gcTimeFrame.Name = "gcTimeFrame";
-      gcTimeFrame.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { luTrend, luFrame });
+      gcTimeFrame.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { luTrend, luFrame, ieImage, meDescription });
       gcTimeFrame.Size = new Size(867, 394);
       gcTimeFrame.TabIndex = 1;
       gcTimeFrame.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvTimeFrame });
@@ -226,6 +230,7 @@ namespace DiaryOfTrader.EditControls.Entity
       gvTimeFrame.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { clTimeFrame, clTrend, clImage, clDescription });
       gvTimeFrame.GridControl = gcTimeFrame;
       gvTimeFrame.Name = "gvTimeFrame";
+      gvTimeFrame.OptionsView.RowAutoHeight = true;
       gvTimeFrame.OptionsView.ShowGroupPanel = false;
       // 
       // clTimeFrame
@@ -273,6 +278,7 @@ namespace DiaryOfTrader.EditControls.Entity
       // clImage
       // 
       clImage.Caption = "Снимок";
+      clImage.ColumnEdit = ieImage;
       clImage.FieldName = "Image";
       clImage.Name = "clImage";
       clImage.OptionsColumn.FixedWidth = true;
@@ -280,14 +286,29 @@ namespace DiaryOfTrader.EditControls.Entity
       clImage.VisibleIndex = 2;
       clImage.Width = 300;
       // 
+      // ieImage
+      // 
+      ieImage.AutoHeight = false;
+      ieImage.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+      ieImage.Name = "ieImage";
+      // 
       // clDescription
       // 
       clDescription.Caption = "Анализ";
+      clDescription.ColumnEdit = meDescription;
       clDescription.FieldName = "Description";
       clDescription.Name = "clDescription";
       clDescription.Visible = true;
       clDescription.VisibleIndex = 3;
       clDescription.Width = 327;
+      // 
+      // meDescription
+      // 
+      meDescription.AutoHeight = false;
+      meDescription.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+      meDescription.Name = "meDescription";
+      meDescription.ShowIcon = false;
+      meDescription.WordWrap = false;
       // 
       // gnReview
       // 
@@ -327,6 +348,8 @@ namespace DiaryOfTrader.EditControls.Entity
       ((System.ComponentModel.ISupportInitialize)gvTimeFrame).EndInit();
       ((System.ComponentModel.ISupportInitialize)luFrame).EndInit();
       ((System.ComponentModel.ISupportInitialize)luTrend).EndInit();
+      ((System.ComponentModel.ISupportInitialize)ieImage).EndInit();
+      ((System.ComponentModel.ISupportInitialize)meDescription).EndInit();
       ResumeLayout(false);
     }
 
@@ -353,5 +376,7 @@ namespace DiaryOfTrader.EditControls.Entity
     private Label lblDescription;
     private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit luTrend;
     private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit luFrame;
+    private DevExpress.XtraEditors.Repository.RepositoryItemImageEdit ieImage;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit meDescription;
   }
 }
