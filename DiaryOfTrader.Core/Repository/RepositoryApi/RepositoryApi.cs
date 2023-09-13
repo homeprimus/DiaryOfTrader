@@ -6,8 +6,8 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
   public class RepositoryApi<TEntity> : Disposable, IRepository<TEntity> where TEntity : Entity.Entity
   {
     #region fields
-    private readonly HttpClient _client = new HttpClient();
-    private readonly string _endPoint;
+    protected readonly HttpClient _client = new HttpClient();
+    protected readonly string _endPoint;
     #endregion
 
     public RepositoryApi(string root)

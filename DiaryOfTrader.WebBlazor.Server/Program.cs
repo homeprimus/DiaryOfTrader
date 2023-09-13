@@ -38,6 +38,7 @@ builder.Services.AddScoped<ITraderSessionRepository, TraderSessionRepositoryApi>
 builder.Services.AddScoped<ITraderRegionRepository, TraderRegionRepositoryApi>(_ => new TraderRegionRepositoryApi(rootApi));
 builder.Services.AddScoped<ISymbolRepository, SymbolRepositoryApi>(_ => new SymbolRepositoryApi(rootApi));
 builder.Services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryApi>(_ => new EconomicCalendarRepositoryApi(rootApi));
+builder.Services.AddScoped<ITraderRepository, TraderRepositoryApi>(_ => new TraderRepositoryApi(rootApi));
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();

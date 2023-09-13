@@ -1,4 +1,6 @@
 using DiaryOfTrader.Core.Auth;
+using DiaryOfTrader.Core.Entity;
+using DiaryOfTrader.Core.Interfaces.Repository;
 using DiaryOfTrader.WebBlazor.Core.HttpRepository;
 using Microsoft.AspNetCore.Components;
 
@@ -8,7 +10,7 @@ public partial class Registration
 {
     private UserForRegistrationDto _userForRegistration = new UserForRegistrationDto();
 
-    [Inject] public IAuthenticationService AuthenticationService { get; set; }
+    [Inject] public ITraderRepository AuthenticationRepository { get; set; }
 
     [Inject] public NavigationManager NavigationManager { get; set; }
 
@@ -19,7 +21,8 @@ public partial class Registration
     {
         ShowRegistrationErrors = false;
 
-        var result = await AuthenticationService.RegisterUser(_userForRegistration);
+        var result = await AuthenticationRepository.RegisterUser(_userForRegistration);
+        
         if (!result.IsSuccessfulRegistration)
         {
             Errors = result.Errors;

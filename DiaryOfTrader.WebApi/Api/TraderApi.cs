@@ -1,4 +1,4 @@
-﻿
+﻿using DiaryOfTrader.Core.Auth;
 using DiaryOfTrader.WebApi.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,16 @@ namespace DiaryOfTrader.WebApi.Api
           return Results.Ok(token);
         }
       );
+      
+      application.MapPost("/register",
+        [AllowAnonymous] async ([FromBody] UserForRegistrationDto userForRegistrationDto,
+          ITraderRepository traderRepository) =>
+        {
+          var result = await traderRepository.RegisterUser(userForRegistrationDto);
+          if (!result.IsSuccessfulRegistration) return Results.BadRequest(result);
+          return Results.Ok(result);
+        }
+      );
     }
-
   }
 }
