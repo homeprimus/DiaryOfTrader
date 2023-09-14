@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
-using DiaryOfTrader.Abstracts;
 using DiaryOfTrader.Core;
 using DiaryOfTrader.Core.Interfaces;
 using DiaryOfTrader.EditDialogs;
+using SkiaSharp;
+using SkiaSharp.Views.Desktop;
 
 namespace DiaryOfTrader.EditControls.Entity
 {
@@ -16,6 +17,16 @@ namespace DiaryOfTrader.EditControls.Entity
       {
         var frame = (MarketReviewTimeFrame)entity;
         Element.SetFrame(frame);
+
+        var edit = new MarketReviewTimeFrameDlg();
+        edit.Edit(frame, EditModeUI.AllowEdit);
+        gvTimeFrame.RefreshData();
+      };
+
+      gnReview.Edit += delegate (object entity)
+      {
+        var frame = (MarketReviewTimeFrame)entity;
+
         var edit = new MarketReviewTimeFrameDlg();
         edit.Edit(frame, EditModeUI.AllowEdit);
         gvTimeFrame.RefreshData();
@@ -44,5 +55,22 @@ namespace DiaryOfTrader.EditControls.Entity
       luTrend.DataSource = MarketReview.TrendList;
     }
 
+    protected override void OnPropertyChanged(string property)
+    {
+      base.OnPropertyChanged(property);
+      if (property == "Exchange" || property == "Symbol" || property == "DateTime")
+      {
+        BindingUtils.SafeReadValue(txtName, BindingUtils.Text);
+      }
+    }
+
+    private void repositoryItemPictureEdit_FormatEditValue(object sender, DevExpress.XtraEditors.Controls.ConvertEditValueEventArgs e)
+    {
+      if (e.Value is SKImage img)
+      {
+        e.Value = img.ToBitmap();
+        e.Handled = true;
+      }
+    }
   }
 }

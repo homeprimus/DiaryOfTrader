@@ -17,6 +17,8 @@
   <ItemGroup>
     <PackageReference Include="CefSharp.WinForms.NETCore" Version="116.0.190" />
     <PackageReference Include="DevExpress.Win.Design" Version="22.2.5" />
+    <PackageReference Include="SkiaSharp" Version="2.88.5" />
+    <PackageReference Include="SkiaSharp.Views.Desktop.Common" Version="2.88.5" />
   </ItemGroup>
   
   <ItemGroup>

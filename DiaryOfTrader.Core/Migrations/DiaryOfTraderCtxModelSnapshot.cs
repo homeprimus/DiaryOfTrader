@@ -211,9 +211,6 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<long>("FrameID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("ImageID")
-                        .HasColumnType("INTEGER");
-
                     b.Property<long>("MarketID")
                         .HasColumnType("INTEGER");
 
@@ -224,6 +221,9 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
 
+                    b.Property<long?>("ScreenShotID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<long?>("TrendID")
                         .HasColumnType("INTEGER");
 
@@ -231,9 +231,9 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.HasIndex("FrameID");
 
-                    b.HasIndex("ImageID");
-
                     b.HasIndex("MarketID");
+
+                    b.HasIndex("ScreenShotID");
 
                     b.HasIndex("TrendID");
 
@@ -263,6 +263,9 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.Property<string>("Path")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
@@ -376,10 +379,15 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
 
+                    b.Property<long?>("ScreenShotID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ScreenShotID");
 
                     b.ToTable("Exchange");
 
@@ -622,15 +630,15 @@ namespace DiaryOfTrader.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DiaryOfTrader.Core.Entity.ScreenShot", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageID");
-
                     b.HasOne("DiaryOfTrader.Core.Entity.MarketReview", "Market")
                         .WithMany("Frames")
                         .HasForeignKey("MarketID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("DiaryOfTrader.Core.Entity.ScreenShot", "ScreenShot")
+                        .WithMany()
+                        .HasForeignKey("ScreenShotID");
 
                     b.HasOne("DiaryOfTrader.Core.Entity.Trend", "Trend")
                         .WithMany()
@@ -638,9 +646,9 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.Navigation("Frame");
 
-                    b.Navigation("Image");
-
                     b.Navigation("Market");
+
+                    b.Navigation("ScreenShot");
 
                     b.Navigation("Trend");
                 });
@@ -650,6 +658,13 @@ namespace DiaryOfTrader.Core.Migrations
                     b.HasOne("DiaryOfTrader.Core.Entity.Diary", null)
                         .WithMany("Screenshot")
                         .HasForeignKey("DiaryID");
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderExchange", b =>
+                {
+                    b.HasOne("DiaryOfTrader.Core.Entity.ScreenShot", null)
+                        .WithMany("Exchanges")
+                        .HasForeignKey("ScreenShotID");
                 });
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderSession", b =>
@@ -688,6 +703,11 @@ namespace DiaryOfTrader.Core.Migrations
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReview", b =>
                 {
                     b.Navigation("Frames");
+                });
+
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.ScreenShot", b =>
+                {
+                    b.Navigation("Exchanges");
                 });
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderRegion", b =>

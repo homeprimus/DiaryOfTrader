@@ -29,23 +29,6 @@ namespace DiaryOfTrader.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Exchange",
-                columns: table => new
-                {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true),
-                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Exchange", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Frame",
                 columns: table => new
                 {
@@ -181,59 +164,6 @@ namespace DiaryOfTrader.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExchangeSymbol",
-                columns: table => new
-                {
-                    ExchangesID = table.Column<long>(type: "INTEGER", nullable: false),
-                    SymbolsID = table.Column<long>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExchangeSymbol", x => new { x.ExchangesID, x.SymbolsID });
-                    table.ForeignKey(
-                        name: "FK_ExchangeSymbol_Exchange_ExchangesID",
-                        column: x => x.ExchangesID,
-                        principalTable: "Exchange",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ExchangeSymbol_Symbol_SymbolsID",
-                        column: x => x.SymbolsID,
-                        principalTable: "Symbol",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MarketReview",
-                columns: table => new
-                {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ExchangeID = table.Column<long>(type: "INTEGER", nullable: false),
-                    SymbolID = table.Column<long>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MarketReview", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_MarketReview_Exchange_ExchangeID",
-                        column: x => x.ExchangeID,
-                        principalTable: "Exchange",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MarketReview_Symbol_SymbolID",
-                        column: x => x.SymbolID,
-                        principalTable: "Symbol",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Diary",
                 columns: table => new
                 {
@@ -255,20 +185,9 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     table.PrimaryKey("PK_Diary", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Diary_Exchange_ExchangeID",
-                        column: x => x.ExchangeID,
-                        principalTable: "Exchange",
-                        principalColumn: "ID");
-                    table.ForeignKey(
                         name: "FK_Diary_Frame_EnteredID",
                         column: x => x.EnteredID,
                         principalTable: "Frame",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Diary_MarketReview_ReviewID",
-                        column: x => x.ReviewID,
-                        principalTable: "MarketReview",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -331,6 +250,7 @@ namespace DiaryOfTrader.Core.Migrations
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Path = table.Column<string>(type: "TEXT", nullable: false),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
                     DiaryID = table.Column<long>(type: "INTEGER", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
@@ -347,6 +267,82 @@ namespace DiaryOfTrader.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Exchange",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true),
+                    ScreenShotID = table.Column<long>(type: "INTEGER", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exchange", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Exchange_ScreenShot_ScreenShotID",
+                        column: x => x.ScreenShotID,
+                        principalTable: "ScreenShot",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExchangeSymbol",
+                columns: table => new
+                {
+                    ExchangesID = table.Column<long>(type: "INTEGER", nullable: false),
+                    SymbolsID = table.Column<long>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExchangeSymbol", x => new { x.ExchangesID, x.SymbolsID });
+                    table.ForeignKey(
+                        name: "FK_ExchangeSymbol_Exchange_ExchangesID",
+                        column: x => x.ExchangesID,
+                        principalTable: "Exchange",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExchangeSymbol_Symbol_SymbolsID",
+                        column: x => x.SymbolsID,
+                        principalTable: "Symbol",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MarketReview",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ExchangeID = table.Column<long>(type: "INTEGER", nullable: false),
+                    SymbolID = table.Column<long>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MarketReview", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_MarketReview_Exchange_ExchangeID",
+                        column: x => x.ExchangeID,
+                        principalTable: "Exchange",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MarketReview_Symbol_SymbolID",
+                        column: x => x.SymbolID,
+                        principalTable: "Symbol",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MarketReviewTimeFrame",
                 columns: table => new
                 {
@@ -355,7 +351,7 @@ namespace DiaryOfTrader.Core.Migrations
                     MarketID = table.Column<long>(type: "INTEGER", nullable: false),
                     FrameID = table.Column<long>(type: "INTEGER", nullable: false),
                     TrendID = table.Column<long>(type: "INTEGER", nullable: true),
-                    ImageID = table.Column<long>(type: "INTEGER", nullable: true),
+                    ScreenShotID = table.Column<long>(type: "INTEGER", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Order = table.Column<int>(type: "INTEGER", nullable: false)
@@ -376,8 +372,8 @@ namespace DiaryOfTrader.Core.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MarketReviewTimeFrame_ScreenShot_ImageID",
-                        column: x => x.ImageID,
+                        name: "FK_MarketReviewTimeFrame_ScreenShot_ScreenShotID",
+                        column: x => x.ScreenShotID,
                         principalTable: "ScreenShot",
                         principalColumn: "ID");
                     table.ForeignKey(
@@ -428,6 +424,11 @@ namespace DiaryOfTrader.Core.Migrations
                 column: "EventID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Exchange_ScreenShotID",
+                table: "Exchange",
+                column: "ScreenShotID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ExchangeSymbol_SymbolsID",
                 table: "ExchangeSymbol",
                 column: "SymbolsID");
@@ -448,14 +449,14 @@ namespace DiaryOfTrader.Core.Migrations
                 column: "FrameID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MarketReviewTimeFrame_ImageID",
-                table: "MarketReviewTimeFrame",
-                column: "ImageID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MarketReviewTimeFrame_MarketID",
                 table: "MarketReviewTimeFrame",
                 column: "MarketID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MarketReviewTimeFrame_ScreenShotID",
+                table: "MarketReviewTimeFrame",
+                column: "ScreenShotID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MarketReviewTimeFrame_TrendID",
@@ -471,11 +472,34 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "IX_Session_RegionID",
                 table: "Session",
                 column: "RegionID");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Diary_Exchange_ExchangeID",
+                table: "Diary",
+                column: "ExchangeID",
+                principalTable: "Exchange",
+                principalColumn: "ID");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Diary_MarketReview_ReviewID",
+                table: "Diary",
+                column: "ReviewID",
+                principalTable: "MarketReview",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Diary_Exchange_ExchangeID",
+                table: "Diary");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_MarketReview_Exchange_ExchangeID",
+                table: "MarketReview");
+
             migrationBuilder.DropTable(
                 name: "EconomicSchedule");
 
@@ -495,13 +519,16 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "EconomicEvent");
 
             migrationBuilder.DropTable(
-                name: "ScreenShot");
-
-            migrationBuilder.DropTable(
                 name: "Trend");
 
             migrationBuilder.DropTable(
                 name: "Region");
+
+            migrationBuilder.DropTable(
+                name: "Exchange");
+
+            migrationBuilder.DropTable(
+                name: "ScreenShot");
 
             migrationBuilder.DropTable(
                 name: "Diary");
@@ -517,9 +544,6 @@ namespace DiaryOfTrader.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Wallet");
-
-            migrationBuilder.DropTable(
-                name: "Exchange");
 
             migrationBuilder.DropTable(
                 name: "Symbol");

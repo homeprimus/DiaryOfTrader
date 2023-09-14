@@ -13,6 +13,7 @@ namespace DiaryOfTrader.EditControls
   {
     public delegate void Handler(object entity);
     public event Handler Add;
+    public event Handler Edit;
     public event Handler Delete;
 
     private DevExpress.XtraGrid.Views.Grid.GridView? view;
@@ -59,6 +60,8 @@ namespace DiaryOfTrader.EditControls
 
     private void bbEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
+      Edit?.Invoke(GetEntity());
+      RefreshAction();
     }
 
     private void bbtDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -69,7 +72,6 @@ namespace DiaryOfTrader.EditControls
         View.DeleteRow(View.FocusedRowHandle);
         View.FocusedRowHandle = 0;
       }
-
       RefreshAction();
     }
   }

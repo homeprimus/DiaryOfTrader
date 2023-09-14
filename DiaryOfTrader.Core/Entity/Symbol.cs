@@ -9,10 +9,12 @@ namespace DiaryOfTrader.Core.Entity
   {
     [NonSerialized, NotPersistent]
     private SKImage? _image;
+
+
     [JsonIgnore, NotMapped]
     public SKImage? Image { get { return _image; } set { _image = value; } }
-
     public string? Url { get; set; }
+
     [JsonIgnore]
     public List<TraderExchange> Exchanges { get; set; } = new List<TraderExchange>();
 
