@@ -98,51 +98,7 @@ namespace DiaryOfTrader.Core.Entity
     [NotMapped, JsonIgnore]
     public static IList ExchangeList => Get<TraderExchange>();
   }
-  [Serializable]
-  public class MarketReviewTimeFrame : Entity
-  {
-    #region fields
 
-    private TimeFrame _frame;
-    private Trend? _trend;
-    #endregion
 
-    public override string Name
-    {
-      get { return _frame != null ? _frame.Name : base.Name; }
-      set { base.Name = value; }
-    }
-
-    [JsonIgnore]
-    public MarketReview Market { get; set; }
-
-    public TimeFrame Frame
-    {
-      get { return _frame;}
-      set
-      {
-        if (_frame != value)
-        {
-          _frame = value;
-          OnPropertyChanged();
-        }
-      }
-    }
-
-    public Trend? Trend
-    {
-      get { return _trend; }
-      set
-      {
-        if (_trend != value)
-        {
-          _trend = value;
-          OnPropertyChanged();
-        }
-      }
-    }
-    public ScreenShot? ScreenShot { get; set; } = new ScreenShot();
-
-  }
 }
 

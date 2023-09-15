@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using System.Text.Json.Serialization;
 using DiaryOfTrader.Core.Interfaces;
+using DiaryOfTrader.Core.Utils;
 
 namespace DiaryOfTrader.Core.Core
 {
@@ -202,7 +203,6 @@ namespace DiaryOfTrader.Core.Core
       internal set { isNew = value; }
     }
 
-
     [JsonIgnore, NotMapped, Browsable(false)]
     public bool IsDeleted
     {
@@ -230,9 +230,13 @@ namespace DiaryOfTrader.Core.Core
       get { return GetValidate(); }
     }
 
+    [JsonIgnore, NotMapped]
+    public string ClassDescription => ReflectionUtils.ClassDescription(GetType());
+
     public virtual void DefaultValues()
     {
     }
+
     #region IDataErrorInfo Members
     private static string GetColumnName(string columnName)
     {

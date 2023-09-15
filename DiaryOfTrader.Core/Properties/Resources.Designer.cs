@@ -273,6 +273,15 @@ namespace DiaryOfTrader.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Обзор тайм фрейма.
+        /// </summary>
+        internal static string MarketReviewTimeFrame {
+            get {
+                return ResourceManager.GetString("MarketReviewTimeFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Нью-Йорк.
         /// </summary>
         internal static string NewYork {

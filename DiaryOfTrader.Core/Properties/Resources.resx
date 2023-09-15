@@ -191,6 +191,9 @@
   <data name="MarketReview" xml:space="preserve">
     <value>Обзор рынка</value>
   </data>
+  <data name="MarketReviewTimeFrame" xml:space="preserve">
+    <value>Обзор тайм фрейма</value>
+  </data>
   <data name="NewYork" xml:space="preserve">
     <value>Нью-Йорк</value>
   </data>

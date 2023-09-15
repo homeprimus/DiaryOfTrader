@@ -78,6 +78,7 @@ namespace DiaryOfTrader.EditDialogs
     {
       MinimumSize = new Size(Width, Height);
       BindingUtils.Bind(btOK as IBindableComponent, BindingUtils.Enabled, instance, BindingUtils.Validate);
+      BindingUtils.Bind(this, BindingUtils.Text, instance, "ClassDescription");
     }
     protected virtual void OnAfterInitializeInstance()
     {
