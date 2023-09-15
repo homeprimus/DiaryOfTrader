@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DiaryOfTrader.Core.Entity.Economic
 {
+  [Serializable]
   public class EntityPicture: Entity
   {
     #region fields

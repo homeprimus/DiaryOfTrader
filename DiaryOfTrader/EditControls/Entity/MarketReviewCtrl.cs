@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using DiaryOfTrader.Core;
+using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.Core.Interfaces;
 using DiaryOfTrader.EditDialogs;
 using SkiaSharp;
@@ -70,6 +71,21 @@ namespace DiaryOfTrader.EditControls.Entity
       {
         e.Value = img.ToBitmap();
         e.Handled = true;
+      }
+    }
+
+    private void repositoryItemPictureEdit_DoubleClick(object sender, EventArgs e)
+    {
+      var entity = (MarketReviewTimeFrame)gvTimeFrame.GetRow(gvTimeFrame.FocusedRowHandle);
+      if (entity?.ScreenShot?.Image is SKImage img)
+      {
+        var pictureEditDlg = new PictureEditDlg();
+        pictureEditDlg.Image = img.ToBitmap();
+        if (pictureEditDlg.ShowDialog() == DialogResult.OK)
+        {
+          entity.ScreenShot.Image = ((Bitmap)pictureEditDlg.Image)?.ToSKImage();
+          gvTimeFrame.RefreshData();
+        }
       }
     }
   }

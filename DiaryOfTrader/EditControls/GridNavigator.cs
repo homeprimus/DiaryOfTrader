@@ -1,9 +1,6 @@
 ﻿
 using System.ComponentModel;
-using System.Windows.Controls;
-using DevExpress.XtraEditors.Controls;
 using DiaryOfTrader.Components;
-using DiaryOfTrader.Core;
 using DiaryOfTrader.Properties;
 using MessageBox = DiaryOfTrader.Core.MessageBox;
 

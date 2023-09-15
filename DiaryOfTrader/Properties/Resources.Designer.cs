@@ -61,6 +61,15 @@ namespace DiaryOfTrader.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Удалить изображение?.
+        /// </summary>
+        internal static string DeleteImage {
+            get {
+                return ResourceManager.GetString("DeleteImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удаление.
         /// </summary>
         internal static string DeleteQuestion {

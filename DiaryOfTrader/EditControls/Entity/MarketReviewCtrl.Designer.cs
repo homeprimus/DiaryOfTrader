@@ -241,6 +241,7 @@ namespace DiaryOfTrader.EditControls.Entity
       clTimeFrame.ColumnEdit = luFrame;
       clTimeFrame.FieldName = "Frame";
       clTimeFrame.Name = "clTimeFrame";
+      clTimeFrame.OptionsColumn.AllowMove = false;
       clTimeFrame.OptionsColumn.FixedWidth = true;
       clTimeFrame.Visible = true;
       clTimeFrame.VisibleIndex = 0;
@@ -264,6 +265,7 @@ namespace DiaryOfTrader.EditControls.Entity
       clTrend.ColumnEdit = luTrend;
       clTrend.FieldName = "Trend";
       clTrend.Name = "clTrend";
+      clTrend.OptionsColumn.AllowMove = false;
       clTrend.OptionsColumn.FixedWidth = true;
       clTrend.Visible = true;
       clTrend.VisibleIndex = 1;
@@ -287,6 +289,7 @@ namespace DiaryOfTrader.EditControls.Entity
       clImage.ColumnEdit = repositoryItemPictureEdit;
       clImage.FieldName = "ScreenShot.Image";
       clImage.Name = "clImage";
+      clImage.OptionsColumn.AllowMove = false;
       clImage.OptionsColumn.FixedWidth = true;
       clImage.Visible = true;
       clImage.VisibleIndex = 2;
@@ -299,6 +302,7 @@ namespace DiaryOfTrader.EditControls.Entity
       repositoryItemPictureEdit.ShowZoomSubMenu = DevExpress.Utils.DefaultBoolean.True;
       repositoryItemPictureEdit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
       repositoryItemPictureEdit.FormatEditValue += repositoryItemPictureEdit_FormatEditValue;
+      repositoryItemPictureEdit.DoubleClick += repositoryItemPictureEdit_DoubleClick;
       // 
       // clDescription
       // 
@@ -308,6 +312,7 @@ namespace DiaryOfTrader.EditControls.Entity
       clDescription.ColumnEdit = repositoryItemMemoEdit;
       clDescription.FieldName = "Description";
       clDescription.Name = "clDescription";
+      clDescription.OptionsColumn.AllowMove = false;
       clDescription.UnboundDataType = typeof(string);
       clDescription.Visible = true;
       clDescription.VisibleIndex = 3;
