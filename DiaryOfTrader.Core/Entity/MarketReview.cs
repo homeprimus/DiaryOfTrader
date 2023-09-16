@@ -12,7 +12,7 @@ namespace DiaryOfTrader.Core.Entity
   [Serializable]
   public class MarketReview: Entity
   {
-    #region
+    #region fields
     private TraderExchange _exchange;
     private Symbol _symbol;
     private DateTime _dateTime = DateTime.Now;
@@ -74,28 +74,28 @@ namespace DiaryOfTrader.Core.Entity
     public void SetFrame(MarketReviewTimeFrame entry)
     {
       entry.Market = this;
-      using var db = new DiaryOfTraderCtx();
-      entry.Trend = db.Trend.FirstOrDefault();
+      entry.Trend = DiaryOfTrader.TrendRepository.GetAllAsync().Result?.OrderBy(e => e.Order).FirstOrDefault();
+      var frames = DiaryOfTrader.TimeFrameRepository.GetAllAsync().Result?.OrderBy(e => e.Order);
       if (Frames.Count > 1)
       {
         var exists = Frames.Where(e=> e.Frame != null).Select(e=> e.Frame).Distinct().ToList();
-        entry.Frame = db.Frame.OrderBy(e => e.Order).FirstOrDefault(e => !exists.Contains(e));
+        entry.Frame = frames?.FirstOrDefault(e => !exists.Contains(e));
       }
       else
       {
-        entry.Frame = db.Frame.OrderBy(e=>e.Order).FirstOrDefault();
+        entry.Frame = frames?.FirstOrDefault();
       }
     }
 
     [NotMapped, JsonIgnore]
-    public static IList FrameList => Get<TimeFrame>();
+    public static IList FrameList => DiaryOfTrader.GetTimeFrame();
     [NotMapped, JsonIgnore]
-    public static IList TrendList => Get<Trend>();
+    public static IList TrendList => DiaryOfTrader.GetTrend();
 
     [NotMapped, JsonIgnore]
-    public static IList SymbolList => Get<Symbol>();
+    public static IList SymbolList => DiaryOfTrader.GetSymbol();
     [NotMapped, JsonIgnore]
-    public static IList ExchangeList => Get<TraderExchange>();
+    public static IList ExchangeList => DiaryOfTrader.GetTraderExchange();
   }
 
 

@@ -1,48 +1,54 @@
 ﻿
-using DiaryOfTrader.Core.Data;
+using System.Collections;
+using System.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DiaryOfTrader.Core.Entity
 {
-  public class DiaryOfTrader: Element
+  public static class DiaryOfTrader 
   {
-    #region
 
-    private static DiaryOfTrader _diaryOfTrader = new();
-    private Trader _trader;
-    #endregion
+    public static IServiceProvider ServiceProvider { get; set; }
+    public static Trader Trader { get; set; }
+    public static ISymbolRepository SymbolRepository { get { return ServiceProvider.GetRequiredService<ISymbolRepository>(); } }
+    public static ITimeFrameRepository TimeFrameRepository { get { return ServiceProvider.GetRequiredService<ITimeFrameRepository>(); } }
+    public static ITraderExchangeRepository TraderExchangeRepository { get { return ServiceProvider.GetRequiredService<ITraderExchangeRepository>(); } }
+    public static ITraderResultRepository TraderResultRepository { get { return ServiceProvider.GetRequiredService<ITraderResultRepository>(); } }
+    public static ITraderSessionRepository TraderSessionRepository { get { return ServiceProvider.GetRequiredService<ITraderSessionRepository>(); } }
+    public static ITraderRegionRepository TraderRegionRepository { get { return ServiceProvider.GetRequiredService<ITraderRegionRepository>(); } }
+    public static ITrendRepository TrendRepository { get { return ServiceProvider.GetRequiredService<ITrendRepository>(); } }
+    public static IWalletRepository WalletRepository { get { return ServiceProvider.GetRequiredService<IWalletRepository>(); } }
+    public static IMarketReviewRepository MarketReviewRepository { get { return ServiceProvider.GetRequiredService<IMarketReviewRepository>(); } }
+    public static IMarketReviewTimeFrameRepository MarketReviewTimeFrameRepository { get { return ServiceProvider.GetRequiredService<IMarketReviewTimeFrameRepository>(); } }
+    public static IDiaryRepository DiaryRepository { get { return ServiceProvider.GetRequiredService<IDiaryRepository>(); } }
+    public static IEconomicCalendarRepository EconomicCalendarRepository { get { return ServiceProvider.GetRequiredService<IEconomicCalendarRepository>(); } }
 
-    private DiaryOfTrader()
+    public static IList GetSymbol()
     {
+      return SymbolRepository.GetAllAsync().Result.Select(e=>new KeyValuePair<string, Symbol>(e.Name, e)).ToList();
     }
-    protected override void Free()
+    public static IList GetTimeFrame()
     {
-      base.Free();
+      return TimeFrameRepository.GetAllAsync().Result.Select(e => new KeyValuePair<string, TimeFrame>(e.Name, e)).ToList();
     }
-
-    public static DiaryOfTrader Default { get; } = _diaryOfTrader;
-    public Trader Trader
+    public static IList GetTraderExchange()
     {
-      get { return _trader;}
-      set
-      {
-        if (_trader != value)
-        {
-          _trader = value;
-          OnPropertyChanged();
-        }
-      }
+      return TraderExchangeRepository.GetAllAsync().Result.Select(e => new KeyValuePair<string, TraderExchange>(e.Name, e)).ToList();
     }
-
-    public List<Diary> Diaries()
+    public static IList GetTrend()
     {
-      using var context = new DiaryOfTraderCtx();
-      return context.Diary.ToList();
+      return TrendRepository.GetAllAsync().Result.Select(e => new KeyValuePair<string, Trend>(e.Name, e)).ToList();
+    }
+    public static IList GetTraderResult()
+    {
+      return TraderResultRepository.GetAllAsync().Result.Select(e => new KeyValuePair<string, TraderResult>(e.Name, e)).ToList();
+    }
+    public static IList GetWallet()
+    {
+      return WalletRepository.GetAllAsync().Result.Select(e => new KeyValuePair<string, Wallet>(e.Name, e)).ToList();
     }
 
-    public List<MarketReview> MarketReviews()
-    {
-      using var contex = new DiaryOfTraderCtx();
-      return contex.MarketReview.ToList();
-    }
+    
+
   }
 }

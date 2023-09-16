@@ -7,12 +7,11 @@ namespace DiaryOfTrader
 {
   internal static class Program
   {
-    public static IServiceProvider ServiceProvider { get; set; }
-
     static void ConfigureServices()
     {
       var services = new ServiceCollection();
-      services.AddScoped<DbContext, DiaryOfTraderCtx>();
+      //services.AddScoped<DbContext, DiaryOfTraderCtx>();
+      services.AddSingleton<DbContext, DiaryOfTraderCtx>();
 
       //// инткрфейс добавили
       services.AddTransient<ISymbolRepository, SymbolRepositoryDb>();
@@ -23,17 +22,16 @@ namespace DiaryOfTrader
       services.AddTransient<ITraderRegionRepository, TraderRegionRepositoryDb>();
       services.AddTransient<ITrendRepository, TrendRepositoryDb>();
       services.AddTransient<IWalletRepository, WalletRepositoryDb>();
-
       services.AddTransient<IMarketReviewRepository, MarketReviewRepositoryDb>();
       services.AddTransient<IMarketReviewTimeFrameRepository, MarketReviewTimeFrameRepositoryDb>();
       services.AddTransient<IDiaryRepository, DiaryRepositoryDb>();
-
       services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
+     
 
       //services.AddSingleton<Main, Main>();
       services.AddSingleton<RibbonMain, RibbonMain>();
-      
-      ServiceProvider = services.BuildServiceProvider();
+
+      Core.Entity.DiaryOfTrader.ServiceProvider = services.BuildServiceProvider();
     }
     [STAThread]
     static void Main()
@@ -43,7 +41,7 @@ namespace DiaryOfTrader
 
       ApplicationConfiguration.Initialize();
       ConfigureServices();
-      var main = ServiceProvider.GetRequiredService<RibbonMain>();
+      var main = Core.Entity.DiaryOfTrader.ServiceProvider.GetRequiredService<RibbonMain>();
       Application.Run(main);
       //Application.Run(new Main());
     }

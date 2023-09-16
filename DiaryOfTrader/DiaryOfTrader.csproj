@@ -7,6 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Resource\Icon\Main.ico</ApplicationIcon>
+    <PackageIcon>Main-64.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,6 +42,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Resource\Png\Main-64.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

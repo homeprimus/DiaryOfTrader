@@ -254,6 +254,9 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<long?>("DiaryID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("BLOB");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -262,10 +265,6 @@ namespace DiaryOfTrader.Core.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
@@ -379,15 +378,10 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("ScreenShotID")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ScreenShotID");
 
                     b.ToTable("Exchange");
 
@@ -660,13 +654,6 @@ namespace DiaryOfTrader.Core.Migrations
                         .HasForeignKey("DiaryID");
                 });
 
-            modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderExchange", b =>
-                {
-                    b.HasOne("DiaryOfTrader.Core.Entity.ScreenShot", null)
-                        .WithMany("Exchanges")
-                        .HasForeignKey("ScreenShotID");
-                });
-
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderSession", b =>
                 {
                     b.HasOne("DiaryOfTrader.Core.Entity.TraderRegion", "Region")
@@ -703,11 +690,6 @@ namespace DiaryOfTrader.Core.Migrations
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReview", b =>
                 {
                     b.Navigation("Frames");
-                });
-
-            modelBuilder.Entity("DiaryOfTrader.Core.Entity.ScreenShot", b =>
-                {
-                    b.Navigation("Exchanges");
                 });
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.TraderRegion", b =>

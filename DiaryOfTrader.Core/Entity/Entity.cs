@@ -73,14 +73,6 @@ namespace DiaryOfTrader.Core.Entity
     }
 
 
-    public static IList Get<T>() where T : Entity
-    {
-      var result = new List<KeyValuePair<string, T>>();
-      using var db = new DiaryOfTraderCtx();
-      db.Set<T>().ToList().ForEach(e => result.Add(new KeyValuePair<string, T>(e.Name, e))); ;
-      return result.ToArray();
-    }
-
     public static List<T> GetList<T>() where T : Entity
     {
       using var db = new DiaryOfTraderCtx();

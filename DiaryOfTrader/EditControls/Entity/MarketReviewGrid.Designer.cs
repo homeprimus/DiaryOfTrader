@@ -49,7 +49,7 @@ namespace DiaryOfTrader.EditControls.Entity
       clSymbol = new DevExpress.XtraGrid.Columns.GridColumn();
       clDescription = new DevExpress.XtraGrid.Columns.GridColumn();
       bmGrid = new DevExpress.XtraBars.BarManager(components);
-      bar2 = new DevExpress.XtraBars.Bar();
+      navMarketReview = new DevExpress.XtraBars.Bar();
       bbtAdd = new DevExpress.XtraBars.BarButtonItem();
       bbtEdit = new DevExpress.XtraBars.BarButtonItem();
       bbtDelete = new DevExpress.XtraBars.BarButtonItem();
@@ -205,26 +205,26 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       bmGrid.AllowCustomization = false;
       bmGrid.AllowHtmlText = true;
-      bmGrid.Bars.AddRange(new DevExpress.XtraBars.Bar[] { bar2 });
+      bmGrid.Bars.AddRange(new DevExpress.XtraBars.Bar[] { navMarketReview });
       bmGrid.DockControls.Add(barDockControlTop);
       bmGrid.DockControls.Add(barDockControlBottom);
       bmGrid.DockControls.Add(barDockControlLeft);
       bmGrid.DockControls.Add(barDockControlRight);
       bmGrid.Form = this;
       bmGrid.Items.AddRange(new DevExpress.XtraBars.BarItem[] { bbtDelete, bbtAdd, bbtEdit, bbtRefresh });
-      bmGrid.MainMenu = bar2;
+      bmGrid.MainMenu = navMarketReview;
       bmGrid.MaxItemId = 4;
       // 
-      // bar2
+      // navMarketReview
       // 
-      bar2.BarName = "Main menu";
-      bar2.DockCol = 0;
-      bar2.DockRow = 0;
-      bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-      bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(bbtAdd), new DevExpress.XtraBars.LinkPersistInfo(bbtEdit), new DevExpress.XtraBars.LinkPersistInfo(bbtDelete), new DevExpress.XtraBars.LinkPersistInfo(bbtRefresh) });
-      bar2.OptionsBar.MultiLine = true;
-      bar2.OptionsBar.UseWholeRow = true;
-      bar2.Text = "Main menu";
+      navMarketReview.BarName = "Main menu";
+      navMarketReview.DockCol = 0;
+      navMarketReview.DockRow = 0;
+      navMarketReview.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+      navMarketReview.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(bbtAdd), new DevExpress.XtraBars.LinkPersistInfo(bbtEdit), new DevExpress.XtraBars.LinkPersistInfo(bbtDelete), new DevExpress.XtraBars.LinkPersistInfo(bbtRefresh) });
+      navMarketReview.OptionsBar.MultiLine = true;
+      navMarketReview.OptionsBar.UseWholeRow = true;
+      navMarketReview.Text = "Main menu";
       // 
       // bbtAdd
       // 
@@ -233,6 +233,7 @@ namespace DiaryOfTrader.EditControls.Entity
       bbtAdd.ImageOptions.Image = (Image)resources.GetObject("bbtAdd.ImageOptions.Image");
       bbtAdd.ImageOptions.LargeImage = (Image)resources.GetObject("bbtAdd.ImageOptions.LargeImage");
       bbtAdd.Name = "bbtAdd";
+      bbtAdd.ItemClick += bbtAdd_ItemClick;
       // 
       // bbtEdit
       // 
@@ -241,6 +242,7 @@ namespace DiaryOfTrader.EditControls.Entity
       bbtEdit.ImageOptions.Image = (Image)resources.GetObject("bbtEdit.ImageOptions.Image");
       bbtEdit.ImageOptions.LargeImage = (Image)resources.GetObject("bbtEdit.ImageOptions.LargeImage");
       bbtEdit.Name = "bbtEdit";
+      bbtEdit.ItemClick += bbEdit_ItemClick;
       // 
       // bbtDelete
       // 
@@ -249,6 +251,7 @@ namespace DiaryOfTrader.EditControls.Entity
       bbtDelete.ImageOptions.Image = (Image)resources.GetObject("bbtDelete.ImageOptions.Image");
       bbtDelete.ImageOptions.LargeImage = (Image)resources.GetObject("bbtDelete.ImageOptions.LargeImage");
       bbtDelete.Name = "bbtDelete";
+      bbtDelete.ItemClick += bbtDelete_ItemClick;
       // 
       // bbtRefresh
       // 
@@ -257,6 +260,7 @@ namespace DiaryOfTrader.EditControls.Entity
       bbtRefresh.ImageOptions.Image = (Image)resources.GetObject("bbtRefresh.ImageOptions.Image");
       bbtRefresh.ImageOptions.LargeImage = (Image)resources.GetObject("bbtRefresh.ImageOptions.LargeImage");
       bbtRefresh.Name = "bbtRefresh";
+      bbtRefresh.ItemClick += bbtRefresh_ItemClick;
       // 
       // barDockControlTop
       // 
@@ -316,7 +320,7 @@ namespace DiaryOfTrader.EditControls.Entity
     #endregion
 
     public DevExpress.XtraBars.BarManager bmGrid;
-    public DevExpress.XtraBars.Bar bar2;
+    public DevExpress.XtraBars.Bar navMarketReview;
     public DevExpress.XtraBars.BarButtonItem bbtAdd;
     public DevExpress.XtraBars.BarButtonItem bbtEdit;
     public DevExpress.XtraBars.BarButtonItem bbtDelete;

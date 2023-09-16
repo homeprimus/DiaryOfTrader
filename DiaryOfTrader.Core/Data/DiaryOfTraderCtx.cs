@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using System.Diagnostics;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Sqlite.Migrations.Internal;
 
@@ -60,9 +61,10 @@ namespace DiaryOfTrader.Core.Data
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder.UseSqlite("Pooling=True;Data Source=" + DataSource())
-        .ReplaceService<IHistoryRepository, HistoryRepository>()
-        ; 
+        .ReplaceService<IHistoryRepository, HistoryRepository>();
+      optionsBuilder.LogTo(message => Debug.WriteLine(message));
     }
+  
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 

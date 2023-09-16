@@ -4,10 +4,10 @@
   public class ScreenShot : EntityPicture
   {
     #region fields
-    private string _path;
+    private string? _path;
     #endregion
 
-    public string Path
+    public string? Path
     {
       get { return _path; }
       set

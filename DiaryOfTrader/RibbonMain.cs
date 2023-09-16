@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using DevExpress.XtraBars;
 using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Interfaces.Repository;
 using DiaryOfTrader.Core.Utils;
 using DiaryOfTrader.EditDialogs;
 using DiaryOfTrader.EditDialogs.Calendar;
@@ -13,28 +12,22 @@ namespace DiaryOfTrader
   public partial class RibbonMain : DevExpress.XtraBars.Ribbon.RibbonForm
   {
     #region fields
-    private IServiceProvider _serviceProvider;
     private readonly CancellationTokenSource _cancelTokenSource;
     private readonly DiaryOfTraderCtx _context;// = new();
     private Task? _updateThisWeekAsync;
+
     #endregion
 
-    //public RibbonMain()
-    //{
-    //  InitializeComponent();
-    //  var eco = new EconomicParser(_context, _cancelTokenSource.Token);
-    //  _updateThisWeekAsync = eco.UpdateThisWeekAsync();
-    //}
-    public RibbonMain(IServiceProvider serviceProvider)
+    public RibbonMain()
     {
       InitializeComponent();
-      _serviceProvider = serviceProvider;
 
       _cancelTokenSource = new CancellationTokenSource();
       _context = new DiaryOfTraderCtx();
 
       var eco = new EconomicParser(_context, _cancelTokenSource.Token);
       _updateThisWeekAsync = eco.UpdateThisWeekAsync();
+
     }
 
     private bool EditDbSet<T>(GridEditDialog dlg, DbSet<T> data) where T : Entity
@@ -110,14 +103,12 @@ namespace DiaryOfTrader
 
     private void bbiMarketReview_ItemClick(object sender, ItemClickEventArgs e)
     {
-      var review = new MarketReview();
-      var marketReview = new MarketReviewDlg();
+      tcMain.SelectedTabPage = tpMarketReview;
+    }
 
-      if (marketReview.Edit(review))
-      {
-        _context.MarketReview.Add(review);
-      }
-
+    private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+    {
+      tcMain.SelectedTabPage = tpDiary;
     }
   }
 
