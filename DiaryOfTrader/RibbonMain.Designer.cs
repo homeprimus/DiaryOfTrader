@@ -44,10 +44,11 @@ namespace DiaryOfTrader
       bbtWallet = new DevExpress.XtraBars.BarButtonItem();
       bbtCalendar = new DevExpress.XtraBars.BarButtonItem();
       bbiMarketReview = new DevExpress.XtraBars.BarButtonItem();
+      barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
       rbpGenaral = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-      rbpgDictionary = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       rbpgCalendar = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+      rbpgDictionary = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       rbpАnalytics = new DevExpress.XtraBars.Ribbon.RibbonPage();
       rbpgReports = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
       ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -55,9 +56,16 @@ namespace DiaryOfTrader
       navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
       navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
       navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
-      barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+      pnlCenter = new Panel();
+      splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
+      tcMain = new Components.TabControl();
+      tpDiary = new DevExpress.XtraTab.XtraTabPage();
+      tpMarketReview = new DevExpress.XtraTab.XtraTabPage();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
       ((System.ComponentModel.ISupportInitialize)nbMain).BeginInit();
+      pnlCenter.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)tcMain).BeginInit();
+      tcMain.SuspendLayout();
       SuspendLayout();
       // 
       // ribbon
@@ -68,7 +76,7 @@ namespace DiaryOfTrader
       ribbon.MaxItemId = 12;
       ribbon.Name = "ribbon";
       ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { rbpGenaral, rbpАnalytics });
-      ribbon.Size = new Size(964, 158);
+      ribbon.Size = new Size(1025, 158);
       ribbon.StatusBar = ribbonStatusBar;
       // 
       // bbtExchamge
@@ -158,6 +166,14 @@ namespace DiaryOfTrader
       bbiMarketReview.Name = "bbiMarketReview";
       bbiMarketReview.ItemClick += bbiMarketReview_ItemClick;
       // 
+      // barButtonItem1
+      // 
+      barButtonItem1.Caption = "Журнал сделок";
+      barButtonItem1.Id = 11;
+      barButtonItem1.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image");
+      barButtonItem1.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItem1.ImageOptions.LargeImage");
+      barButtonItem1.Name = "barButtonItem1";
+      // 
       // rbpGenaral
       // 
       rbpGenaral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { rbpgMain, rbpgCalendar, rbpgDictionary });
@@ -171,6 +187,12 @@ namespace DiaryOfTrader
       rbpgMain.Name = "rbpgMain";
       rbpgMain.Text = "Основные";
       // 
+      // rbpgCalendar
+      // 
+      rbpgCalendar.ItemLinks.Add(bbtCalendar);
+      rbpgCalendar.Name = "rbpgCalendar";
+      rbpgCalendar.Text = "Календарь";
+      // 
       // rbpgDictionary
       // 
       rbpgDictionary.ItemLinks.Add(bbtExchamge);
@@ -182,12 +204,6 @@ namespace DiaryOfTrader
       rbpgDictionary.ItemLinks.Add(bbtWallet);
       rbpgDictionary.Name = "rbpgDictionary";
       rbpgDictionary.Text = "Справочники";
-      // 
-      // rbpgCalendar
-      // 
-      rbpgCalendar.ItemLinks.Add(bbtCalendar);
-      rbpgCalendar.Name = "rbpgCalendar";
-      rbpgCalendar.Text = "Календарь";
       // 
       // rbpАnalytics
       // 
@@ -202,10 +218,10 @@ namespace DiaryOfTrader
       // 
       // ribbonStatusBar
       // 
-      ribbonStatusBar.Location = new Point(0, 537);
+      ribbonStatusBar.Location = new Point(0, 589);
       ribbonStatusBar.Name = "ribbonStatusBar";
       ribbonStatusBar.Ribbon = ribbon;
-      ribbonStatusBar.Size = new Size(964, 24);
+      ribbonStatusBar.Size = new Size(1025, 24);
       // 
       // nbMain
       // 
@@ -215,8 +231,8 @@ namespace DiaryOfTrader
       nbMain.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] { navBarItem1 });
       nbMain.Location = new Point(0, 158);
       nbMain.Name = "nbMain";
-      nbMain.OptionsNavPane.ExpandedWidth = 178;
-      nbMain.Size = new Size(178, 379);
+      nbMain.OptionsNavPane.ExpandedWidth = 172;
+      nbMain.Size = new Size(172, 431);
       nbMain.TabIndex = 2;
       nbMain.Text = "navBarControl1";
       // 
@@ -238,19 +254,54 @@ namespace DiaryOfTrader
       navBarItem1.Caption = "navBarItem1";
       navBarItem1.Name = "navBarItem1";
       // 
-      // barButtonItem1
+      // pnlCenter
       // 
-      barButtonItem1.Caption = "Журнал сделок";
-      barButtonItem1.Id = 11;
-      barButtonItem1.ImageOptions.Image = (Image)resources.GetObject("barButtonItem1.ImageOptions.Image");
-      barButtonItem1.ImageOptions.LargeImage = (Image)resources.GetObject("barButtonItem1.ImageOptions.LargeImage");
-      barButtonItem1.Name = "barButtonItem1";
+      pnlCenter.Controls.Add(tcMain);
+      pnlCenter.Dock = DockStyle.Fill;
+      pnlCenter.Location = new Point(172, 158);
+      pnlCenter.Name = "pnlCenter";
+      pnlCenter.Size = new Size(853, 431);
+      pnlCenter.TabIndex = 5;
+      // 
+      // splitterControl1
+      // 
+      splitterControl1.Location = new Point(172, 158);
+      splitterControl1.Name = "splitterControl1";
+      splitterControl1.Size = new Size(10, 431);
+      splitterControl1.TabIndex = 6;
+      splitterControl1.TabStop = false;
+      // 
+      // tcMain
+      // 
+      tcMain.Appearance.BackColor = Color.Transparent;
+      tcMain.Appearance.Options.UseBackColor = true;
+      tcMain.Dock = DockStyle.Fill;
+      tcMain.Location = new Point(0, 0);
+      tcMain.Name = "tcMain";
+      tcMain.SelectedTabPage = tpDiary;
+      tcMain.Size = new Size(853, 431);
+      tcMain.TabIndex = 0;
+      tcMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { tpDiary, tpMarketReview });
+      // 
+      // tpDiary
+      // 
+      tpDiary.Name = "tpDiary";
+      tpDiary.Size = new Size(851, 406);
+      tpDiary.Text = "Журнал сделок";
+      // 
+      // tpMarketReview
+      // 
+      tpMarketReview.Name = "tpMarketReview";
+      tpMarketReview.Size = new Size(851, 406);
+      tpMarketReview.Text = "Обзор рынка";
       // 
       // RibbonMain
       // 
       AutoScaleDimensions = new SizeF(6F, 13F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(964, 561);
+      ClientSize = new Size(1025, 613);
+      Controls.Add(splitterControl1);
+      Controls.Add(pnlCenter);
       Controls.Add(nbMain);
       Controls.Add(ribbonStatusBar);
       Controls.Add(ribbon);
@@ -260,6 +311,9 @@ namespace DiaryOfTrader
       Text = "Дневник трейдера";
       ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
       ((System.ComponentModel.ISupportInitialize)nbMain).EndInit();
+      pnlCenter.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)tcMain).EndInit();
+      tcMain.ResumeLayout(false);
       ResumeLayout(false);
       PerformLayout();
     }
@@ -289,5 +343,10 @@ namespace DiaryOfTrader
     private DevExpress.XtraNavBar.NavBarItem navBarItem1;
     private DevExpress.XtraBars.BarButtonItem bbiMarketReview;
     private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+    private Panel pnlCenter;
+    private DevExpress.XtraEditors.SplitterControl splitterControl1;
+    private Components.TabControl tcMain;
+    private DevExpress.XtraTab.XtraTabPage tpDiary;
+    private DevExpress.XtraTab.XtraTabPage tpMarketReview;
   }
 }

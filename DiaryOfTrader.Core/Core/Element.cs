@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using System.Text.Json.Serialization;
 using DiaryOfTrader.Core.Interfaces;
 using DiaryOfTrader.Core.Utils;
 

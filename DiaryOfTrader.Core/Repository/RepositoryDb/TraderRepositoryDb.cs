@@ -1,5 +1,4 @@
-﻿using DiaryOfTrader.Core.Interfaces.Repository;
-
+﻿
 namespace DiaryOfTrader.Core.Repository.RepositoryDb
 {
   public class TraderRepositoryDb : RepositoryDb<Trader>, ITraderRepository

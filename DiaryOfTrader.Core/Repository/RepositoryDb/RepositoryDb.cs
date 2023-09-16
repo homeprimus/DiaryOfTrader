@@ -53,6 +53,26 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
         await SaveAsync();
       }
     }
+
+    public async Task InsertRangeAsync(TEntity[] entities)
+    {
+      await _entity.AddRangeAsync(entities);
+      await SaveAsync();
+    }
+
+    public async Task UpdateRangeAsync(TEntity[] entities)
+    {
+      _entity.UpdateRange(entities);
+      await SaveAsync();
+    }
+
+    public async Task DeleteRangeAsync(long[] entityIds)
+    {
+      var list = new List<long>(entityIds);
+      _entity.RemoveRange(_entity.Where(e => list.Contains(e.ID)));
+      await SaveAsync();
+    }
+
     public async Task SaveAsync()
     {
       await _data.SaveChangesAsync();

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Reflection;
 using DiaryOfTrader.Core.DynamicCode;
-using Exchange.Core.DynamicCode;
 
 namespace DiaryOfTrader.Core.Core
 {

@@ -21,35 +21,40 @@ foreach (var api in apiServices)
 
 app.Run();
 
-void ResgistryServices(IServiceCollection serveices)
+void ResgistryServices(IServiceCollection services)
 {
   // сваггер добавили
-  serveices.AddEndpointsApiExplorer();
-  serveices.AddSwaggerGen();
+  services.AddEndpointsApiExplorer();
+  services.AddSwaggerGen();
 
-  //serveices.AddDbContext<HotelDb>(options =>
+  //services.AddDbContext<HotelDb>(options =>
   //  options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite")));
 
-  serveices.AddScoped<DbContext, DiaryOfTraderCtx>();
+  services.AddScoped<DbContext, DiaryOfTraderCtx>();
   //// инткрфейс добавили
-  serveices.AddScoped<ISymbolRepository, SymbolRepositoryDb>();
-  serveices.AddScoped<ITimeFrameRepository, TimeFrameRepositoryDb>();
-  serveices.AddScoped<ITraderExchangeRepository, TraderExchangeRepositoryDb>();
-  serveices.AddScoped<ITraderResultRepository, TraderResultRepositoryDb>();
-  serveices.AddScoped<ITraderSessionRepository, TraderSessionRepositoryDb>();
-  serveices.AddScoped<ITraderRegionRepository, TraderRegionRepositoryDb>();
-  serveices.AddScoped<ITrendRepository, TrendRepositoryDb>();
-  serveices.AddScoped<IWalletRepository, WalletRepositoryDb>();
-  serveices.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
+  services.AddScoped<ISymbolRepository, SymbolRepositoryDb>();
+  services.AddScoped<ITimeFrameRepository, TimeFrameRepositoryDb>();
+  services.AddScoped<ITraderExchangeRepository, TraderExchangeRepositoryDb>();
+  services.AddScoped<ITraderResultRepository, TraderResultRepositoryDb>();
+  services.AddScoped<ITraderSessionRepository, TraderSessionRepositoryDb>();
+  services.AddScoped<ITraderRegionRepository, TraderRegionRepositoryDb>();
+  services.AddScoped<ITrendRepository, TrendRepositoryDb>();
+  services.AddScoped<IWalletRepository, WalletRepositoryDb>();
 
-  serveices.AddScoped<ITraderRepository, TraderRepositoryDb>();
+  services.AddScoped<IMarketReviewRepository, MarketReviewRepositoryDb>();
+  services.AddScoped<IMarketReviewTimeFrameRepository, MarketReviewTimeFrameRepositoryDb>();
+  services.AddScoped<IDiaryRepository, DiaryRepositoryDb>();
+
+  services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
+
+  services.AddScoped<ITraderRepository, TraderRepositoryDb>();
 
   // добавили авторизыцию
-  serveices.AddSingleton<ITokenService>(new TokenService());
-  //serveices.AddSingleton<ITraderRepository>(new TraderRepository());
+  services.AddSingleton<ITokenService>(new TokenService());
+  //services.AddSingleton<ITraderRepository>(new TraderRepository());
 
-  serveices.AddAuthorization();
-  serveices.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+  services.AddAuthorization();
+  services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
       options.TokenValidationParameters = new()
@@ -64,18 +69,21 @@ void ResgistryServices(IServiceCollection serveices)
       };
     });
 
-  serveices.AddTransient<IApi, SymbolApi>();
-  serveices.AddTransient<IApi, TimeFrameApi>();
-  serveices.AddTransient<IApi, TraderExchangeApi>();
-  serveices.AddTransient<IApi, TraderResultApi>();
-  serveices.AddTransient<IApi, TraderSessionApi>();
-  serveices.AddTransient<IApi, TraderRegionApi>();
-  serveices.AddTransient<IApi, TrendApi>();
-  serveices.AddTransient<IApi, WalletApi>();
+  services.AddTransient<IApi, SymbolApi>();
+  services.AddTransient<IApi, TimeFrameApi>();
+  services.AddTransient<IApi, TraderExchangeApi>();
+  services.AddTransient<IApi, TraderResultApi>();
+  services.AddTransient<IApi, TraderSessionApi>();
+  services.AddTransient<IApi, TraderRegionApi>();
+  services.AddTransient<IApi, TrendApi>();
+  services.AddTransient<IApi, WalletApi>();
+  services.AddTransient<IApi, DiaryApi>();
+  services.AddTransient<IApi, MarketReviewApi>();
+  services.AddTransient<IApi, MarketReviewTimeFrameApi>();
 
-  serveices.AddTransient<IApi, EconomicCalendarApi>();
+  services.AddTransient<IApi, EconomicCalendarApi>();
 
-  serveices.AddTransient<IApi, TraderApi>();
+  services.AddTransient<IApi, TraderApi>();
 }
 
 void Configure(WebApplication application)

@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace DiaryOfTrader.WebApi.Core.Api
 {
@@ -45,17 +43,35 @@ namespace DiaryOfTrader.WebApi.Core.Api
         .WithName($"Create{_swagger}")
         .WithTags("Creators");
 
+      //application.MapPost($"{_endPoint}/range", PostRange)
+      //  .Accepts<TEntity>("application/json")
+      //  .Produces(StatusCodes.Status201Created)
+      //  .WithName($"Create{_swagger}")
+      //  .WithTags("Creators");
+
       application.MapPut($"{_endPoint}", Put)
         .Accepts<TEntity>("application/json")
         .Produces(StatusCodes.Status204NoContent)
         .WithName($"Update{_swagger}")
         .WithTags("Updaters");
 
+      //application.MapPut($"{_endPoint}/range", PutRange)
+      //  .Accepts<TEntity>("application/json")
+      //  .Produces(StatusCodes.Status204NoContent)
+      //  .WithName($"Update{_swagger}")
+      //  .WithTags("Updaters");
+
       application.MapDelete($"{_endPoint}" + "/{id}", Delete)
         .Produces(StatusCodes.Status404NotFound)
         .Produces(StatusCodes.Status204NoContent)
         .WithName($"Delete{_swagger}")
         .WithTags("Deleters");
+
+      //application.MapDelete($"{_endPoint}_range", DeleteRange)
+      //  .Produces(StatusCodes.Status404NotFound)
+      //  .Produces(StatusCodes.Status204NoContent)
+      //  .WithName($"Delete{_swagger}")
+      //  .WithTags("Deleters");
     }
 
     //[Authorize]
@@ -78,7 +94,14 @@ namespace DiaryOfTrader.WebApi.Core.Api
     private async Task<IResult> Post([FromBody] TEntity entity, TRepository repository)
     {
       await repository.InsertAsync(entity);
-      return Results.Created($"/hotels/{entity.ID}", entity);
+      return Results.Created($"/{entity.ID}", entity);
+    }
+
+    //[Authorize]
+    private async Task<IResult> PostRange([FromBody] TEntity[] entities, TRepository repository)
+    {
+      await repository.InsertRangeAsync(entities);
+      return Results.Created($"/{entities.Select(e=>e.ID)}", entities);
     }
 
     //[Authorize]
@@ -87,11 +110,23 @@ namespace DiaryOfTrader.WebApi.Core.Api
       await repository.UpdateAsync(entity);
       return Results.NoContent();
     }
+    //[Authorize]
+    private async Task<IResult> PutRange([FromBody] TEntity[] entities, TRepository repository)
+    {
+      await repository.UpdateRangeAsync(entities);
+      return Results.NoContent();
+    }
 
     //[Authorize]
     private async Task<IResult> Delete(int id, TRepository repository)
     {
       await repository.DeleteAsync(id);
+      return Results.NoContent();
+    }
+    //[Authorize]
+    private async Task<IResult> DeleteRange(long[] ids, TRepository repository)
+    {
+      await repository.DeleteRangeAsync(ids);
       return Results.NoContent();
     }
   }

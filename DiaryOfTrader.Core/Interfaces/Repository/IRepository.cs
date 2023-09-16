@@ -9,6 +9,11 @@
     Task InsertAsync(TEntity entity);
     Task UpdateAsync(TEntity entity);
     Task DeleteAsync(int entityId);
+
+    Task InsertRangeAsync(TEntity[] entities);
+    Task UpdateRangeAsync(TEntity[] entities);
+    Task DeleteRangeAsync(long[] entityIds);
+
     Task SaveAsync();
   }
 }

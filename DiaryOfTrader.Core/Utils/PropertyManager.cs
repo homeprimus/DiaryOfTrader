@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Reflection;
-using DiaryOfTrader.Core.Attributes;
 
 namespace DiaryOfTrader.Core.Utils
 {
