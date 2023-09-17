@@ -27,9 +27,9 @@ namespace DiaryOfTrader.WebApi.Api
         [AllowAnonymous] async ([FromBody] UserForRegistrationDto userForRegistrationDto,
           ITraderRepository traderRepository) =>
         {
-          var result = await traderRepository.RegisterUser(userForRegistrationDto);
-          if (!result.IsSuccessfulRegistration) return Results.BadRequest(result);
-          return Results.Ok(result);
+          // var result = await traderRepository.RegisterUser(userForRegistrationDto);
+          // if (!result.IsSuccessfulRegistration) return Results.BadRequest(result);
+          // return Results.Ok(result);
         }
       );
     }

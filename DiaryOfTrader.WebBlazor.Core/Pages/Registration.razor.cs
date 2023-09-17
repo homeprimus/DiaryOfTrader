@@ -21,16 +21,16 @@ public partial class Registration
     {
         ShowRegistrationErrors = false;
 
-        var result = await AuthenticationRepository.RegisterUser(_userForRegistration);
+        // var result = await AuthenticationRepository.RegisterUser(_userForRegistration);
         
-        if (!result.IsSuccessfulRegistration)
-        {
-            Errors = result.Errors;
-            ShowRegistrationErrors = true;
-        }
-        else
-        {
-            NavigationManager.NavigateTo("/");
-        }
+        // if (!result.IsSuccessfulRegistration)
+        // {
+        //     Errors = result.Errors;
+        //     ShowRegistrationErrors = true;
+        // }
+        // else
+        // {
+        //     NavigationManager.NavigateTo("/");
+        // }
     }
 }

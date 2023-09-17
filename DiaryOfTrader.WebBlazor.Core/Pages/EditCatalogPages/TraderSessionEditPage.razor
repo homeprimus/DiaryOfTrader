@@ -1,0 +1,36 @@
+@page "/TraderSessionEdit/{Id:long}"
+<h3>TraderSessionEditPage</h3>
+
+@if (_traderSession != null)
+{
+    <EditForm EditContext ="_editContext" OnValidSubmit="Update" class="card card-body bg-light mt-5">
+        <DataAnnotationsValidator />
+	
+        <div class="mb-3 row">
+            <label for="name" class="col-md-2 col-form-label">Name:</label>
+            <div class="col-md-10">
+                <InputText id="code" class="form-control" @bind-Value="_traderSession.Name" />
+                <ValidationMessage For="@(() => _traderSession.Name)" />
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="caption" class="col-md-2 col-form-label">Description:</label>
+            <div class="col-md-10">
+                <InputTextArea id="caption" class="form-control"  @bind-Value="_traderSession.Description" />
+                <ValidationMessage For="@(() => _traderSession.Description)" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success float-end" 
+                        disabled="@_formInvalid">Update</button>
+            </div>
+        </div>
+    </EditForm>
+    <br />
+    <div class="row">
+        <div class="col">
+            <a href="/tradingsession" class="btn btn-success">Back</a>
+        </div>
+    </div>
+}
