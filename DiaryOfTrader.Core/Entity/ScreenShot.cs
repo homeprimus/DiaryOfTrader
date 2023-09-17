@@ -1,13 +1,23 @@
-﻿
-namespace DiaryOfTrader.Core.Entity
+﻿namespace DiaryOfTrader.Core.Entity
 {
   [Serializable]
-  public class ScreenShot : Entity
+  public class ScreenShot : EntityPicture
   {
-    [JsonIgnore]
-    
-    public object Image { get; }
-    public string Path { get; set; }
-  }
+    #region fields
+    private string? _path;
+    #endregion
 
+    public string? Path
+    {
+      get { return _path; }
+      set
+      {
+        if (_path != value)
+        {
+          _path = value;
+          OnPropertyChanged();
+        }
+      }
+    }
+  }
 }

@@ -1,6 +1,4 @@
-﻿using DiaryOfTrader.Core.Interfaces.Repository;
-
-namespace DiaryOfTrader.Core.Repository.RepositoryDb
+﻿namespace DiaryOfTrader.Core.Repository.RepositoryDb
 {
   public class TraderRegionRepositoryDb: RepositoryDb<TraderRegion>, ITraderRegionRepository
   {

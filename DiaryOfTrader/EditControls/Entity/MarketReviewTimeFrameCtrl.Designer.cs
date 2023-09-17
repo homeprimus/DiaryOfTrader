@@ -33,6 +33,7 @@ namespace DiaryOfTrader.EditControls.Entity
     private void InitializeComponent()
     {
       components = new System.ComponentModel.Container();
+      var resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketReviewTimeFrameCtrl));
       pnlTop = new Panel();
       gcMarketReview = new DevExpress.XtraEditors.GroupControl();
       lblTrend = new Label();
@@ -48,8 +49,10 @@ namespace DiaryOfTrader.EditControls.Entity
       mmDescription = new DevExpress.XtraEditors.MemoEdit();
       pnlCenter = new Panel();
       gcTragingView = new DevExpress.XtraEditors.GroupControl();
-      WebBrowser = new CefSharp.WinForms.ChromiumWebBrowser();
+      tragingView = new Components.TragingView();
       splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
+      alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(components);
+      btScreenShot = new Components.Button();
       pnlTop.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)gcMarketReview).BeginInit();
       gcMarketReview.SuspendLayout();
@@ -216,7 +219,8 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // gcTragingView
       // 
-      gcTragingView.Controls.Add(WebBrowser);
+      gcTragingView.Controls.Add(btScreenShot);
+      gcTragingView.Controls.Add(tragingView);
       gcTragingView.Dock = DockStyle.Fill;
       gcTragingView.Location = new Point(0, 0);
       gcTragingView.Name = "gcTragingView";
@@ -224,14 +228,16 @@ namespace DiaryOfTrader.EditControls.Entity
       gcTragingView.TabIndex = 2;
       gcTragingView.Text = "График торговли";
       // 
-      // WebBrowser
+      // tragingView
       // 
-      WebBrowser.ActivateBrowserOnCreation = false;
-      WebBrowser.Dock = DockStyle.Fill;
-      WebBrowser.Location = new Point(2, 23);
-      WebBrowser.Name = "WebBrowser";
-      WebBrowser.Size = new Size(478, 314);
-      WebBrowser.TabIndex = 1;
+      tragingView.Dock = DockStyle.Fill;
+      tragingView.Exchange = null;
+      tragingView.Frame = null;
+      tragingView.Location = new Point(2, 23);
+      tragingView.Name = "tragingView";
+      tragingView.Size = new Size(478, 314);
+      tragingView.Symbol = null;
+      tragingView.TabIndex = 0;
       // 
       // splitterControl1
       // 
@@ -241,6 +247,20 @@ namespace DiaryOfTrader.EditControls.Entity
       splitterControl1.Size = new Size(482, 10);
       splitterControl1.TabIndex = 1;
       splitterControl1.TabStop = false;
+      // 
+      // btScreenShot
+      // 
+      btScreenShot.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+      btScreenShot.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      btScreenShot.Appearance.Options.UseFont = true;
+      btScreenShot.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("button1.ImageOptions.SvgImage");
+      btScreenShot.ImageOptions.SvgImageSize = new Size(20, 20);
+      btScreenShot.Location = new Point(452, 0);
+      btScreenShot.Name = "btScreenShot";
+      btScreenShot.Size = new Size(25, 20);
+      btScreenShot.TabIndex = 1;
+      btScreenShot.UseVisualStyleBackColor = false;
+      btScreenShot.Click += btScreenShot_Click;
       // 
       // MarketReviewTimeFrameCtrl
       // 
@@ -280,7 +300,6 @@ namespace DiaryOfTrader.EditControls.Entity
     private DevExpress.XtraEditors.MemoEdit mmDescription;
     private DevExpress.XtraEditors.GroupControl gcTragingView;
     private DevExpress.XtraEditors.SplitterControl splitterControl1;
-    private CefSharp.WinForms.ChromiumWebBrowser WebBrowser;
     private DevExpress.XtraEditors.GroupControl gcMarketReview;
     private Label lblCoin;
     private Label lblExchange;
@@ -290,5 +309,8 @@ namespace DiaryOfTrader.EditControls.Entity
     private Components.LookComboBox lcbTrend;
     private Label lblTimeFrame;
     private Components.LookComboBox lcbTimeFrame;
+    private DevExpress.XtraBars.Alerter.AlertControl alertControl1;
+    private Components.TragingView tragingView;
+    private Components.Button btScreenShot;
   }
 }

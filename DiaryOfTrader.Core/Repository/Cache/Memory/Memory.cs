@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Text.Json;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 using DiaryOfTrader.Core.Interfaces.Cache;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Internal;

@@ -7,6 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Resource\Icon\Main.ico</ApplicationIcon>
+    <PackageIcon>Main-64.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,8 +16,12 @@
 
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.WinForms.NETCore" Version="116.0.190" />
     <PackageReference Include="DevExpress.Win.Design" Version="22.2.5" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="116.0.190" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="SkiaSharp" Version="2.88.5" />
+    <PackageReference Include="SkiaSharp.Views.Desktop.Common" Version="2.88.5" />
   </ItemGroup>
   
   <ItemGroup>
@@ -37,6 +42,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Resource\Png\Main-64.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

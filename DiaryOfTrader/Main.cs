@@ -15,7 +15,7 @@ namespace DiaryOfTrader
 
     private void btMain_Click(object sender, EventArgs e)
     {
-      new RibbonMain().ShowDialog();
+      //new RibbonMain().ShowDialog();
     }
 
     async void print(EconomicCalendarConsumerMq consumer)

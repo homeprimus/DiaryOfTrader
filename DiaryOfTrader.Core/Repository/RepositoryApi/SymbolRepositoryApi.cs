@@ -1,6 +1,4 @@
 ﻿
-using DiaryOfTrader.Core.Interfaces.Repository;
-
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
   public class SymbolRepositoryApi : RepositoryApi<Symbol>, ISymbolRepository

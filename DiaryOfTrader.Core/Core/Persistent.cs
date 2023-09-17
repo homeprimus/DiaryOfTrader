@@ -1,7 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Reflection;
 using DiaryOfTrader.Core.DynamicCode;
-using Exchange.Core.DynamicCode;
 
 namespace DiaryOfTrader.Core.Core
 {
@@ -108,30 +107,34 @@ namespace DiaryOfTrader.Core.Core
 
     protected virtual void AcceptChanges()
     {
-      try
+      if (stateStack.Count > 0)
       {
-        stateStack.Pop();
-        var currentType = GetType();
-        do
+        try
         {
-          foreach (var info in GetPersistentField(currentType))
+          stateStack.Pop();
+          var currentType = GetType();
+          do
           {
-            if (typeof(Persistent).IsAssignableFrom(info.InfoType))
+            foreach (var info in GetPersistentField(currentType))
             {
-              var value = info.Get(this);
-              if (value != null)
+              if (typeof(Persistent).IsAssignableFrom(info.InfoType))
               {
-                ((Persistent)value).AcceptChanges();
+                var value = info.Get(this);
+                if (value != null)
+                {
+                  ((Persistent)value).AcceptChanges();
+                }
               }
             }
-          }
-          currentType = currentType.BaseType;
-        } while (currentType != typeof(Persistent));
-      }
-      catch (Exception e)
-      {
-        //LogManager.Log.Error("AcceptChanges()", e);
-        throw;
+
+            currentType = currentType.BaseType;
+          } while (currentType != typeof(Persistent));
+        }
+        catch (Exception e)
+        {
+          //LogManager.Log.Error("AcceptChanges()", e);
+          throw;
+        }
       }
     }
 

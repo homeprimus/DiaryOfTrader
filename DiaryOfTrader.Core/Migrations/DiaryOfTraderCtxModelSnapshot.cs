@@ -211,9 +211,6 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<long>("FrameID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("ImageID")
-                        .HasColumnType("INTEGER");
-
                     b.Property<long>("MarketID")
                         .HasColumnType("INTEGER");
 
@@ -224,6 +221,9 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("INTEGER");
 
+                    b.Property<long?>("ScreenShotID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<long?>("TrendID")
                         .HasColumnType("INTEGER");
 
@@ -231,9 +231,9 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.HasIndex("FrameID");
 
-                    b.HasIndex("ImageID");
-
                     b.HasIndex("MarketID");
+
+                    b.HasIndex("ScreenShotID");
 
                     b.HasIndex("TrendID");
 
@@ -254,6 +254,9 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<long?>("DiaryID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("BLOB");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -262,7 +265,6 @@ namespace DiaryOfTrader.Core.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Path")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
@@ -622,15 +624,15 @@ namespace DiaryOfTrader.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DiaryOfTrader.Core.Entity.ScreenShot", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageID");
-
                     b.HasOne("DiaryOfTrader.Core.Entity.MarketReview", "Market")
                         .WithMany("Frames")
                         .HasForeignKey("MarketID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("DiaryOfTrader.Core.Entity.ScreenShot", "ScreenShot")
+                        .WithMany()
+                        .HasForeignKey("ScreenShotID");
 
                     b.HasOne("DiaryOfTrader.Core.Entity.Trend", "Trend")
                         .WithMany()
@@ -638,9 +640,9 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.Navigation("Frame");
 
-                    b.Navigation("Image");
-
                     b.Navigation("Market");
+
+                    b.Navigation("ScreenShot");
 
                     b.Navigation("Trend");
                 });

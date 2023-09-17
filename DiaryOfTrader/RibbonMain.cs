@@ -1,27 +1,33 @@
 ﻿using System.ComponentModel;
 using DevExpress.XtraBars;
 using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Entity;
-using DiaryOfTrader.Core.Entity.Economic;
 using DiaryOfTrader.Core.Utils;
 using DiaryOfTrader.EditDialogs;
 using DiaryOfTrader.EditDialogs.Calendar;
 using DiaryOfTrader.EditDialogs.Dictionary;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DiaryOfTrader
 {
   public partial class RibbonMain : DevExpress.XtraBars.Ribbon.RibbonForm
   {
-    private readonly CancellationTokenSource cancelTokenSource = new();
-    private readonly DiaryOfTraderCtx contexDb = new();
+    #region fields
+    private readonly CancellationTokenSource _cancelTokenSource;
+    private readonly DiaryOfTraderCtx _context;// = new();
+    private Task? _updateThisWeekAsync;
 
-    private Task? updateThisWeekAsync;
+    #endregion
+
     public RibbonMain()
     {
       InitializeComponent();
-      var eco = new EconomicParser(contexDb, cancelTokenSource.Token);
-      updateThisWeekAsync = eco.UpdateThisWeekAsync();
+
+      _cancelTokenSource = new CancellationTokenSource();
+      _context = new DiaryOfTraderCtx();
+
+      var eco = new EconomicParser(_context, _cancelTokenSource.Token);
+      _updateThisWeekAsync = eco.UpdateThisWeekAsync();
+
     }
 
     private bool EditDbSet<T>(GridEditDialog dlg, DbSet<T> data) where T : Entity
@@ -32,76 +38,77 @@ namespace DiaryOfTrader
       var result = dlg.ShowDialog() == DialogResult.OK;
       if (result)
       {
-        Entity.DoEndEdit(contexDb, data, orig, list);
+        Entity.DoEndEdit(_context, data, orig, list);
       }
       else
       {
-        Entity.DoCancelEdit(contexDb);
+        Entity.DoCancelEdit(_context);
       }
       return result;
     }
 
     private void bbtExchamge_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new ExchangeDlg(), contexDb.Exchange);
+      EditDbSet(new ExchangeDlg(), _context.Exchange);
     }
 
     private void bbtSymbol_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new SymbolDlg(), contexDb.Symbol);
+      EditDbSet(new SymbolDlg(), _context.Symbol);
     }
 
     private void bbtSession_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Entity.DoBeginEdit<TraderSession>(contexDb.Session, out BindingList<TraderSession> orig, out List<TraderSession> list);
+      Entity.DoBeginEdit<TraderSession>(_context.Session, out BindingList<TraderSession> orig, out List<TraderSession> list);
 
-      if (EditDbSet(new TradeSessionDlg(), contexDb.Region))
+      if (EditDbSet(new TradeSessionDlg(), _context.Region))
       {
-        Entity.DoEndEdit<TraderSession>(contexDb, contexDb.Session, orig, list);
+        Entity.DoEndEdit<TraderSession>(_context, _context.Session, orig, list);
       }
     }
 
     private void bbtTimeFrame_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new TimeFrameDlg(), contexDb.Frame);
+      EditDbSet(new TimeFrameDlg(), _context.Frame);
     }
 
     private void bbtResult_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new ResultDlg(), contexDb.Result);
+      EditDbSet(new ResultDlg(), _context.Result);
     }
 
     private void bbtTrend_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new TrendDlg(), contexDb.Trend);
+      EditDbSet(new TrendDlg(), _context.Trend);
     }
 
     private void bbtWallet_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new WalletDlg(), contexDb.Wallet);
+      EditDbSet(new WalletDlg(), _context.Wallet);
     }
 
     private void bbtCalendar_ItemClick(object sender, ItemClickEventArgs e)
     {
-      if (updateThisWeekAsync != null)
+      if (_updateThisWeekAsync != null)
       {
-        Task.WaitAll(updateThisWeekAsync);
-        updateThisWeekAsync = null;
+        Task.WaitAll(_updateThisWeekAsync);
+        _updateThisWeekAsync = null;
       }
 
       var calendar = new CalendarDlg();
       calendar.Text = e.Item.Caption;
-      calendar.Contex = contexDb;
+      calendar.Contex = _context;
       calendar.ShowDialog();
     }
 
     private void bbiMarketReview_ItemClick(object sender, ItemClickEventArgs e)
     {
-      var marketReview = new MarketReviewDlg();
-      marketReview.Element = new MarketReview();
-      marketReview.Text = marketReview.Element.ClassDescription;
-      marketReview.Edit();
+      tcMain.SelectedTabPage = tpMarketReview;
+    }
 
+    private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+    {
+      tcMain.SelectedTabPage = tpDiary;
     }
   }
 

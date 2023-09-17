@@ -1,5 +1,4 @@
 ﻿using System.Net.Http.Json;
-using DiaryOfTrader.Core.Interfaces.Repository;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
@@ -43,6 +42,21 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
     public async Task DeleteAsync(int entityId)
     {
       await _client.DeleteAsync($"{_endPoint}/{entityId}");
+    }
+
+    public async Task InsertRangeAsync(TEntity[] entities)
+    {
+      await _client.PostAsJsonAsync($"{_endPoint}/range", entities);
+    }
+
+    public async Task UpdateRangeAsync(TEntity[] entities)
+    {
+      await _client.PutAsJsonRangeAsync($"{_endPoint}/range", entities);
+    }
+    //????
+    public async Task DeleteRangeAsync(long[] entityIds)
+    {
+      await _client.DeleteAsJsonRangeAsync<long>($"{_endPoint}/range", entityIds);
     }
 
     public Task SaveAsync()

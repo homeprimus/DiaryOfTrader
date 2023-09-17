@@ -35,10 +35,10 @@ namespace DiaryOfTrader.Core.Migrations
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Url = table.Column<string>(type: "TEXT", nullable: true),
-                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    Order = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,10 +97,10 @@ namespace DiaryOfTrader.Core.Migrations
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Url = table.Column<string>(type: "TEXT", nullable: true),
-                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    Order = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -210,10 +210,10 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ExchangeID = table.Column<long>(type: "INTEGER", nullable: false),
                     SymbolID = table.Column<long>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -330,11 +330,12 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Path = table.Column<string>(type: "TEXT", nullable: false),
+                    Path = table.Column<string>(type: "TEXT", nullable: true),
                     DiaryID = table.Column<long>(type: "INTEGER", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    Order = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -352,11 +353,11 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     MarketID = table.Column<long>(type: "INTEGER", nullable: false),
                     FrameID = table.Column<long>(type: "INTEGER", nullable: false),
                     TrendID = table.Column<long>(type: "INTEGER", nullable: true),
-                    ImageID = table.Column<long>(type: "INTEGER", nullable: true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    ScreenShotID = table.Column<long>(type: "INTEGER", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Order = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -376,8 +377,8 @@ namespace DiaryOfTrader.Core.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MarketReviewTimeFrame_ScreenShot_ImageID",
-                        column: x => x.ImageID,
+                        name: "FK_MarketReviewTimeFrame_ScreenShot_ScreenShotID",
+                        column: x => x.ScreenShotID,
                         principalTable: "ScreenShot",
                         principalColumn: "ID");
                     table.ForeignKey(
@@ -448,14 +449,14 @@ namespace DiaryOfTrader.Core.Migrations
                 column: "FrameID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MarketReviewTimeFrame_ImageID",
-                table: "MarketReviewTimeFrame",
-                column: "ImageID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MarketReviewTimeFrame_MarketID",
                 table: "MarketReviewTimeFrame",
                 column: "MarketID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MarketReviewTimeFrame_ScreenShotID",
+                table: "MarketReviewTimeFrame",
+                column: "ScreenShotID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MarketReviewTimeFrame_TrendID",

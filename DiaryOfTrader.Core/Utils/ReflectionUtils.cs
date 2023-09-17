@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
-using DiaryOfTrader.Core.Attributes;
-using DiaryOfTrader.Core.Core;
-using DiaryOfTrader.Core.Properties;
 
 namespace DiaryOfTrader.Core.Utils
 {

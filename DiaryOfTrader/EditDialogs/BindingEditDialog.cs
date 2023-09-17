@@ -78,6 +78,7 @@ namespace DiaryOfTrader.EditDialogs
     {
       MinimumSize = new Size(Width, Height);
       BindingUtils.Bind(btOK as IBindableComponent, BindingUtils.Enabled, instance, BindingUtils.Validate);
+      BindingUtils.Bind(this, BindingUtils.Text, instance, "ClassDescription");
     }
     protected virtual void OnAfterInitializeInstance()
     {
@@ -97,12 +98,18 @@ namespace DiaryOfTrader.EditDialogs
     protected virtual void InstancePropertyChanged(string name)
     {
     }
+    protected virtual void InstanceAcceptChanges()
+    {
+    }
+    protected virtual void InstanceCancelChanges()
+    {
+    }
 
     public bool Edit(EditModeUI mode = EditModeUI.AllowEdit)
     {
       return Edit(instance, mode);
     }
-    public virtual bool Edit(object? sender, EditModeUI mode)
+    public virtual bool Edit(object? sender, EditModeUI mode = EditModeUI.AllowEdit)
     {
       var result = false;
       if (!ReferenceEquals(this.instance, null))
@@ -142,9 +149,11 @@ namespace DiaryOfTrader.EditDialogs
             if (result)
             {
               instance.EndEdit();
+              InstanceAcceptChanges();
             }
             else
             {
+              InstanceCancelChanges();
               instance.CancelEdit();
             }
           }

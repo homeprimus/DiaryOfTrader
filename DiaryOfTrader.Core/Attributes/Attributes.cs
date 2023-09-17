@@ -1,7 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Security.Cryptography;
-using System.Xml.Serialization;
-using DiaryOfTrader.Core.Properties;
 
 namespace DiaryOfTrader.Core.Attributes
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Exchange.Core.DynamicCode
+﻿namespace Exchange.Core.DynamicCode
 {
   internal class DynamicCacheKey: IComparable
   {

@@ -1,6 +1,4 @@
-﻿using DiaryOfTrader.Core.Attributes;
-
-namespace DiaryOfTrader.Core.DynamicCode
+﻿namespace DiaryOfTrader.Core.DynamicCode
 {
   internal class DynamicProp : IComparable
   {
