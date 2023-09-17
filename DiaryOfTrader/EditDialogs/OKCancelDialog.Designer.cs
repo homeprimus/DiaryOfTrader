@@ -73,7 +73,7 @@ namespace DiaryOfTrader.EditDialogs
       resources.ApplyResources(btOK, "btOK");
       btOK.Name = "btOK";
       btOK.UseVisualStyleBackColor = true;
-      btOK.Click += btOKClick;
+      btOK.Click += DoOkClick;
       // 
       // pnlCancel
       // 
@@ -110,7 +110,9 @@ namespace DiaryOfTrader.EditDialogs
       resources.ApplyResources(this, "$this");
       Controls.Add(pnlClient);
       Controls.Add(pnlDown);
+      IconOptions.Icon = (Icon)resources.GetObject("OKCancelDialog.IconOptions.Icon");
       Name = "OKCancelDialog";
+      HelpRequested += DoHelpRequested;
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       pnlDown.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)pnlOK).EndInit();

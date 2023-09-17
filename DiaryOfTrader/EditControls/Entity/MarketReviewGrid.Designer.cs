@@ -138,7 +138,7 @@ namespace DiaryOfTrader.EditControls.Entity
       // gvMarketReview
       // 
       gvMarketReview.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-      gvMarketReview.ChildGridLevelName = "gvMarketReviewTimeFrames";
+      gvMarketReview.ChildGridLevelName = "MarketReviewTimeFrames";
       gvMarketReview.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { clDateTime, clName, clExchange, clSymbol, clDescription });
       gvMarketReview.DetailHeight = 303;
       gvMarketReview.GridControl = gcMarketReview;

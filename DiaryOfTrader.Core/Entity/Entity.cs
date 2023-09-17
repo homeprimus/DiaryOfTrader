@@ -73,48 +73,6 @@ namespace DiaryOfTrader.Core.Entity
     }
 
 
-    public static List<T> GetList<T>() where T : Entity
-    {
-      using var db = new DiaryOfTraderCtx();
-      return db.Set<T>().ToList();
-    }
-
-    #region На вылет
-    public static void DoBeginEdit<T>(DbSet<T> data, out BindingList<T> orig, out List<T> modify) where T : Entity
-    {
-      orig = new BindingList<T>(data.OrderBy(e => e.Order).ToList());
-      modify = new List<T>(orig);
-    }
-    public static void DoEndEdit<T>(DbContext context, DbSet<T> data, BindingList<T> orig, List<T> modify, bool update = true) where T : Entity
-    {
-
-      orig.Where(e => !modify.Contains(e) && e.Validate).ToList().ForEach(e => data.Add(e));
-      modify.Where(e => !orig.Contains(e)).ToList().ForEach(e => data.Remove(e));
-      if (update)
-        context.SaveChangesAsync();
-
-    }
-    public static void DoCancelEdit(DbContext context) 
-    {
-
-      foreach (var entry in context.ChangeTracker.Entries())
-      {
-        switch (entry.State)
-        {
-          case EntityState.Modified:
-            entry.State = EntityState.Unchanged;
-            break;
-          case EntityState.Added:
-            entry.State = EntityState.Detached;
-            break;
-          case EntityState.Deleted:
-            entry.Reload();
-            break;
-          default: break;
-        }
-      }
-    }
-    #endregion
     protected override bool GetValidate()
     {
       return  base.GetValidate() && !string.IsNullOrEmpty(Name);

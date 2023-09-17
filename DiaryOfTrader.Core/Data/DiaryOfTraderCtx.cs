@@ -222,6 +222,7 @@ namespace DiaryOfTrader.Core.Data
     public DbSet<Wallet> Wallet { get; set; }
     public DbSet<Diary> Diary { get; set; }
     public DbSet<MarketReview> MarketReview { get; set; }
+    public DbSet<MarketReviewTimeFrame> MarketReviewTimeFrame { get; set; }
     public DbSet<EconomicSchedule> EconomicSchedule { get; set; }
     public DbSet<EconomicEvent> EconomicEvent { get; set; }
     public DbSet<Trader> Trader { get; set; }
