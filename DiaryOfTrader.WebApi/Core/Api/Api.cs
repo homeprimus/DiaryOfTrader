@@ -43,35 +43,18 @@ namespace DiaryOfTrader.WebApi.Core.Api
         .WithName($"Create{_swagger}")
         .WithTags("Creators");
 
-      //application.MapPost($"{_endPoint}/range", PostRange)
-      //  .Accepts<TEntity>("application/json")
-      //  .Produces(StatusCodes.Status201Created)
-      //  .WithName($"Create{_swagger}")
-      //  .WithTags("Creators");
-
       application.MapPut($"{_endPoint}", Put)
         .Accepts<TEntity>("application/json")
         .Produces(StatusCodes.Status204NoContent)
         .WithName($"Update{_swagger}")
         .WithTags("Updaters");
 
-      //application.MapPut($"{_endPoint}/range", PutRange)
-      //  .Accepts<TEntity>("application/json")
-      //  .Produces(StatusCodes.Status204NoContent)
-      //  .WithName($"Update{_swagger}")
-      //  .WithTags("Updaters");
-
-      application.MapDelete($"{_endPoint}" + "/{id}", Delete)
+      application.MapDelete($"{_endPoint}", Delete)
         .Produces(StatusCodes.Status404NotFound)
         .Produces(StatusCodes.Status204NoContent)
         .WithName($"Delete{_swagger}")
         .WithTags("Deleters");
 
-      //application.MapDelete($"{_endPoint}_range", DeleteRange)
-      //  .Produces(StatusCodes.Status404NotFound)
-      //  .Produces(StatusCodes.Status204NoContent)
-      //  .WithName($"Delete{_swagger}")
-      //  .WithTags("Deleters");
     }
 
     //[Authorize]
@@ -91,42 +74,25 @@ namespace DiaryOfTrader.WebApi.Core.Api
         : Results.NotFound(Array.Empty<TEntity>());
 
     //[Authorize]
-    private async Task<IResult> Post([FromBody] TEntity entity, TRepository repository)
+    private async Task<IResult> Post([FromBody] List<TEntity> entities, TRepository repository)
     {
-      await repository.InsertAsync(entity);
-      return Results.Created($"/{entity.ID}", entity);
-    }
-
-    //[Authorize]
-    private async Task<IResult> PostRange([FromBody] TEntity[] entities, TRepository repository)
-    {
-      await repository.InsertRangeAsync(entities);
-      return Results.Created($"/{entities.Select(e=>e.ID)}", entities);
-    }
-
-    //[Authorize]
-    private async Task<IResult> Put([FromBody] TEntity entity, TRepository repository)
-    {
-      await repository.UpdateAsync(entity);
+      await repository.InsertAsync(entities);
       return Results.NoContent();
+      //return Results.Created($"/{entity.ID}", entity);
     }
+
+
     //[Authorize]
-    private async Task<IResult> PutRange([FromBody] TEntity[] entities, TRepository repository)
+    private async Task<IResult> Put([FromBody] List<TEntity> entities, TRepository repository)
     {
-      await repository.UpdateRangeAsync(entities);
+      await repository.UpdateAsync(entities);
       return Results.NoContent();
     }
 
     //[Authorize]
-    private async Task<IResult> Delete(int id, TRepository repository)
+    private async Task<IResult> Delete([FromBody] List<long> ids, TRepository repository)
     {
-      await repository.DeleteAsync(id);
-      return Results.NoContent();
-    }
-    //[Authorize]
-    private async Task<IResult> DeleteRange(long[] ids, TRepository repository)
-    {
-      await repository.DeleteRangeAsync(ids);
+      await repository.DeleteAsync(ids);
       return Results.NoContent();
     }
   }

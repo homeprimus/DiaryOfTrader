@@ -9,26 +9,7 @@ namespace DiaryOfTrader.EditDialogs
       InitializeComponent();
     }
 
-    //[Browsable(true)]
-    //public event CancelEventHandler ButtonOkClicked;
-
-    //protected virtual void OnButtonOKClicked(CancelEventArgs args)
-    //{
-    //  if (ButtonOkClicked != null)
-    //  {
-    //    ButtonOkClicked(this, args);
-    //  }
-    //}
-
-    protected override void OnLoad(EventArgs e)
-    {
-      base.OnLoad(e);
-      //var icon = Settings.ApplicationIcon;
-      //if (icon != null)
-      //  Icon = icon;
-    }
-
-    private void OKCancelDialogHelpRequested(object sender, HelpEventArgs hlpevent)
+    private void DoHelpRequested(object sender, HelpEventArgs hlpevent)
     {
       hlpevent.Handled = HelpFileHelper.ShowHelp(GetHelpTopic());
     }
@@ -43,13 +24,21 @@ namespace DiaryOfTrader.EditDialogs
       return true;
     }
 
-    private void btOKClick(object sender, EventArgs e)
+    protected virtual void OnOkClick()
     {
-      //var args = new CancelEventArgs(false);
-      //OnButtonOKClicked(args);
-      DialogResult = !OnCloseQuery()
-        ? System.Windows.Forms.DialogResult.None
-        : System.Windows.Forms.DialogResult.OK;
+    }
+
+    private void DoOkClick(object sender, EventArgs e)
+    {
+      if (!OnCloseQuery())
+      {
+        OnOkClick();
+        DialogResult = DialogResult.OK;
+      }
+      else
+      {
+        DialogResult = DialogResult.None; 
+      }
     }
   }
 }

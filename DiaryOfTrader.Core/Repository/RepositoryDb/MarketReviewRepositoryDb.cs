@@ -6,5 +6,17 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
     public MarketReviewRepositoryDb(DbContext data) : base(data)
     {
     }
+
+    public override async Task<List<MarketReview?>> GetAllAsync()
+    {
+      _ = Data.Frame.ToList();
+      _ = Data.Trend.ToList();
+      return await Entity
+        .Include(p=>p.Symbol)
+        .Include(p=>p.Exchange)
+        .Include(p=>p.Frames)
+        .ToListAsync();
+    }
+
   }
 }

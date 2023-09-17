@@ -1,8 +1,5 @@
-﻿using System.ComponentModel;
-using DevExpress.XtraBars;
+﻿using DevExpress.XtraBars;
 using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Utils;
-using DiaryOfTrader.EditDialogs;
 using DiaryOfTrader.EditDialogs.Calendar;
 using DiaryOfTrader.EditDialogs.Dictionary;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,61 +27,39 @@ namespace DiaryOfTrader
 
     }
 
-    private bool EditDbSet<T>(GridEditDialog dlg, DbSet<T> data) where T : Entity
-    {
-      Entity.DoBeginEdit(data, out BindingList<T> orig, out List<T> list);
-      dlg.DataSource = orig;
-      dlg.Text = ReflectionUtils.ClassDescription(typeof(T));
-      var result = dlg.ShowDialog() == DialogResult.OK;
-      if (result)
-      {
-        Entity.DoEndEdit(_context, data, orig, list);
-      }
-      else
-      {
-        Entity.DoCancelEdit(_context);
-      }
-      return result;
-    }
-
     private void bbtExchamge_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new ExchangeDlg(), _context.Exchange);
+      new ExchangeDlg().ShowDialog();
     }
 
     private void bbtSymbol_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new SymbolDlg(), _context.Symbol);
+      new SymbolDlg().ShowDialog();
     }
 
     private void bbtSession_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Entity.DoBeginEdit<TraderSession>(_context.Session, out BindingList<TraderSession> orig, out List<TraderSession> list);
-
-      if (EditDbSet(new TradeSessionDlg(), _context.Region))
-      {
-        Entity.DoEndEdit<TraderSession>(_context, _context.Session, orig, list);
-      }
+      new TradeSessionDlg().ShowDialog();
     }
 
     private void bbtTimeFrame_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new TimeFrameDlg(), _context.Frame);
+      new TimeFrameDlg().ShowDialog();
     }
 
     private void bbtResult_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new ResultDlg(), _context.Result);
+      new ResultDlg().ShowDialog();
     }
 
     private void bbtTrend_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new TrendDlg(), _context.Trend);
+      new TrendDlg().ShowDialog();
     }
 
     private void bbtWallet_ItemClick(object sender, ItemClickEventArgs e)
     {
-      EditDbSet(new WalletDlg(), _context.Wallet);
+      new WalletDlg().ShowDialog();
     }
 
     private void bbtCalendar_ItemClick(object sender, ItemClickEventArgs e)

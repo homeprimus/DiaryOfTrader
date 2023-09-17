@@ -24,39 +24,39 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
       throw new NotImplementedException();
     }
 
-    public async Task<TEntity?> GetByIdAsync(int entityId)
+    public async Task<TEntity?> GetByIdAsync(long entityId)
     {
       return await _client.GetFromJsonAsync<TEntity>($"{_endPoint}/{entityId}");
     }
 
+    public async Task InsertAsync(List<TEntity> entities)
+    {
+      await _client.PostAsJsonAsync($"{_endPoint}", entities);
+    }
+
     public async Task InsertAsync(TEntity entity)
     {
-      await _client.PostAsJsonAsync($"{_endPoint}", entity);
+      await InsertAsync(new List<TEntity> { entity });
+    }
+
+    public async Task UpdateAsync(List<TEntity> entities)
+    {
+      await _client.PutAsJsonAsync($"{_endPoint}", entities);
     }
 
     public async Task UpdateAsync(TEntity entity)
     {
-      await _client.PutAsJsonAsync($"{_endPoint}", entity);
+      await UpdateAsync(new List<TEntity> { entity });
     }
 
-    public async Task DeleteAsync(int entityId)
+    public async Task DeleteAsync(List<long> entityIds)
     {
-      await _client.DeleteAsync($"{_endPoint}/{entityId}");
+      await _client.DeleteAsJsonRangeAsync<long>($"{_endPoint}", entityIds);
     }
 
-    public async Task InsertRangeAsync(TEntity[] entities)
+    public async Task DeleteAsync(long entityId)
     {
-      await _client.PostAsJsonAsync($"{_endPoint}/range", entities);
-    }
-
-    public async Task UpdateRangeAsync(TEntity[] entities)
-    {
-      await _client.PutAsJsonRangeAsync($"{_endPoint}/range", entities);
-    }
-    //????
-    public async Task DeleteRangeAsync(long[] entityIds)
-    {
-      await _client.DeleteAsJsonRangeAsync<long>($"{_endPoint}/range", entityIds);
+      await DeleteAsync(new List<long> { entityId });
     }
 
     public Task SaveAsync()
