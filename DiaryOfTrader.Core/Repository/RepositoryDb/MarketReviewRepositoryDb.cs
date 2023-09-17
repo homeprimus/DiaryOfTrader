@@ -11,10 +11,12 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
     {
       _ = Data.Frame.ToList();
       _ = Data.Trend.ToList();
+      _ = Data.ScreenShot.ToList();
       return await Entity
         .Include(p=>p.Symbol)
         .Include(p=>p.Exchange)
-        .Include(p=>p.Frames)
+        .Include(p => p.Frames)
+        
         .ToListAsync();
     }
 

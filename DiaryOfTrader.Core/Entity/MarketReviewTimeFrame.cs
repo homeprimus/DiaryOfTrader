@@ -9,6 +9,7 @@ namespace DiaryOfTrader.Core.Entity
 
     private TimeFrame _frame;
     private Trend? _trend;
+    private ScreenShot? _screenShot;
     #endregion
 
     public override string Name
@@ -45,7 +46,19 @@ namespace DiaryOfTrader.Core.Entity
         }
       }
     }
-    public ScreenShot? ScreenShot { get; set; } = new ScreenShot();
+
+    public ScreenShot? ScreenShot
+    {
+      get { return _screenShot;}
+      set
+      {
+        if (_screenShot != value)
+        {
+          _screenShot = value;
+          OnPropertyChanged();
+        }
+      }
+    } 
 
   }
 }

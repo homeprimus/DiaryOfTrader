@@ -35,12 +35,14 @@ namespace DiaryOfTrader.EditControls.Entity
       components = new System.ComponentModel.Container();
       var gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
       var resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketReviewGrid));
-      gvMarketReviewTimeFrames = new DevExpress.XtraGrid.Views.Grid.GridView();
-      clReviewName = new DevExpress.XtraGrid.Columns.GridColumn();
-      clclReviewFrame = new DevExpress.XtraGrid.Columns.GridColumn();
-      clReviewTrend = new DevExpress.XtraGrid.Columns.GridColumn();
-      clReviewScreenShot = new DevExpress.XtraGrid.Columns.GridColumn();
-      clReviewDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+      viewFrames = new DevExpress.XtraGrid.Views.Grid.GridView();
+      clFrameName = new DevExpress.XtraGrid.Columns.GridColumn();
+      clFrameTimeFrame = new DevExpress.XtraGrid.Columns.GridColumn();
+      clFrameTrend = new DevExpress.XtraGrid.Columns.GridColumn();
+      clFrameShot = new DevExpress.XtraGrid.Columns.GridColumn();
+      repositoryItemPictureEdit = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+      clFrameDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+      repositoryItemMemoEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
       gcMarketReview = new DevExpress.XtraGrid.GridControl();
       gvMarketReview = new DevExpress.XtraGrid.Views.Grid.GridView();
       clDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -58,103 +60,137 @@ namespace DiaryOfTrader.EditControls.Entity
       barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
       barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
       barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-      ((System.ComponentModel.ISupportInitialize)gvMarketReviewTimeFrames).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)viewFrames).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemPictureEdit).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gcMarketReview).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gvMarketReview).BeginInit();
       ((System.ComponentModel.ISupportInitialize)bmGrid).BeginInit();
       SuspendLayout();
       // 
-      // gvMarketReviewTimeFrames
+      // viewFrames
       // 
-      gvMarketReviewTimeFrames.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { clReviewName, clclReviewFrame, clReviewTrend, clReviewScreenShot, clReviewDescription });
-      gvMarketReviewTimeFrames.DetailHeight = 303;
-      gvMarketReviewTimeFrames.GridControl = gcMarketReview;
-      gvMarketReviewTimeFrames.Name = "gvMarketReviewTimeFrames";
+      viewFrames.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { clFrameName, clFrameTimeFrame, clFrameTrend, clFrameShot, clFrameDescription });
+      viewFrames.GridControl = gcMarketReview;
+      viewFrames.Name = "viewFrames";
+      viewFrames.OptionsBehavior.AllowIncrementalSearch = true;
+      viewFrames.OptionsClipboard.ClipboardMode = DevExpress.Export.ClipboardMode.Formatted;
+      viewFrames.OptionsCustomization.AllowColumnMoving = false;
+      viewFrames.OptionsCustomization.AllowGroup = false;
+      viewFrames.OptionsCustomization.AllowQuickHideColumns = false;
+      viewFrames.OptionsView.RowAutoHeight = true;
+      viewFrames.OptionsView.ShowDetailButtons = false;
+      viewFrames.OptionsView.ShowGroupPanel = false;
       // 
-      // clReviewName
+      // clFrameName
       // 
-      clReviewName.Caption = "Наименование";
-      clReviewName.FieldName = "Name";
-      clReviewName.MinWidth = 17;
-      clReviewName.Name = "clReviewName";
-      clReviewName.Visible = true;
-      clReviewName.VisibleIndex = 0;
-      clReviewName.Width = 64;
+      clFrameName.AppearanceHeader.Options.UseTextOptions = true;
+      clFrameName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clFrameName.Caption = "Наименование";
+      clFrameName.FieldName = "Name";
+      clFrameName.Name = "clFrameName";
+      clFrameName.OptionsColumn.AllowEdit = false;
+      clFrameName.Visible = true;
+      clFrameName.VisibleIndex = 0;
       // 
-      // clclReviewFrame
+      // clFrameTimeFrame
       // 
-      clclReviewFrame.Caption = "ТФ";
-      clclReviewFrame.FieldName = "Frame";
-      clclReviewFrame.MinWidth = 17;
-      clclReviewFrame.Name = "clclReviewFrame";
-      clclReviewFrame.Visible = true;
-      clclReviewFrame.VisibleIndex = 1;
-      clclReviewFrame.Width = 64;
+      clFrameTimeFrame.AppearanceHeader.Options.UseTextOptions = true;
+      clFrameTimeFrame.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clFrameTimeFrame.Caption = "Таймфрейм";
+      clFrameTimeFrame.FieldName = "Frame";
+      clFrameTimeFrame.Name = "clFrameTimeFrame";
+      clFrameTimeFrame.OptionsColumn.AllowEdit = false;
+      clFrameTimeFrame.Visible = true;
+      clFrameTimeFrame.VisibleIndex = 2;
       // 
-      // clReviewTrend
+      // clFrameTrend
       // 
-      clReviewTrend.Caption = "Тренд";
-      clReviewTrend.FieldName = "Trend";
-      clReviewTrend.MinWidth = 17;
-      clReviewTrend.Name = "clReviewTrend";
-      clReviewTrend.Visible = true;
-      clReviewTrend.VisibleIndex = 2;
-      clReviewTrend.Width = 64;
+      clFrameTrend.AppearanceHeader.Options.UseTextOptions = true;
+      clFrameTrend.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clFrameTrend.Caption = "Тренд";
+      clFrameTrend.FieldName = "Trend";
+      clFrameTrend.Name = "clFrameTrend";
+      clFrameTrend.OptionsColumn.AllowEdit = false;
+      clFrameTrend.Visible = true;
+      clFrameTrend.VisibleIndex = 1;
       // 
-      // clReviewScreenShot
+      // clFrameShot
       // 
-      clReviewScreenShot.Caption = "Изображение";
-      clReviewScreenShot.FieldName = "ScreenShot.Image";
-      clReviewScreenShot.MinWidth = 17;
-      clReviewScreenShot.Name = "clReviewScreenShot";
-      clReviewScreenShot.Visible = true;
-      clReviewScreenShot.VisibleIndex = 3;
-      clReviewScreenShot.Width = 64;
+      clFrameShot.AppearanceHeader.Options.UseTextOptions = true;
+      clFrameShot.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clFrameShot.Caption = "Изображение";
+      clFrameShot.ColumnEdit = repositoryItemPictureEdit;
+      clFrameShot.FieldName = "ScreenShot.Image";
+      clFrameShot.Name = "clFrameShot";
+      clFrameShot.OptionsColumn.AllowEdit = false;
+      clFrameShot.Visible = true;
+      clFrameShot.VisibleIndex = 3;
       // 
-      // clReviewDescription
+      // repositoryItemPictureEdit
       // 
-      clReviewDescription.Caption = "Анализ";
-      clReviewDescription.FieldName = "Description";
-      clReviewDescription.MinWidth = 17;
-      clReviewDescription.Name = "clReviewDescription";
-      clReviewDescription.Visible = true;
-      clReviewDescription.VisibleIndex = 4;
-      clReviewDescription.Width = 64;
+      repositoryItemPictureEdit.CustomHeight = 80;
+      repositoryItemPictureEdit.Name = "repositoryItemPictureEdit";
+      repositoryItemPictureEdit.ShowZoomSubMenu = DevExpress.Utils.DefaultBoolean.True;
+      repositoryItemPictureEdit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+      repositoryItemPictureEdit.FormatEditValue += repositoryItemPictureEdit_FormatEditValue;
+      // 
+      // clFrameDescription
+      // 
+      clFrameDescription.AppearanceHeader.Options.UseTextOptions = true;
+      clFrameDescription.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clFrameDescription.Caption = "Анализ таймфрейма";
+      clFrameDescription.ColumnEdit = repositoryItemMemoEdit;
+      clFrameDescription.FieldName = "Description";
+      clFrameDescription.Name = "clFrameDescription";
+      clFrameDescription.OptionsColumn.AllowEdit = false;
+      clFrameDescription.Visible = true;
+      clFrameDescription.VisibleIndex = 4;
+      // 
+      // repositoryItemMemoEdit
+      // 
+      repositoryItemMemoEdit.Name = "repositoryItemMemoEdit";
       // 
       // gcMarketReview
       // 
       gcMarketReview.Dock = DockStyle.Fill;
-      gridLevelNode1.LevelTemplate = gvMarketReviewTimeFrames;
-      gridLevelNode1.RelationName = "MarketReviewTimeFrames";
+      gridLevelNode1.LevelTemplate = viewFrames;
+      gridLevelNode1.RelationName = "Frames";
       gcMarketReview.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
       gcMarketReview.Location = new Point(0, 24);
       gcMarketReview.MainView = gvMarketReview;
       gcMarketReview.MenuManager = bmGrid;
       gcMarketReview.Name = "gcMarketReview";
+      gcMarketReview.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit, repositoryItemPictureEdit });
       gcMarketReview.Size = new Size(751, 397);
       gcMarketReview.TabIndex = 4;
-      gcMarketReview.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvMarketReview, gvMarketReviewTimeFrames });
+      gcMarketReview.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvMarketReview, viewFrames });
       // 
       // gvMarketReview
       // 
       gvMarketReview.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-      gvMarketReview.ChildGridLevelName = "MarketReviewTimeFrames";
+      gvMarketReview.ChildGridLevelName = "Frames";
       gvMarketReview.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { clDateTime, clName, clExchange, clSymbol, clDescription });
       gvMarketReview.DetailHeight = 303;
       gvMarketReview.GridControl = gcMarketReview;
       gvMarketReview.Name = "gvMarketReview";
       gvMarketReview.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
+      gvMarketReview.OptionsDetail.ShowDetailTabs = false;
       gvMarketReview.OptionsDetail.ShowEmbeddedDetailIndent = DevExpress.Utils.DefaultBoolean.True;
       gvMarketReview.OptionsMenu.EnableGroupPanelMenu = false;
       gvMarketReview.OptionsView.AllowHtmlDrawHeaders = true;
+      gvMarketReview.OptionsView.RowAutoHeight = true;
       gvMarketReview.OptionsView.ShowChildrenInGroupPanel = true;
       // 
       // clDateTime
       // 
+      clDateTime.AppearanceHeader.Options.UseTextOptions = true;
+      clDateTime.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clDateTime.Caption = "Двта";
       clDateTime.FieldName = "DateTime";
       clDateTime.MinWidth = 17;
       clDateTime.Name = "clDateTime";
+      clDateTime.OptionsColumn.AllowEdit = false;
       clDateTime.OptionsColumn.AllowSize = false;
       clDateTime.OptionsColumn.FixedWidth = true;
       clDateTime.Visible = true;
@@ -163,40 +199,53 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clName
       // 
+      clName.AppearanceHeader.Options.UseTextOptions = true;
+      clName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clName.Caption = "Наименование";
       clName.FieldName = "DateTime";
       clName.MinWidth = 17;
       clName.Name = "clName";
+      clName.OptionsColumn.AllowEdit = false;
       clName.Visible = true;
       clName.VisibleIndex = 0;
       clName.Width = 64;
       // 
       // clExchange
       // 
+      clExchange.AppearanceHeader.Options.UseTextOptions = true;
+      clExchange.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clExchange.Caption = "Биржа";
       clExchange.FieldName = "Exchange";
       clExchange.MinWidth = 17;
       clExchange.Name = "clExchange";
+      clExchange.OptionsColumn.AllowEdit = false;
       clExchange.Visible = true;
       clExchange.VisibleIndex = 2;
       clExchange.Width = 64;
       // 
       // clSymbol
       // 
+      clSymbol.AppearanceHeader.Options.UseTextOptions = true;
+      clSymbol.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clSymbol.Caption = "Инструмент";
       clSymbol.FieldName = "Symbol";
       clSymbol.MinWidth = 17;
       clSymbol.Name = "clSymbol";
+      clSymbol.OptionsColumn.AllowEdit = false;
       clSymbol.Visible = true;
       clSymbol.VisibleIndex = 3;
       clSymbol.Width = 64;
       // 
       // clDescription
       // 
+      clDescription.AppearanceHeader.Options.UseTextOptions = true;
+      clDescription.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clDescription.Caption = "Описпание";
+      clDescription.ColumnEdit = repositoryItemMemoEdit;
       clDescription.FieldName = "Description";
       clDescription.MinWidth = 17;
       clDescription.Name = "clDescription";
+      clDescription.OptionsColumn.AllowEdit = false;
       clDescription.Visible = true;
       clDescription.VisibleIndex = 4;
       clDescription.Width = 64;
@@ -309,7 +358,9 @@ namespace DiaryOfTrader.EditControls.Entity
       Controls.Add(barDockControlTop);
       Name = "MarketReviewGrid";
       Size = new Size(751, 421);
-      ((System.ComponentModel.ISupportInitialize)gvMarketReviewTimeFrames).EndInit();
+      ((System.ComponentModel.ISupportInitialize)viewFrames).EndInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemPictureEdit).EndInit();
+      ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit).EndInit();
       ((System.ComponentModel.ISupportInitialize)gcMarketReview).EndInit();
       ((System.ComponentModel.ISupportInitialize)gvMarketReview).EndInit();
       ((System.ComponentModel.ISupportInitialize)bmGrid).EndInit();
@@ -331,16 +382,18 @@ namespace DiaryOfTrader.EditControls.Entity
     public DevExpress.XtraBars.BarDockControl barDockControlRight;
     private DevExpress.XtraGrid.GridControl gcMarketReview;
     private DevExpress.XtraGrid.Views.Grid.GridView gvMarketReview;
-    private DevExpress.XtraGrid.Views.Grid.GridView gvMarketReviewTimeFrames;
-    private DevExpress.XtraGrid.Columns.GridColumn clReviewName;
-    private DevExpress.XtraGrid.Columns.GridColumn clclReviewFrame;
-    private DevExpress.XtraGrid.Columns.GridColumn clReviewTrend;
-    private DevExpress.XtraGrid.Columns.GridColumn clReviewScreenShot;
-    private DevExpress.XtraGrid.Columns.GridColumn clReviewDescription;
     private DevExpress.XtraGrid.Columns.GridColumn clDateTime;
     private DevExpress.XtraGrid.Columns.GridColumn clName;
     private DevExpress.XtraGrid.Columns.GridColumn clExchange;
     private DevExpress.XtraGrid.Columns.GridColumn clSymbol;
     private DevExpress.XtraGrid.Columns.GridColumn clDescription;
+    private DevExpress.XtraGrid.Views.Grid.GridView viewFrames;
+    private DevExpress.XtraGrid.Columns.GridColumn clFrameName;
+    private DevExpress.XtraGrid.Columns.GridColumn clFrameTimeFrame;
+    private DevExpress.XtraGrid.Columns.GridColumn clFrameTrend;
+    private DevExpress.XtraGrid.Columns.GridColumn clFrameShot;
+    private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
+    private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit;
+    private DevExpress.XtraGrid.Columns.GridColumn clFrameDescription;
   }
 }

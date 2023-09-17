@@ -1,12 +1,11 @@
 ﻿
 
 using System.ComponentModel;
-using System.Windows.Controls;
-using DevExpress.XtraSpreadsheet.Internal;
 using DiaryOfTrader.Components;
-using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.EditDialogs;
 using DiaryOfTrader.Properties;
+using SkiaSharp;
+using SkiaSharp.Views.Desktop;
 using MessageBox = DiaryOfTrader.Core.MessageBox;
 
 namespace DiaryOfTrader.EditControls.Entity
@@ -16,6 +15,7 @@ namespace DiaryOfTrader.EditControls.Entity
     public MarketReviewGrid()
     {
       InitializeComponent();
+      MasterDetail = true;
     }
 
     private bool MasterDetail
@@ -43,6 +43,7 @@ namespace DiaryOfTrader.EditControls.Entity
     {
       return (MarketReview)View.GetRow(View.FocusedRowHandle);
     }
+
     private void RefreshAction()
     {
       var bEnabled = View.DataRowCount > 0;
@@ -65,6 +66,7 @@ namespace DiaryOfTrader.EditControls.Entity
       gcMarketReview.DataSource = new BindingList<MarketReview>(data!);
 
     }
+
     private void bbtAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
       View.AddNewRow();
@@ -76,6 +78,7 @@ namespace DiaryOfTrader.EditControls.Entity
       {
         Core.Entity.DiaryOfTrader.MarketReviewRepository.InsertAsync(review);
       }
+
       RefreshAction();
     }
 
@@ -85,10 +88,12 @@ namespace DiaryOfTrader.EditControls.Entity
       var marketReview = new MarketReviewDlg();
       if (marketReview.Edit(review))
       {
-        Core.Entity.DiaryOfTrader.MarketReviewRepository.InsertAsync(review);
+        Core.Entity.DiaryOfTrader.MarketReviewRepository.UpdateAsync(review);
       }
+
       RefreshAction();
     }
+
     private void bbtRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
       RefreshData();
@@ -97,12 +102,24 @@ namespace DiaryOfTrader.EditControls.Entity
 
     private void bbtDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
-      if (MessageBox.ShowQuestionYesNo(String.Format(Resources.DeleteRecord, GetEntity()), Resources.DeleteQuestion) == DialogResult.Yes)
+      var review = GetEntity();
+      if (MessageBox.ShowQuestionYesNo(String.Format(Resources.DeleteRecord, review), Resources.DeleteQuestion) ==
+          DialogResult.Yes)
       {
+        Core.Entity.DiaryOfTrader.MarketReviewRepository.DeleteAsync(review.ID);
 
         View.DeleteRow(View.FocusedRowHandle);
         View.FocusedRowHandle = 0;
         RefreshAction();
+      }
+    }
+
+    private void repositoryItemPictureEdit_FormatEditValue(object sender, DevExpress.XtraEditors.Controls.ConvertEditValueEventArgs e)
+    {
+      if (e.Value is SKImage img)
+      {
+        e.Value = img.ToBitmap();
+        e.Handled = true;
       }
     }
   }

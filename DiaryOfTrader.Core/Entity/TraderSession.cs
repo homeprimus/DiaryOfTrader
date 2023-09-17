@@ -20,12 +20,64 @@ https://alfaforex.ru/faq/internet-treyding/vremya-raboty-rynka-forex-raspisanie-
   [Serializable]
   public class TraderSession : Entity
   {
+    #region fields
+    private DateTime _winterStarting;
+    private DateTime _winterFinished;
+    private DateTime _summerStarting;
+    private DateTime _summerFinished;
+    #endregion
     [JsonIgnore]
     public TraderRegion Region { get; set; }
-    public DateTime WinterStarting { get; set; }
-    public DateTime WinterFinished { get; set; }
-    public DateTime SummerStarting { get; set; }
-    public DateTime SummerFinished { get; set; }
+
+    public DateTime WinterStarting
+    {
+      get { return _winterStarting;}
+      set
+      {
+        if (_winterStarting != value)
+        {
+          _winterStarting = value;
+          OnPropertyChanged();
+        }
+      }
+    }
+    public DateTime WinterFinished
+    {
+    get { return _winterFinished; }
+    set
+    {
+      if (_winterFinished != value)
+      {
+
+        _winterFinished = value;
+        OnPropertyChanged();
+      }
+    }
+    }
+    public DateTime SummerStarting
+    {
+      get { return _summerStarting;}
+      set
+      {
+        if (_summerStarting != value)
+        {
+          _summerStarting = value;
+          OnPropertyChanged();
+        }
+      }
+    }
+    public DateTime SummerFinished
+    {
+      get { return _summerFinished;}
+      set
+      {
+        if (_summerFinished != value)
+        {
+          _summerFinished = value;
+          OnPropertyChanged();
+        }
+      }
+    }
   }
 
 }

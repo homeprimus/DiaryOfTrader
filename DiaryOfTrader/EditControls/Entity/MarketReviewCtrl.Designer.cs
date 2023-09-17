@@ -285,7 +285,7 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       clImage.AppearanceHeader.Options.UseTextOptions = true;
       clImage.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      clImage.Caption = "Снимок";
+      clImage.Caption = "Изображение";
       clImage.ColumnEdit = repositoryItemPictureEdit;
       clImage.FieldName = "ScreenShot.Image";
       clImage.Name = "clImage";
