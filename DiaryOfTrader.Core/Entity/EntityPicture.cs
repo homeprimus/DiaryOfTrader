@@ -1,18 +1,14 @@
-﻿using SkiaSharp;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using SkiaSharp;
 
-namespace DiaryOfTrader.Core.Entity.Economic
+namespace DiaryOfTrader.Core.Entity
 {
   [Serializable]
   public class EntityPicture: Entity
   {
     #region fields
-    [NonSerialized, NotPersistent]
-#if WINDOWS
-    private Image? _image;
-#else
-    private SKImage? _image;
-#endif
+
+    private byte[]? _imageData;
     #endregion
 
 #if WINDOWS
@@ -53,10 +49,18 @@ namespace DiaryOfTrader.Core.Entity.Economic
     [JsonIgnore, NotMapped]
     public SKImage? Image
     {
-      get { return _image; }
+      get
+      {
+        if (_imageData == null)
+        {
+          return null;
+        }
+        using var ms = new MemoryStream(_imageData);
+        return SKImage.FromEncodedData(ms);
+      }
       set
       {
-        _image = value;
+        _imageData = value?.EncodedData.ToArray(); 
         OnPropertyChanged();
       }
     }
@@ -66,19 +70,12 @@ namespace DiaryOfTrader.Core.Entity.Economic
     {
       get
       {
-        return (Image as SKImage)?.EncodedData.ToArray(); ;
+        return _imageData;
       }
       set
       {
-        if (value == null || value.Length == 0)
-        {
-          Image = null;
-        }
-        else
-        {
-          using var ms = new MemoryStream(value);
-          Image = SKImage.FromEncodedData(ms);
-        }
+        _imageData = value;
+        OnPropertyChanged();
       }
     }
 

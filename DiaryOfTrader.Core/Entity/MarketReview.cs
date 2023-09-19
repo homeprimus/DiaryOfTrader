@@ -16,6 +16,7 @@ namespace DiaryOfTrader.Core.Entity
     private TraderExchange _exchange;
     private Symbol _symbol;
     private DateTime _dateTime = DateTime.Now;
+    private List<MarketReviewTimeFrame> _frames = new ();
     #endregion
     public override string Name
     {
@@ -69,7 +70,19 @@ namespace DiaryOfTrader.Core.Entity
         }
       }
     }
-    public List<MarketReviewTimeFrame> Frames { get; set; } = new List<MarketReviewTimeFrame>();
+
+    public List<MarketReviewTimeFrame> Frames
+    {
+      get { return _frames;}
+      set
+      {
+        if (_frames != value)
+        {
+          _frames = value;
+          OnPropertyChanged();
+        }
+      }
+    }
 
     public void SetFrame(MarketReviewTimeFrame entry)
     {

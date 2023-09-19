@@ -70,7 +70,6 @@ namespace DiaryOfTrader.EditDialogs
       pictureEdit.Appearance.Options.UseBackColor = true;
       pictureEdit.Appearance.Options.UseFont = true;
       pictureEdit.Dock = DockStyle.Fill;
-      pictureEdit.Image = null;
       pictureEdit.Location = new Point(0, 0);
       pictureEdit.Name = "pictureEdit";
       pictureEdit.Size = new Size(545, 461);
@@ -83,7 +82,7 @@ namespace DiaryOfTrader.EditDialogs
       ClientSize = new Size(545, 501);
       IconOptions.Icon = (Icon)resources.GetObject("PictureEditDlg.IconOptions.Icon");
       Name = "PictureEditDlg";
-      Text = "PictureEditDlg";
+      Text = "Изображение";
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
       pnlClient.ResumeLayout(false);

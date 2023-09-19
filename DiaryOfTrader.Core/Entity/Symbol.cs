@@ -1,5 +1,4 @@
-﻿
-namespace DiaryOfTrader.Core.Entity
+﻿namespace DiaryOfTrader.Core.Entity
 {
   [Serializable]
   [DescriptionRes("Symbol")]
