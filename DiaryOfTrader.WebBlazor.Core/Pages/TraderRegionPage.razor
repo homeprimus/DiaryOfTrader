@@ -1,4 +1,4 @@
-@page "/tradertegion"
+@page "/traderregion"
 @using DiaryOfTrader.Core.Entity
 
 <PageTitle>Regions</PageTitle>
@@ -10,7 +10,7 @@
 </div>
 <div class="row">
     <div class="col">
-        <CatalogTable TItem="TraderRegion" Entities="TraderRegions"/>
+        <CatalogTable TItem="TraderRegion" Entities="TraderRegions" RedirectEditUrl="/TraderRegionEdit"/>
 
         @if (CatalogItemState.SelectedEntity != null)
         {
@@ -37,10 +37,10 @@
                     <tr>
                         <td>@session.Name</td>
                         <td>@session.Description</td>
-                        <td>@session.SummerStarting</td>
-                        <td>@session.SummerFinished</td>
-                        <td>@session.WinterStarting</td>
-                        <td>@session.WinterFinished</td>
+                        <td>@session.SummerStarting.ToShortTimeString()</td>
+                        <td>@session.SummerFinished.ToShortTimeString()</td>
+                        <td>@session.WinterStarting.ToShortTimeString()</td>
+                        <td>@session.WinterFinished.ToShortTimeString()</td>
                     </tr>
                 }
                 </tbody>

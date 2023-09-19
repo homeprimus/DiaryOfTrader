@@ -1,0 +1,69 @@
+@page "/TraderRegionEdit/{Id:long}"
+<h3>TraderRegionEditPage</h3>
+
+@if (_traderRegion != null)
+{
+    <EditForm EditContext="_editContext" class="card card-body bg-light mt-5">
+        <DataAnnotationsValidator/>
+
+        <div class="mb-3 row">
+            <label for="name" class="col-md-2 col-form-label">Name:</label>
+            <div class="col-md-10">
+                <InputText id="code" class="form-control" @bind-Value="_traderRegion.Name"/>
+                <ValidationMessage For="@(() => _traderRegion.Name)"/>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="caption" class="col-md-2 col-form-label">Description:</label>
+            <div class="col-md-10">
+                <InputTextArea id="caption" class="form-control" @bind-Value="_traderRegion.Description"/>
+                <ValidationMessage For="@(() => _traderRegion.Description)"/>
+            </div>
+        </div>
+
+        @foreach (var session in _traderRegion.Sessions)
+        {
+            <div class="form">
+                <span>
+                    <InputText @bind-Value="session.Name"></InputText>
+                </span>
+                <span>
+                    <InputTextArea @bind-Value="session.Description"></InputTextArea>
+                </span>
+                <span>
+                    <InputDate Type="InputDateType.Time" @bind-Value="session.SummerStarting"></InputDate>
+                </span>
+                <span>
+                    <InputDate Type="InputDateType.Time" @bind-Value="session.SummerFinished"></InputDate>
+                </span>
+                <span>
+                    <InputDate Type="InputDateType.Time" @bind-Value="session.WinterStarting"></InputDate>
+                </span>
+                <span>
+                    <InputDate Type="InputDateType.Time" @bind-Value="session.WinterFinished"></InputDate>
+                </span>
+                <span>
+                    <button class="btn btn-danger float-end" @onclick="() => DeleteSession(session)">
+                        Delete
+                    </button>
+                </span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success float-end"
+                        disabled="@_formInvalid"
+                        @onclick="() => Update()">
+                    Update
+                </button>
+            </div>
+        </div>
+    </EditForm>
+    <br/>
+    <div class="row">
+        <div class="col">
+            <a href="/traderregion" class="btn btn-success">Back</a>
+        </div>
+    </div>
+}

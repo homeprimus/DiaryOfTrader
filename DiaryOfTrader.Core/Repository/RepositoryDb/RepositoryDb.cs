@@ -52,7 +52,7 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
       await SaveAsync();
     }
 
-    public async Task UpdateAsync(TEntity entity)
+    public  async Task UpdateAsync(TEntity entity)
     {
       await UpdateAsync(new List<TEntity> { entity });
     }
