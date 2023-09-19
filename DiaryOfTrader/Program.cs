@@ -1,7 +1,8 @@
 ﻿using DiaryOfTrader.Core.Data;
+using DiaryOfTrader.Core.Interfaces.Cache;
 using DiaryOfTrader.Core.Interfaces.Repository;
+using DiaryOfTrader.Core.Repository.Cache.Memory;
 using DiaryOfTrader.Core.Repository.RepositoryDb;
-using DiaryOfTrader.EditDialogs.Dictionary;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DiaryOfTrader
@@ -14,6 +15,8 @@ namespace DiaryOfTrader
       services.AddScoped<DbContext, DiaryOfTraderCtx>();
       //services.AddSingleton<DbContext, DiaryOfTraderCtx>();
 
+      
+      services.AddTransient<ICache, Memory>();
       //// инткрфейс добавили
       services.AddTransient<ISymbolRepository, SymbolRepositoryDb>();
       services.AddTransient<ITimeFrameRepository, TimeFrameRepositoryDb>();
@@ -28,7 +31,9 @@ namespace DiaryOfTrader
       services.AddTransient<IDiaryRepository, DiaryRepositoryDb>();
       services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
 
-      //services.AddSingleton<Main, Main>();
+      //кэш
+      services.AddMemoryCache();
+
       services.AddSingleton<RibbonMain, RibbonMain>();
 
       Core.Entity.DiaryOfTrader.ServiceProvider = services.BuildServiceProvider();

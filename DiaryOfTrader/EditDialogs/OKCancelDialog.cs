@@ -30,7 +30,7 @@ namespace DiaryOfTrader.EditDialogs
 
     private void DoOkClick(object sender, EventArgs e)
     {
-      if (!OnCloseQuery())
+      if (OnCloseQuery())
       {
         OnOkClick();
         DialogResult = DialogResult.OK;

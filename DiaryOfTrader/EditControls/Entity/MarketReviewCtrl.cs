@@ -13,6 +13,7 @@ namespace DiaryOfTrader.EditControls.Entity
     public MarketReviewCtrl()
     {
       InitializeComponent();
+
       gnReview.View = gvTimeFrame;
       gnReview.Add += delegate (object entity)
       {
@@ -88,5 +89,6 @@ namespace DiaryOfTrader.EditControls.Entity
         }
       }
     }
+
   }
 }

@@ -74,9 +74,9 @@ namespace DiaryOfTrader.Core.Repository.Cache.DistributedCache
       return await _cache.GetAsync(key);
     }
 
-    public async Task<T?> Get<T>(string key)
+    public T? Get<T>(string key)
     {
-      return JsonSerializer.Deserialize<T>(await _cache.GetStringAsync(key));
+      return JsonSerializer.Deserialize<T>(_cache.GetString(key));
     }
   }
 }

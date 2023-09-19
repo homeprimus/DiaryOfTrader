@@ -5,6 +5,6 @@
     void Set(string key, byte[] value);
     void Set<T>(string key, T value);
     Task<byte[]?> Get(string key);
-    Task<T?> Get<T>(string key);
+    T? Get<T>(string key);
   }
 }

@@ -52,13 +52,10 @@ namespace DiaryOfTrader.Core.Repository.Cache.Memory
       });
     }
 
-    public async Task<T?> Get<T>(string key)
+    public T? Get<T>(string key)
     {
-      return await Task.Run(() =>
-      {
-        _cache.TryGetValue(key, out T? value);
-        return value;
-      });
+      _cache.TryGetValue(key, out T? value);
+      return value;
     }
   }
 }

@@ -9,12 +9,16 @@ namespace DiaryOfTrader.Core.Entity
 
     private TimeFrame _frame;
     private Trend? _trend;
-    private ScreenShot? _screenShot;
+    private ScreenShot? _screenShot = new ();
     #endregion
 
     public override string Name
     {
-      get { return _frame != null ? _frame.Name : base.Name; }
+      get 
+      { 
+        return 
+        _frame != null ? _frame.Name : base.Name;
+      }
       set { base.Name = value; }
     }
 

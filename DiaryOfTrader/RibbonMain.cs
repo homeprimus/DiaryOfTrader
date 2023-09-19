@@ -1,5 +1,7 @@
 ﻿using DevExpress.XtraBars;
 using DiaryOfTrader.Core.Data;
+using DiaryOfTrader.Core.Interfaces.Repository;
+using DiaryOfTrader.EditDialogs;
 using DiaryOfTrader.EditDialogs.Calendar;
 using DiaryOfTrader.EditDialogs.Dictionary;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,39 +29,47 @@ namespace DiaryOfTrader
 
     }
 
+    private static void Proccessing<T>(GridEditDialog dlg, IRepository<T> repository) where T : Entity
+    {
+      dlg.DoLoad(repository);
+      if (dlg.ShowDialog() == DialogResult.OK)
+      {
+        dlg.DoUpdate(repository);
+      }
+    }
     private void bbtExchamge_ItemClick(object sender, ItemClickEventArgs e)
     {
-      new ExchangeDlg().ShowDialog();
+      Proccessing(new ExchangeDlg(), Core.Entity.DiaryOfTrader.TraderExchangeRepository);
     }
 
     private void bbtSymbol_ItemClick(object sender, ItemClickEventArgs e)
     {
-      new SymbolDlg().ShowDialog();
+      Proccessing(new SymbolDlg(), Core.Entity.DiaryOfTrader.SymbolRepository);
     }
 
     private void bbtSession_ItemClick(object sender, ItemClickEventArgs e)
     {
-      new TradeSessionDlg().ShowDialog();
+      Proccessing(new TradeSessionDlg(), Core.Entity.DiaryOfTrader.TraderRegionRepository);
     }
 
     private void bbtTimeFrame_ItemClick(object sender, ItemClickEventArgs e)
     {
-      new TimeFrameDlg().ShowDialog();
+      Proccessing(new TimeFrameDlg(), Core.Entity.DiaryOfTrader.TimeFrameRepository);
     }
 
     private void bbtResult_ItemClick(object sender, ItemClickEventArgs e)
     {
-      new ResultDlg().ShowDialog();
+      Proccessing(new ResultDlg(), Core.Entity.DiaryOfTrader.TraderResultRepository);
     }
 
     private void bbtTrend_ItemClick(object sender, ItemClickEventArgs e)
     {
-      new TrendDlg().ShowDialog();
+      Proccessing(new TrendDlg(), Core.Entity.DiaryOfTrader.TrendRepository);
     }
 
     private void bbtWallet_ItemClick(object sender, ItemClickEventArgs e)
     {
-      new WalletDlg().ShowDialog();
+      Proccessing(new WalletDlg(), Core.Entity.DiaryOfTrader.WalletRepository);
     }
 
     private void bbtCalendar_ItemClick(object sender, ItemClickEventArgs e)
