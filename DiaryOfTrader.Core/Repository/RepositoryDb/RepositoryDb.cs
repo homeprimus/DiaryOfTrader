@@ -34,7 +34,7 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
       if (result == null)
       {
         result = await _entity.ToListAsync();
-        _cache.Set(_key, result);
+        _cache.Remove(_key);
       }
       return result;
     }
@@ -59,7 +59,7 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
       await _entity.AddRangeAsync(entities);
       await SaveAsync();
       await _entity.ForEachAsync(e => _cache.Set($"{_key}:{e.ID}", e));
-      _cache.Set(_key, null);
+      _cache.Remove(_key);
     }
     public async Task InsertAsync(TEntity entity)
     {
@@ -69,8 +69,8 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
     {
       _entity.UpdateRange(entities);
       await SaveAsync();
-      await _entity.ForEachAsync(e => _cache.Set($"{_key}:{e.ID}", e));
-      _cache.Set(_key, null);
+      await _entity.ForEachAsync(e => _cache.Remove($"{_key}:{e.ID}"));
+      _cache.Remove(_key);
     }
     public async Task UpdateAsync(TEntity entity)
     {
@@ -80,8 +80,8 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
     {
       _entity.RemoveRange(_entity.Where(e => entityIds.Contains(e.ID)));
        await SaveAsync();
-       await _entity.ForEachAsync(e => _cache.Set($"{_key}:{e.ID}", null));
-       _cache.Set(_key, null);
+       await _entity.ForEachAsync(e => _cache.Remove($"{_key}:{e.ID}"));
+       _cache.Remove(_key);
     }
     public async Task DeleteAsync(long entityId)
     {

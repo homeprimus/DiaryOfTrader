@@ -32,25 +32,22 @@ namespace DiaryOfTrader.Core.Repository.Cache.DistributedCache
   public class Redis: ICache
   {
     private IDistributedCache _cache;
-    private int _liveMinutes;
+    private int _liveMinutes = 5;
 
     public Redis()
     {
-      _liveMinutes = 5;
       var options = new RedisCacheOptions
       {
         Configuration = "localhost",
-        InstanceName = "local"
+        InstanceName = "local",
       };
       var optionsAccessor = Options.Create(options);
       _cache = new RedisCache(optionsAccessor);
     }
 
-    public Redis(IDistributedCache сache, int liveMinutes)
+    public Redis(IDistributedCache сache)
     {
-      
       _cache = сache;
-      _liveMinutes = liveMinutes;
     }
 
     public async void Set(string key, byte[] value)
@@ -76,7 +73,17 @@ namespace DiaryOfTrader.Core.Repository.Cache.DistributedCache
 
     public T? Get<T>(string key)
     {
-      return JsonSerializer.Deserialize<T>(_cache.GetString(key));
+      var data = _cache.GetString(key);
+      if (data == null)
+      {
+        return default(T);
+      }
+      return JsonSerializer.Deserialize<T>(data);
+    }
+
+    public async void Remove(string key)
+    {
+      await _cache.RemoveAsync(key);
     }
   }
 }

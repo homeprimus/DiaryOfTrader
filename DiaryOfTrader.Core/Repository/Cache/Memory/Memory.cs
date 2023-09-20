@@ -57,5 +57,10 @@ namespace DiaryOfTrader.Core.Repository.Cache.Memory
       _cache.TryGetValue(key, out T? value);
       return value;
     }
+
+    public void Remove(string key)
+    {
+      _cache.Remove(key);
+    }
   }
 }

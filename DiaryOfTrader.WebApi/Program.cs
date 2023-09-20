@@ -1,7 +1,9 @@
 ﻿
 using System.Text;
 using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Interfaces.Repository;
+using DiaryOfTrader.Core.Interfaces.Cache;
+using DiaryOfTrader.Core.Repository.Cache.DistributedCache;
+using DiaryOfTrader.Core.Repository.Cache.Memory;
 using DiaryOfTrader.Core.Repository.RepositoryDb;
 using DiaryOfTrader.WebApi.Api;
 using DiaryOfTrader.WebApi.Auth;
@@ -10,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-ResgistryServices(builder.Services);
+ResgistryServices(builder.Services, builder.Configuration);
 var app = builder.Build();
 Configure(app);
 var apiServices = app.Services.GetServices<IApi>();
@@ -21,7 +23,7 @@ foreach (var api in apiServices)
 
 app.Run();
 
-void ResgistryServices(IServiceCollection services)
+void ResgistryServices(IServiceCollection services, ConfigurationManager configurationManager)
 {
   // сваггер добавили
   services.AddEndpointsApiExplorer();
@@ -84,6 +86,22 @@ void ResgistryServices(IServiceCollection services)
   services.AddTransient<IApi, EconomicCalendarApi>();
 
   services.AddTransient<IApi, TraderApi>();
+
+  if (bool.TryParse(configurationManager["Redis:Enabled"], out var enabled) && enabled)
+  {
+    services.AddStackExchangeRedisCache(options =>
+    {
+      options.Configuration = configurationManager["Redis:ConnectionString"];
+      //options.InstanceName = "local";
+    });
+    services.AddSingleton<ICache, Redis>();
+  }
+  else
+  {
+    services.AddMemoryCache();
+    services.AddSingleton<ICache, Memory>();
+  }
+
 }
 
 void Configure(WebApplication application)
@@ -97,10 +115,6 @@ void Configure(WebApplication application)
     application.UseSwagger();
     application.UseSwaggerUI();
     //
-    // создали базу
-    //using var scope = application.Services.CreateScope();
-    //var db = scope.ServiceProvider.GetRequiredService<HotelDb>();
-    //db.Database.EnsureCreated();
   }
 
   // Get a shared logger object
@@ -113,4 +127,5 @@ void Configure(WebApplication application)
   }
 
   application.UseHttpsRedirection();
+
 }

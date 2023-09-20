@@ -1,9 +1,17 @@
-﻿using DiaryOfTrader.Core.Data;
+﻿using System.Configuration;
+using System.Diagnostics;
+using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Interfaces.Cache;
 using DiaryOfTrader.Core.Interfaces.Repository;
+using DiaryOfTrader.Core.Repository.Cache.DistributedCache;
 using DiaryOfTrader.Core.Repository.Cache.Memory;
 using DiaryOfTrader.Core.Repository.RepositoryDb;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace DiaryOfTrader
 {
@@ -11,12 +19,13 @@ namespace DiaryOfTrader
   {
     static void ConfigureServices()
     {
+      var config = new ConfigurationBuilder()
+        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+        .AddJsonFile("appsettings.json").Build();
+
       var services = new ServiceCollection();
       services.AddScoped<DbContext, DiaryOfTraderCtx>();
-      //services.AddSingleton<DbContext, DiaryOfTraderCtx>();
 
-      
-      services.AddTransient<ICache, Memory>();
       //// инткрфейс добавили
       services.AddTransient<ISymbolRepository, SymbolRepositoryDb>();
       services.AddTransient<ITimeFrameRepository, TimeFrameRepositoryDb>();
@@ -32,12 +41,27 @@ namespace DiaryOfTrader
       services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
 
       //кэш
-      services.AddMemoryCache();
+      var redis = config.GetSection("Redis");
+      if (bool.TryParse(redis["Enabled"], out var enabled) && enabled)
+      {
+        services.AddStackExchangeRedisCache(options =>
+        {
+          options.Configuration = redis["ConnectionString"];
+        });
+        services.AddSingleton<ICache, Redis>();
+      }
+      else
+      {
+        services.AddMemoryCache();
+        services.AddSingleton<ICache, Memory>();
+      }
 
       services.AddSingleton<RibbonMain, RibbonMain>();
 
       Core.Entity.DiaryOfTrader.ServiceProvider = services.BuildServiceProvider();
     }
+
+
     [STAThread]
     static void Main()
     {

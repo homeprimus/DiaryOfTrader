@@ -5,9 +5,6 @@ using System.IO;
 using DevExpress.XtraEditors;
 using DiaryOfTrader.Core;
 using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Entity;
-using DiaryOfTrader.Core.Entity.Economic;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace DiaryOfTrader.EditDialogs.Calendar
 {
