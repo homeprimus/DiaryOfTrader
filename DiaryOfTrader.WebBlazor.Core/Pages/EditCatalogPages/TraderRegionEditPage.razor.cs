@@ -12,10 +12,12 @@ public partial class TraderRegionEditPage:IDisposable
   [Parameter] public long Id { get; set; }
   
   private TraderRegion? _traderRegion;
+  private TraderRegion? _copyTraderRegion;
   private EditContext _editContext;
   private bool _formInvalid = false;
 
   [Inject] public ITraderRegionRepository? Repository { get; set; }
+  [Inject] public ITraderSessionRepository? SessionRepository { get; set; }
 
   [Inject] public HttpInterceptorService? Interceptor { get; set; }
 
@@ -25,6 +27,7 @@ public partial class TraderRegionEditPage:IDisposable
   protected async override Task OnInitializedAsync()
   {
     _traderRegion = await Repository.GetByIdAsync(Id);
+    _copyTraderRegion =  await Repository.GetByIdAsync(Id);
     _editContext = new EditContext(_traderRegion);
     _editContext.OnFieldChanged += HandleFieldChanged;
     Interceptor?.RegisterEvent();
@@ -38,8 +41,30 @@ public partial class TraderRegionEditPage:IDisposable
 
   private async Task Update()
   {
-    await Repository.UpdateAsync(_traderRegion);
+    foreach (var session in _copyTraderRegion.Sessions)
+    {
+      if (_traderRegion.Sessions.All(x => x.ID != session.ID))
+      {
+        await SessionRepository.DeleteAsync(session.ID);
+      } 
+      
+      if(_traderRegion.Sessions.Any(x => x.ID == session.ID))
+      {
+        var ses= _traderRegion.Sessions.First(x=>x.ID == session.ID);
+        if(!ses.Equals(session))
+          await SessionRepository.UpdateAsync(session);
+      }
+    }
 
+    foreach (var session in _traderRegion.Sessions)
+    {
+      if (_copyTraderRegion.Sessions.All(x => x.ID != session.ID))
+      {
+        await SessionRepository.InsertAsync(session);
+      }
+    }
+
+    await Repository.UpdateAsync(_traderRegion);
     ToastService.ShowSuccess($"Update successful.");
   }
 
@@ -52,5 +77,10 @@ public partial class TraderRegionEditPage:IDisposable
   private void DeleteSession(TraderSession session)
   {
     _traderRegion.Sessions.Remove(session);
+  }
+
+  private void AddSession()
+  {
+    _traderRegion.Sessions.Add(new TraderSession());
   }
 }

@@ -20,6 +20,12 @@
                 <ValidationMessage For="@(() => _traderRegion.Description)"/>
             </div>
         </div>
+        <div>
+            <button type="submit" class="btn btn-success"
+                    @onclick="() => AddSession()">
+                +
+            </button>
+        </div>
 
         @foreach (var session in _traderRegion.Sessions)
         {
