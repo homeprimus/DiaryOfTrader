@@ -4,7 +4,6 @@
 
 using System.ComponentModel;
 using DiaryOfTrader.Core;
-using DiaryOfTrader.Core.Core;
 using DiaryOfTrader.Core.Interfaces;
 using MessageBox = DiaryOfTrader.Core.MessageBox;
 

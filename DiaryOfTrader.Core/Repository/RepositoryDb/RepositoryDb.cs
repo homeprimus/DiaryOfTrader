@@ -1,8 +1,7 @@
-﻿
-
+﻿using DiaryOfTrader.Core.Utils;
 using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.Core.Interfaces.Cache;
+using Microsoft.Extensions.Logging;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryDb
 {
@@ -13,13 +12,15 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
     private readonly DbSet<TEntity> _entity;
     private readonly ICache _cache;
     private readonly string _key;
+    private readonly ILogger _logger;
     #endregion
 
-    public RepositoryDb(DbContext data, ICache cache)
+    public RepositoryDb(DbContext data, ICache cache, ILogger<RepositoryDb<TEntity>> logger)
     {
       _data = (DiaryOfTraderCtx)data;
       _entity = _data.Set<TEntity>();
       _cache = cache;
+      _logger = logger;
       _key = typeof(TEntity).Name.ToLowerInvariant();
     }
 
@@ -30,11 +31,16 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
 
     public virtual async Task<List<TEntity?>> GetAllAsync()
     {
-      var result = _cache.Get<List<TEntity?>>(_key);
+       var result = _cache.Get<List<TEntity?>>(_key);
       if (result == null)
       {
+        _logger.LogInformation($"DB: {nameof(GetAllAsync)}");
         result = await _entity.ToListAsync();
-        _cache.Remove(_key);
+        _cache.Set(_key, result);
+      }
+      else
+      {
+        _logger.LogInformation($"Cache: {nameof(GetAllAsync)}");
       }
       return result;
     }
@@ -49,15 +55,22 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
       var result = _cache.Get<TEntity?>($"{_key}:{entryId}");
       if (result == null)
       {
+        _logger.LogInformation($"DB: {nameof(GetByIdAsync)}");
         result = await _entity.Where(e => e.ID == entryId).FirstOrDefaultAsync();
         _cache.Set($"{_key}:{entryId}", result);
+      }
+      else
+      {
+        _logger.LogInformation($"Cache: {nameof(GetByIdAsync)}");
       }
       return result;
     }
     public virtual async Task InsertAsync(List<TEntity> entities)
     {
+      _logger.LogInformation($"DB: {nameof(InsertAsync)}");
       await _entity.AddRangeAsync(entities);
       await SaveAsync();
+
       await _entity.ForEachAsync(e => _cache.Set($"{_key}:{e.ID}", e));
       _cache.Remove(_key);
     }
@@ -67,8 +80,10 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
     }
     public virtual async Task UpdateAsync(List<TEntity> entities)
     {
+      _logger.LogInformation($"DB: {nameof(UpdateAsync)}");
       _entity.UpdateRange(entities);
       await SaveAsync();
+
       await _entity.ForEachAsync(e => _cache.Remove($"{_key}:{e.ID}"));
       _cache.Remove(_key);
     }
@@ -78,8 +93,10 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
     }
     public async Task DeleteAsync(List<long> entityIds)
     {
+      _logger.LogInformation($"DB: {nameof(DeleteAsync)}");
       _entity.RemoveRange(_entity.Where(e => entityIds.Contains(e.ID)));
        await SaveAsync();
+
        await _entity.ForEachAsync(e => _cache.Remove($"{_key}:{e.ID}"));
        _cache.Remove(_key);
     }

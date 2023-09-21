@@ -1,6 +1,4 @@
-﻿
-using CefSharp;
-using DiaryOfTrader.Core;
+﻿using DiaryOfTrader.Core;
 
 namespace DiaryOfTrader.EditControls.Entity
 {

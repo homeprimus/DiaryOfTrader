@@ -1,4 +1,5 @@
 ﻿
+using DiaryOfTrader.Core.Repository.RepositoryDb;
 using DiaryOfTrader.WebApi.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,10 @@ namespace DiaryOfTrader.WebApi.Api
 {
   public class TraderApi : Api<Trader, ITraderRepository>
   {
+    public TraderApi(ILogger<RepositoryDb<Trader>> logger) : base(logger)
+    {
+    }
+
     public override void Register(WebApplication application)
     {
       base.Register(application);

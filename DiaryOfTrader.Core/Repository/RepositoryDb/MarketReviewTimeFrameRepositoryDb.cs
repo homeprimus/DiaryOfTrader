@@ -1,10 +1,11 @@
 ﻿using DiaryOfTrader.Core.Interfaces.Cache;
+using Microsoft.Extensions.Logging;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryDb
 {
   public class MarketReviewTimeFrameRepositoryDb : RepositoryDb<MarketReviewTimeFrame>, IMarketReviewTimeFrameRepository
   {
-    public MarketReviewTimeFrameRepositoryDb(DbContext data, ICache cache) : base(data, cache)
+    public MarketReviewTimeFrameRepositoryDb(DbContext data, ICache cache, ILogger<MarketReviewTimeFrameRepositoryDb> logger) : base(data, cache, logger)
     {
     }
     public override async Task<List<MarketReviewTimeFrame?>> GetAllAsync()

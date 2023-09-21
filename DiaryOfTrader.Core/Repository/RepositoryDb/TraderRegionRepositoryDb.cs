@@ -1,10 +1,11 @@
 ﻿using DiaryOfTrader.Core.Interfaces.Cache;
+using Microsoft.Extensions.Logging;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryDb
 {
   public class TraderRegionRepositoryDb: RepositoryDb<TraderRegion>, ITraderRegionRepository
   {
-    public TraderRegionRepositoryDb(DbContext data, ICache cache) : base(data, cache)
+    public TraderRegionRepositoryDb(DbContext data, ICache cache, ILogger<TraderRegionRepositoryDb> logger) : base(data, cache, logger)
     {
     }
 

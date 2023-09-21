@@ -1,5 +1,4 @@
-using System.Net.Http.Json;
-using DiaryOfTrader.Core.Entity;
+﻿using DiaryOfTrader.Core.Entity;
 using Microsoft.AspNetCore.Components;
 
 namespace DiaryOfTrader.Web.Components;

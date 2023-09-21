@@ -92,7 +92,6 @@ void ResgistryServices(IServiceCollection services, ConfigurationManager configu
     services.AddStackExchangeRedisCache(options =>
     {
       options.Configuration = configurationManager["Redis:ConnectionString"];
-      //options.InstanceName = "local";
     });
     services.AddSingleton<ICache, Redis>();
   }
@@ -120,7 +119,6 @@ void Configure(WebApplication application)
   // Get a shared logger object
   var loggerFactory = application.Services.GetService<ILoggerFactory>();
   var logger = loggerFactory?.CreateLogger<Program>();
-
   if (logger == null)
   {
     throw new InvalidOperationException("Logger not found");

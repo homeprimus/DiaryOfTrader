@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.IO;
-using DevExpress.XtraPrinting.Caching;
 using DiaryOfTrader.Core.Interfaces.Repository;
 
 namespace DiaryOfTrader.EditDialogs

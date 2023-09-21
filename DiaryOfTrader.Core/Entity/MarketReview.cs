@@ -1,7 +1,6 @@
 ﻿
 using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
-using DiaryOfTrader.Core.Data;
 
 namespace DiaryOfTrader.Core.Entity
 {

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using DiaryOfTrader.Components;
 using DiaryOfTrader.Core;
-using Exchange.Core;
 
 namespace Exchange.Components.Primitive
 {

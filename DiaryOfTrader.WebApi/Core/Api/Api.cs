@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DiaryOfTrader.Core.Repository.RepositoryDb;
+using DiaryOfTrader.Core.Utils;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DiaryOfTrader.WebApi.Core.Api
 {
@@ -7,15 +9,16 @@ namespace DiaryOfTrader.WebApi.Core.Api
     where TRepository : IRepository<TEntity>
   {
     #region
-
     private readonly string _endPoint;
     private readonly string _swagger;
+    private ILogger<RepositoryDb<TEntity>> _logger;
     #endregion
-    public Api()
+    public Api(ILogger<RepositoryDb<TEntity>> logger)
     {
       var s = typeof(TEntity).Name.ToLowerInvariant();
       _endPoint = $"/{s}s";
-      _swagger = s.Substring(0,1).ToUpperInvariant() + s.Substring(1);
+      _swagger = s.Substring(0,1).ToUpperInvariant() + s.Substring(1).ToLowerInvariant();
+      _logger = logger;
     }
     public virtual void Register(WebApplication application)
     {
@@ -58,24 +61,34 @@ namespace DiaryOfTrader.WebApi.Core.Api
     }
 
     //[Authorize]
-    private async Task<IResult> GetAll(TRepository repository) =>
-      Results.Ok(await repository.GetAllAsync());
+    private async Task<IResult> GetAll(TRepository repository)
+    {
+      _logger.LogRequest(nameof(Api<TEntity, TRepository>), nameof(GetAll));
+      return Results.Ok(await repository.GetAllAsync());
+    }
 
     //[Authorize]
-    private async Task<IResult> Search(string pattern, [FromServices] TRepository repository) =>
-      await repository.GetAllAsync(new object[] { pattern }) is IEnumerable<TEntity> entities
+    private async Task<IResult> Search(string pattern, [FromServices] TRepository repository)
+    {
+      _logger.LogRequest(nameof(Api<TEntity, TRepository>), nameof(Search));
+      return await repository.GetAllAsync(new object[] { pattern }) is IEnumerable<TEntity> entities
         ? Results.Ok(entities)
         : Results.NotFound(Array.Empty<TEntity>());
+    }
 
     //[Authorize]
-    private async Task<IResult> GetById(int id, [FromServices] TRepository repository) =>
-      await repository.GetByIdAsync(id) is TEntity entity
+    private async Task<IResult> GetById(int id, [FromServices] TRepository repository)
+    {
+      _logger.LogRequest(nameof(Api<TEntity, TRepository>), nameof(GetById));
+      return await repository.GetByIdAsync(id) is TEntity entity
         ? Results.Ok(entity)
         : Results.NotFound(Array.Empty<TEntity>());
+    }
 
     //[Authorize]
     private async Task<IResult> Post([FromBody] List<TEntity> entities, TRepository repository)
     {
+      _logger.LogRequest(nameof(Api<TEntity, TRepository>), nameof(Post));
       await repository.InsertAsync(entities);
       return Results.NoContent();
       //return Results.Created($"/{entity.ID}", entity);
@@ -85,6 +98,7 @@ namespace DiaryOfTrader.WebApi.Core.Api
     //[Authorize]
     private async Task<IResult> Put([FromBody] List<TEntity> entities, TRepository repository)
     {
+      _logger.LogRequest(nameof(Api<TEntity, TRepository>), nameof(Put));
       await repository.UpdateAsync(entities);
       return Results.NoContent();
     }
@@ -92,6 +106,7 @@ namespace DiaryOfTrader.WebApi.Core.Api
     //[Authorize]
     private async Task<IResult> Delete([FromBody] List<long> ids, TRepository repository)
     {
+      _logger.LogRequest(nameof(Api<TEntity, TRepository>), nameof(Delete));
       await repository.DeleteAsync(ids);
       return Results.NoContent();
     }

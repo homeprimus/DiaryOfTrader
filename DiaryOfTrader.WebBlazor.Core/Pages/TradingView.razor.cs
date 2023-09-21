@@ -1,5 +1,4 @@
-﻿using DiaryOfTrader.WebBlazor.Core.JsInterop;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;

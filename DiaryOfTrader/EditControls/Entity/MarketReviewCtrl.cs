@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using DiaryOfTrader.Core;
-using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.Core.Interfaces;
 using DiaryOfTrader.EditDialogs;
 using SkiaSharp;

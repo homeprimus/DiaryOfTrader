@@ -4,7 +4,6 @@ using DiaryOfTrader.Core.Interfaces.Repository;
 using DiaryOfTrader.EditDialogs;
 using DiaryOfTrader.EditDialogs.Calendar;
 using DiaryOfTrader.EditDialogs.Dictionary;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace DiaryOfTrader
 {

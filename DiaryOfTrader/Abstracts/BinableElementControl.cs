@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
 using DiaryOfTrader.Components;
-using DiaryOfTrader.Core.Core;
 using DiaryOfTrader.Core.Interfaces;
 using DiaryOfTrader.EditDialogs;
-using Exchange.Components;
 
 namespace DiaryOfTrader.Abstracts
 {

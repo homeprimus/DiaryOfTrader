@@ -1,4 +1,5 @@
 ﻿using DiaryOfTrader.Core.Data;
+using Microsoft.Extensions.Logging;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryDb
 {
@@ -6,11 +7,13 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
   {
     #region fields
     private readonly DiaryOfTraderCtx _data;
+    private ILogger<EconomicCalendarRepositoryDb> _logger;
     #endregion
 
-    public EconomicCalendarRepositoryDb(DbContext data)
+    public EconomicCalendarRepositoryDb(DbContext data, ILogger<EconomicCalendarRepositoryDb> logger)
     {
       _data = data as DiaryOfTraderCtx;
+      _logger = logger;
     }
 
     private List<EventCalendar> MakeEventCalendar(List<EconomicSchedule> events)

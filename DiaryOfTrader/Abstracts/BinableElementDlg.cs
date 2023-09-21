@@ -1,5 +1,4 @@
-﻿using DiaryOfTrader.Core.Core;
-using DiaryOfTrader.EditDialogs;
+﻿using DiaryOfTrader.EditDialogs;
 
 namespace DiaryOfTrader.Abstracts
 {
