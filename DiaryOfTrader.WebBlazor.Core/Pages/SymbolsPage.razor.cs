@@ -16,4 +16,10 @@ public partial class SymbolsPage
   {
     Symbols = await HttpRepo.GetAllAsync();
   }
+
+  private async Task DeleteSymbol(long id)
+  { 
+    await HttpRepo.DeleteAsync(id);
+    Symbols.Remove(Symbols.FirstOrDefault(x => x.ID == id));
+  }
 }

@@ -15,4 +15,10 @@ public partial class TrendPage
   {
     Trends = await HttpRepo.GetAllAsync();
   }
+
+  private async Task DeleteTrend(long id)
+  {
+    await HttpRepo.DeleteAsync(id);
+    Trends.Remove(Trends.FirstOrDefault(x => x.ID == id));
+  }
 }

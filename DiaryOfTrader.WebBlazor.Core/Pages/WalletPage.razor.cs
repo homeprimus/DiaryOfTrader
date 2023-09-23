@@ -15,4 +15,10 @@ public partial class WalletPage
   {
     Wallets = await HttpRepo.GetAllAsync();
   }
+
+  private async Task DeleteWallet(long id)
+  {
+    await HttpRepo.DeleteAsync(id);
+    Wallets.Remove(Wallets.FirstOrDefault(x => x.ID == id));
+  }
 }

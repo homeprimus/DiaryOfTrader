@@ -17,4 +17,10 @@ public partial class TimeFramePage
   {
     TimeFrames = await HttpRepo.GetAllAsync();
   }
+
+  private async Task DeleteTimeFrame(long id)
+  {
+    await HttpRepo.DeleteAsync(id);
+    TimeFrames.Remove(TimeFrames.FirstOrDefault(x => x.ID == id));
+  }
 }

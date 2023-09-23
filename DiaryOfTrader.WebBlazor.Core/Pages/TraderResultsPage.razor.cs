@@ -15,4 +15,10 @@ public partial class TraderResultsPage
   {
     TraderResults = await HttpRepo.GetAllAsync();
   }
+
+  private async Task DeleteTraderResult(long id)
+  {
+    await HttpRepo.DeleteAsync(id);
+    TraderResults.Remove(TraderResults.FirstOrDefault(x => x.ID == id));
+  }
 }

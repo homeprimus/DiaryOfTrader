@@ -15,4 +15,10 @@ public partial class TraderSessionPage
   {
     TraderSessions = await HttpRepo.GetAllAsync();
   }
+
+  private async Task DeleteTraderSession(long id)
+  {
+    await HttpRepo.DeleteAsync(id);
+    TraderSessions.Remove(TraderSessions.FirstOrDefault(x => x.ID == id));
+  }
 }
