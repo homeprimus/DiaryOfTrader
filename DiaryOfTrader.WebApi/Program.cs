@@ -2,6 +2,7 @@
 using System.Text;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Interfaces.Cache;
+using DiaryOfTrader.Core.Repository;
 using DiaryOfTrader.Core.Repository.Cache.DistributedCache;
 using DiaryOfTrader.Core.Repository.Cache.Memory;
 using DiaryOfTrader.Core.Repository.RepositoryDb;
@@ -48,8 +49,10 @@ void ResgistryServices(IServiceCollection services, ConfigurationManager configu
   services.AddScoped<IDiaryRepository, DiaryRepositoryDb>();
 
   services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
-
   services.AddScoped<ITraderRepository, TraderRepositoryDb>();
+
+
+  services.AddSingleton(new EndPointConfiguration());
 
   // добавили авторизыцию
   services.AddSingleton<ITokenService>(new TokenService());

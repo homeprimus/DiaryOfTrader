@@ -1,10 +1,11 @@
-﻿using DiaryOfTrader.Core.Repository.RepositoryDb;
+﻿using DiaryOfTrader.Core.Repository;
+using DiaryOfTrader.Core.Repository.RepositoryDb;
 
 namespace DiaryOfTrader.WebApi.Api
 {
   public class TraderSessionApi : Api<TraderSession, ITraderSessionRepository>, IApi
   {
-    public TraderSessionApi(ILogger<RepositoryDb<TraderSession>> logger) : base(logger)
+    public TraderSessionApi(EndPointConfiguration config, ILogger<Api<TraderSession, ITraderSessionRepository>> logger) : base(config, logger)
     {
     }
   }

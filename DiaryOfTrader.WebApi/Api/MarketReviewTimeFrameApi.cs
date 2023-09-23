@@ -1,10 +1,10 @@
-﻿using DiaryOfTrader.Core.Repository.RepositoryDb;
+﻿using DiaryOfTrader.Core.Repository;
 
 namespace DiaryOfTrader.WebApi.Api
 {
   public class MarketReviewTimeFrameApi : Api<MarketReviewTimeFrame, IMarketReviewTimeFrameRepository>, IApi
   {
-    public MarketReviewTimeFrameApi(ILogger<RepositoryDb<MarketReviewTimeFrame>> logger) : base(logger)
+    public MarketReviewTimeFrameApi(EndPointConfiguration config, ILogger<Api<MarketReviewTimeFrame, IMarketReviewTimeFrameRepository>> logger) : base(config, logger)
     {
     }
   }

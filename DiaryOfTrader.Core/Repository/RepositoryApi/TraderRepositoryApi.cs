@@ -1,9 +1,11 @@
 ﻿
+using Microsoft.Extensions.Logging;
+
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
   public class TraderRepositoryApi : RepositoryApi<Trader>, ITraderRepository
   {
-    public TraderRepositoryApi(string root) : base(root)
+    public TraderRepositoryApi(EndPointConfiguration config, HttpClient client, ILogger<RepositoryApi<Trader>> logger) : base(config, client, logger)
     {
     }
 

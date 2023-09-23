@@ -1,17 +1,23 @@
 ﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
   public class RepositoryApi<TEntity> : Disposable, IRepository<TEntity> where TEntity : Entity.Entity
   {
     #region fields
-    private readonly HttpClient _client = new HttpClient();
+    private readonly HttpClient _client;
     private readonly string _endPoint;
+    private readonly ILogger<RepositoryApi<TEntity>> _logger;
     #endregion
 
-    public RepositoryApi(string root)
+    public RepositoryApi(EndPointConfiguration config, HttpClient client, ILogger<RepositoryApi<TEntity>> logger)
     {
-      _endPoint = root + "/" + typeof(TEntity).Name.ToLowerInvariant() + "s";
+      var entity = typeof(TEntity).Name.ToLowerInvariant();
+      var url = new UriBuilder(config.EndPoint) { Path = config.Version(entity) + "/" + entity + "s" };
+      _endPoint = url.ToString();
+      _client = client;
+      _logger = logger;
     }
 
     public async Task<List<TEntity?>> GetAllAsync()

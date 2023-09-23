@@ -1,4 +1,5 @@
 ﻿
+using DiaryOfTrader.Core.Repository;
 using DiaryOfTrader.Core.Repository.RepositoryDb;
 using DiaryOfTrader.WebApi.Auth;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +9,7 @@ namespace DiaryOfTrader.WebApi.Api
 {
   public class TraderApi : Api<Trader, ITraderRepository>
   {
-    public TraderApi(ILogger<RepositoryDb<Trader>> logger) : base(logger)
+    public TraderApi(EndPointConfiguration config, ILogger<Api<Trader, ITraderRepository>> logger) : base(config, logger)
     {
     }
 
