@@ -25,11 +25,13 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
 
     public static Task<HttpResponseMessage> DeleteAsJsonRangeAsync<T>(this HttpClient httpClient, string url, List<long> data)
     {
+      var request = new HttpRequestMessage(HttpMethod.Delete, url);
       var dataAsString = JsonSerializer.Serialize(data);
       var content = new StringContent(dataAsString);
       content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-      return httpClient.PutAsync(url, content);
+      request.Content = content;
+      
+      return httpClient.SendAsync(request);
     }
 
     public static async Task<T?> ReadAsJsonAsync<T>(this HttpContent content)

@@ -18,4 +18,9 @@ public partial class ExchangePage
     Exchanges = await ApiRepo.GetAllAsync();
   }
 
+  private async Task DeleteExchange(long id)
+  {
+    await ApiRepo.DeleteAsync(id);
+    Exchanges.Remove(Exchanges.FirstOrDefault(x => x.ID == id));
+  }
 }
