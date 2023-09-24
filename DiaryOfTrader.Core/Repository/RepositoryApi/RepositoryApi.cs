@@ -22,21 +22,25 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
 
     public async Task<List<TEntity?>> GetAllAsync()
     {
+      _logger.LogInformation(nameof(GetAllAsync));
       return await _client.GetFromJsonAsync<List<TEntity>>(_endPoint);
     }
 
     public async Task<List<TEntity>> GetAllAsync(object[] pattern)
     {
+      _logger.LogInformation(nameof(GetAllAsync));
       throw new NotImplementedException();
     }
 
     public async Task<TEntity?> GetByIdAsync(long entityId)
     {
+      _logger.LogInformation(nameof(GetByIdAsync));
       return await _client.GetFromJsonAsync<TEntity>($"{_endPoint}/{entityId}");
     }
 
     public async Task InsertAsync(List<TEntity> entities)
     {
+      _logger.LogInformation(nameof(InsertAsync));
       await _client.PostAsJsonAsync($"{_endPoint}", entities);
     }
 
@@ -47,6 +51,7 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
 
     public async Task UpdateAsync(List<TEntity> entities)
     {
+      _logger.LogInformation(nameof(UpdateAsync));
       await _client.PutAsJsonAsync($"{_endPoint}", entities);
     }
 
@@ -57,6 +62,7 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
 
     public async Task DeleteAsync(List<long> entityIds)
     {
+      _logger.LogInformation(nameof(DeleteAsync));
       await _client.DeleteAsJsonRangeAsync<long>($"{_endPoint}", entityIds);
     }
 

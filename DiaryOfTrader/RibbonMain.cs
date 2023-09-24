@@ -70,6 +70,10 @@ namespace DiaryOfTrader
     {
       Proccessing(new WalletDlg(), Core.Entity.DiaryOfTrader.WalletRepository);
     }
+    private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
+    {
+      Proccessing(new TradingStrategyDlg(), Core.Entity.DiaryOfTrader.TradingStrategyRepository);
+    }
 
     private void bbtCalendar_ItemClick(object sender, ItemClickEventArgs e)
     {
@@ -93,6 +97,11 @@ namespace DiaryOfTrader
     private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
     {
       tcMain.SelectedTabPage = tpDiary;
+    }
+
+    private void bbtMarket_ItemClick(object sender, ItemClickEventArgs e)
+    {
+      tcMain.SelectedTabPage = tpMarket;
     }
   }
 

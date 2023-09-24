@@ -1,5 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Web;
+using DiaryOfTrader.Core.Entity;
+using Microsoft.Extensions.Logging;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
@@ -14,13 +16,18 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
     private const string DATE_FORMAT = "YYYY-MM-dd";
     #endregion
     #region fields
-    private readonly HttpClient _client = new ();
+    private readonly HttpClient _client;
     private readonly string _endPoint;
+    private readonly ILogger<EconomicCalendarRepositoryApi> _logger;
     #endregion
 
-    public EconomicCalendarRepositoryApi(string root)
+    public EconomicCalendarRepositoryApi(EndPointConfiguration config, HttpClient client, ILogger<EconomicCalendarRepositoryApi> logger)
     {
-      _endPoint = root + CALENDAR;
+      var entity = CALENDAR;
+      var url = new UriBuilder(config.EndPoint) { Path = config.Version(entity) + "/" + entity + "s" };
+      _endPoint = url.ToString();
+      _logger = logger;
+      _client = client;
     }
 
     public async Task<List<EventCalendar>> GetAsync(EconomicPeriod period, Importance importance)

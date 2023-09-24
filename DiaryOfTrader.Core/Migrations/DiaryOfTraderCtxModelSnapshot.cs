@@ -26,7 +26,7 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<string>("Deal")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -41,12 +41,21 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Property<long?>("ExchangeID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime?>("FinishedDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("ReviewID")
+                    b.Property<long?>("ReviewID")
                         .HasColumnType("INTEGER");
+
+                    b.Property<long?>("SessionID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("StartedDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<long>("SymbolID")
                         .HasColumnType("INTEGER");
@@ -64,6 +73,8 @@ namespace DiaryOfTrader.Core.Migrations
                     b.HasIndex("ExchangeID");
 
                     b.HasIndex("ReviewID");
+
+                    b.HasIndex("SessionID");
 
                     b.HasIndex("SymbolID");
 
@@ -474,6 +485,29 @@ namespace DiaryOfTrader.Core.Migrations
                     b.UseTpcMappingStrategy();
                 });
 
+            modelBuilder.Entity("DiaryOfTrader.Core.Entity.TradingStrategy", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TradingStrategy");
+
+                    b.UseTpcMappingStrategy();
+                });
+
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.Trend", b =>
                 {
                     b.Property<long>("ID")
@@ -549,9 +583,11 @@ namespace DiaryOfTrader.Core.Migrations
 
                     b.HasOne("DiaryOfTrader.Core.Entity.MarketReview", "Review")
                         .WithMany()
-                        .HasForeignKey("ReviewID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReviewID");
+
+                    b.HasOne("DiaryOfTrader.Core.Entity.TraderSession", "Session")
+                        .WithMany()
+                        .HasForeignKey("SessionID");
 
                     b.HasOne("DiaryOfTrader.Core.Entity.Symbol", "Symbol")
                         .WithMany()
@@ -576,6 +612,8 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Navigation("Exchange");
 
                     b.Navigation("Review");
+
+                    b.Navigation("Session");
 
                     b.Navigation("Symbol");
 

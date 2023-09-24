@@ -117,6 +117,7 @@ void Configure(WebApplication application)
     application.UseSwagger();
     application.UseSwaggerUI();
     //
+    application.UseDeveloperExceptionPage();
   }
 
   // Get a shared logger object

@@ -1,4 +1,5 @@
-﻿using DiaryOfTrader.Core.Data;
+﻿using System.Net.Http;
+using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Interfaces.Cache;
 using DiaryOfTrader.Core.Interfaces.Repository;
 using DiaryOfTrader.Core.Repository;
@@ -47,6 +48,7 @@ namespace DiaryOfTrader
         services.AddTransient<IMarketReviewRepository, MarketReviewRepositoryDb>();
         services.AddTransient<IMarketReviewTimeFrameRepository, MarketReviewTimeFrameRepositoryDb>();
         services.AddTransient<IDiaryRepository, DiaryRepositoryDb>();
+        services.AddTransient<ITradingStrategyRepository, TradingStrategyRepositoryDb>();
         services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
 
         //кэш
@@ -66,6 +68,7 @@ namespace DiaryOfTrader
           services.AddSingleton<ICache, Memory>();
         }
 
+        services.AddTransient<HttpClient>();
         services.AddSingleton<EndPointConfiguration>();
 
         services.AddSingleton<RibbonMain, RibbonMain>();
@@ -86,8 +89,6 @@ namespace DiaryOfTrader
         .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
         .AddEnvironmentVariables()
         .Build();
-
-
 
 
       // https://learn.microsoft.com/ru-ru/dotnet/core/extensions/configuration
@@ -117,6 +118,8 @@ namespace DiaryOfTrader
       services.AddTransient<IMarketReviewTimeFrameRepository, MarketReviewTimeFrameRepositoryDb>();
       services.AddTransient<IDiaryRepository, DiaryRepositoryDb>();
       services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
+
+      services.AddTransient<HttpClient>();
 
       //кэш
       var redis = config.GetSection("Redis");

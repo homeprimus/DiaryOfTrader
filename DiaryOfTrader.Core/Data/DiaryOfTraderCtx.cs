@@ -79,6 +79,7 @@ namespace DiaryOfTrader.Core.Data
 
       modelBuilder.Entity<Wallet>(WalletConfigure);
       modelBuilder.Entity<Symbol>(SymbolConfigure);
+      modelBuilder.Entity<TradingStrategy>(StrategyConfigure);
       modelBuilder.Entity<TraderExchange>(ExchangeConfigure);
       modelBuilder.Entity<TraderRegion>(TraderRegionConfigure);
       modelBuilder.Entity<TraderSession>(TraderSessionConfigure);
@@ -100,6 +101,11 @@ namespace DiaryOfTrader.Core.Data
     }
 
     #region Configure
+    private void StrategyConfigure(EntityTypeBuilder<TradingStrategy> builder)
+    {
+      builder.UseTpcMappingStrategy();
+      builder.Property(b => b.ID).ValueGeneratedOnAdd();
+    }
     private void MarketReviewTimeFrameConfigure(EntityTypeBuilder<MarketReviewTimeFrame> builder)
     {
       builder.UseTpcMappingStrategy();

@@ -27,8 +27,9 @@ namespace DiaryOfTrader.EditControls.Entity
         gvMarketReview.OptionsView.ShowChildrenInGroupPanel = value;
       }
     }
-
+    [DefaultValue(null)]
     public TraderExchange Exchange { get; set; }
+    [DefaultValue(null)]
     public Symbol Symbol { get; set; }
 
     private DevExpress.XtraGrid.Views.Grid.GridView View
@@ -57,14 +58,19 @@ namespace DiaryOfTrader.EditControls.Entity
     protected override void OnLoad(EventArgs e)
     {
       base.OnLoad(e);
-      RefreshData();
+      //RefreshData();
     }
 
     private void RefreshData()
     {
-      var data = Core.Entity.DiaryOfTrader.MarketReviewRepository.GetAllAsync().Result;
-      gcMarketReview.DataSource = new BindingList<MarketReview>(data!);
-
+      try
+      {
+        var data = Core.Entity.DiaryOfTrader.MarketReviewRepository.GetAllAsync().Result;
+        gcMarketReview.DataSource = new BindingList<MarketReview>(data!);
+      }
+      catch
+      {
+      }
     }
 
     private void bbtAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

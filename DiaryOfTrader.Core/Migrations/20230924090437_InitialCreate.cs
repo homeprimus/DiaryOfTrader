@@ -125,6 +125,21 @@ namespace DiaryOfTrader.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TradingStrategy",
+                columns: table => new
+                {
+                    ID = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TradingStrategy", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Trend",
                 columns: table => new
                 {
@@ -239,11 +254,14 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     ID = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    StartedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FinishedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     ExchangeID = table.Column<long>(type: "INTEGER", nullable: true),
                     SymbolID = table.Column<long>(type: "INTEGER", nullable: false),
-                    ReviewID = table.Column<long>(type: "INTEGER", nullable: false),
+                    ReviewID = table.Column<long>(type: "INTEGER", nullable: true),
+                    SessionID = table.Column<long>(type: "INTEGER", nullable: true),
                     EnteredID = table.Column<long>(type: "INTEGER", nullable: false),
+                    Deal = table.Column<string>(type: "TEXT", nullable: true),
                     Emotions = table.Column<string>(type: "TEXT", nullable: true),
                     WalletID = table.Column<long>(type: "INTEGER", nullable: false),
                     TraderResultID = table.Column<long>(type: "INTEGER", nullable: false),
@@ -269,14 +287,18 @@ namespace DiaryOfTrader.Core.Migrations
                         name: "FK_Diary_MarketReview_ReviewID",
                         column: x => x.ReviewID,
                         principalTable: "MarketReview",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_Diary_Result_TraderResultID",
                         column: x => x.TraderResultID,
                         principalTable: "Result",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Diary_Session_SessionID",
+                        column: x => x.SessionID,
+                        principalTable: "Session",
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_Diary_Symbol_SymbolID",
                         column: x => x.SymbolID,
@@ -404,6 +426,11 @@ namespace DiaryOfTrader.Core.Migrations
                 column: "ReviewID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Diary_SessionID",
+                table: "Diary",
+                column: "SessionID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Diary_SymbolID",
                 table: "Diary",
                 column: "SymbolID");
@@ -487,10 +514,10 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "MarketReviewTimeFrame");
 
             migrationBuilder.DropTable(
-                name: "Session");
+                name: "Trader");
 
             migrationBuilder.DropTable(
-                name: "Trader");
+                name: "TradingStrategy");
 
             migrationBuilder.DropTable(
                 name: "EconomicEvent");
@@ -500,9 +527,6 @@ namespace DiaryOfTrader.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Trend");
-
-            migrationBuilder.DropTable(
-                name: "Region");
 
             migrationBuilder.DropTable(
                 name: "Diary");
@@ -517,6 +541,9 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Result");
 
             migrationBuilder.DropTable(
+                name: "Session");
+
+            migrationBuilder.DropTable(
                 name: "Wallet");
 
             migrationBuilder.DropTable(
@@ -524,6 +551,9 @@ namespace DiaryOfTrader.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Symbol");
+
+            migrationBuilder.DropTable(
+                name: "Region");
         }
     }
 }

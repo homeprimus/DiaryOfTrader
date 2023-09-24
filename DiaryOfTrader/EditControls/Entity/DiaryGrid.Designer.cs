@@ -46,6 +46,21 @@ namespace DiaryOfTrader.EditControls.Entity
       barDockControlRight = new DevExpress.XtraBars.BarDockControl();
       gcDiaryGrid = new DevExpress.XtraGrid.GridControl();
       gvDiaryGrid = new DevExpress.XtraGrid.Views.Grid.GridView();
+      clStartedDate = new DevExpress.XtraGrid.Columns.GridColumn();
+      clTraderExchange = new DevExpress.XtraGrid.Columns.GridColumn();
+      clSymbol = new DevExpress.XtraGrid.Columns.GridColumn();
+      clReview = new DevExpress.XtraGrid.Columns.GridColumn();
+      clEconomicSchedule = new DevExpress.XtraGrid.Columns.GridColumn();
+      clSession = new DevExpress.XtraGrid.Columns.GridColumn();
+      clEntered = new DevExpress.XtraGrid.Columns.GridColumn();
+      clDeal = new DevExpress.XtraGrid.Columns.GridColumn();
+      clEmotions = new DevExpress.XtraGrid.Columns.GridColumn();
+      clScreenshot = new DevExpress.XtraGrid.Columns.GridColumn();
+      clWallet = new DevExpress.XtraGrid.Columns.GridColumn();
+      clTraderResult = new DevExpress.XtraGrid.Columns.GridColumn();
+      clAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+      clFinished = new DevExpress.XtraGrid.Columns.GridColumn();
+      clStrategy = new DevExpress.XtraGrid.Columns.GridColumn();
       ((System.ComponentModel.ISupportInitialize)bmGrid).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gcDiaryGrid).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gvDiaryGrid).BeginInit();
@@ -114,15 +129,15 @@ namespace DiaryOfTrader.EditControls.Entity
       barDockControlTop.Dock = DockStyle.Top;
       barDockControlTop.Location = new Point(0, 0);
       barDockControlTop.Manager = bmGrid;
-      barDockControlTop.Size = new Size(900, 24);
+      barDockControlTop.Size = new Size(1128, 24);
       // 
       // barDockControlBottom
       // 
       barDockControlBottom.CausesValidation = false;
       barDockControlBottom.Dock = DockStyle.Bottom;
-      barDockControlBottom.Location = new Point(0, 394);
+      barDockControlBottom.Location = new Point(0, 496);
       barDockControlBottom.Manager = bmGrid;
-      barDockControlBottom.Size = new Size(900, 0);
+      barDockControlBottom.Size = new Size(1128, 0);
       // 
       // barDockControlLeft
       // 
@@ -130,15 +145,15 @@ namespace DiaryOfTrader.EditControls.Entity
       barDockControlLeft.Dock = DockStyle.Left;
       barDockControlLeft.Location = new Point(0, 24);
       barDockControlLeft.Manager = bmGrid;
-      barDockControlLeft.Size = new Size(0, 370);
+      barDockControlLeft.Size = new Size(0, 472);
       // 
       // barDockControlRight
       // 
       barDockControlRight.CausesValidation = false;
       barDockControlRight.Dock = DockStyle.Right;
-      barDockControlRight.Location = new Point(900, 24);
+      barDockControlRight.Location = new Point(1128, 24);
       barDockControlRight.Manager = bmGrid;
-      barDockControlRight.Size = new Size(0, 370);
+      barDockControlRight.Size = new Size(0, 472);
       // 
       // gcDiaryGrid
       // 
@@ -147,12 +162,13 @@ namespace DiaryOfTrader.EditControls.Entity
       gcDiaryGrid.MainView = gvDiaryGrid;
       gcDiaryGrid.MenuManager = bmGrid;
       gcDiaryGrid.Name = "gcDiaryGrid";
-      gcDiaryGrid.Size = new Size(900, 370);
+      gcDiaryGrid.Size = new Size(1128, 472);
       gcDiaryGrid.TabIndex = 9;
       gcDiaryGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gvDiaryGrid });
       // 
       // gvDiaryGrid
       // 
+      gvDiaryGrid.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { clStartedDate, clFinished, clTraderExchange, clSymbol, clReview, clEconomicSchedule, clSession, clStrategy, clEntered, clDeal, clEmotions, clScreenshot, clWallet, clTraderResult, clAmount });
       gvDiaryGrid.GridControl = gcDiaryGrid;
       gvDiaryGrid.Name = "gvDiaryGrid";
       gvDiaryGrid.OptionsBehavior.AllowIncrementalSearch = true;
@@ -163,6 +179,126 @@ namespace DiaryOfTrader.EditControls.Entity
       gvDiaryGrid.OptionsView.RowAutoHeight = true;
       gvDiaryGrid.OptionsView.ShowDetailButtons = false;
       gvDiaryGrid.OptionsView.ShowGroupPanel = false;
+      // 
+      // clStartedDate
+      // 
+      clStartedDate.Caption = "Начало";
+      clStartedDate.FieldName = "StartedDate";
+      clStartedDate.Name = "clStartedDate";
+      clStartedDate.Visible = true;
+      clStartedDate.VisibleIndex = 0;
+      // 
+      // clTraderExchange
+      // 
+      clTraderExchange.Caption = "Брокер";
+      clTraderExchange.FieldName = "TraderExchange";
+      clTraderExchange.Name = "clTraderExchange";
+      clTraderExchange.Visible = true;
+      clTraderExchange.VisibleIndex = 1;
+      // 
+      // clSymbol
+      // 
+      clSymbol.Caption = "Инструмент";
+      clSymbol.FieldName = "Symbol";
+      clSymbol.Name = "clSymbol";
+      clSymbol.Visible = true;
+      clSymbol.VisibleIndex = 2;
+      // 
+      // clReview
+      // 
+      clReview.Caption = "Анализ рынка";
+      clReview.FieldName = "Review";
+      clReview.Name = "clReview";
+      clReview.Visible = true;
+      clReview.VisibleIndex = 3;
+      // 
+      // clEconomicSchedule
+      // 
+      clEconomicSchedule.Caption = "Экогом. новости";
+      clEconomicSchedule.FieldName = "EconomicSchedule";
+      clEconomicSchedule.Name = "clEconomicSchedule";
+      clEconomicSchedule.Visible = true;
+      clEconomicSchedule.VisibleIndex = 4;
+      // 
+      // clSession
+      // 
+      clSession.Caption = "Сессия";
+      clSession.FieldName = "Session";
+      clSession.Name = "clSession";
+      clSession.Visible = true;
+      clSession.VisibleIndex = 5;
+      // 
+      // clEntered
+      // 
+      clEntered.Caption = "ТФ входа";
+      clEntered.FieldName = "Entered";
+      clEntered.Name = "clEntered";
+      clEntered.Visible = true;
+      clEntered.VisibleIndex = 6;
+      // 
+      // clDeal
+      // 
+      clDeal.Caption = "Сделка, ход и сопровождение";
+      clDeal.FieldName = "Deal";
+      clDeal.Name = "clDeal";
+      clDeal.Visible = true;
+      clDeal.VisibleIndex = 7;
+      // 
+      // clEmotions
+      // 
+      clEmotions.Caption = "Чек лист эмиций";
+      clEmotions.FieldName = "Emotions";
+      clEmotions.Name = "clEmotions";
+      clEmotions.Visible = true;
+      clEmotions.VisibleIndex = 8;
+      // 
+      // clScreenshot
+      // 
+      clScreenshot.Caption = "Снимок";
+      clScreenshot.FieldName = "Screenshot";
+      clScreenshot.Name = "clScreenshot";
+      clScreenshot.Visible = true;
+      clScreenshot.VisibleIndex = 9;
+      // 
+      // clWallet
+      // 
+      clWallet.Caption = "Кошелек";
+      clWallet.FieldName = "Wallet";
+      clWallet.Name = "clWallet";
+      clWallet.Visible = true;
+      clWallet.VisibleIndex = 10;
+      // 
+      // clTraderResult
+      // 
+      clTraderResult.Caption = "Результат сделки";
+      clTraderResult.FieldName = "TraderResult";
+      clTraderResult.Name = "clTraderResult";
+      clTraderResult.Visible = true;
+      clTraderResult.VisibleIndex = 11;
+      // 
+      // clAmount
+      // 
+      clAmount.Caption = "Сумма профита или убытка";
+      clAmount.FieldName = "Amount";
+      clAmount.Name = "clAmount";
+      clAmount.Visible = true;
+      clAmount.VisibleIndex = 12;
+      // 
+      // clFinished
+      // 
+      clFinished.Caption = "Окончание";
+      clFinished.FieldName = "FinishedDate";
+      clFinished.Name = "clFinished";
+      clFinished.Visible = true;
+      clFinished.VisibleIndex = 13;
+      // 
+      // clStrategy
+      // 
+      clStrategy.Caption = "Cтратегия";
+      clStrategy.FieldName = "Strategy";
+      clStrategy.Name = "clStrategy";
+      clStrategy.Visible = true;
+      clStrategy.VisibleIndex = 14;
       // 
       // DiaryGrid
       // 
@@ -178,7 +314,7 @@ namespace DiaryOfTrader.EditControls.Entity
       Controls.Add(barDockControlBottom);
       Controls.Add(barDockControlTop);
       Name = "DiaryGrid";
-      Size = new Size(900, 394);
+      Size = new Size(1128, 496);
       ((System.ComponentModel.ISupportInitialize)bmGrid).EndInit();
       ((System.ComponentModel.ISupportInitialize)gcDiaryGrid).EndInit();
       ((System.ComponentModel.ISupportInitialize)gvDiaryGrid).EndInit();
@@ -200,5 +336,20 @@ namespace DiaryOfTrader.EditControls.Entity
     public DevExpress.XtraBars.BarDockControl barDockControlRight;
     private DevExpress.XtraGrid.GridControl gcDiaryGrid;
     private DevExpress.XtraGrid.Views.Grid.GridView gvDiaryGrid;
+    private DevExpress.XtraGrid.Columns.GridColumn clStartedDate;
+    private DevExpress.XtraGrid.Columns.GridColumn clFinished;
+    private DevExpress.XtraGrid.Columns.GridColumn clTraderExchange;
+    private DevExpress.XtraGrid.Columns.GridColumn clSymbol;
+    private DevExpress.XtraGrid.Columns.GridColumn clReview;
+    private DevExpress.XtraGrid.Columns.GridColumn clEconomicSchedule;
+    private DevExpress.XtraGrid.Columns.GridColumn clSession;
+    private DevExpress.XtraGrid.Columns.GridColumn clStrategy;
+    private DevExpress.XtraGrid.Columns.GridColumn clEntered;
+    private DevExpress.XtraGrid.Columns.GridColumn clDeal;
+    private DevExpress.XtraGrid.Columns.GridColumn clEmotions;
+    private DevExpress.XtraGrid.Columns.GridColumn clScreenshot;
+    private DevExpress.XtraGrid.Columns.GridColumn clWallet;
+    private DevExpress.XtraGrid.Columns.GridColumn clTraderResult;
+    private DevExpress.XtraGrid.Columns.GridColumn clAmount;
   }
 }

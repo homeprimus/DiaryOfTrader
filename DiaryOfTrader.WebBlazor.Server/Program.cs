@@ -1,6 +1,7 @@
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using Blazored.Toast;
 using DiaryOfTrader.Core.Interfaces.Repository;
+using DiaryOfTrader.Core.Repository;
 using DiaryOfTrader.Core.Repository.RepositoryApi;
 using DiaryOfTrader.WebBlazor.Core;
 using DiaryOfTrader.WebBlazor.Core.HttpInterceptor;
@@ -14,10 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddScoped(sp => new HttpClient (){BaseAddress = new Uri("https://localhost:7184")});
+//builder.Services.AddScoped(sp => new HttpClient (){BaseAddress = new Uri("https://localhost:7184")});
 
 builder.Services.Configure<ApiConfiguration>
   (builder.Configuration.GetSection("ApiConfiguration"));
+
+builder.Services.Configure<EndPointConfiguration>
+  (builder.Configuration.GetSection("EndPointConfiguration"));
 
 #region Register HttpRepository
 
@@ -28,16 +32,18 @@ builder.Services.AddHttpClient("DiaryOfTraderAPI", (sp, cl) =>
   cl.EnableIntercept(sp);
 });
 
-var rootApi = "https://localhost:7236";
-builder.Services.AddScoped<ITraderExchangeRepository, TraderExchangeRepositoryApi>(_ => new TraderExchangeRepositoryApi(rootApi));
-builder.Services.AddScoped<ITimeFrameRepository, TimeFrameRepositoryApi>(_ => new TimeFrameRepositoryApi(rootApi));
-builder.Services.AddScoped<IWalletRepository, WalletRepositoryApi>(_ => new WalletRepositoryApi(rootApi));
-builder.Services.AddScoped<ITraderResultRepository, TraderResultRepositoryApi>(_ => new TraderResultRepositoryApi(rootApi));
-builder.Services.AddScoped<ITrendRepository, TrendRepositoryApi>(_ => new TrendRepositoryApi(rootApi));
-builder.Services.AddScoped<ITraderSessionRepository, TraderSessionRepositoryApi>(_ => new TraderSessionRepositoryApi(rootApi));
-builder.Services.AddScoped<ITraderRegionRepository, TraderRegionRepositoryApi>(_ => new TraderRegionRepositoryApi(rootApi));
-builder.Services.AddScoped<ISymbolRepository, SymbolRepositoryApi>(_ => new SymbolRepositoryApi(rootApi));
-builder.Services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryApi>(_ => new EconomicCalendarRepositoryApi(rootApi));
+builder.Services.AddSingleton<EndPointConfiguration>();
+
+builder.Services.AddScoped<ITraderExchangeRepository, TraderExchangeRepositoryApi>();
+builder.Services.AddScoped<ITimeFrameRepository, TimeFrameRepositoryApi>();
+builder.Services.AddScoped<IWalletRepository, WalletRepositoryApi>();
+builder.Services.AddScoped<ITraderResultRepository, TraderResultRepositoryApi>();
+builder.Services.AddScoped<ITrendRepository, TrendRepositoryApi>();
+builder.Services.AddScoped<ITraderSessionRepository, TraderSessionRepositoryApi>();
+builder.Services.AddScoped<ITraderRegionRepository, TraderRegionRepositoryApi>();
+builder.Services.AddScoped<ISymbolRepository, SymbolRepositoryApi>();
+builder.Services.AddScoped<ITradingStrategyRepository, TradingStrategyRepositoryApi>();
+builder.Services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryApi>();
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -62,6 +68,11 @@ if (!app.Environment.IsDevelopment())
   // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
   app.UseHsts();
 }
+
+var endPoint = app.Services.GetRequiredService<EndPointConfiguration>();
+var configuration = app.Services.GetRequiredService<IOptions<EndPointConfiguration>>();
+endPoint.EndPoint = configuration.Value.EndPoint;
+endPoint.Default = configuration.Value.Default;
 
 app.UseHttpsRedirection();
 

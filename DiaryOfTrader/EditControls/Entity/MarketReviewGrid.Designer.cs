@@ -180,7 +180,13 @@ namespace DiaryOfTrader.EditControls.Entity
       gvMarketReview.OptionsMenu.EnableGroupPanelMenu = false;
       gvMarketReview.OptionsView.AllowHtmlDrawHeaders = true;
       gvMarketReview.OptionsView.RowAutoHeight = true;
-      gvMarketReview.OptionsView.ShowChildrenInGroupPanel = true;
+      gvMarketReview.OptionsView.ShowChildrenInGroupPanel = false;
+
+      gvMarketReview.OptionsCustomization.AllowColumnMoving = false;
+      gvMarketReview.OptionsCustomization.AllowGroup = false;
+      gvMarketReview.OptionsCustomization.AllowQuickHideColumns = false;
+      gvMarketReview.OptionsView.ShowGroupPanel = false;
+
       // 
       // clDateTime
       // 

@@ -1,6 +1,5 @@
 ﻿
 using DiaryOfTrader.Core.Repository;
-using DiaryOfTrader.Core.Repository.RepositoryDb;
 using DiaryOfTrader.WebApi.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
