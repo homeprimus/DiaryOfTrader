@@ -58,7 +58,7 @@ namespace DiaryOfTrader.EditControls.Entity
     protected override void OnLoad(EventArgs e)
     {
       base.OnLoad(e);
-      //RefreshData();
+      RefreshData();
     }
 
     private void RefreshData()

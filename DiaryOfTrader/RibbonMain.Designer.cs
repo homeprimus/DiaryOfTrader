@@ -64,14 +64,15 @@ namespace DiaryOfTrader
       splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
       pnlCenter = new Panel();
       tcMain = new Components.TabControl();
+      tpMarketReview = new DevExpress.XtraTab.XtraTabPage();
+      pnlMarketReview = new Panel();
       tpMarket = new DevExpress.XtraTab.XtraTabPage();
       tcMarket = new Components.TabControl();
       xtpFirst = new DevExpress.XtraTab.XtraTabPage();
-      tpMarketReview = new DevExpress.XtraTab.XtraTabPage();
       tpDiary = new DevExpress.XtraTab.XtraTabPage();
       pnlDiary = new Panel();
       diaryGrid = new EditControls.Entity.DiaryGrid();
-      pnlMarketReview = new Panel();
+      marketReviewGrid = new EditControls.Entity.MarketReviewGrid();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
       ((System.ComponentModel.ISupportInitialize)panel1).BeginInit();
       panel1.SuspendLayout();
@@ -79,10 +80,11 @@ namespace DiaryOfTrader
       pnlCenter.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)tcMain).BeginInit();
       tcMain.SuspendLayout();
+      tpMarketReview.SuspendLayout();
+      pnlMarketReview.SuspendLayout();
       tpMarket.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)tcMarket).BeginInit();
       tcMarket.SuspendLayout();
-      tpMarketReview.SuspendLayout();
       tpDiary.SuspendLayout();
       pnlDiary.SuspendLayout();
       SuspendLayout();
@@ -350,6 +352,23 @@ namespace DiaryOfTrader
       tcMain.TabIndex = 0;
       tcMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { tpMarket, tpMarketReview, tpDiary });
       // 
+      // tpMarketReview
+      // 
+      tpMarketReview.Controls.Add(pnlMarketReview);
+      tpMarketReview.Name = "tpMarketReview";
+      tpMarketReview.Size = new Size(813, 429);
+      tpMarketReview.Text = "Журнал сделок";
+      // 
+      // pnlMarketReview
+      // 
+      pnlMarketReview.Controls.Add(marketReviewGrid);
+      pnlMarketReview.Dock = DockStyle.Fill;
+      pnlMarketReview.Location = new Point(0, 0);
+      pnlMarketReview.Name = "pnlMarketReview";
+      pnlMarketReview.Padding = new Padding(3);
+      pnlMarketReview.Size = new Size(813, 429);
+      pnlMarketReview.TabIndex = 0;
+      // 
       // tpMarket
       // 
       tpMarket.Controls.Add(tcMarket);
@@ -374,13 +393,6 @@ namespace DiaryOfTrader
       xtpFirst.Name = "xtpFirst";
       xtpFirst.Size = new Size(811, 404);
       xtpFirst.Text = "BTCUSDT";
-      // 
-      // tpMarketReview
-      // 
-      tpMarketReview.Controls.Add(pnlMarketReview);
-      tpMarketReview.Name = "tpMarketReview";
-      tpMarketReview.Size = new Size(813, 429);
-      tpMarketReview.Text = "Журнал сделок";
       // 
       // tpDiary
       // 
@@ -411,14 +423,17 @@ namespace DiaryOfTrader
       diaryGrid.Size = new Size(807, 423);
       diaryGrid.TabIndex = 0;
       // 
-      // pnlMarketReview
+      // marketReviewGrid
       // 
-      pnlMarketReview.Dock = DockStyle.Fill;
-      pnlMarketReview.Location = new Point(0, 0);
-      pnlMarketReview.Name = "pnlMarketReview";
-      pnlMarketReview.Padding = new Padding(3);
-      pnlMarketReview.Size = new Size(813, 429);
-      pnlMarketReview.TabIndex = 0;
+      marketReviewGrid.Appearance.BackColor = Color.Transparent;
+      marketReviewGrid.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      marketReviewGrid.Appearance.Options.UseBackColor = true;
+      marketReviewGrid.Appearance.Options.UseFont = true;
+      marketReviewGrid.Dock = DockStyle.Fill;
+      marketReviewGrid.Location = new Point(3, 3);
+      marketReviewGrid.Name = "marketReviewGrid";
+      marketReviewGrid.Size = new Size(807, 423);
+      marketReviewGrid.TabIndex = 0;
       // 
       // RibbonMain
       // 
@@ -442,10 +457,11 @@ namespace DiaryOfTrader
       pnlCenter.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)tcMain).EndInit();
       tcMain.ResumeLayout(false);
+      tpMarketReview.ResumeLayout(false);
+      pnlMarketReview.ResumeLayout(false);
       tpMarket.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)tcMarket).EndInit();
       tcMarket.ResumeLayout(false);
-      tpMarketReview.ResumeLayout(false);
       tpDiary.ResumeLayout(false);
       pnlDiary.ResumeLayout(false);
       ResumeLayout(false);
@@ -493,5 +509,6 @@ namespace DiaryOfTrader
     private Panel pnlDiary;
     private EditControls.Entity.DiaryGrid diaryGrid;
     private Panel pnlMarketReview;
+    private EditControls.Entity.MarketReviewGrid marketReviewGrid;
   }
 }

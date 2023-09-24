@@ -12,8 +12,6 @@ namespace DiaryOfTrader.EditControls.Entity
     protected override void OnInitializeInstance()
     {
       base.OnInitializeInstance();
-      BindingUtils.Bind(txtExchange, BindingUtils.Text, Element.Market, "Exchange");
-      BindingUtils.Bind(txtCoin, BindingUtils.Text, Element.Market, "Symbol");
       BindingUtils.BindCombo(lcbTimeFrame, Element, "Frame", MarketReview.FrameList);
       BindingUtils.BindCombo(lcbTrend, Element, "Trend", MarketReview.TrendList);
       BindingUtils.Bind(mmDescription, BindingUtils.Text, Element, "Description");
@@ -29,7 +27,6 @@ namespace DiaryOfTrader.EditControls.Entity
       if (property == "Frame")
       {
         tragingView.Frame = Element.Frame;
-        tragingView.Go();
       }
     }
 

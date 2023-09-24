@@ -174,25 +174,22 @@ namespace DiaryOfTrader.EditControls.Entity
       gvMarketReview.DetailHeight = 303;
       gvMarketReview.GridControl = gcMarketReview;
       gvMarketReview.Name = "gvMarketReview";
+      gvMarketReview.OptionsCustomization.AllowColumnMoving = false;
+      gvMarketReview.OptionsCustomization.AllowGroup = false;
+      gvMarketReview.OptionsCustomization.AllowQuickHideColumns = false;
       gvMarketReview.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
       gvMarketReview.OptionsDetail.ShowDetailTabs = false;
       gvMarketReview.OptionsDetail.ShowEmbeddedDetailIndent = DevExpress.Utils.DefaultBoolean.True;
       gvMarketReview.OptionsMenu.EnableGroupPanelMenu = false;
       gvMarketReview.OptionsView.AllowHtmlDrawHeaders = true;
       gvMarketReview.OptionsView.RowAutoHeight = true;
-      gvMarketReview.OptionsView.ShowChildrenInGroupPanel = false;
-
-      gvMarketReview.OptionsCustomization.AllowColumnMoving = false;
-      gvMarketReview.OptionsCustomization.AllowGroup = false;
-      gvMarketReview.OptionsCustomization.AllowQuickHideColumns = false;
       gvMarketReview.OptionsView.ShowGroupPanel = false;
-
       // 
       // clDateTime
       // 
       clDateTime.AppearanceHeader.Options.UseTextOptions = true;
       clDateTime.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      clDateTime.Caption = "Двта";
+      clDateTime.Caption = "Дата";
       clDateTime.FieldName = "DateTime";
       clDateTime.MinWidth = 17;
       clDateTime.Name = "clDateTime";
@@ -220,7 +217,7 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       clExchange.AppearanceHeader.Options.UseTextOptions = true;
       clExchange.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-      clExchange.Caption = "Биржа";
+      clExchange.Caption = "Брокер";
       clExchange.FieldName = "Exchange";
       clExchange.MinWidth = 17;
       clExchange.Name = "clExchange";

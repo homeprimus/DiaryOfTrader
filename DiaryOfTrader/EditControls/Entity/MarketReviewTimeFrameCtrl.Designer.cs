@@ -33,17 +33,12 @@ namespace DiaryOfTrader.EditControls.Entity
     private void InitializeComponent()
     {
       components = new System.ComponentModel.Container();
-      var resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketReviewTimeFrameCtrl));
       pnlTop = new Panel();
       gcMarketReview = new DevExpress.XtraEditors.GroupControl();
       lblTrend = new Label();
       lcbTrend = new Components.LookComboBox(components);
       lblTimeFrame = new Label();
       lcbTimeFrame = new Components.LookComboBox(components);
-      txtCoin = new TextBox();
-      txtExchange = new TextBox();
-      lblCoin = new Label();
-      lblExchange = new Label();
       pnlDown = new Panel();
       gcDescription = new DevExpress.XtraEditors.GroupControl();
       mmDescription = new DevExpress.XtraEditors.MemoEdit();
@@ -51,8 +46,6 @@ namespace DiaryOfTrader.EditControls.Entity
       gcTragingView = new DevExpress.XtraEditors.GroupControl();
       tragingView = new Components.TragingView();
       splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
-      alertControl1 = new DevExpress.XtraBars.Alerter.AlertControl(components);
-      btScreenShot = new Components.Button();
       pnlTop.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)gcMarketReview).BeginInit();
       gcMarketReview.SuspendLayout();
@@ -73,7 +66,7 @@ namespace DiaryOfTrader.EditControls.Entity
       pnlTop.Dock = DockStyle.Top;
       pnlTop.Location = new Point(0, 0);
       pnlTop.Name = "pnlTop";
-      pnlTop.Size = new Size(482, 98);
+      pnlTop.Size = new Size(674, 63);
       pnlTop.TabIndex = 0;
       // 
       // gcMarketReview
@@ -82,21 +75,17 @@ namespace DiaryOfTrader.EditControls.Entity
       gcMarketReview.Controls.Add(lcbTrend);
       gcMarketReview.Controls.Add(lblTimeFrame);
       gcMarketReview.Controls.Add(lcbTimeFrame);
-      gcMarketReview.Controls.Add(txtCoin);
-      gcMarketReview.Controls.Add(txtExchange);
-      gcMarketReview.Controls.Add(lblCoin);
-      gcMarketReview.Controls.Add(lblExchange);
       gcMarketReview.Dock = DockStyle.Fill;
       gcMarketReview.Location = new Point(0, 0);
       gcMarketReview.Name = "gcMarketReview";
-      gcMarketReview.Size = new Size(482, 98);
+      gcMarketReview.Size = new Size(674, 63);
       gcMarketReview.TabIndex = 0;
       gcMarketReview.Text = "Общее";
       // 
       // lblTrend
       // 
       lblTrend.AutoSize = true;
-      lblTrend.Location = new Point(246, 64);
+      lblTrend.Location = new Point(246, 32);
       lblTrend.Name = "lblTrend";
       lblTrend.Size = new Size(42, 13);
       lblTrend.TabIndex = 13;
@@ -104,7 +93,7 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // lcbTrend
       // 
-      lcbTrend.Location = new Point(326, 60);
+      lcbTrend.Location = new Point(326, 28);
       lcbTrend.Name = "lcbTrend";
       lcbTrend.Properties.Appearance.BackColor = Color.Transparent;
       lcbTrend.Properties.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
@@ -122,7 +111,7 @@ namespace DiaryOfTrader.EditControls.Entity
       // lblTimeFrame
       // 
       lblTimeFrame.AutoSize = true;
-      lblTimeFrame.Location = new Point(14, 64);
+      lblTimeFrame.Location = new Point(14, 32);
       lblTimeFrame.Name = "lblTimeFrame";
       lblTimeFrame.Size = new Size(67, 13);
       lblTimeFrame.TabIndex = 11;
@@ -130,7 +119,7 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // lcbTimeFrame
       // 
-      lcbTimeFrame.Location = new Point(83, 60);
+      lcbTimeFrame.Location = new Point(83, 28);
       lcbTimeFrame.Name = "lcbTimeFrame";
       lcbTimeFrame.Properties.Appearance.BackColor = Color.Transparent;
       lcbTimeFrame.Properties.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
@@ -145,48 +134,14 @@ namespace DiaryOfTrader.EditControls.Entity
       lcbTimeFrame.Size = new Size(137, 20);
       lcbTimeFrame.TabIndex = 10;
       // 
-      // txtCoin
-      // 
-      txtCoin.Location = new Point(324, 28);
-      txtCoin.Name = "txtCoin";
-      txtCoin.ReadOnly = true;
-      txtCoin.Size = new Size(150, 21);
-      txtCoin.TabIndex = 9;
-      // 
-      // txtExchange
-      // 
-      txtExchange.Location = new Point(83, 28);
-      txtExchange.Name = "txtExchange";
-      txtExchange.ReadOnly = true;
-      txtExchange.Size = new Size(137, 21);
-      txtExchange.TabIndex = 8;
-      // 
-      // lblCoin
-      // 
-      lblCoin.AutoSize = true;
-      lblCoin.Location = new Point(246, 33);
-      lblCoin.Name = "lblCoin";
-      lblCoin.Size = new Size(71, 13);
-      lblCoin.TabIndex = 7;
-      lblCoin.Text = "Инструмент:";
-      // 
-      // lblExchange
-      // 
-      lblExchange.AutoSize = true;
-      lblExchange.Location = new Point(14, 33);
-      lblExchange.Name = "lblExchange";
-      lblExchange.Size = new Size(43, 13);
-      lblExchange.TabIndex = 6;
-      lblExchange.Text = "Биржа:";
-      // 
       // pnlDown
       // 
       pnlDown.Controls.Add(gcDescription);
       pnlDown.Dock = DockStyle.Bottom;
-      pnlDown.Location = new Point(0, 447);
+      pnlDown.Location = new Point(0, 448);
       pnlDown.Name = "pnlDown";
       pnlDown.Padding = new Padding(5);
-      pnlDown.Size = new Size(482, 119);
+      pnlDown.Size = new Size(674, 119);
       pnlDown.TabIndex = 1;
       // 
       // gcDescription
@@ -195,7 +150,7 @@ namespace DiaryOfTrader.EditControls.Entity
       gcDescription.Dock = DockStyle.Fill;
       gcDescription.Location = new Point(5, 5);
       gcDescription.Name = "gcDescription";
-      gcDescription.Size = new Size(472, 109);
+      gcDescription.Size = new Size(664, 109);
       gcDescription.TabIndex = 0;
       gcDescription.Text = "Анализ таймфрейма";
       // 
@@ -204,7 +159,7 @@ namespace DiaryOfTrader.EditControls.Entity
       mmDescription.Dock = DockStyle.Fill;
       mmDescription.Location = new Point(2, 23);
       mmDescription.Name = "mmDescription";
-      mmDescription.Size = new Size(468, 84);
+      mmDescription.Size = new Size(660, 84);
       mmDescription.TabIndex = 1;
       // 
       // pnlCenter
@@ -212,55 +167,40 @@ namespace DiaryOfTrader.EditControls.Entity
       pnlCenter.Controls.Add(gcTragingView);
       pnlCenter.Controls.Add(splitterControl1);
       pnlCenter.Dock = DockStyle.Fill;
-      pnlCenter.Location = new Point(0, 98);
+      pnlCenter.Location = new Point(0, 63);
       pnlCenter.Name = "pnlCenter";
-      pnlCenter.Size = new Size(482, 349);
+      pnlCenter.Size = new Size(674, 385);
       pnlCenter.TabIndex = 2;
       // 
       // gcTragingView
       // 
-      gcTragingView.Controls.Add(btScreenShot);
       gcTragingView.Controls.Add(tragingView);
       gcTragingView.Dock = DockStyle.Fill;
       gcTragingView.Location = new Point(0, 0);
       gcTragingView.Name = "gcTragingView";
-      gcTragingView.Size = new Size(482, 339);
+      gcTragingView.Size = new Size(674, 375);
       gcTragingView.TabIndex = 2;
       gcTragingView.Text = "График торговли";
       // 
       // tragingView
       // 
       tragingView.Dock = DockStyle.Fill;
-      tragingView.Exchange = null;
-      tragingView.Frame = null;
+      tragingView.EnabledTimeFrame = false;
       tragingView.Location = new Point(2, 23);
+      tragingView.LowGroup = false;
       tragingView.Name = "tragingView";
-      tragingView.Size = new Size(478, 314);
-      tragingView.Symbol = null;
+      tragingView.Size = new Size(670, 350);
       tragingView.TabIndex = 0;
+      tragingView.VisibleSymbol = false;
       // 
       // splitterControl1
       // 
       splitterControl1.Dock = DockStyle.Bottom;
-      splitterControl1.Location = new Point(0, 339);
+      splitterControl1.Location = new Point(0, 375);
       splitterControl1.Name = "splitterControl1";
-      splitterControl1.Size = new Size(482, 10);
+      splitterControl1.Size = new Size(674, 10);
       splitterControl1.TabIndex = 1;
       splitterControl1.TabStop = false;
-      // 
-      // btScreenShot
-      // 
-      btScreenShot.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      btScreenShot.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
-      btScreenShot.Appearance.Options.UseFont = true;
-      btScreenShot.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("button1.ImageOptions.SvgImage");
-      btScreenShot.ImageOptions.SvgImageSize = new Size(20, 20);
-      btScreenShot.Location = new Point(452, 0);
-      btScreenShot.Name = "btScreenShot";
-      btScreenShot.Size = new Size(25, 20);
-      btScreenShot.TabIndex = 1;
-      btScreenShot.UseVisualStyleBackColor = false;
-      btScreenShot.Click += btScreenShot_Click;
       // 
       // MarketReviewTimeFrameCtrl
       // 
@@ -274,7 +214,7 @@ namespace DiaryOfTrader.EditControls.Entity
       Controls.Add(pnlDown);
       Controls.Add(pnlTop);
       Name = "MarketReviewTimeFrameCtrl";
-      Size = new Size(482, 566);
+      Size = new Size(674, 567);
       pnlTop.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)gcMarketReview).EndInit();
       gcMarketReview.ResumeLayout(false);
@@ -301,16 +241,10 @@ namespace DiaryOfTrader.EditControls.Entity
     private DevExpress.XtraEditors.GroupControl gcTragingView;
     private DevExpress.XtraEditors.SplitterControl splitterControl1;
     private DevExpress.XtraEditors.GroupControl gcMarketReview;
-    private Label lblCoin;
-    private Label lblExchange;
-    private TextBox txtCoin;
-    private TextBox txtExchange;
     private Label lblTrend;
     private Components.LookComboBox lcbTrend;
     private Label lblTimeFrame;
     private Components.LookComboBox lcbTimeFrame;
-    private DevExpress.XtraBars.Alerter.AlertControl alertControl1;
     private Components.TragingView tragingView;
-    private Components.Button btScreenShot;
   }
 }
