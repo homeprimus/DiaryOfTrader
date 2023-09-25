@@ -6,6 +6,7 @@ using DiaryOfTrader.WebBlazor.Core;
 using DiaryOfTrader.WebBlazor.Core.HttpInterceptor;
 using DiaryOfTrader.WebBlazor.Core.HttpRepository;
 using DiaryOfTrader.WebBlazor.Server;
+using Havit.Blazor.Components.Web;
 using Microsoft.Extensions.Options;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
@@ -53,6 +54,8 @@ builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>()?.CreateClie
 
 builder.Services.AddHttpClientInterceptor();
 builder.Services.AddScoped<HttpInterceptorService>();
+
+builder.Services.AddHxServices();
 
 var app = builder.Build();
 
