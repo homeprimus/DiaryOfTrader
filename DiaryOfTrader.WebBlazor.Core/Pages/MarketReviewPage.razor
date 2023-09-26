@@ -5,44 +5,79 @@
 <EditForm class="card card-body bg-light mt-5" Model="_model">
     <DataAnnotationsValidator/>
 
-    <div class="form">
-        <span>
-            <HxInputDate Label="Date" 
-                         CalendarIcon="BootstrapIcon.Calendar"
-                         InputSize="InputSize.Regular" 
-                         @bind-Value="MarketReview.DateTime" 
-                         CssClass="mb-3"/>
-            <HxSelect
-                TItem="TraderExchange"
-                TValue="long?"
-                InputGroupStartText="Exchange"
-                Data="Exchanges"
-                @bind-Value="_model.SelectedExchange"
-                TextSelector="@(p => p.Name)"
-                ValueSelector="@(p => p.ID)"
-                Nullable="true"
-                NullText="-select exchange-"
-                NullDataText="Loading exchanges..."/>
-            <p/>
-            <HxSelect
-                TItem="Symbol"
-                TValue="long?"
-                InputGroupStartText="Symbol"
-                Data="Symbols"
-                @bind-Value="_model.SelectedSymbols"
-                TextSelector="@(p => p.Name)"
-                ValueSelector="@(p => p.ID)"
-                Nullable="true"
-                NullText="-select symbol-"
-                NullDataText="Loading symbols..."/>
-            <p/>
-        </span>
-        <span>
-            <HxInputText @bind-Value="MarketReview.Name" Label="Name"/>
-            <p/>
-            <HxInputTextArea @bind-Value="MarketReview.Description" Label="Description" />
-        </span>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <HxInputDate Label="Date"
+                             CalendarIcon="BootstrapIcon.Calendar"
+                             InputSize="InputSize.Regular"
+                             @bind-Value="MarketReview.DateTime"
+                             CssClass="mb-3"/>
+            </div>
+            <div class="col">
+                <HxSelect
+                    TItem="TraderExchange"
+                    TValue="long?"
+                    Label="Exchange"
+                    Data="Exchanges"
+                    @bind-Value="_model.SelectedExchange"
+                    TextSelector="@(p => p.Name)"
+                    ValueSelector="@(p => p.ID)"
+                    Nullable="true"
+                    NullText="-select exchange-"
+                    NullDataText="Loading exchanges..."/>
+            </div>
+            <div class="col">
+                <HxSelect
+                    TItem="Symbol"
+                    TValue="long?"
+                    Label="Symbol"
+                    Data="Symbols"
+                    @bind-Value="_model.SelectedSymbols"
+                    TextSelector="@(p => p.Name)"
+                    ValueSelector="@(p => p.ID)"
+                    Nullable="true"
+                    NullText="-select symbol-"
+                    NullDataText="Loading symbols..."/>
+            </div>
+        </div>
+        <div>
+            <div>
+                <HxInputText @bind-Value="MarketReview.Name" Label="Name"/>
+            </div>
+            <div>
+                <HxInputTextArea @bind-Value="MarketReview.Description" Label="Description"/>
+            </div>
+        </div>
+        <p/>
+    </div>
 
+    <div>
+        <HxButton Color="ThemeColor.Success"  Icon="@BootstrapIcon.Bootstrap">
+        </HxButton>
+        <HxButton Color="ThemeColor.Danger" Text="-" />
+        <p/>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Time Frame</th>
+                <th scope="col">Trend</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Analysis</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var frame in MarketReview.Frames)
+            {
+                <tr>
+                    <td>@frame.Name</td>
+                    <td>@frame.Trend</td>
+                    <td>@frame.ScreenShot</td>
+                    <td>@frame.Description</td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
 
 </EditForm>
