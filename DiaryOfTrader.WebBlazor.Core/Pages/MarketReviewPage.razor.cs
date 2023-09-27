@@ -14,11 +14,30 @@ public partial class MarketReviewPage
   public MarketReview MarketReview { get; set; } = new();
   public List<TraderExchange?> Exchanges { get; set; }
   public List<Symbol?> Symbols { get; set; }
+  public List<TimeFrame?> TimeFrames { get; set; }
+  public List<Trend?> Trends { get; set; }
+  private TraderExchange SelectedExchange
+  {
+    get
+    {
+      return Exchanges.FirstOrDefault(x => x.ID == _model.SelectedExchange);
+    }
+  }
+  private Symbol SelectedSymbol
+  {
+    get
+    {
+      return Symbols.FirstOrDefault(x => x.ID == _model.SelectedSymbols);
+    }
+  }
+  private MarketReviewTimeFrame NewMarketReviewTimeFrame { get; set; }
 
   #region HttpRepositories
 
   [Inject] public ITraderExchangeRepository ExchangeRepository { get; set; }
   [Inject] public ISymbolRepository SymbolRepository { get; set; }
+  [Inject] public ITimeFrameRepository TimeFrameRepository { get; set; }
+  [Inject] public ITrendRepository TrendRepository { get; set; }
 
   #endregion
   
@@ -29,6 +48,8 @@ public partial class MarketReviewPage
     _model.SelectedExchange = Exchanges.FirstOrDefault()?.ID ?? 0;
     
     Symbols = await SymbolRepository.GetAllAsync();
+    TimeFrames = await TimeFrameRepository.GetAllAsync();
+    Trends = await TrendRepository.GetAllAsync();
   }
   
   
@@ -39,5 +60,16 @@ public partial class MarketReviewPage
     
     [Required(ErrorMessage = "Choose a symbols.")]
     public long? SelectedSymbols { get; set; }
+  }
+
+  private void AddFrame()
+  {
+    NewMarketReviewTimeFrame = new MarketReviewTimeFrame();
+    // NavigationManager.NavigateTo("/createMarketReviewTimeFrame");
+  }
+
+  private void Save()
+  {
+    MarketReview.Frames.Add(NewMarketReviewTimeFrame);
   }
 }

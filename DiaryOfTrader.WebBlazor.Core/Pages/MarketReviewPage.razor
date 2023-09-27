@@ -53,9 +53,61 @@
     </div>
 
     <div>
-        <HxButton Color="ThemeColor.Success"  Icon="@BootstrapIcon.Bootstrap">
+        <HxButton Color="ThemeColor.Success" OnClick="() => { AddFrame(); myModal.ShowAsync(); }">
+            +
         </HxButton>
-        <HxButton Color="ThemeColor.Danger" Text="-" />
+
+        <HxModal @ref="myModal" Title="Modal title" Centered="true">
+            <BodyTemplate>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <HxInputText Label="Exchange"
+                                         @bind-Value="@SelectedExchange.Name"
+                                         InputMode="InputMode.None"
+                                         readonly="true"/>
+                        </div>
+                        <div class="col">
+                            <HxInputText Label="Symbol"
+                                         @bind-Value="@SelectedSymbol.Name"
+                                         InputMode="InputMode.None"
+                                         readonly="true"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <HxSelect
+                                TItem="TimeFrame"
+                                TValue="TimeFrame?"
+                                Label="Time Frame"
+                                Data="TimeFrames"
+                                @bind-Value="NewMarketReviewTimeFrame.Frame"
+                                TextSelector="@(p => p.Name)"/>
+                        </div>
+                        <div class="col">
+                            <HxSelect
+                                TItem="Trend"
+                                TValue="Trend?"
+                                Label="Trend"
+                                Data="Trends"
+                                @bind-Value="NewMarketReviewTimeFrame.Trend"
+                                TextSelector="@(p => p.Name)"/>
+                        </div>
+                        <div class="row">
+                            <HxInputTextArea Label="Time frame analysis"
+                                         @bind-Value="@NewMarketReviewTimeFrame.Description"/>
+                        </div>
+                    </div>
+                </div>
+            </BodyTemplate>
+            <FooterTemplate>
+                <HxButton Text="Close" OnClick="() => myModal.HideAsync()" Color="ThemeColor.Primary"/>
+                <HxButton Text="OK" OnClick="() => {myModal.HideAsync(); Save(); }" Color="ThemeColor.Success"/>
+            </FooterTemplate>
+        </HxModal>
+
+
+        <HxButton Color="ThemeColor.Danger" Text="-"/>
         <p/>
         <table class="table table-striped">
             <thead>
@@ -81,3 +133,9 @@
     </div>
 
 </EditForm>
+
+
+@code
+{
+    private HxModal myModal;
+}
