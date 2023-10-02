@@ -7,7 +7,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col"></th>
             <th scope="col">Name</th>
             <th scope="col">Date</th>
             <th scope="col">Exchange</th>
@@ -18,41 +18,56 @@
         <tbody>
         @foreach (var marketReview in MarketReviews)
         {
+            _row++;
             <tr>
-                 <td class="expand-button"></td>
+                @if (marketReview.Frames.Any())
+                {
+                    <td>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseRow" aria-expanded="false" aria-controls="collapseRow">
+                            +
+                        </button>
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
                 <td>@marketReview.Name</td>
                 <td>@marketReview.DateTime</td>
                 <td>@marketReview.Exchange</td>
                 <td>@marketReview.Symbol</td>
                 <td>@marketReview.Description</td>
             </tr>
-            <tr>
-                <td colspan="5">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Trend</th>
-                            <th scope="col">Time frame</th>
-                            <th scope="col">Screen Shot</th>
-                            <th scope="col">Analysis</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach (var frame in marketReview.Frames)
-                        {
+            if (marketReview.Frames.Any())
+            {
+                <div id="collapseRow" class="collapse">
+                    <td colspan="5">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <td >@frame.Name</td>
-                                <td>@frame.Trend</td>
-                                <td>@frame.Frame</td>
-                                <td>@frame.ScreenShot</td>
-                                <td>@frame.Description</td>
+                                <th scope="col">Name</th>
+                                <th scope="col">Trend</th>
+                                <th scope="col">Time frame</th>
+                                <th scope="col">Screen Shot</th>
+                                <th scope="col">Analysis</th>
                             </tr>
-                        }
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var frame in marketReview.Frames)
+                            {
+                                <tr>
+                                    <td >@frame.Name</td>
+                                    <td>@frame.Trend</td>
+                                    <td>@frame.Frame</td>
+                                    <td>@frame.ScreenShot</td>
+                                    <td>@frame.Description</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </td>
+                </div>
+            }
         }
         </tbody>
     </table>

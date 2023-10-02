@@ -11,6 +11,8 @@ public partial class AllMarketReviewPage
 
   [Inject] public IMarketReviewRepository MarketReviewRepository { get; set; }
 
+  private int _row = 0;
+
 
   protected override async Task OnInitializedAsync()
   {
