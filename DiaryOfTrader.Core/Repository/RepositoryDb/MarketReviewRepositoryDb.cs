@@ -20,5 +20,22 @@ namespace DiaryOfTrader.Core.Repository.RepositoryDb
         .ToListAsync();
     }
 
+    public override async Task InsertAsync(List<MarketReview> entities)
+    {
+      foreach (var entity in entities)
+      {
+        foreach (var frame in entity.Frames)
+        {
+          frame.Frame = await Data.Frame.FindAsync(frame.Frame.ID);
+          frame.Trend = await Data.Trend.FindAsync(frame.Trend.ID);
+        }
+        
+        entity.Symbol = await Data.Symbol.FindAsync(entity.Symbol.ID);
+        entity.Exchange = await Data.Exchange.FindAsync(entity.Exchange.ID);
+        await Data.MarketReview.AddAsync(entity);
+      }
+
+      await Data.SaveChangesAsync();
+    }
   }
 }

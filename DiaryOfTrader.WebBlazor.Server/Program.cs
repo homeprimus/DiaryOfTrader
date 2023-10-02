@@ -8,6 +8,7 @@ using DiaryOfTrader.WebBlazor.Core.HttpRepository;
 using DiaryOfTrader.WebBlazor.Server;
 using Havit.Blazor.Components.Web;
 using Microsoft.Extensions.Options;
+using MudBlazor.Services;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,8 @@ builder.Services.AddScoped<ITraderRegionRepository, TraderRegionRepositoryApi>(_
 builder.Services.AddScoped<ISymbolRepository, SymbolRepositoryApi>(_ => new SymbolRepositoryApi(rootApi));
 builder.Services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryApi>(_ => new EconomicCalendarRepositoryApi(rootApi));
 builder.Services.AddScoped<ITraderRepository, TraderRepositoryApi>(_ => new TraderRepositoryApi(rootApi));
+builder.Services.AddScoped<IMarketReviewRepository, MarketReviewRepositoryApi>(_ => new MarketReviewRepositoryApi(rootApi));
+builder.Services.AddScoped<IMarketReviewTimeFrameRepository, MarketReviewTimeFrameRepositoryApi>(_ => new MarketReviewTimeFrameRepositoryApi(rootApi));
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -56,6 +59,7 @@ builder.Services.AddHttpClientInterceptor();
 builder.Services.AddScoped<HttpInterceptorService>();
 
 builder.Services.AddHxServices();
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 

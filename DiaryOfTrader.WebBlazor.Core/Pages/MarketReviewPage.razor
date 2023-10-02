@@ -64,13 +64,13 @@
                         <div class="col">
                             <HxInputText Label="Exchange"
                                          @bind-Value="@SelectedExchange.Name"
-                                         InputMode="InputMode.None"
+                                         InputMode="Havit.Blazor.Components.Web.InputMode.None"
                                          readonly="true"/>
                         </div>
                         <div class="col">
                             <HxInputText Label="Symbol"
                                          @bind-Value="@SelectedSymbol.Name"
-                                         InputMode="InputMode.None"
+                                         InputMode="Havit.Blazor.Components.Web.InputMode.None"
                                          readonly="true"/>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
             </BodyTemplate>
             <FooterTemplate>
                 <HxButton Text="Close" OnClick="() => myModal.HideAsync()" Color="ThemeColor.Primary"/>
-                <HxButton Text="OK" OnClick="() => {myModal.HideAsync(); Save(); }" Color="ThemeColor.Success"/>
+                <HxButton Text="OK" OnClick="() => {myModal.HideAsync(); SaveNewMarketReviewTimeFrame(); }" Color="ThemeColor.Success"/>
             </FooterTemplate>
         </HxModal>
 
@@ -134,6 +134,7 @@
 
 </EditForm>
 
+<HxButton Text="Save" Color="ThemeColor.Success"  OnClick="() => {SaveMarketReview(); }" />
 
 @code
 {

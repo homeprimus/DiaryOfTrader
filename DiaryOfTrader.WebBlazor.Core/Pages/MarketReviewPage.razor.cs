@@ -2,7 +2,6 @@
 using DiaryOfTrader.Core.Entity;
 using DiaryOfTrader.Core.Interfaces.Repository;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace DiaryOfTrader.WebBlazor.Core.Pages;
 
@@ -38,6 +37,8 @@ public partial class MarketReviewPage
   [Inject] public ISymbolRepository SymbolRepository { get; set; }
   [Inject] public ITimeFrameRepository TimeFrameRepository { get; set; }
   [Inject] public ITrendRepository TrendRepository { get; set; }
+  [Inject] public IMarketReviewRepository MarketReviewRepository { get; set; }
+  [Inject] public IMarketReviewTimeFrameRepository MarketReviewTimeFrameRepository { get; set; }
 
   #endregion
   
@@ -48,6 +49,8 @@ public partial class MarketReviewPage
     _model.SelectedExchange = Exchanges.FirstOrDefault()?.ID ?? 0;
     
     Symbols = await SymbolRepository.GetAllAsync();
+    _model.SelectedSymbols = Symbols.FirstOrDefault()?.ID ?? 0;
+    
     TimeFrames = await TimeFrameRepository.GetAllAsync();
     Trends = await TrendRepository.GetAllAsync();
   }
@@ -68,8 +71,16 @@ public partial class MarketReviewPage
     // NavigationManager.NavigateTo("/createMarketReviewTimeFrame");
   }
 
-  private void Save()
+  private void SaveNewMarketReviewTimeFrame()
   {
+    NewMarketReviewTimeFrame.Market = MarketReview;
     MarketReview.Frames.Add(NewMarketReviewTimeFrame);
+  }
+
+  private async Task SaveMarketReview()
+  {
+    MarketReview.Exchange = SelectedExchange;
+    MarketReview.Symbol = SelectedSymbol;
+    await MarketReviewRepository.InsertAsync(MarketReview);
   }
 }
