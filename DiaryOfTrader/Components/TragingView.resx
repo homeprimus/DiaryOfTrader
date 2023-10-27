@@ -338,10 +338,13 @@
         IGN4PSIxNiIgY3k9IjE4IiByPSI0IiBjbGFzcz0iQmxhY2siIC8+DQogIDwvZz4NCjwvc3ZnPgs=
 </value>
   </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>46</value>
+  </metadata>
   <data name="bbiScreenShot.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DwAACw8BkvkDpQAABFpJREFUSEullftPWmcYxzFZth/38/6FZT/t9627NLFrE82sl3oD3OqxYE11ppuu
+        DgAACw4BQL7hQQAABFpJREFUSEullftPWmcYxzFZth/38/6FZT/t9627NLFrE82sl3oD3OqxYE11ppuu
         DpTJVUS8DAWxahWZYkUQVERUBPGGIlW8I07EWl1WpwSt1Tw753iJR1nV9Ek+OXnf532+3+R5nzeHhEV8
         MieMQi+UUmgFle+HUBqP8CUYUUmcWFw8hpz/nax50D/g9oNlcQdnxLsPY2uH12J4ZR8MM9vQMb0Nhlk/
         PG2fCsTd5yIkMk1UbFnag0rNODRbl3G6p7dgcPXwyti8h9A2uQ21vcs44sZR6HQfAIUuqiWRHxSUWDx7

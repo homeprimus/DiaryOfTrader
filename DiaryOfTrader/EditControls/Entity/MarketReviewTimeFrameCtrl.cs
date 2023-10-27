@@ -18,6 +18,7 @@ namespace DiaryOfTrader.EditControls.Entity
 
       tragingView.Symbol = Element.Market.Symbol;
       tragingView.Exchange = Element.Market.Exchange;
+      tragingView.NotifyScreenShort += ScreenShotClick;
       OnPropertyChanged("Frame");
     }
 
@@ -30,9 +31,9 @@ namespace DiaryOfTrader.EditControls.Entity
       }
     }
 
-    private void btScreenShot_Click(object sender, EventArgs e)
+    private void ScreenShotClick(object sender, EventArgs e)
     {
-      Element.ScreenShot.ImageData = tragingView.ScreenShot();
+      Element.ScreenShot.ImageData = tragingView.ImageData;
     }
   }
 }

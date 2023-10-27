@@ -1,15 +1,17 @@
 ﻿
 using System.Collections;
-using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DiaryOfTrader.Core.Entity
 {
-  public static class DiaryOfTrader 
+  public static class DiaryOfTrader
   {
 
     public static IServiceProvider ServiceProvider { get; set; }
+
     public static Trader Trader { get; set; }
+
+    #region Repository
     public static ISymbolRepository SymbolRepository { get { return ServiceProvider.GetRequiredService<ISymbolRepository>(); } }
     public static ITimeFrameRepository TimeFrameRepository { get { return ServiceProvider.GetRequiredService<ITimeFrameRepository>(); } }
     public static ITraderExchangeRepository TraderExchangeRepository { get { return ServiceProvider.GetRequiredService<ITraderExchangeRepository>(); } }
@@ -23,12 +25,13 @@ namespace DiaryOfTrader.Core.Entity
     public static IMarketReviewTimeFrameRepository MarketReviewTimeFrameRepository { get { return ServiceProvider.GetRequiredService<IMarketReviewTimeFrameRepository>(); } }
     public static IDiaryRepository DiaryRepository { get { return ServiceProvider.GetRequiredService<IDiaryRepository>(); } }
     public static IEconomicCalendarRepository EconomicCalendarRepository { get { return ServiceProvider.GetRequiredService<IEconomicCalendarRepository>(); } }
-
+    #endregion
+    #region IList of Repository
     public static IList GetSymbol()
     {
       return SymbolRepository.GetAllAsync().Result
-        .OrderBy(e=>e.Order)
-        .Select(e=>new KeyValuePair<string, Symbol>(e.Name, e))
+        .OrderBy(e => e.Order)
+        .Select(e => new KeyValuePair<string, Symbol>(e.Name, e))
         .ToList();
     }
     public static IList GetTimeFrame()
@@ -74,6 +77,6 @@ namespace DiaryOfTrader.Core.Entity
         .ToList();
     }
 
-
+    #endregion
   }
 }

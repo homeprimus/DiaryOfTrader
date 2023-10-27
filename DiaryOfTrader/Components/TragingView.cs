@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Media;
 using System.Windows;
 using CefSharp;
 using DevExpress.Mvvm.Native;
@@ -59,6 +60,8 @@ namespace DiaryOfTrader.Components
         bci1m
       });
     }
+
+    public EventHandler NotifyScreenShort;
 
     [DefaultValue(true)]
     public bool EnabledTimeFrame
@@ -214,6 +217,10 @@ namespace DiaryOfTrader.Components
 
     public byte[] ScreenShot()
     {
+      var simpleSound = new SoundPlayer(Properties.Resources.photoSound);
+      simpleSound.Play();
+
+
       var deltaX = 57;
       var deltaY = 0;
       var format = ImageFormat.Jpeg;
@@ -232,6 +239,7 @@ namespace DiaryOfTrader.Components
     private void bbiScreeShot_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
     {
       ImageData = ScreenShot();
+      NotifyScreenShort?.Invoke(this, EventArgs.Empty);
     }
 
     private void bci1m_ItemClick(object sender, ItemClickEventArgs e)

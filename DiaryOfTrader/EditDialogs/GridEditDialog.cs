@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.IO;
-using DiaryOfTrader.Core.Interfaces.Repository;
 
 namespace DiaryOfTrader.EditDialogs
 {
@@ -16,9 +15,7 @@ namespace DiaryOfTrader.EditDialogs
     {
       InitializeComponent();
     }
-
-
-    public void DoLoad<T>(IRepository<T> repository) where T : Entity
+    public void DoLoad<T, L>(IRepository<T> repository, ILogger<L> logger) where T : Entity
     {
       _data = new List<object>(repository.GetAllAsync().Result.OrderBy(e => e.Order).ToList());
       _modify = new List<object>(_data);
@@ -26,22 +23,7 @@ namespace DiaryOfTrader.EditDialogs
       grid.DataSource = new BindingList<object>(_data);
     }
 
-    protected string GridLayoutStore
-    {
-      get { return Path.Combine(SettingFolder, GetType().Name + ".GridLayout.xml"); }
-    }
-
-    protected override void OnLoad(EventArgs e)
-    {
-      base.OnLoad(e);
-
-      if (File.Exists(GridLayoutStore))
-      {
-        grid.gridView.RestoreLayoutFromXml(GridLayoutStore);
-      }
-    }
-
-    public void DoUpdate<T>(IRepository<T> repository) where T : Entity
+    public void DoUpdate<T, L>(IRepository<T> repository, ILogger<L> logger) where T : Entity
     {
 
       var data = new List<T>();
@@ -67,6 +49,20 @@ namespace DiaryOfTrader.EditDialogs
         repository.UpdateAsync(data);
       }
     }
+    protected string GridLayoutStore
+    {
+      get { return Path.Combine(SettingFolder, GetType().Name + ".GridLayout.xml"); }
+    }
+    protected override void OnLoad(EventArgs e)
+    {
+      base.OnLoad(e);
+
+      if (File.Exists(GridLayoutStore))
+      {
+        grid.gridView.RestoreLayoutFromXml(GridLayoutStore);
+      }
+    }
+
     protected override void OnClosed(EventArgs e)
     {
       base.OnClosed(e);
