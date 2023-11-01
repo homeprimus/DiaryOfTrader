@@ -4,7 +4,7 @@
 
 namespace DiaryOfTrader.EditDialogs
 {
-  partial class GridEditDialog
+  partial class GridEditDialogGeneric<T>
   {
     /// <summary>
     /// Required designer variable.
@@ -32,7 +32,7 @@ namespace DiaryOfTrader.EditDialogs
     /// </summary>
     private void InitializeComponent()
     {
-      var resources = new System.ComponentModel.ComponentResourceManager(typeof(GridEditDialog));
+      var resources = new System.ComponentModel.ComponentResourceManager(typeof(GridEditDialogGeneric<T>));
       grid = new EditControls.GridCntrl();
       ((System.ComponentModel.ISupportInitialize)pnlDown).BeginInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).BeginInit();
@@ -41,41 +41,32 @@ namespace DiaryOfTrader.EditDialogs
       // 
       // pnlDown
       // 
-      pnlDown.Appearance.BackColor = (Color)resources.GetObject("pnlDown.Appearance.BackColor");
       pnlDown.Appearance.Options.UseBackColor = true;
       // 
       // pnlClient
       // 
-      pnlClient.Appearance.BackColor = (Color)resources.GetObject("pnlClient.Appearance.BackColor");
       pnlClient.Appearance.Options.UseBackColor = true;
       pnlClient.Controls.Add(grid);
       // 
       // btOK
       // 
-      btOK.Appearance.Font = (Font)resources.GetObject("btOK.Appearance.Font");
       btOK.Appearance.Options.UseFont = true;
       // 
       // btCancel
       // 
-      btCancel.Appearance.Font = (Font)resources.GetObject("btCancel.Appearance.Font");
       btCancel.Appearance.Options.UseFont = true;
       // 
       // grid
       // 
-      grid.Appearance.BackColor = (Color)resources.GetObject("grid.Appearance.BackColor");
-      grid.Appearance.Font = (Font)resources.GetObject("grid.Appearance.Font");
       grid.Appearance.Options.UseBackColor = true;
       grid.Appearance.Options.UseFont = true;
       grid.DataSource = null;
-      resources.ApplyResources(grid, "grid");
       grid.Name = "grid";
       // 
-      // GridEditDialog
+      // GridEditDialogGeneric
       // 
       Appearance.Options.UseFont = true;
-      resources.ApplyResources(this, "$this");
-      IconOptions.Icon = (Icon)resources.GetObject("GridEditDialog.IconOptions.Icon");
-      Name = "GridEditDialog";
+      Name = "GridEditDialogGeneric";
       ((System.ComponentModel.ISupportInitialize)pnlDown).EndInit();
       ((System.ComponentModel.ISupportInitialize)pnlClient).EndInit();
       pnlClient.ResumeLayout(false);

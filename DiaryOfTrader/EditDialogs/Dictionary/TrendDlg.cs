@@ -1,20 +1,11 @@
 ﻿
 namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  public partial class TrendDlg : GridEditDialog
+  public partial class TrendDlg : GridEditDialogGeneric<Trend>
   {
-    ITrendRepository _repository;
-    ILogger<TrendDlg> _logger;
-    public TrendDlg(ILogger<TrendDlg> logger, ITrendRepository repository)
+    public TrendDlg(IRepository<Trend> repository, ILogger<GridEditDialogGeneric<Trend>> logger) : base(repository, logger)
     {
       InitializeComponent();
-      _logger = logger;
-      _repository = repository;
-      DoLoad(_repository, _logger);
-    }
-    protected override void OnOkClick()
-    {
-      DoUpdate(_repository, _logger);
     }
   }
 }

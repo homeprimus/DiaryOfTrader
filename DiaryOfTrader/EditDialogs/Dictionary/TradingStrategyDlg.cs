@@ -1,20 +1,11 @@
 ﻿
 namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  public partial class TradingStrategyDlg : GridEditDialog
+  public partial class TradingStrategyDlg : GridEditDialogGeneric<TradingStrategy>
   {
-    ITradingStrategyRepository _repository;
-    ILogger<TradingStrategyDlg> _logger;
-    public TradingStrategyDlg(ILogger<TradingStrategyDlg> logger, ITradingStrategyRepository repository)
+    public TradingStrategyDlg(IRepository<TradingStrategy> repository, ILogger<GridEditDialogGeneric<TradingStrategy>> logger) : base(repository, logger)
     {
       InitializeComponent();
-      _logger = logger;
-      _repository = repository;
-      DoLoad(_repository, _logger);
-    }
-    protected override void OnOkClick()
-    {
-      DoUpdate(_repository, _logger);
     }
   }
 }

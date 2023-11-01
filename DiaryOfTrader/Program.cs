@@ -53,6 +53,21 @@ namespace DiaryOfTrader
       services.AddTransient<ITradingStrategyRepository, TradingStrategyRepositoryDb>();
       services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
 
+      services.AddTransient<IRepository<Symbol> , SymbolRepositoryDb>();
+      services.AddTransient<IRepository<TimeFrame>, TimeFrameRepositoryDb>();
+      services.AddTransient<IRepository<TraderExchange>, TraderExchangeRepositoryDb>();
+      services.AddTransient<IRepository<TraderResult>, TraderResultRepositoryDb>();
+      services.AddTransient<IRepository<TraderSession>, TraderSessionRepositoryDb>();
+      services.AddTransient<IRepository<TraderRegion>, TraderRegionRepositoryDb>();
+      services.AddTransient<IRepository<Trend>, TrendRepositoryDb>();
+      services.AddTransient<IRepository<Wallet>, WalletRepositoryDb>();
+      services.AddTransient<IRepository<MarketReview>, MarketReviewRepositoryDb>();
+      services.AddTransient<IRepository<MarketReviewTimeFrame>, MarketReviewTimeFrameRepositoryDb>();
+      services.AddTransient<IRepository<Diary>, DiaryRepositoryDb>();
+      services.AddTransient<IRepository<TradingStrategy>, TradingStrategyRepositoryDb>();
+
+      services.AddSingleton<IServiceCollection> (services);
+
       //кэш
       var redis = configuration.GetSection("Redis");
       if (bool.TryParse(redis["Enabled"], out var enabled) && enabled)

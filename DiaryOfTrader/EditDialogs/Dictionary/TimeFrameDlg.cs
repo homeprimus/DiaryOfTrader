@@ -1,21 +1,11 @@
 ﻿
 namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  public partial class TimeFrameDlg : GridEditDialog
+  public partial class TimeFrameDlg : GridEditDialogGeneric<TimeFrame>
   {
-    ITimeFrameRepository _repository;
-    ILogger<TimeFrameDlg> _logger;
-    public TimeFrameDlg(ILogger<TimeFrameDlg> logger, ITimeFrameRepository repository)
+    public TimeFrameDlg(IRepository<TimeFrame> repository, ILogger<GridEditDialogGeneric<TimeFrame>> logger) : base(repository, logger)
     {
       InitializeComponent();
-
-      _logger = logger;
-      _repository = repository;
-      DoLoad(_repository, _logger);
-    }
-    protected override void OnOkClick()
-    {
-      DoUpdate(_repository, _logger);
     }
   }
 }

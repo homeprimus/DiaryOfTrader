@@ -1,20 +1,11 @@
 ﻿
 namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  public partial class SymbolDlg : GridEditDialog
+  public partial class SymbolDlg : GridEditDialogGeneric<Symbol>
   {
-    ISymbolRepository _repository;
-    ILogger<SymbolDlg> _logger;
-    public SymbolDlg(ILogger<SymbolDlg> logger, ISymbolRepository repository)
+    public SymbolDlg(IRepository<Symbol> repository, ILogger<GridEditDialogGeneric<Symbol>> logger) : base(repository, logger)
     {
       InitializeComponent();
-      _logger = logger;
-      _repository = repository;
-      DoLoad(_repository, _logger);
-    }
-    protected override void OnOkClick()
-    {
-      DoUpdate(_repository, _logger);
     }
   }
 }

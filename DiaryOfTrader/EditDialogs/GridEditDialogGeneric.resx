@@ -159,7 +159,7 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>531, 282</value>
   </data>
-  <data name="GridEditDialog.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="GridEditDialogGeneric.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAICAAAAAAAACoCAAAFgAAACgAAAAgAAAAQAAAAAEACAAAAAAAgAQAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAA////ANOSMQAure0AVlZWALGxsQBernIAea3cANbW1gDJqHgAjo6OADQ0NAB8mrMAj7eZAGpq
@@ -205,10 +205,10 @@
     <value>533, 314</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>GridEditDialog</value>
+    <value>GridEditDialogGeneric</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>GridEditDialog</value>
+    <value>GridEditDialogGeneric</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>DiaryOfTrader.EditDialogs.OKCancelDialog, DiaryOfTrader, Culture=neutral, PublicKeyToken=null</value>
