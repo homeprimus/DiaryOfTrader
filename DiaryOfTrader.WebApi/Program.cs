@@ -10,21 +10,39 @@ using DiaryOfTrader.WebApi.Api;
 using DiaryOfTrader.WebApi.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using NLog.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+BuildLogging(builder.Logging);
+var configuration = BuildConfiguration(builder.Configuration, builder.Environment);
+var serviceProvider = BuildServices(builder.Services, configuration);
 
-ResgistryServices(builder.Services, builder.Configuration);
-var app = builder.Build();
+using var app = builder.Build();
+
 Configure(app);
-var apiServices = app.Services.GetServices<IApi>();
-foreach (var api in apiServices)
-{
-  api.Register(app);
-}
 
 app.Run();
 
-void ResgistryServices(IServiceCollection services, ConfigurationManager configurationManager)
+
+static ILoggingBuilder BuildLogging(ILoggingBuilder loggingBuilder)
+{
+  loggingBuilder.ClearProviders();
+  loggingBuilder.AddNLog();
+  loggingBuilder.SetMinimumLevel(LogLevel.Trace);
+  return loggingBuilder;
+}
+
+static IConfigurationRoot BuildConfiguration(ConfigurationManager configuration, IHostEnvironment environment)
+{
+  return configuration
+    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+    .AddEnvironmentVariables()
+    .AddJsonFile("appsettings", true, true)
+    .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true, true)
+    .Build();
+}
+
+static ServiceProvider BuildServices(IServiceCollection services, IConfigurationRoot configuration)
 {
   // сваггер добавили
   services.AddEndpointsApiExplorer();
@@ -52,11 +70,11 @@ void ResgistryServices(IServiceCollection services, ConfigurationManager configu
   services.AddScoped<ITraderRepository, TraderRepositoryDb>();
 
 
-  services.AddSingleton(new EndPointConfiguration());
+  services.Configure<EndPointConfiguration>(configuration.GetSection(nameof(EndPointConfiguration)));
+  //services.AddSingleton(new EndPointConfiguration());
 
   // добавили авторизыцию
   services.AddSingleton<ITokenService>(new TokenService());
-  //services.AddSingleton<ITraderRepository>(new TraderRepository());
 
   services.AddAuthorization();
   services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -68,9 +86,9 @@ void ResgistryServices(IServiceCollection services, ConfigurationManager configu
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        ValidIssuer = configuration["Jwt:Issuer"],
+        ValidAudience = configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
       };
     });
 
@@ -83,6 +101,7 @@ void ResgistryServices(IServiceCollection services, ConfigurationManager configu
   services.AddTransient<IApi, TrendApi>();
   services.AddTransient<IApi, WalletApi>();
   services.AddTransient<IApi, DiaryApi>();
+
   services.AddTransient<IApi, MarketReviewApi>();
   services.AddTransient<IApi, MarketReviewTimeFrameApi>();
 
@@ -90,11 +109,12 @@ void ResgistryServices(IServiceCollection services, ConfigurationManager configu
 
   services.AddTransient<IApi, TraderApi>();
 
-  if (bool.TryParse(configurationManager["Redis:Enabled"], out var enabled) && enabled)
+  #region add Cache
+  if (bool.TryParse(configuration["Redis:Enabled"], out var enabled) && enabled)
   {
     services.AddStackExchangeRedisCache(options =>
     {
-      options.Configuration = configurationManager["Redis:ConnectionString"];
+      options.Configuration = configuration["Redis:ConnectionString"];
     });
     services.AddSingleton<ICache, Redis>();
   }
@@ -103,7 +123,9 @@ void ResgistryServices(IServiceCollection services, ConfigurationManager configu
     services.AddMemoryCache();
     services.AddSingleton<ICache, Memory>();
   }
+  #endregion
 
+  return services.BuildServiceProvider();
 }
 
 void Configure(WebApplication application)
@@ -120,14 +142,19 @@ void Configure(WebApplication application)
     application.UseDeveloperExceptionPage();
   }
 
-  // Get a shared logger object
-  var loggerFactory = application.Services.GetService<ILoggerFactory>();
-  var logger = loggerFactory?.CreateLogger<Program>();
-  if (logger == null)
-  {
-    throw new InvalidOperationException("Logger not found");
-  }
+  //var loggerFactory = application.Services.GetService<ILoggerFactory>();
+  //var logger = loggerFactory?.CreateLogger<Program>();
+  //if (logger == null)
+  //{
+  //  throw new InvalidOperationException("Logger not found");
+  //}
 
   application.UseHttpsRedirection();
+
+  var apiServices = application.Services.GetServices<IApi>();
+    foreach (var api in apiServices)
+  {
+    api.Register(app);
+  }
 
 }

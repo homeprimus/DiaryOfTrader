@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Interfaces.Cache;
-using DiaryOfTrader.Core.Interfaces.Repository;
 using DiaryOfTrader.Core.Repository;
 using DiaryOfTrader.Core.Repository.Cache.DistributedCache;
 using DiaryOfTrader.Core.Repository.Cache.Memory;

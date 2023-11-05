@@ -3,12 +3,13 @@ using DiaryOfTrader.Core.Repository;
 using DiaryOfTrader.WebApi.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace DiaryOfTrader.WebApi.Api
 {
   public class TraderApi : Api<Trader, ITraderRepository>
   {
-    public TraderApi(EndPointConfiguration config, ILogger<Api<Trader, ITraderRepository>> logger) : base(config, logger)
+    public TraderApi(IOptions<EndPointConfiguration> config, ILogger<Api<Trader, ITraderRepository>> logger) : base(config, logger)
     {
     }
 

@@ -10,7 +10,7 @@ namespace DiaryOfTrader
   {
     #region fields
     private readonly CancellationTokenSource _cancelTokenSource;
-    private readonly DiaryOfTraderCtx _context;// = new();
+    private readonly DiaryOfTraderCtx _context;
     private Task? _updateThisWeekAsync;
 
     IServiceProvider _serviceProvider;

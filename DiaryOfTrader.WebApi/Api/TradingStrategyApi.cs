@@ -1,10 +1,11 @@
 ﻿using DiaryOfTrader.Core.Repository;
+using Microsoft.Extensions.Options;
 
 namespace DiaryOfTrader.WebApi.Api
 {
   public class TradingStrategyApi:  Api<TradingStrategy, ITradingStrategyRepository>
   {
-    public TradingStrategyApi(EndPointConfiguration config, ILogger<Api<TradingStrategy, ITradingStrategyRepository>> logger) : base(config, logger)
+    public TradingStrategyApi(IOptions<EndPointConfiguration> config, ILogger<Api<TradingStrategy, ITradingStrategyRepository>> logger) : base(config, logger)
     {
     }
   }

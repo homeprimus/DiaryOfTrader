@@ -1,6 +1,7 @@
 ﻿using DiaryOfTrader.Core.Repository;
 using DiaryOfTrader.Core.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace DiaryOfTrader.WebApi.Core.Api
 {
@@ -13,10 +14,10 @@ namespace DiaryOfTrader.WebApi.Core.Api
     private readonly string _swagger;
     private ILogger<Api<TEntity, TRepository>> _logger;
     #endregion
-    public Api(EndPointConfiguration config, ILogger<Api<TEntity, TRepository>> logger)
+    public Api(IOptions<EndPointConfiguration> config, ILogger<Api<TEntity, TRepository>> logger)
     {
       var s = typeof(TEntity).Name.ToLowerInvariant();
-      _endPoint = config.Version(s) + $"/{s}s";
+      _endPoint = config.Value.Version(s) + $"/{s}s";
       _swagger = s.Substring(0,1).ToUpperInvariant() + s.Substring(1).ToLowerInvariant();
       _logger = logger;
     }
