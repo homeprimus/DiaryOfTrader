@@ -1,0 +1,15 @@
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+WORKDIR /src
+
+COPY DiaryOfTrader/ DiaryOfTrader/
+COPY DiaryOfTrader.Core/  DiaryOfTrader.Core/
+
+
+RUN dotnet restore "DiaryOfTrader/DiaryOfTrader.csproj" --verbosity normal
+
+# copy all files
+COPY    . .
+
+RUN     dotnet build
