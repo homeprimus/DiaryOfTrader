@@ -5,10 +5,12 @@ namespace DiaryOfTrader.Core.Core
 {
   public static class SerializationFormatterFactory
   {
+#pragma warning disable SYSLIB0011
     public static IFormatter GetFormatter()
     {
       return new BinaryFormatter();
     }
+#pragma warning restore SYSLIB0011
   }
 
   public static class ObjectCloner

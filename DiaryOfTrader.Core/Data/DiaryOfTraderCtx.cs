@@ -12,8 +12,7 @@ namespace DiaryOfTrader.Core.Data
 
     internal class HistoryRepository : SqliteHistoryRepository
     {
-      public HistoryRepository(HistoryRepositoryDependencies dependencies) :
-        base(dependencies)
+      public HistoryRepository(HistoryRepositoryDependencies dependencies) : base(dependencies)
       {
       }
       protected override void ConfigureTable(EntityTypeBuilder<HistoryRow> history)
@@ -62,6 +61,7 @@ namespace DiaryOfTrader.Core.Data
     {
       optionsBuilder.UseSqlite("Pooling=True;Data Source=" + DataSource())
         .ReplaceService<IHistoryRepository, HistoryRepository>();
+
       optionsBuilder.LogTo(message => Debug.WriteLine(message));
     }
   
