@@ -15,7 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryOfTrader.WebBlazor.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryOfTrader.WebBlazor.Server", "DiaryOfTrader.WebBlazor.Server\DiaryOfTrader.WebBlazor.Server.csproj", "{34E76976-E0C5-4927-A1C6-E11FE583C329}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryOfTrader.Tests", "DiaryOfTrader.Tests\DiaryOfTrader.Tests.csproj", "{FA5A65CF-C96C-46DB-B0C5-D7358DDBA125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiaryOfTrader.Tests", "DiaryOfTrader.Tests\DiaryOfTrader.Tests.csproj", "{FA5A65CF-C96C-46DB-B0C5-D7358DDBA125}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D642C95-5A88-4DF2-A3F8-0C54351D6A35}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

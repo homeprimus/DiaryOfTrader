@@ -1,11 +1,12 @@
 ﻿
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
   public class DiaryRepositoryApi : RepositoryApi<Diary>, IDiaryRepository
   {
-    public DiaryRepositoryApi(EndPointConfiguration config, HttpClient client, ILogger<RepositoryApi<Diary>> logger) : base(config, client, logger)
+    public DiaryRepositoryApi(IOptions<EndPointConfiguration> config, HttpClient client, ILogger<RepositoryApi<Diary>> logger) : base(config, client, logger)
     {
     }
   }

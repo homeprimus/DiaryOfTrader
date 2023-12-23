@@ -69,7 +69,6 @@ static ServiceProvider BuildServices(IServiceCollection services, IConfiguration
   services.AddScoped<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
   services.AddScoped<ITraderRepository, TraderRepositoryDb>();
 
-
   services.Configure<EndPointConfiguration>(configuration.GetSection(nameof(EndPointConfiguration)));
   //services.AddSingleton(new EndPointConfiguration());
 
@@ -152,7 +151,7 @@ void Configure(WebApplication application)
   application.UseHttpsRedirection();
 
   var apiServices = application.Services.GetServices<IApi>();
-    foreach (var api in apiServices)
+  foreach (var api in apiServices)
   {
     api.Register(app);
   }

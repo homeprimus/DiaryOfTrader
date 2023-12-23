@@ -23,9 +23,10 @@ namespace DiaryOfTrader.EditDialogs
     }
     protected IRepository<T> Repository  => _repository;
     protected ILogger<GridEditDialogGeneric<T>> Logger =>_logger;
-    public void DoLoad()
+    public async void DoLoad()
     {
-      _data = new List<T>(_repository.GetAllAsync().Result.OrderBy(e => e.Order).ToList());
+      var data = await _repository.GetAllAsync();
+      _data = new List<T>(data?.OrderBy(e => e.Order).ToList());
       _modify = new List<T>(_data);
 
       grid.DataSource = new BindingList<T>(_data);

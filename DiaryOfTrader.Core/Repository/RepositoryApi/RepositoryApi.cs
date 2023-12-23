@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
@@ -11,10 +12,10 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
     private readonly ILogger<RepositoryApi<TEntity>> _logger;
     #endregion
 
-    public RepositoryApi(EndPointConfiguration config, HttpClient client, ILogger<RepositoryApi<TEntity>> logger)
+    public RepositoryApi(IOptions<EndPointConfiguration> config, HttpClient client, ILogger<RepositoryApi<TEntity>> logger)
     {
       var entity = typeof(TEntity).Name.ToLowerInvariant();
-      var url = new UriBuilder(config.EndPoint) { Path = config.Version(entity) + "/" + entity + "s" };
+      var url = new UriBuilder(config.Value.EndPoint) { Path = config.Value.Version(entity) + "/" + entity + "s" };
       _endPoint = url.ToString();
       _client = client;
       _logger = logger;
