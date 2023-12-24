@@ -1,4 +1,7 @@
-﻿using System.Net.Http;
+﻿//#define use_db
+
+
+using System.Net.Http;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Interfaces.Cache;
 using DiaryOfTrader.Core.Repository;
@@ -121,14 +124,15 @@ namespace DiaryOfTrader
 
       #region UI
       services.AddSingleton<RibbonMain>();
-      services.AddSingleton<ExchangeDlg>();
-      services.AddSingleton<ResultDlg>();
-      services.AddSingleton<SymbolDlg>();
-      services.AddSingleton<TimeFrameDlg>();
-      services.AddSingleton<TradeSessionDlg>();
-      services.AddSingleton<TradingStrategyDlg>();
-      services.AddSingleton<TrendDlg>();
-      services.AddSingleton<WalletDlg>();
+
+      services.AddTransient<ExchangeDlg>();
+      services.AddTransient<ResultDlg>();
+      services.AddTransient<SymbolDlg>();
+      services.AddTransient<TimeFrameDlg>();
+      services.AddTransient<TradeSessionDlg>();
+      services.AddTransient<TradingStrategyDlg>();
+      services.AddTransient<TrendDlg>();
+      services.AddTransient<WalletDlg>();
       #endregion
 
       return services.BuildServiceProvider();

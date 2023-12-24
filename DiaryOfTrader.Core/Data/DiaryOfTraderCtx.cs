@@ -1,7 +1,13 @@
-﻿using System.Diagnostics;
+﻿#define sqlite
+
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
+
+
+#if sqlite
 using Microsoft.EntityFrameworkCore.Sqlite.Migrations.Internal;
+#endif
 
 namespace DiaryOfTrader.Core.Data
 {
@@ -10,6 +16,12 @@ namespace DiaryOfTrader.Core.Data
   {
     private const string DIARY_OF_TRADER = "DiaryOfTrader";
 
+    public static string RootFolder
+    {
+      get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DIARY_OF_TRADER); }
+    }
+
+#if sqlite
     internal class HistoryRepository : SqliteHistoryRepository
     {
       public HistoryRepository(HistoryRepositoryDependencies dependencies) : base(dependencies)
@@ -24,11 +36,6 @@ namespace DiaryOfTrader.Core.Data
       }
     }
 
-    public static string RootFolder
-    {
-      get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DIARY_OF_TRADER); }
-    }
-
     private string DataSource()
     {
       var folder = Path.Combine(RootFolder, "Data");
@@ -38,6 +45,7 @@ namespace DiaryOfTrader.Core.Data
       }
       return Path.Combine(folder, DIARY_OF_TRADER + ".db");
     }
+#endif
     public DiaryOfTraderCtx()
     {
       /*
@@ -49,6 +57,7 @@ namespace DiaryOfTrader.Core.Data
        * Remove-migration
        */
 
+
       Database.Migrate();
       if (Frame != null && !Frame.Any())
       {
@@ -59,8 +68,13 @@ namespace DiaryOfTrader.Core.Data
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+#if sqlite
       optionsBuilder.UseSqlite("Pooling=True;Data Source=" + DataSource())
         .ReplaceService<IHistoryRepository, HistoryRepository>();
+#else
+      //optionsBuilder.UseNpgsql($"Host=localhost;Port=5432;Database={DIARY_OF_TRADER};Username=pguser;Password=pg6702");
+      optionsBuilder.UseNpgsql($"Host=localhost;Port=5432;Database=db;Username=pguser;Password=pg6702");
+#endif
 
       optionsBuilder.LogTo(message => Debug.WriteLine(message));
     }
