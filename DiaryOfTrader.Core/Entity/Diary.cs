@@ -2,7 +2,7 @@
 
 namespace DiaryOfTrader.Core.Entity
 {
-  public class Diary: Entity
+  public class Diary : Entity
   {
     #region firlds
     private DateTime _startedDate;
@@ -17,9 +17,24 @@ namespace DiaryOfTrader.Core.Entity
     private string? _emotions;
     private List<ScreenShot>? _screenshot;
     private Wallet _wallet;
+    private Trader? _trader;
     private TraderResult _traderResult;
     private decimal _amount;
     #endregion
+
+    public Trader? Trader
+    {
+      get { return _trader; }
+      set
+      {
+        if(value != _trader)
+        {
+          _trader = value;
+          OnPropertyChanged();
+        }
+      }
+    }
+
     /*
      * Дата-время начала сделки
      */

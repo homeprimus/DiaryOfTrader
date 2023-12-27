@@ -22,7 +22,7 @@ namespace DiaryOfTrader
       _serviceProvider = serviceProvider;
 
       _cancelTokenSource = new CancellationTokenSource();
-      _context = new DiaryOfTraderCtx();
+      _context = (DiaryOfTraderCtx)_serviceProvider.GetRequiredService<DbContext>();
 
       var eco = new EconomicParser(_context, _cancelTokenSource.Token);
       _updateThisWeekAsync = eco.UpdateThisWeekAsync();

@@ -11,17 +11,64 @@ namespace DiaryOfTrader.Core.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "DiarySequence");
+
+            migrationBuilder.CreateSequence(
+                name: "EconomicEventSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "EconomicScheduleSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "MarketReviewSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "MarketReviewTimeFrameSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "ScreenShotSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "SymbolSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "TimeFrameSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "TraderExchangeSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "TraderRegionSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "TraderResultSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "TraderSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "TraderSessionSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "TradingStrategySequence");
+
+            migrationBuilder.CreateSequence(
+                name: "TrendSequence");
+
+            migrationBuilder.CreateSequence(
+                name: "WalletSequence");
+
             migrationBuilder.CreateTable(
                 name: "EconomicEvent",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Country = table.Column<string>(type: "TEXT", nullable: false),
-                    Currency = table.Column<string>(type: "TEXT", nullable: false),
-                    SourceRef = table.Column<string>(type: "TEXT", nullable: false),
-                    LocalRef = table.Column<string>(type: "TEXT", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"EconomicEventSequence\"')"),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Country = table.Column<string>(type: "text", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: false),
+                    SourceRef = table.Column<string>(type: "text", nullable: false),
+                    LocalRef = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,13 +79,12 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Exchange",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false),
-                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"TraderExchangeSequence\"')"),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,11 +95,10 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Frame",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"TimeFrameSequence\"')"),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,11 +109,10 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Region",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"TraderRegionSequence\"')"),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,11 +123,10 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Result",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"TraderResultSequence\"')"),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,13 +137,12 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Symbol",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(type: "TEXT", nullable: true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false),
-                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"SymbolSequence\"')"),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,13 +153,12 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Trader",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Password = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"TraderSequence\"')"),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -128,11 +169,10 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "TradingStrategy",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"TradingStrategySequence\"')"),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -143,11 +183,10 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Trend",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"TrendSequence\"')"),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,11 +197,10 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Wallet",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"WalletSequence\"')"),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -173,16 +211,15 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Session",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RegionID = table.Column<long>(type: "INTEGER", nullable: false),
-                    WinterStarting = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    WinterFinished = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    SummerStarting = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    SummerFinished = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"TraderSessionSequence\"')"),
+                    RegionID = table.Column<long>(type: "bigint", nullable: false),
+                    WinterStarting = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    WinterFinished = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    SummerStarting = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    SummerFinished = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,8 +236,8 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "ExchangeSymbol",
                 columns: table => new
                 {
-                    ExchangesID = table.Column<long>(type: "INTEGER", nullable: false),
-                    SymbolsID = table.Column<long>(type: "INTEGER", nullable: false)
+                    ExchangesID = table.Column<long>(type: "bigint", nullable: false),
+                    SymbolsID = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -223,13 +260,13 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "MarketReview",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ExchangeID = table.Column<long>(type: "INTEGER", nullable: false),
-                    SymbolID = table.Column<long>(type: "INTEGER", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"MarketReviewSequence\"')"),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    TraderID = table.Column<long>(type: "bigint", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ExchangeID = table.Column<long>(type: "bigint", nullable: false),
+                    SymbolID = table.Column<long>(type: "bigint", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -246,28 +283,33 @@ namespace DiaryOfTrader.Core.Migrations
                         principalTable: "Symbol",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MarketReview_Trader_TraderID",
+                        column: x => x.TraderID,
+                        principalTable: "Trader",
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Diary",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    StartedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    FinishedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    ExchangeID = table.Column<long>(type: "INTEGER", nullable: true),
-                    SymbolID = table.Column<long>(type: "INTEGER", nullable: false),
-                    ReviewID = table.Column<long>(type: "INTEGER", nullable: true),
-                    SessionID = table.Column<long>(type: "INTEGER", nullable: true),
-                    EnteredID = table.Column<long>(type: "INTEGER", nullable: false),
-                    Deal = table.Column<string>(type: "TEXT", nullable: true),
-                    Emotions = table.Column<string>(type: "TEXT", nullable: true),
-                    WalletID = table.Column<long>(type: "INTEGER", nullable: false),
-                    TraderResultID = table.Column<long>(type: "INTEGER", nullable: false),
-                    Amount = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"DiarySequence\"')"),
+                    TraderID = table.Column<long>(type: "bigint", nullable: true),
+                    StartedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    FinishedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ExchangeID = table.Column<long>(type: "bigint", nullable: true),
+                    SymbolID = table.Column<long>(type: "bigint", nullable: false),
+                    ReviewID = table.Column<long>(type: "bigint", nullable: true),
+                    SessionID = table.Column<long>(type: "bigint", nullable: true),
+                    EnteredID = table.Column<long>(type: "bigint", nullable: false),
+                    Deal = table.Column<string>(type: "text", nullable: true),
+                    Emotions = table.Column<string>(type: "text", nullable: true),
+                    WalletID = table.Column<long>(type: "bigint", nullable: false),
+                    TraderResultID = table.Column<long>(type: "bigint", nullable: false),
+                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -306,6 +348,11 @@ namespace DiaryOfTrader.Core.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Diary_Trader_TraderID",
+                        column: x => x.TraderID,
+                        principalTable: "Trader",
+                        principalColumn: "ID");
+                    table.ForeignKey(
                         name: "FK_Diary_Wallet_WalletID",
                         column: x => x.WalletID,
                         principalTable: "Wallet",
@@ -317,19 +364,18 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "EconomicSchedule",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Time = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Currency = table.Column<string>(type: "TEXT", nullable: false),
-                    Importance = table.Column<int>(type: "INTEGER", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Factual = table.Column<string>(type: "TEXT", nullable: false),
-                    Prognosis = table.Column<string>(type: "TEXT", nullable: false),
-                    Previous = table.Column<string>(type: "TEXT", nullable: false),
-                    Last = table.Column<string>(type: "TEXT", nullable: false),
-                    HRef = table.Column<string>(type: "TEXT", nullable: false),
-                    EventID = table.Column<long>(type: "INTEGER", nullable: true),
-                    DiaryID = table.Column<long>(type: "INTEGER", nullable: true)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"EconomicScheduleSequence\"')"),
+                    Time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Currency = table.Column<string>(type: "text", nullable: false),
+                    Importance = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Factual = table.Column<string>(type: "text", nullable: false),
+                    Prognosis = table.Column<string>(type: "text", nullable: false),
+                    Previous = table.Column<string>(type: "text", nullable: false),
+                    Last = table.Column<string>(type: "text", nullable: false),
+                    HRef = table.Column<string>(type: "text", nullable: false),
+                    EventID = table.Column<long>(type: "bigint", nullable: true),
+                    DiaryID = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -350,14 +396,13 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "ScreenShot",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Path = table.Column<string>(type: "TEXT", nullable: true),
-                    DiaryID = table.Column<long>(type: "INTEGER", nullable: true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false),
-                    ImageData = table.Column<byte[]>(type: "BLOB", nullable: true)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"ScreenShotSequence\"')"),
+                    Path = table.Column<string>(type: "text", nullable: true),
+                    DiaryID = table.Column<long>(type: "bigint", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -373,15 +418,14 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "MarketReviewTimeFrame",
                 columns: table => new
                 {
-                    ID = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    MarketID = table.Column<long>(type: "INTEGER", nullable: false),
-                    FrameID = table.Column<long>(type: "INTEGER", nullable: false),
-                    TrendID = table.Column<long>(type: "INTEGER", nullable: true),
-                    ScreenShotID = table.Column<long>(type: "INTEGER", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Order = table.Column<int>(type: "INTEGER", nullable: false)
+                    ID = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "nextval('\"MarketReviewTimeFrameSequence\"')"),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    MarketID = table.Column<long>(type: "bigint", nullable: false),
+                    FrameID = table.Column<long>(type: "bigint", nullable: false),
+                    TrendID = table.Column<long>(type: "bigint", nullable: true),
+                    ScreenShotID = table.Column<long>(type: "bigint", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -436,6 +480,11 @@ namespace DiaryOfTrader.Core.Migrations
                 column: "SymbolID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Diary_TraderID",
+                table: "Diary",
+                column: "TraderID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Diary_TraderResultID",
                 table: "Diary",
                 column: "TraderResultID");
@@ -469,6 +518,11 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "IX_MarketReview_SymbolID",
                 table: "MarketReview",
                 column: "SymbolID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MarketReview_TraderID",
+                table: "MarketReview",
+                column: "TraderID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MarketReviewTimeFrame_FrameID",
@@ -514,9 +568,6 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "MarketReviewTimeFrame");
 
             migrationBuilder.DropTable(
-                name: "Trader");
-
-            migrationBuilder.DropTable(
                 name: "TradingStrategy");
 
             migrationBuilder.DropTable(
@@ -553,7 +604,58 @@ namespace DiaryOfTrader.Core.Migrations
                 name: "Symbol");
 
             migrationBuilder.DropTable(
+                name: "Trader");
+
+            migrationBuilder.DropTable(
                 name: "Region");
+
+            migrationBuilder.DropSequence(
+                name: "DiarySequence");
+
+            migrationBuilder.DropSequence(
+                name: "EconomicEventSequence");
+
+            migrationBuilder.DropSequence(
+                name: "EconomicScheduleSequence");
+
+            migrationBuilder.DropSequence(
+                name: "MarketReviewSequence");
+
+            migrationBuilder.DropSequence(
+                name: "MarketReviewTimeFrameSequence");
+
+            migrationBuilder.DropSequence(
+                name: "ScreenShotSequence");
+
+            migrationBuilder.DropSequence(
+                name: "SymbolSequence");
+
+            migrationBuilder.DropSequence(
+                name: "TimeFrameSequence");
+
+            migrationBuilder.DropSequence(
+                name: "TraderExchangeSequence");
+
+            migrationBuilder.DropSequence(
+                name: "TraderRegionSequence");
+
+            migrationBuilder.DropSequence(
+                name: "TraderResultSequence");
+
+            migrationBuilder.DropSequence(
+                name: "TraderSequence");
+
+            migrationBuilder.DropSequence(
+                name: "TraderSessionSequence");
+
+            migrationBuilder.DropSequence(
+                name: "TradingStrategySequence");
+
+            migrationBuilder.DropSequence(
+                name: "TrendSequence");
+
+            migrationBuilder.DropSequence(
+                name: "WalletSequence");
         }
     }
 }

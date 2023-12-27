@@ -15,6 +15,7 @@ namespace DiaryOfTrader.Core.Entity
     private TraderExchange _exchange;
     private Symbol _symbol;
     private DateTime _dateTime = DateTime.Now;
+    private Trader? _trader;
     private List<MarketReviewTimeFrame> _frames = new ();
     #endregion
     public override string Name
@@ -32,6 +33,18 @@ namespace DiaryOfTrader.Core.Entity
       set { base.Name = value; }
     }
 
+    public Trader? Trader
+    {
+      get { return _trader; }
+      set
+      {
+        if (value != _trader)
+        {
+          _trader = value;
+          OnPropertyChanged();
+        }
+      }
+    }
     public DateTime DateTime
     {
       get { return _dateTime; }

@@ -53,6 +53,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resource\Png\Main-64.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

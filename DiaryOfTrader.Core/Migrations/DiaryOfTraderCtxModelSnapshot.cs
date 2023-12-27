@@ -4,6 +4,7 @@ using DiaryOfTrader.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -15,56 +16,98 @@ namespace DiaryOfTrader.Core.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.HasSequence("DiarySequence");
+
+            modelBuilder.HasSequence("EconomicEventSequence");
+
+            modelBuilder.HasSequence("EconomicScheduleSequence");
+
+            modelBuilder.HasSequence("MarketReviewSequence");
+
+            modelBuilder.HasSequence("MarketReviewTimeFrameSequence");
+
+            modelBuilder.HasSequence("ScreenShotSequence");
+
+            modelBuilder.HasSequence("SymbolSequence");
+
+            modelBuilder.HasSequence("TimeFrameSequence");
+
+            modelBuilder.HasSequence("TraderExchangeSequence");
+
+            modelBuilder.HasSequence("TraderRegionSequence");
+
+            modelBuilder.HasSequence("TraderResultSequence");
+
+            modelBuilder.HasSequence("TraderSequence");
+
+            modelBuilder.HasSequence("TraderSessionSequence");
+
+            modelBuilder.HasSequence("TradingStrategySequence");
+
+            modelBuilder.HasSequence("TrendSequence");
+
+            modelBuilder.HasSequence("WalletSequence");
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.Diary", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"DiarySequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("numeric");
 
                     b.Property<string>("Deal")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Emotions")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<long>("EnteredID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("ExchangeID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("FinishedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<long?>("ReviewID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("SessionID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartedDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("SymbolID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("TraderID")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("TraderResultID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<long>("WalletID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
@@ -77,6 +120,8 @@ namespace DiaryOfTrader.Core.Migrations
                     b.HasIndex("SessionID");
 
                     b.HasIndex("SymbolID");
+
+                    b.HasIndex("TraderID");
 
                     b.HasIndex("TraderResultID");
 
@@ -91,27 +136,30 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"EconomicEventSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Currency")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("LocalRef")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("SourceRef")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -124,47 +172,50 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"EconomicScheduleSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Currency")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<long?>("DiaryID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("EventID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Factual")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("HRef")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Importance")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Last")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Previous")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Prognosis")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Time")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ID");
 
@@ -181,29 +232,37 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"MarketReviewSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<DateTime>("DateTime")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<long>("ExchangeID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<long>("SymbolID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("TraderID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ExchangeID");
 
                     b.HasIndex("SymbolID");
+
+                    b.HasIndex("TraderID");
 
                     b.ToTable("MarketReview");
 
@@ -214,29 +273,32 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"MarketReviewTimeFrameSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<long>("FrameID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<long>("MarketID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<long?>("ScreenShotID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("TrendID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
@@ -257,26 +319,29 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"ScreenShotSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<long?>("DiaryID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<byte[]>("ImageData")
-                        .HasColumnType("BLOB");
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Path")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -291,23 +356,26 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"SymbolSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<byte[]>("ImageData")
-                        .HasColumnType("BLOB");
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Url")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -320,17 +388,20 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"TimeFrameSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -343,25 +414,28 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"TraderSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -374,23 +448,26 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"TraderExchangeSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<byte[]>("ImageData")
-                        .HasColumnType("BLOB");
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Url")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -403,17 +480,20 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"TraderRegionSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -426,17 +506,20 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"TraderResultSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -449,32 +532,35 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"TraderSessionSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<long>("RegionID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("SummerFinished")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("SummerStarting")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("WinterFinished")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("WinterStarting")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ID");
 
@@ -489,17 +575,20 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"TradingStrategySequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -512,17 +601,20 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"TrendSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -535,17 +627,20 @@ namespace DiaryOfTrader.Core.Migrations
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("nextval('\"WalletSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<long>("ID"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -557,10 +652,10 @@ namespace DiaryOfTrader.Core.Migrations
             modelBuilder.Entity("SymbolTraderExchange", b =>
                 {
                     b.Property<long>("ExchangesID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<long>("SymbolsID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.HasKey("ExchangesID", "SymbolsID");
 
@@ -595,6 +690,10 @@ namespace DiaryOfTrader.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DiaryOfTrader.Core.Entity.Trader", "Trader")
+                        .WithMany()
+                        .HasForeignKey("TraderID");
+
                     b.HasOne("DiaryOfTrader.Core.Entity.TraderResult", "TraderResult")
                         .WithMany()
                         .HasForeignKey("TraderResultID")
@@ -616,6 +715,8 @@ namespace DiaryOfTrader.Core.Migrations
                     b.Navigation("Session");
 
                     b.Navigation("Symbol");
+
+                    b.Navigation("Trader");
 
                     b.Navigation("TraderResult");
 
@@ -649,9 +750,15 @@ namespace DiaryOfTrader.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DiaryOfTrader.Core.Entity.Trader", "Trader")
+                        .WithMany()
+                        .HasForeignKey("TraderID");
+
                     b.Navigation("Exchange");
 
                     b.Navigation("Symbol");
+
+                    b.Navigation("Trader");
                 });
 
             modelBuilder.Entity("DiaryOfTrader.Core.Entity.MarketReviewTimeFrame", b =>

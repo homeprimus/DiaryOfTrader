@@ -1,5 +1,4 @@
-﻿//#define use_db
-
+﻿#define use_db
 
 using System.Net.Http;
 using DiaryOfTrader.Core.Data;
@@ -15,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using DiaryOfTrader.EditDialogs.Dictionary;
 using DiaryOfTrader.Core.Repository.RepositoryApi;
+using DiaryOfTrader.Core.WritableOptions;
+using System.Data.Common;
 
 namespace DiaryOfTrader
 {
@@ -119,8 +120,8 @@ namespace DiaryOfTrader
       }
 
       services.AddTransient<HttpClient>();
-      //services.AddSingleton<EndPointConfiguration>();
-      services.Configure<EndPointConfiguration>(configuration.GetSection(nameof(EndPointConfiguration)));
+      services.Configure<EndPointConfiguration>(configuration.GetSection(key: nameof(EndPointConfiguration)));
+      services.ConfigureWritable<DbConnectionStringBuilder>(configuration.GetSection(key: "ConnectionStringBuilder"));
 
       #region UI
       services.AddSingleton<RibbonMain>();

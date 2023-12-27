@@ -1,8 +1,14 @@
-﻿#define sqlite
+﻿//#define sqlite
 
+using System.Data.Common;
 using System.Diagnostics;
+using DiaryOfTrader.Core.Entity;
+using DiaryOfTrader.Core.Repository.RepositoryDb;
+using DiaryOfTrader.Core.WritableOptions;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.Logging;
+using Npgsql;
 
 
 #if sqlite
@@ -15,6 +21,8 @@ namespace DiaryOfTrader.Core.Data
   public sealed class DiaryOfTraderCtx : DbContext
   {
     private const string DIARY_OF_TRADER = "DiaryOfTrader";
+    private ILogger<DiaryOfTraderCtx> _logger;
+    private IWritableOptions<DbConnectionStringBuilder> _options;
 
     public static string RootFolder
     {
@@ -46,8 +54,10 @@ namespace DiaryOfTrader.Core.Data
       return Path.Combine(folder, DIARY_OF_TRADER + ".db");
     }
 #endif
-    public DiaryOfTraderCtx()
+    public DiaryOfTraderCtx(ILogger<DiaryOfTraderCtx> logger, IWritableOptions<DbConnectionStringBuilder> options)
     {
+      _logger = logger;
+      _options = options;
       /*
        * После изменения структуры базы выполнить миграцию = Юперейдем в Visual Studio к окну Package Manager Console.
        * Вначале введем команду
@@ -57,6 +67,7 @@ namespace DiaryOfTrader.Core.Data
        * Remove-migration
        */
 
+      AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
       Database.Migrate();
       if (Frame != null && !Frame.Any())
@@ -72,11 +83,19 @@ namespace DiaryOfTrader.Core.Data
       optionsBuilder.UseSqlite("Pooling=True;Data Source=" + DataSource())
         .ReplaceService<IHistoryRepository, HistoryRepository>();
 #else
-      //optionsBuilder.UseNpgsql($"Host=localhost;Port=5432;Database={DIARY_OF_TRADER};Username=pguser;Password=pg6702");
-      optionsBuilder.UseNpgsql($"Host=localhost;Port=5432;Database=db;Username=pguser;Password=pg6702");
+      NpgsqlConnectionStringBuilder builder;
+      if (_options.Value is NpgsqlConnectionStringBuilder b)
+      {
+        builder = b;
+      }
+      else
+      {
+        builder = new NpgsqlConnectionStringBuilder(_options.Value.ConnectionString);
+      }
+      //_options.Update(value => value.ConnectionString = builder.ConnectionString);
+      optionsBuilder.UseNpgsql(builder.ToString());
 #endif
-
-      optionsBuilder.LogTo(message => Debug.WriteLine(message));
+      optionsBuilder.LogTo(message => _logger.LogTrace(message));
     }
   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -86,12 +105,10 @@ namespace DiaryOfTrader.Core.Data
       
       modelBuilder.Ignore<Element>();
       modelBuilder.Ignore<Entity.Entity>();
-      
 
       modelBuilder.Entity<ScreenShot>().UseTpcMappingStrategy();
       modelBuilder.Entity<ScreenShot>().Property(b => b.ID).ValueGeneratedOnAdd();
 
-      modelBuilder.Entity<Wallet>(WalletConfigure);
       modelBuilder.Entity<Symbol>(SymbolConfigure);
       modelBuilder.Entity<TradingStrategy>(StrategyConfigure);
       modelBuilder.Entity<TraderExchange>(ExchangeConfigure);
@@ -100,11 +117,15 @@ namespace DiaryOfTrader.Core.Data
       modelBuilder.Entity<TimeFrame>(TimeFrameConfigure);
       modelBuilder.Entity<Trend>(TrendConfigure);
       modelBuilder.Entity<TraderResult>(TraderResultConfigure);
-      modelBuilder.Entity<Diary>(DiaryConfigure);
+
       modelBuilder.Entity<EconomicSchedule>(EconomicScheduleConfigure);
       modelBuilder.Entity<EconomicEvent>(EconomicEventConfigure);
+
       modelBuilder.Entity<Trader>(TraderConfigure);
 
+      modelBuilder.Entity<Wallet>(WalletConfigure);
+
+      modelBuilder.Entity<Diary>(DiaryConfigure);
       modelBuilder.Entity<MarketReview>(MarketReviewConfigure);
       modelBuilder.Entity<MarketReviewTimeFrame>(MarketReviewTimeFrameConfigure);
 
