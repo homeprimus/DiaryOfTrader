@@ -1,4 +1,4 @@
-﻿#define use_db
+﻿//#define use_db
 
 using System.Net.Http;
 using DiaryOfTrader.Core.Data;

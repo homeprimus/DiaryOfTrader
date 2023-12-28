@@ -1,4 +1,5 @@
 ﻿
+using System.Data.Common;
 using System.Text;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Interfaces.Cache;
@@ -11,6 +12,7 @@ using DiaryOfTrader.WebApi.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
+using DiaryOfTrader.Core.WritableOptions;
 
 var builder = WebApplication.CreateBuilder(args);
 BuildLogging(builder.Logging);
@@ -123,6 +125,7 @@ static ServiceProvider BuildServices(IServiceCollection services, IConfiguration
     services.AddSingleton<ICache, Memory>();
   }
   #endregion
+  services.ConfigureWritable<DbConnectionStringBuilder>(configuration.GetSection(key: "ConnectionStringBuilder"));
 
   return services.BuildServiceProvider();
 }
