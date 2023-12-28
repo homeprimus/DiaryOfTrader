@@ -34,9 +34,9 @@ services:
       - "-c"
       - "pg_stat_statements.track=all"
     environment:
-      POSTGRES_DB: "db"
-      POSTGRES_USER: "pguser"
-      POSTGRES_PASSWORD: "pg6702"
+      POSTGRES_DB: "DiaryOfTrader"
+      POSTGRES_USER: "pgTrader"
+      POSTGRES_PASSWORD: "Trader6702"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
       - f:\pg\scripts:/docker-entrypoint-initdb.d
@@ -44,7 +44,7 @@ services:
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pguser -d db"]
+      test: ["CMD-SHELL", "pg_isready -U pgTrader -d DiaryOfTrader"]
       interval: 10s
       timeout: 5s
       retries: 5

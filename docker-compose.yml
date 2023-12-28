@@ -27,8 +27,9 @@ services:
     depends_on:
       - redis
       - pg
-    networks:
-      - diaryoftrader
+#    networks:
+#      - diaryoftrader
+#      - default
 
   redis:
     image: redis/redis-stack
@@ -40,8 +41,8 @@ services:
       options:
         max-size: '5m'
         max-file: '10'
-    networks:
-      - diaryoftrader
+ #   networks:
+#      - diaryoftrader
 
   pg:
     container_name: pg
@@ -101,10 +102,10 @@ services:
         limits:
           cpus: '1'
           memory: 4G
-    networks:
-      - diaryoftrader
+#    networks:
+#      - diaryoftrader
 
-networks:
-  diaryoftrader:
-    name: diaryoftrader
-    driver: bridge
+#networks:
+#  diaryoftrader:
+#    name: diaryoftrader
+#    driver: bridge
