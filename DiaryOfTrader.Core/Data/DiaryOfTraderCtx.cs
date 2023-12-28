@@ -83,21 +83,11 @@ namespace DiaryOfTrader.Core.Data
       optionsBuilder.UseSqlite("Pooling=True;Data Source=" + DataSource())
         .ReplaceService<IHistoryRepository, HistoryRepository>();
 #else
-      NpgsqlConnectionStringBuilder builder;
-      if (_options.Value is NpgsqlConnectionStringBuilder b)
-      {
-        builder = b;
-      }
-      else
-      {
-        builder = new NpgsqlConnectionStringBuilder(_options.Value.ConnectionString);
-      }
-      //_options.Update(value => value.ConnectionString = builder.ConnectionString);
-      optionsBuilder.UseNpgsql(builder.ToString());
+      optionsBuilder.UseNpgsql(_options.Value.ToString());
 #endif
       optionsBuilder.LogTo(message => _logger.LogTrace(message));
     }
-  
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 

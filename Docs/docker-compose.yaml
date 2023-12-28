@@ -39,8 +39,7 @@ services:
       POSTGRES_PASSWORD: "Trader6702"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
-      - f:\pg\scripts:/docker-entrypoint-initdb.d
-      - f:\pg\data:/var/lib/postgresql/data
+      - f:\pg\DiaryOfTrader\data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
