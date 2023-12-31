@@ -8,6 +8,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
+ENV ASPNETCORE_HTTP_PORTS 32778
+
 COPY DiaryOfTrader.WebApi/ DiaryOfTrader.WebApi/
 COPY DiaryOfTrader.Core/  DiaryOfTrader.Core/
 RUN dotnet restore "DiaryOfTrader.WebApi/DiaryOfTrader.WebApi.csproj"

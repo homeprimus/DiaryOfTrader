@@ -9,6 +9,8 @@ services:
       context: .
       dockerfile: Dockerfile.WinApi
     container_name: DiaryOfTrader.WebApi
+    env_file:
+      - .env
     volumes:
       - ${USERPROFILE}/.aspnet/https:/https/
     ports:
@@ -27,12 +29,15 @@ services:
     depends_on:
       - redis
       - pg
+      - rabbit
     networks:
       - diaryoftrader
 
   redis:
     image: redis/redis-stack
     container_name: redis
+    env_file:
+      - .env
     ports:
       - 8001:8001
       - 6379:6379
@@ -44,8 +49,10 @@ services:
       - diaryoftrader
 
   pg:
-    container_name: pg
     image: postgres:16.0
+    container_name: pg
+    env_file:
+      - .env
     command:
       - "postgres"
       - "-c"
@@ -101,6 +108,31 @@ services:
         limits:
           cpus: '1'
           memory: 4G
+    networks:
+      - diaryoftrader
+
+  rabbit:
+    image: docker.io/bitnami/rabbitmq:3.12
+    container_name: rabbit
+    env_file:
+      - .env
+    ports:
+      - '4369:4369'
+      - '5551:5551'
+      - '5552:5552'
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'
+    #environment:
+    #  - RABBITMQ_SECURE_PASSWORD=yes
+    #  - RABBITMQ_LOGS=-
+    #volumes:
+    #  - ${RABBITDATA}:/bitnami/rabbitmq/mnesia'
+    logging:
+      options:
+        max-size: '5m'
+        max-file: '10'
+    restart: always
     networks:
       - diaryoftrader
 
