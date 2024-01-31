@@ -47,11 +47,13 @@ namespace DiaryOfTrader.EditControls.Entity
       gcDiaryGrid = new DevExpress.XtraGrid.GridControl();
       gvDiaryGrid = new DevExpress.XtraGrid.Views.Grid.GridView();
       clStartedDate = new DevExpress.XtraGrid.Columns.GridColumn();
+      clFinished = new DevExpress.XtraGrid.Columns.GridColumn();
       clTraderExchange = new DevExpress.XtraGrid.Columns.GridColumn();
       clSymbol = new DevExpress.XtraGrid.Columns.GridColumn();
       clReview = new DevExpress.XtraGrid.Columns.GridColumn();
       clEconomicSchedule = new DevExpress.XtraGrid.Columns.GridColumn();
       clSession = new DevExpress.XtraGrid.Columns.GridColumn();
+      clStrategy = new DevExpress.XtraGrid.Columns.GridColumn();
       clEntered = new DevExpress.XtraGrid.Columns.GridColumn();
       clDeal = new DevExpress.XtraGrid.Columns.GridColumn();
       clEmotions = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,8 +61,6 @@ namespace DiaryOfTrader.EditControls.Entity
       clWallet = new DevExpress.XtraGrid.Columns.GridColumn();
       clTraderResult = new DevExpress.XtraGrid.Columns.GridColumn();
       clAmount = new DevExpress.XtraGrid.Columns.GridColumn();
-      clFinished = new DevExpress.XtraGrid.Columns.GridColumn();
-      clStrategy = new DevExpress.XtraGrid.Columns.GridColumn();
       ((System.ComponentModel.ISupportInitialize)bmGrid).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gcDiaryGrid).BeginInit();
       ((System.ComponentModel.ISupportInitialize)gvDiaryGrid).BeginInit();
@@ -182,14 +182,28 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clStartedDate
       // 
+      clStartedDate.AppearanceHeader.Options.UseTextOptions = true;
+      clStartedDate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clStartedDate.Caption = "Начало";
       clStartedDate.FieldName = "StartedDate";
       clStartedDate.Name = "clStartedDate";
       clStartedDate.Visible = true;
       clStartedDate.VisibleIndex = 0;
       // 
+      // clFinished
+      // 
+      clFinished.AppearanceHeader.Options.UseTextOptions = true;
+      clFinished.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clFinished.Caption = "Окончание";
+      clFinished.FieldName = "FinishedDate";
+      clFinished.Name = "clFinished";
+      clFinished.Visible = true;
+      clFinished.VisibleIndex = 13;
+      // 
       // clTraderExchange
       // 
+      clTraderExchange.AppearanceHeader.Options.UseTextOptions = true;
+      clTraderExchange.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clTraderExchange.Caption = "Брокер";
       clTraderExchange.FieldName = "TraderExchange";
       clTraderExchange.Name = "clTraderExchange";
@@ -198,6 +212,8 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clSymbol
       // 
+      clSymbol.AppearanceHeader.Options.UseTextOptions = true;
+      clSymbol.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clSymbol.Caption = "Инструмент";
       clSymbol.FieldName = "Symbol";
       clSymbol.Name = "clSymbol";
@@ -206,6 +222,8 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clReview
       // 
+      clReview.AppearanceHeader.Options.UseTextOptions = true;
+      clReview.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clReview.Caption = "Анализ рынка";
       clReview.FieldName = "Review";
       clReview.Name = "clReview";
@@ -214,6 +232,8 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clEconomicSchedule
       // 
+      clEconomicSchedule.AppearanceHeader.Options.UseTextOptions = true;
+      clEconomicSchedule.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clEconomicSchedule.Caption = "Экогом. новости";
       clEconomicSchedule.FieldName = "EconomicSchedule";
       clEconomicSchedule.Name = "clEconomicSchedule";
@@ -222,14 +242,28 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clSession
       // 
+      clSession.AppearanceHeader.Options.UseTextOptions = true;
+      clSession.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clSession.Caption = "Сессия";
       clSession.FieldName = "Session";
       clSession.Name = "clSession";
       clSession.Visible = true;
       clSession.VisibleIndex = 5;
       // 
+      // clStrategy
+      // 
+      clStrategy.AppearanceHeader.Options.UseTextOptions = true;
+      clStrategy.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+      clStrategy.Caption = "Cтратегия";
+      clStrategy.FieldName = "Strategy";
+      clStrategy.Name = "clStrategy";
+      clStrategy.Visible = true;
+      clStrategy.VisibleIndex = 14;
+      // 
       // clEntered
       // 
+      clEntered.AppearanceHeader.Options.UseTextOptions = true;
+      clEntered.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clEntered.Caption = "ТФ входа";
       clEntered.FieldName = "Entered";
       clEntered.Name = "clEntered";
@@ -238,6 +272,8 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clDeal
       // 
+      clDeal.AppearanceHeader.Options.UseTextOptions = true;
+      clDeal.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clDeal.Caption = "Сделка, ход и сопровождение";
       clDeal.FieldName = "Deal";
       clDeal.Name = "clDeal";
@@ -246,6 +282,8 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clEmotions
       // 
+      clEmotions.AppearanceHeader.Options.UseTextOptions = true;
+      clEmotions.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clEmotions.Caption = "Чек лист эмиций";
       clEmotions.FieldName = "Emotions";
       clEmotions.Name = "clEmotions";
@@ -254,6 +292,8 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clScreenshot
       // 
+      clScreenshot.AppearanceHeader.Options.UseTextOptions = true;
+      clScreenshot.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clScreenshot.Caption = "Снимок";
       clScreenshot.FieldName = "Screenshot";
       clScreenshot.Name = "clScreenshot";
@@ -270,6 +310,8 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clTraderResult
       // 
+      clTraderResult.AppearanceHeader.Options.UseTextOptions = true;
+      clTraderResult.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clTraderResult.Caption = "Результат сделки";
       clTraderResult.FieldName = "TraderResult";
       clTraderResult.Name = "clTraderResult";
@@ -278,27 +320,13 @@ namespace DiaryOfTrader.EditControls.Entity
       // 
       // clAmount
       // 
+      clAmount.AppearanceHeader.Options.UseTextOptions = true;
+      clAmount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
       clAmount.Caption = "Сумма профита или убытка";
       clAmount.FieldName = "Amount";
       clAmount.Name = "clAmount";
       clAmount.Visible = true;
       clAmount.VisibleIndex = 12;
-      // 
-      // clFinished
-      // 
-      clFinished.Caption = "Окончание";
-      clFinished.FieldName = "FinishedDate";
-      clFinished.Name = "clFinished";
-      clFinished.Visible = true;
-      clFinished.VisibleIndex = 13;
-      // 
-      // clStrategy
-      // 
-      clStrategy.Caption = "Cтратегия";
-      clStrategy.FieldName = "Strategy";
-      clStrategy.Name = "clStrategy";
-      clStrategy.Visible = true;
-      clStrategy.VisibleIndex = 14;
       // 
       // DiaryGrid
       // 

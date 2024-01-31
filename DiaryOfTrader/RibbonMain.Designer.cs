@@ -60,19 +60,19 @@ namespace DiaryOfTrader
       nbMain = new DevExpress.XtraNavBar.NavBarControl();
       navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
       navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
-      navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
       splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
       pnlCenter = new Panel();
       tcMain = new Components.TabControl();
       tpMarketReview = new DevExpress.XtraTab.XtraTabPage();
       pnlMarketReview = new Panel();
+      marketReviewGrid = new EditControls.Entity.MarketReviewGrid();
       tpMarket = new DevExpress.XtraTab.XtraTabPage();
       tcMarket = new Components.TabControl();
       xtpFirst = new DevExpress.XtraTab.XtraTabPage();
       tpDiary = new DevExpress.XtraTab.XtraTabPage();
       pnlDiary = new Panel();
       diaryGrid = new EditControls.Entity.DiaryGrid();
-      marketReviewGrid = new EditControls.Entity.MarketReviewGrid();
+      tvBTCUSDT = new Components.TragingView();
       ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
       ((System.ComponentModel.ISupportInitialize)panel1).BeginInit();
       panel1.SuspendLayout();
@@ -85,6 +85,7 @@ namespace DiaryOfTrader
       tpMarket.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)tcMarket).BeginInit();
       tcMarket.SuspendLayout();
+      xtpFirst.SuspendLayout();
       tpDiary.SuspendLayout();
       pnlDiary.SuspendLayout();
       SuspendLayout();
@@ -296,7 +297,6 @@ namespace DiaryOfTrader
       nbMain.ActiveGroup = navBarGroup1;
       nbMain.Dock = DockStyle.Fill;
       nbMain.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] { navBarGroup1, navBarGroup2 });
-      nbMain.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] { navBarItem1 });
       nbMain.Location = new Point(0, 0);
       nbMain.Name = "nbMain";
       nbMain.OptionsNavPane.ExpandedWidth = 200;
@@ -314,13 +314,7 @@ namespace DiaryOfTrader
       // 
       navBarGroup2.Caption = "navBarGroup2";
       navBarGroup2.Expanded = true;
-      navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] { new DevExpress.XtraNavBar.NavBarItemLink(navBarItem1) });
       navBarGroup2.Name = "navBarGroup2";
-      // 
-      // navBarItem1
-      // 
-      navBarItem1.Caption = "navBarItem1";
-      navBarItem1.Name = "navBarItem1";
       // 
       // splitterControl1
       // 
@@ -346,7 +340,7 @@ namespace DiaryOfTrader
       tcMain.Dock = DockStyle.Fill;
       tcMain.Location = new Point(0, 0);
       tcMain.Name = "tcMain";
-      tcMain.SelectedTabPage = tpMarketReview;
+      tcMain.SelectedTabPage = tpMarket;
       tcMain.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
       tcMain.Size = new Size(815, 431);
       tcMain.TabIndex = 0;
@@ -369,6 +363,18 @@ namespace DiaryOfTrader
       pnlMarketReview.Size = new Size(813, 429);
       pnlMarketReview.TabIndex = 0;
       // 
+      // marketReviewGrid
+      // 
+      marketReviewGrid.Appearance.BackColor = Color.Transparent;
+      marketReviewGrid.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      marketReviewGrid.Appearance.Options.UseBackColor = true;
+      marketReviewGrid.Appearance.Options.UseFont = true;
+      marketReviewGrid.Dock = DockStyle.Fill;
+      marketReviewGrid.Location = new Point(3, 3);
+      marketReviewGrid.Name = "marketReviewGrid";
+      marketReviewGrid.Size = new Size(807, 423);
+      marketReviewGrid.TabIndex = 0;
+      // 
       // tpMarket
       // 
       tpMarket.Controls.Add(tcMarket);
@@ -390,6 +396,7 @@ namespace DiaryOfTrader
       // 
       // xtpFirst
       // 
+      xtpFirst.Controls.Add(tvBTCUSDT);
       xtpFirst.Name = "xtpFirst";
       xtpFirst.Size = new Size(811, 404);
       xtpFirst.Text = "BTCUSDT";
@@ -423,17 +430,17 @@ namespace DiaryOfTrader
       diaryGrid.Size = new Size(807, 423);
       diaryGrid.TabIndex = 0;
       // 
-      // marketReviewGrid
+      // tvBTCUSDT
       // 
-      marketReviewGrid.Appearance.BackColor = Color.Transparent;
-      marketReviewGrid.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
-      marketReviewGrid.Appearance.Options.UseBackColor = true;
-      marketReviewGrid.Appearance.Options.UseFont = true;
-      marketReviewGrid.Dock = DockStyle.Fill;
-      marketReviewGrid.Location = new Point(3, 3);
-      marketReviewGrid.Name = "marketReviewGrid";
-      marketReviewGrid.Size = new Size(807, 423);
-      marketReviewGrid.TabIndex = 0;
+      tvBTCUSDT.Appearance.BackColor = Color.Transparent;
+      tvBTCUSDT.Appearance.Font = new Font("Tahoma", 8F, FontStyle.Regular, GraphicsUnit.Point);
+      tvBTCUSDT.Appearance.Options.UseBackColor = true;
+      tvBTCUSDT.Appearance.Options.UseFont = true;
+      tvBTCUSDT.Dock = DockStyle.Fill;
+      tvBTCUSDT.Location = new Point(0, 0);
+      tvBTCUSDT.Name = "tvBTCUSDT";
+      tvBTCUSDT.Size = new Size(811, 404);
+      tvBTCUSDT.TabIndex = 0;
       // 
       // RibbonMain
       // 
@@ -462,6 +469,7 @@ namespace DiaryOfTrader
       tpMarket.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)tcMarket).EndInit();
       tcMarket.ResumeLayout(false);
+      xtpFirst.ResumeLayout(false);
       tpDiary.ResumeLayout(false);
       pnlDiary.ResumeLayout(false);
       ResumeLayout(false);
@@ -493,7 +501,6 @@ namespace DiaryOfTrader
     private DevExpress.XtraNavBar.NavBarControl nbMain;
     private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
     private DevExpress.XtraNavBar.NavBarGroup navBarGroup2;
-    private DevExpress.XtraNavBar.NavBarItem navBarItem1;
     private DevExpress.XtraEditors.SplitterControl splitterControl1;
     private Panel pnlCenter;
     private DevExpress.XtraBars.BarButtonItem barButtonItem3;
@@ -510,5 +517,6 @@ namespace DiaryOfTrader
     private EditControls.Entity.DiaryGrid diaryGrid;
     private Panel pnlMarketReview;
     private EditControls.Entity.MarketReviewGrid marketReviewGrid;
+    private Components.TragingView tvBTCUSDT;
   }
 }
