@@ -1,5 +1,4 @@
-﻿using DiaryOfTrader.Core.Utils;
-using DiaryOfTrader.Core.Data;
+﻿using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Interfaces.Cache;
 using Microsoft.Extensions.Logging;
 

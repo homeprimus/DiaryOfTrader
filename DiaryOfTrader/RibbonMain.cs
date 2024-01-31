@@ -1,9 +1,8 @@
 ﻿using DevExpress.XtraBars;
 using DiaryOfTrader.Core.Data;
-using DiaryOfTrader.Core.Interfaces.Repository;
-using DiaryOfTrader.EditDialogs;
 using DiaryOfTrader.EditDialogs.Calendar;
 using DiaryOfTrader.EditDialogs.Dictionary;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DiaryOfTrader
 {
@@ -11,68 +10,61 @@ namespace DiaryOfTrader
   {
     #region fields
     private readonly CancellationTokenSource _cancelTokenSource;
-    private readonly DiaryOfTraderCtx _context;// = new();
+    private readonly DiaryOfTraderCtx _context;
     private Task? _updateThisWeekAsync;
 
-    #endregion
+    IServiceProvider _serviceProvider;
 
-    public RibbonMain()
+    #endregion
+    public RibbonMain(IServiceProvider serviceProvider)
     {
       InitializeComponent();
+      _serviceProvider = serviceProvider;
 
       _cancelTokenSource = new CancellationTokenSource();
-      _context = new DiaryOfTraderCtx();
+      _context = (DiaryOfTraderCtx)_serviceProvider.GetRequiredService<DbContext>();
 
       var eco = new EconomicParser(_context, _cancelTokenSource.Token);
       _updateThisWeekAsync = eco.UpdateThisWeekAsync();
 
     }
-
-    private static void Proccessing<T>(GridEditDialog dlg, IRepository<T> repository) where T : Entity
-    {
-      dlg.DoLoad(repository);
-      if (dlg.ShowDialog() == DialogResult.OK)
-      {
-        dlg.DoUpdate(repository);
-      }
-    }
     private void bbtExchamge_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Proccessing(new ExchangeDlg(), Core.Entity.DiaryOfTrader.TraderExchangeRepository);
+      _serviceProvider.GetRequiredService<ExchangeDlg>().ShowDialog();
     }
 
     private void bbtSymbol_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Proccessing(new SymbolDlg(), Core.Entity.DiaryOfTrader.SymbolRepository);
+      _serviceProvider.GetRequiredService<SymbolDlg>().ShowDialog();
     }
 
     private void bbtSession_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Proccessing(new TradeSessionDlg(), Core.Entity.DiaryOfTrader.TraderRegionRepository);
+      _serviceProvider.GetRequiredService<TradeSessionDlg>().ShowDialog();
     }
 
     private void bbtTimeFrame_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Proccessing(new TimeFrameDlg(), Core.Entity.DiaryOfTrader.TimeFrameRepository);
+      _serviceProvider.GetRequiredService<TimeFrameDlg>().ShowDialog();
     }
 
     private void bbtResult_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Proccessing(new ResultDlg(), Core.Entity.DiaryOfTrader.TraderResultRepository);
+      _serviceProvider.GetRequiredService<ResultDlg>().ShowDialog();
     }
 
     private void bbtTrend_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Proccessing(new TrendDlg(), Core.Entity.DiaryOfTrader.TrendRepository);
+      _serviceProvider.GetRequiredService<TrendDlg>().ShowDialog();
     }
 
     private void bbtWallet_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Proccessing(new WalletDlg(), Core.Entity.DiaryOfTrader.WalletRepository);
+      _serviceProvider.GetRequiredService<WalletDlg>().ShowDialog();
     }
     private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
     {
-      Proccessing(new TradingStrategyDlg(), Core.Entity.DiaryOfTrader.TradingStrategyRepository);
+      _serviceProvider.GetRequiredService<TradingStrategyDlg>().ShowDialog();
     }
 
     private void bbtCalendar_ItemClick(object sender, ItemClickEventArgs e)

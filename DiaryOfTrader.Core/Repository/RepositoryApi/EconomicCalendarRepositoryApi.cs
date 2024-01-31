@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Web;
-using DiaryOfTrader.Core.Entity;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace DiaryOfTrader.Core.Repository.RepositoryApi
 {
@@ -21,10 +21,10 @@ namespace DiaryOfTrader.Core.Repository.RepositoryApi
     private readonly ILogger<EconomicCalendarRepositoryApi> _logger;
     #endregion
 
-    public EconomicCalendarRepositoryApi(EndPointConfiguration config, HttpClient client, ILogger<EconomicCalendarRepositoryApi> logger)
+    public EconomicCalendarRepositoryApi(IOptions<EndPointConfiguration> config, HttpClient client, ILogger<EconomicCalendarRepositoryApi> logger)
     {
       var entity = CALENDAR;
-      var url = new UriBuilder(config.EndPoint) { Path = config.Version(entity) + "/" + entity + "s" };
+      var url = new UriBuilder(config.Value.EndPoint) { Path = config.Value.Version(entity) + "/" + entity + "s" };
       _endPoint = url.ToString();
       _logger = logger;
       _client = client;

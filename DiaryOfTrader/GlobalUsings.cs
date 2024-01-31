@@ -1,5 +1,6 @@
 ﻿
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Logging;
 global using System.Xml.Serialization;
 global using System.Text.Json.Serialization;
 
@@ -11,5 +12,6 @@ global using DiaryOfTrader.Core.Entity.Economic;
 global using DiaryOfTrader.Core.Properties;
 
 global using DiaryOfTrader.Abstracts;
+global using DiaryOfTrader.Core.Interfaces.Repository;
 
 

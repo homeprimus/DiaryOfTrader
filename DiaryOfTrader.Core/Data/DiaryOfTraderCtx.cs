@@ -1,7 +1,19 @@
-﻿using System.Diagnostics;
+﻿//#define sqlite
+
+using System.Data.Common;
+using System.Diagnostics;
+using DiaryOfTrader.Core.Entity;
+using DiaryOfTrader.Core.Repository.RepositoryDb;
+using DiaryOfTrader.Core.WritableOptions;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Extensions.Logging;
+using Npgsql;
+
+
+#if sqlite
 using Microsoft.EntityFrameworkCore.Sqlite.Migrations.Internal;
+#endif
 
 namespace DiaryOfTrader.Core.Data
 {
@@ -9,11 +21,18 @@ namespace DiaryOfTrader.Core.Data
   public sealed class DiaryOfTraderCtx : DbContext
   {
     private const string DIARY_OF_TRADER = "DiaryOfTrader";
+    private ILogger<DiaryOfTraderCtx> _logger;
+    private IWritableOptions<DbConnectionStringBuilder> _options;
 
+    public static string RootFolder
+    {
+      get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DIARY_OF_TRADER); }
+    }
+
+#if sqlite
     internal class HistoryRepository : SqliteHistoryRepository
     {
-      public HistoryRepository(HistoryRepositoryDependencies dependencies) :
-        base(dependencies)
+      public HistoryRepository(HistoryRepositoryDependencies dependencies) : base(dependencies)
       {
       }
       protected override void ConfigureTable(EntityTypeBuilder<HistoryRow> history)
@@ -25,11 +44,6 @@ namespace DiaryOfTrader.Core.Data
       }
     }
 
-    public static string RootFolder
-    {
-      get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DIARY_OF_TRADER); }
-    }
-
     private string DataSource()
     {
       var folder = Path.Combine(RootFolder, "Data");
@@ -39,8 +53,11 @@ namespace DiaryOfTrader.Core.Data
       }
       return Path.Combine(folder, DIARY_OF_TRADER + ".db");
     }
-    public DiaryOfTraderCtx()
+#endif
+    public DiaryOfTraderCtx(ILogger<DiaryOfTraderCtx> logger, IWritableOptions<DbConnectionStringBuilder> options)
     {
+      _logger = logger;
+      _options = options;
       /*
        * После изменения структуры базы выполнить миграцию = Юперейдем в Visual Studio к окну Package Manager Console.
        * Вначале введем команду
@@ -49,6 +66,8 @@ namespace DiaryOfTrader.Core.Data
        *
        * Remove-migration
        */
+
+      AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
       Database.Migrate();
       if (Frame != null && !Frame.Any())
@@ -60,11 +79,15 @@ namespace DiaryOfTrader.Core.Data
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+#if sqlite
       optionsBuilder.UseSqlite("Pooling=True;Data Source=" + DataSource())
         .ReplaceService<IHistoryRepository, HistoryRepository>();
-      optionsBuilder.LogTo(message => Debug.WriteLine(message));
+#else
+      optionsBuilder.UseNpgsql(_options.Value.ToString());
+#endif
+      optionsBuilder.LogTo(message => _logger.LogTrace(message));
     }
-  
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
@@ -72,12 +95,10 @@ namespace DiaryOfTrader.Core.Data
       
       modelBuilder.Ignore<Element>();
       modelBuilder.Ignore<Entity.Entity>();
-      
 
       modelBuilder.Entity<ScreenShot>().UseTpcMappingStrategy();
       modelBuilder.Entity<ScreenShot>().Property(b => b.ID).ValueGeneratedOnAdd();
 
-      modelBuilder.Entity<Wallet>(WalletConfigure);
       modelBuilder.Entity<Symbol>(SymbolConfigure);
       modelBuilder.Entity<TradingStrategy>(StrategyConfigure);
       modelBuilder.Entity<TraderExchange>(ExchangeConfigure);
@@ -86,11 +107,15 @@ namespace DiaryOfTrader.Core.Data
       modelBuilder.Entity<TimeFrame>(TimeFrameConfigure);
       modelBuilder.Entity<Trend>(TrendConfigure);
       modelBuilder.Entity<TraderResult>(TraderResultConfigure);
-      modelBuilder.Entity<Diary>(DiaryConfigure);
+
       modelBuilder.Entity<EconomicSchedule>(EconomicScheduleConfigure);
       modelBuilder.Entity<EconomicEvent>(EconomicEventConfigure);
+
       modelBuilder.Entity<Trader>(TraderConfigure);
 
+      modelBuilder.Entity<Wallet>(WalletConfigure);
+
+      modelBuilder.Entity<Diary>(DiaryConfigure);
       modelBuilder.Entity<MarketReview>(MarketReviewConfigure);
       modelBuilder.Entity<MarketReviewTimeFrame>(MarketReviewTimeFrameConfigure);
 

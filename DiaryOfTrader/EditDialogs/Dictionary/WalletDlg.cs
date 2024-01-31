@@ -1,9 +1,9 @@
 ﻿
 namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  public partial class WalletDlg : GridEditDialog
+  public partial class WalletDlg : GridEditDialogGeneric<Wallet>
   {
-    public WalletDlg()
+    public WalletDlg(IRepository<Wallet> repository, ILogger<GridEditDialogGeneric<Wallet>> logger) : base(repository, logger)
     {
       InitializeComponent();
     }

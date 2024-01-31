@@ -1,9 +1,8 @@
-﻿
-namespace DiaryOfTrader.EditDialogs.Dictionary
+﻿namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  public partial class ExchangeDlg : GridEditDialog
+  public partial class ExchangeDlg : GridEditDialogGeneric<TraderExchange>
   {
-    public ExchangeDlg()
+    public ExchangeDlg(IRepository<TraderExchange> repository, ILogger<GridEditDialogGeneric<TraderExchange>> logger): base(repository, logger) 
     {
       InitializeComponent();
     }

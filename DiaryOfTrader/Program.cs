@@ -1,7 +1,8 @@
-﻿using System.Net.Http;
+﻿//#define use_db
+
+using System.Net.Http;
 using DiaryOfTrader.Core.Data;
 using DiaryOfTrader.Core.Interfaces.Cache;
-using DiaryOfTrader.Core.Interfaces.Repository;
 using DiaryOfTrader.Core.Repository;
 using DiaryOfTrader.Core.Repository.Cache.DistributedCache;
 using DiaryOfTrader.Core.Repository.Cache.Memory;
@@ -10,102 +11,40 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using DiaryOfTrader.EditDialogs.Dictionary;
+using DiaryOfTrader.Core.Repository.RepositoryApi;
+using DiaryOfTrader.Core.WritableOptions;
+using System.Data.Common;
 
 namespace DiaryOfTrader
 {
   internal static class Program
   {
-
-    class Startup
+    static ILoggingBuilder BuildLogging(ILoggingBuilder loggingBuilder)
     {
-      private IConfigurationRoot Configuration { get; }
-
-      public Startup(IHostEnvironment environment, IConfigurationBuilder configuration)
-      {
-        Configuration  = configuration
-          .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-          .AddJsonFile("appsettings.json")
-          .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true, true)
-          .AddEnvironmentVariables()
-          .Build();
-      }
-
-      public ServiceProvider ConfigureServices(IServiceCollection services)
-      {
-        services.AddScoped<DbContext, DiaryOfTraderCtx>();
-
-        services.AddLogging(configure => configure.AddDebug());
-
-        //// инткрфейс добавили
-        services.AddTransient<ISymbolRepository, SymbolRepositoryDb>();
-        services.AddTransient<ITimeFrameRepository, TimeFrameRepositoryDb>();
-        services.AddTransient<ITraderExchangeRepository, TraderExchangeRepositoryDb>();
-        services.AddTransient<ITraderResultRepository, TraderResultRepositoryDb>();
-        services.AddTransient<ITraderSessionRepository, TraderSessionRepositoryDb>();
-        services.AddTransient<ITraderRegionRepository, TraderRegionRepositoryDb>();
-        services.AddTransient<ITrendRepository, TrendRepositoryDb>();
-        services.AddTransient<IWalletRepository, WalletRepositoryDb>();
-        services.AddTransient<IMarketReviewRepository, MarketReviewRepositoryDb>();
-        services.AddTransient<IMarketReviewTimeFrameRepository, MarketReviewTimeFrameRepositoryDb>();
-        services.AddTransient<IDiaryRepository, DiaryRepositoryDb>();
-        services.AddTransient<ITradingStrategyRepository, TradingStrategyRepositoryDb>();
-        services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
-
-        //кэш
-        var redis = Configuration.GetSection("Redis");
-        if (bool.TryParse(redis["Enabled"], out var enabled) && enabled)
-        {
-          services.AddStackExchangeRedisCache(options =>
-          {
-            options.Configuration = redis["ConnectionString"];
-
-          });
-          services.AddSingleton<ICache, Redis>();
-        }
-        else
-        {
-          services.AddMemoryCache();
-          services.AddSingleton<ICache, Memory>();
-        }
-
-        services.AddTransient<HttpClient>();
-        services.AddSingleton<EndPointConfiguration>();
-
-        services.AddSingleton<RibbonMain, RibbonMain>();
-
-        return services.BuildServiceProvider();
-      }
+      loggingBuilder.ClearProviders();
+      loggingBuilder.AddNLog();
+      loggingBuilder.SetMinimumLevel(LogLevel.Trace);
+      return loggingBuilder;
     }
 
-    static void ConfigureServices(string[] args)
+    static IConfigurationRoot BuildConfiguration(ConfigurationManager configuration, IHostEnvironment environment)
     {
-      var builder = Host.CreateApplicationBuilder(args);
-      var env = builder.Environment;
-
-      var configuration = builder.Configuration
+      return configuration
         .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-        .AddCommandLine(args)
-        .AddJsonFile("appsettings.json")
-        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
         .AddEnvironmentVariables()
+        .AddJsonFile("appsettings", true, true)
+        .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true, true)
         .Build();
-
-
-      // https://learn.microsoft.com/ru-ru/dotnet/core/extensions/configuration
-      var config = new ConfigurationBuilder()
-        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-        .AddCommandLine(args)
-        .AddJsonFile("appsettings.json")
-        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
-        .AddEnvironmentVariables()
-        .Build();
-
-      var services = new ServiceCollection();
+    }
+    /// <summary>
+    static ServiceProvider BuildServices(IServiceCollection services, IConfigurationRoot configuration)
+    {
       services.AddScoped<DbContext, DiaryOfTraderCtx>();
 
-      services.AddLogging(configure => configure.AddDebug());
-
-      //// инткрфейс добавили
+      services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
+#if use_db
       services.AddTransient<ISymbolRepository, SymbolRepositoryDb>();
       services.AddTransient<ITimeFrameRepository, TimeFrameRepositoryDb>();
       services.AddTransient<ITraderExchangeRepository, TraderExchangeRepositoryDb>();
@@ -117,12 +56,54 @@ namespace DiaryOfTrader
       services.AddTransient<IMarketReviewRepository, MarketReviewRepositoryDb>();
       services.AddTransient<IMarketReviewTimeFrameRepository, MarketReviewTimeFrameRepositoryDb>();
       services.AddTransient<IDiaryRepository, DiaryRepositoryDb>();
-      services.AddTransient<IEconomicCalendarRepository, EconomicCalendarRepositoryDb>();
+      services.AddTransient<ITradingStrategyRepository, TradingStrategyRepositoryDb>();
 
-      services.AddTransient<HttpClient>();
+
+      services.AddTransient<IRepository<Symbol> , SymbolRepositoryDb>();
+      services.AddTransient<IRepository<TimeFrame>, TimeFrameRepositoryDb>();
+      services.AddTransient<IRepository<TraderExchange>, TraderExchangeRepositoryDb>();
+      services.AddTransient<IRepository<TraderResult>, TraderResultRepositoryDb>();
+      services.AddTransient<IRepository<TraderSession>, TraderSessionRepositoryDb>();
+      services.AddTransient<IRepository<TraderRegion>, TraderRegionRepositoryDb>();
+      services.AddTransient<IRepository<Trend>, TrendRepositoryDb>();
+      services.AddTransient<IRepository<Wallet>, WalletRepositoryDb>();
+      services.AddTransient<IRepository<MarketReview>, MarketReviewRepositoryDb>();
+      services.AddTransient<IRepository<MarketReviewTimeFrame>, MarketReviewTimeFrameRepositoryDb>();
+      services.AddTransient<IRepository<Diary>, DiaryRepositoryDb>();
+      services.AddTransient<IRepository<TradingStrategy>, TradingStrategyRepositoryDb>();
+#else
+      services.AddTransient<ISymbolRepository, SymbolRepositoryApi>();
+      services.AddTransient<ITimeFrameRepository, TimeFrameRepositoryApi>();
+      services.AddTransient<ITraderExchangeRepository, TraderExchangeRepositoryApi>();
+      services.AddTransient<ITraderResultRepository, TraderResultRepositoryApi>();
+      services.AddTransient<ITraderSessionRepository, TraderSessionRepositoryApi>();
+      services.AddTransient<ITraderRegionRepository, TraderRegionRepositoryApi>();
+      services.AddTransient<ITrendRepository, TrendRepositoryApi>();
+      services.AddTransient<IWalletRepository, WalletRepositoryApi>();
+      services.AddTransient<IMarketReviewRepository, MarketReviewRepositoryApi>();
+      services.AddTransient<IMarketReviewTimeFrameRepository, MarketReviewTimeFrameRepositoryApi>();
+      services.AddTransient<IDiaryRepository, DiaryRepositoryApi>();
+      services.AddTransient<ITradingStrategyRepository, TradingStrategyRepositoryApi>();
+
+      services.AddTransient<IRepository<Symbol>, SymbolRepositoryApi>();
+      services.AddTransient<IRepository<TimeFrame>, TimeFrameRepositoryApi>();
+      services.AddTransient<IRepository<TraderExchange>, TraderExchangeRepositoryApi>();
+      services.AddTransient<IRepository<TraderResult>, TraderResultRepositoryApi>();
+      services.AddTransient<IRepository<TraderSession>, TraderSessionRepositoryApi>();
+      services.AddTransient<IRepository<TraderRegion>, TraderRegionRepositoryApi>();
+      services.AddTransient<IRepository<Trend>, TrendRepositoryApi>();
+      services.AddTransient<IRepository<Wallet>, WalletRepositoryApi>();
+      services.AddTransient<IRepository<MarketReview>, MarketReviewRepositoryApi>();
+      services.AddTransient<IRepository<MarketReviewTimeFrame>, MarketReviewTimeFrameRepositoryApi>();
+      services.AddTransient<IRepository<Diary>, DiaryRepositoryApi>();
+      services.AddTransient<IRepository<TradingStrategy>, TradingStrategyRepositoryApi>();
+#endif
+
+      services.AddSingleton<IServiceCollection> (services);
 
       //кэш
-      var redis = config.GetSection("Redis");
+      
+      var redis = configuration.GetSection("Redis");
       if (bool.TryParse(redis["Enabled"], out var enabled) && enabled)
       {
         services.AddStackExchangeRedisCache(options =>
@@ -138,12 +119,25 @@ namespace DiaryOfTrader
         services.AddSingleton<ICache, Memory>();
       }
 
-      services.AddSingleton<RibbonMain, RibbonMain>();
+      services.AddTransient<HttpClient>();
+      services.Configure<EndPointConfiguration>(configuration.GetSection(key: nameof(EndPointConfiguration)));
+      services.ConfigureWritable<DbConnectionStringBuilder>(configuration.GetSection(key: "ConnectionStringBuilder"));
 
-      Core.Entity.DiaryOfTrader.ServiceProvider = services.BuildServiceProvider();
+      #region UI
+      services.AddSingleton<RibbonMain>();
 
+      services.AddTransient<ExchangeDlg>();
+      services.AddTransient<ResultDlg>();
+      services.AddTransient<SymbolDlg>();
+      services.AddTransient<TimeFrameDlg>();
+      services.AddTransient<TradeSessionDlg>();
+      services.AddTransient<TradingStrategyDlg>();
+      services.AddTransient<TrendDlg>();
+      services.AddTransient<WalletDlg>();
+      #endregion
+
+      return services.BuildServiceProvider();
     }
-
 
     [STAThread]
     static void Main(string[] args)
@@ -151,29 +145,18 @@ namespace DiaryOfTrader
       // To customize application configuration such as set high DPI settings or default font,
       // see https://aka.ms/applicationconfiguration.
 
-      ApplicationConfiguration.Initialize();
+      //ApplicationConfiguration.Initialize();
 
-      var builder = Host.CreateApplicationBuilder(args);
-      
-      var startup = new Startup(builder.Environment, builder.Configuration);
-      startup.ConfigureServices(builder.Services);
-      using var host = builder.Build();
+      var builder = Host.CreateApplicationBuilder();
+      BuildLogging(builder.Logging);
+      var configuration = BuildConfiguration(builder.Configuration, builder.Environment);
+      Core.Entity.DiaryOfTrader.ServiceProvider = BuildServices(builder.Services, configuration);
 
+      using var app = builder.Build();
 
-      //var env = builder.Environment;
-
-      //var configuration = builder.Configuration
-      //  .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-      //  .AddCommandLine(args)
-      //  .AddJsonFile("appsettings.json")
-      //  .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true, true)
-      //  .AddEnvironmentVariables()
-      //  .Build();
-
-      ConfigureServices(args);
       var main = Core.Entity.DiaryOfTrader.ServiceProvider.GetRequiredService<RibbonMain>();
       Application.Run(main);
-      //Application.Run(new Main());
     }
   }
 }
+

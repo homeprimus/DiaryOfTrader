@@ -3,9 +3,9 @@ using System.ComponentModel;
 
 namespace DiaryOfTrader.EditDialogs.Dictionary
 {
-  public partial class TradeSessionDlg : GridEditDialog
+  public partial class TradeSessionDlg : GridEditDialogGeneric<TraderRegion>
   {
-    public TradeSessionDlg()
+    public TradeSessionDlg(IRepository<TraderRegion> repository, ILogger<GridEditDialogGeneric<TraderRegion>> logger) : base(repository, logger)
     {
       InitializeComponent();
       grid.gridView.FocusedRowChanged += FocusedRowChanged;
@@ -21,6 +21,7 @@ namespace DiaryOfTrader.EditDialogs.Dictionary
         var region = (TraderRegion)grid.gridView.GetRow(grid.gridView.FocusedRowHandle);
         region.Sessions.Remove((TraderSession)entity);
       };
+
     }
 
     private void FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
